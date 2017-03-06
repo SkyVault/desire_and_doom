@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>C:/Users/Dustin.Neumann/Documents/Visual Studio 2015/Projects/Desire_And_Doom/Desire_And_Doom/Content/font</SourceFile>
+  <SourceTime>2016-03-29T23:36:08-07:00</SourceTime>
+  <DestFile>C:/Users/Dustin.Neumann/Documents/Visual Studio 2015/Projects/Desire_And_Doom/Desire_And_Doom/Content/bin/DesktopGL/font.xnb</DestFile>
+  <DestTime>2017-03-06T10:14:31.319575-08:00</DestTime>
+  <Importer>FontDescriptionImporter</Importer>
+  <ImporterTime>2016-03-29T23:36:08-07:00</ImporterTime>
+  <Processor>FontDescriptionProcessor</Processor>
+  <ProcessorTime>2016-03-29T23:36:08-07:00</ProcessorTime>
+  <Parameters>
+    <Key>TextureFormat</Key>
+    <Value>Compressed</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

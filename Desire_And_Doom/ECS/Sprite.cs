@@ -1,0 +1,26 @@
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Desire_And_Doom.ECS
+{
+    class Sprite : Component
+    {
+        public Texture2D Texture    { get; private set; }
+        public Rectangle Quad       { get; private set; }
+
+        public Color    Color  { get; set; } = Color.White;
+        public Vector2  Offset { get; set; } = Vector2.Zero;
+        public Vector2  Scale  { get; set; } = Vector2.One;
+
+        public Sprite(Texture2D _texture, Rectangle _quad)
+        {
+            Texture = _texture;
+            Quad    = _quad;
+        }
+    }
+}

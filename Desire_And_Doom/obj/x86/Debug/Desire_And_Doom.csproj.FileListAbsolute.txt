@@ -1,0 +1,17 @@
+c:\users\dustin.neumann\documents\visual studio 2015\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\OpenTK.dll.config
+c:\users\dustin.neumann\documents\visual studio 2015\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Desire_And_Doom.exe
+c:\users\dustin.neumann\documents\visual studio 2015\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Desire_And_Doom.pdb
+c:\users\dustin.neumann\documents\visual studio 2015\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\MonoGame.Framework.dll
+c:\users\dustin.neumann\documents\visual studio 2015\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\NVorbis.dll
+c:\users\dustin.neumann\documents\visual studio 2015\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\OpenTK.dll
+c:\users\dustin.neumann\documents\visual studio 2015\Projects\Desire_And_Doom\Desire_And_Doom\obj\x86\Debug\Desire_And_Doom.csprojResolveAssemblyReference.cache
+c:\users\dustin.neumann\documents\visual studio 2015\Projects\Desire_And_Doom\Desire_And_Doom\obj\x86\Debug\Desire_And_Doom.exe
+c:\users\dustin.neumann\documents\visual studio 2015\Projects\Desire_And_Doom\Desire_And_Doom\obj\x86\Debug\Desire_And_Doom.pdb
+c:\users\dustin.neumann\documents\visual studio 2015\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\tiles.xnb
+C:\Users\Dustin.Neumann\documents\visual studio 2015\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\TiledSharp.dll
+C:\Users\Dustin.Neumann\documents\visual studio 2015\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\tiles_main.xnb
+C:\Users\Dustin.Neumann\documents\visual studio 2015\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\MonoGame.Extended.dll
+C:\Users\Dustin.Neumann\documents\visual studio 2015\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\font.xnb
+C:\Users\Dustin.Neumann\documents\visual studio 2015\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\artemis.dll
+C:\Users\Dustin.Neumann\documents\visual studio 2015\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\artemis.xml
+C:\Users\Dustin.Neumann\documents\visual studio 2015\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\entities.xnb
