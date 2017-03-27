@@ -7,5 +7,25 @@ using System.Threading.Tasks;
 namespace Desire_And_Doom.ECS
 {
     abstract class Component {
+        public enum Types : int
+        {
+            Player,
+            Item,
+            Physics,
+            Sprite,
+            Animation,
+            Invatory,
+            Body,
+            AI,
+            Npc,
+            Light_Emitter,
+            Num_Of_Types,
+        }
+
+        public Types Type { get; protected set; }
+        public Component(Types Type)
+        {
+            this.Type = Type;
+        }
     }
 }

@@ -1,0 +1,381 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MonoGame.Penumbra</name>
+    </assembly>
+    <members>
+        <member name="T:Penumbra.Hull">
+            <summary>
+            A hull is an object from which shadows are cast. 
+            It is a simple convex or concave polygon impassable by light rays.
+            </summary>
+        </member>
+        <member name="M:Penumbra.Hull.#ctor(Microsoft.Xna.Framework.Vector2[])">
+            <summary>
+            Constructs a new instance of <see cref="T:Penumbra.Hull"/>.
+            </summary>
+            <param name="points">
+            Points of the hull polygon. In order for the hull to be valid, the points must form:
+            <list type="number">
+            <item><description>A polygon with at least 3 points.</description></item>
+            <item><description>A simple polygon (no two edges intersect with each other).</description></item>
+            </list>        
+            </param>
+        </member>
+        <member name="M:Penumbra.Hull.#ctor(System.Collections.Generic.IEnumerable{Microsoft.Xna.Framework.Vector2})">
+            <summary>
+            Constructs a new instance of <see cref="T:Penumbra.Hull"/>.
+            </summary>
+            <param name="points">
+            Points of the hull polygon. In order for the hull to be valid, the points must form:
+            <list type="number">
+            <item><description>A polygon with at least 3 points.</description></item>
+            <item><description>A simple polygon (no two edges intersect with each other).</description></item>
+            </list>        
+            </param>      
+        </member>
+        <member name="P:Penumbra.Hull.Points">
+            <summary>
+            Points of the hull polygon. In order for the hull to be valid, the points must form:
+            <list type="number">
+            <item><description>A polygon with at least 3 points.</description></item>
+            <item><description>A simple polygon (no two edges intersect with each other).</description></item>
+            </list>
+            Points can be defined in either clockwise or counter-clockwise order.
+            </summary>
+        </member>
+        <member name="P:Penumbra.Hull.Enabled">
+            <summary>
+            Gets or sets if the hull is enabled and participates in shadow casting. 
+            Shadows are only cast from enabled hulls.
+            </summary>
+        </member>
+        <member name="P:Penumbra.Hull.Valid">
+            <summary>
+            Gets if the hull forms a valid polygon and participates in shadow casting. See
+            Points property for rules of a valid polygon.
+            </summary>
+        </member>
+        <member name="P:Penumbra.Hull.Position">
+            <summary>
+            Gets or sets the position of the hull in world space.
+            </summary>
+        </member>
+        <member name="P:Penumbra.Hull.Origin">
+            <summary>
+            Gets or sets the origin ((0, 0) point) of the hull's local space.
+            </summary>
+        </member>
+        <member name="P:Penumbra.Hull.Rotation">
+            <summary>
+            Gets or sets the rotation of the hull in radians.
+            </summary>
+        </member>
+        <member name="P:Penumbra.Hull.Scale">
+            <summary>
+            Gets or sets the scale (width and height) along X and Y axes.
+            </summary>
+        </member>
+        <member name="M:Penumbra.Hull.CreateRectangle(System.Nullable{Microsoft.Xna.Framework.Vector2},System.Nullable{Microsoft.Xna.Framework.Vector2},System.Single,System.Nullable{Microsoft.Xna.Framework.Vector2})">
+            <summary>
+            Factory method for creating a rectangular <see cref="T:Penumbra.Hull"/> with points defined so that 
+            min vertex is at (0.0, 0.0) and max vertex is at (1.0, 1.0).
+            </summary>
+            <param name="position">Optional initial position. Default is (0.0, 0.0).</param>
+            <param name="scale">Optional initial scale. Default is (1.0, 1.0).</param>
+            <param name="rotation">Optional initial rotation in radians. Default is 0.0.</param>
+            <param name="origin">Optional initial origin. Default is (0.5, 0.5).</param>
+            <returns>A rectangular <see cref="T:Penumbra.Hull"/>.</returns>
+        </member>
+        <member name="T:Penumbra.Light">
+            <summary>
+            A light is an object which lights the world and casts shadows from <see cref="T:Penumbra.Hull"/>s.
+            </summary>
+            <remarks>
+            It is an abstract class - one of the three concrete implementations should be used instead: 
+            <see cref="T:Penumbra.PointLight" />, <see cref="T:Penumbra.Spotlight" />, <see cref="T:Penumbra.TexturedLight" />.
+            </remarks>
+        </member>
+        <member name="M:Penumbra.Light.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Penumbra.Light"/> class.
+            </summary>
+        </member>
+        <member name="P:Penumbra.Light.Enabled">
+            <summary>
+            Gets or sets if the light is enabled and should be rendered.
+            </summary>
+        </member>
+        <member name="P:Penumbra.Light.CastsShadows">
+            <summary>
+            Gets or sets if the light casts shadows.
+            </summary>
+        </member>
+        <member name="P:Penumbra.Light.Position">
+            <summary>
+            Gets or sets the light's position in world space.
+            </summary>
+        </member>
+        <member name="P:Penumbra.Light.Origin">
+            <summary>
+            Gets or sets the origin (anchor) of the light. It is used for both positioning and
+            rotating. Normalized to the range [0..1].
+            </summary>
+            <remarks>
+            <para>
+            Each light is essentially a quad. Origin is the anchor point which marks the (0, 0) point on that quad (in local space).
+            Depending if you are operating in SpriteBatch's screen space (y-axis runs from top to bottom) origin (0, 0) 
+            represents the light quad's top left corner while (1, 1) represents the bottom right corner. The reason it's normalized to [0..1] 
+            is so that if you change the scale of the light, you wouldn't need to change the origin: an origin (0.5, 0.5) would still mark 
+            the center of the light.         
+            </para>
+            <para>
+            When it comes to the setter, there is no automatic normalization being done: it is expected to be set in its normalized form.
+            The reason values outside [0..1] range are allowed is that it might be desirable for some weird rotation scenarios, 
+            though such usage should be rather uncommon.
+            </para>
+            <para>
+            Default value is usually sufficient for <see cref="T:Penumbra.PointLight"/> and <see cref="T:Penumbra.Spotlight"/>.
+            </para>        
+            </remarks>
+        </member>
+        <member name="P:Penumbra.Light.Rotation">
+            <summary>
+            Gets or sets the rotation of the light in radians.
+            </summary>
+        </member>
+        <member name="P:Penumbra.Light.Scale">
+            <summary>
+            Gets or sets the scale (width and height) along X and Y axes.
+            </summary>
+            <remarks>
+            Not to be confused with <see cref="P:Penumbra.Light.Radius"/>, scale determines the attenuation
+            of the light or how far the light rays reach (range of the light), while radius
+            determines the radius of the light source (the area where light is emitted).
+            <see cref="P:Penumbra.Light.Radius"/> for more info.
+            </remarks>
+        </member>
+        <member name="P:Penumbra.Light.Color">
+            <summary>
+            Gets or sets the color of the light. Color is in non-premultiplied format.
+            Default is white.
+            </summary>
+        </member>
+        <member name="P:Penumbra.Light.Intensity">
+            <summary>
+            Gets or sets the intensity of the color applied to the final scene.
+            Color will be raised to the power of intensity.
+            </summary>        
+        </member>
+        <member name="P:Penumbra.Light.Radius">
+            <summary>
+            Gets or sets the radius of the light source (the area where light is emitted). 
+            This determines the shape of the umbra and penumbra regions for cast shadows.
+            </summary>
+            <remarks>
+            Not to be confused with <see cref="P:Penumbra.Light.Scale"/>, while radius is only used to control
+            the softness of the shadow being cast and should usually be kept at a small value,
+            scale is used to determine how far the light rays reach (range of the light).
+            <see cref="P:Penumbra.Light.Scale"/> for more info.
+            </remarks>
+        </member>
+        <member name="P:Penumbra.Light.ShadowType">
+            <summary>
+            Gets or sets how the shadow <see cref="T:Penumbra.Hull"/>s are shadowed. See
+            <see cref="P:Penumbra.Light.ShadowType"/> for more information.
+            </summary>
+        </member>
+        <member name="P:Penumbra.Light.IgnoredHulls">
+            <summary>
+            Gets a list of hulls not participating in the light's shadow casting process.
+            </summary>
+        </member>
+        <member name="T:Penumbra.ShadowType">
+            <summary>
+            Determines how the shadows cast by the light affect shadow <see cref="T:Penumbra.Hull"/>s.
+            </summary>
+        </member>
+        <member name="F:Penumbra.ShadowType.Illuminated">
+            <summary>
+            Shadow hulls are lit by the light.
+            </summary>
+        </member>
+        <member name="F:Penumbra.ShadowType.Solid">
+            <summary>
+            Shadow hulls are not lit by the light.
+            </summary>
+        </member>
+        <member name="F:Penumbra.ShadowType.Occluded">
+            <summary>
+            Occluded shadow hulls (hulls behind other hulls) are not lit.
+            </summary>
+        </member>
+        <member name="T:Penumbra.PenumbraComponent">
+            <summary>
+            GPU based 2D lighting and shadowing engine with penumbra support. Operates with
+            <see cref="T:Penumbra.Light"/>s and shadow <see cref="T:Penumbra.Hull"/>s, where light is a
+            colored light source which casts shadows on shadow hulls that are outlines of scene
+            geometry (polygons) impassable by light.
+            </summary>
+            <remarks>
+            Before rendering scene, ensure to call <c>PenumbraComponent.BeginDraw</c> to swap render target
+            in order for the component to be able to later apply generated lightmap.
+            </remarks>
+        </member>
+        <member name="M:Penumbra.PenumbraComponent.#ctor(Microsoft.Xna.Framework.Game)">
+            <summary>
+            Constructs a new instance of <see cref="T:Penumbra.PenumbraComponent"/>.
+            </summary>
+            <param name="game">Game object to associate the engine with.</param>
+        </member>
+        <member name="P:Penumbra.PenumbraComponent.Debug">
+            <summary>
+            Gets or sets if debug outlines should be drawn for shadows and light sources and
+            if logging is enabled.
+            </summary>
+        </member>
+        <member name="P:Penumbra.PenumbraComponent.AmbientColor">
+            <summary>
+            Gets or sets the ambient color of the scene. Color is in non-premultiplied format.
+            </summary>
+        </member>
+        <member name="P:Penumbra.PenumbraComponent.Transform">
+            <summary>
+            Gets or sets the custom transformation matrix used by the component.
+            </summary>
+        </member>
+        <member name="P:Penumbra.PenumbraComponent.SpriteBatchTransformEnabled">
+            <summary>
+            Gets or sets if this component is used with <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/> and its transform should
+            be automatically applied. Default value is <c>true</c>.
+            </summary>
+        </member>
+        <member name="P:Penumbra.PenumbraComponent.Lights">
+            <summary>
+            Gets the list of lights registered with the engine.
+            </summary>
+        </member>
+        <member name="P:Penumbra.PenumbraComponent.Hulls">
+            <summary>
+            Gets the list of shadow hulls registered with the engine.
+            </summary>
+        </member>
+        <member name="P:Penumbra.PenumbraComponent.DiffuseMap">
+            <summary>
+            Gets the diffuse map render target used by Penumbra.
+            </summary>
+        </member>
+        <member name="P:Penumbra.PenumbraComponent.LightMap">
+            <summary>
+            Gets the lightmap render target used by Penumbra.
+            </summary>
+        </member>
+        <member name="M:Penumbra.PenumbraComponent.Initialize">
+            <summary>
+            Explicitly initializes the engine. This should only be called if the
+            component was not added to the game's components list through <c>Components.Add</c>.
+            </summary>
+        </member>
+        <member name="M:Penumbra.PenumbraComponent.BeginDraw">
+            <summary>
+            Sets up the lightmap generation sequence. This should be called before Draw.
+            </summary>
+        </member>
+        <member name="M:Penumbra.PenumbraComponent.Draw(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Generates the lightmap, blends it with whatever was drawn to the scene between the
+            calls to BeginDraw and this and presents the result to the backbuffer.
+            </summary>
+            <param name="gameTime">Time passed since the last call to Draw.</param>
+        </member>
+        <member name="M:Penumbra.PenumbraComponent.UnloadContent">
+            <inheritdoc />
+        </member>
+        <member name="M:Penumbra.PenumbraComponent.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Penumbra.Resource">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Penumbra.Resource.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Penumbra.Resource.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Penumbra.Resource.penumbra_hull">
+            <summary>
+              Looks up a localized resource of type System.Byte[].
+            </summary>
+        </member>
+        <member name="P:Penumbra.Resource.penumbra_light">
+            <summary>
+              Looks up a localized resource of type System.Byte[].
+            </summary>
+        </member>
+        <member name="P:Penumbra.Resource.penumbra_shadow">
+            <summary>
+              Looks up a localized resource of type System.Byte[].
+            </summary>
+        </member>
+        <member name="P:Penumbra.Resource.penumbra_texture">
+            <summary>
+              Looks up a localized resource of type System.Byte[].
+            </summary>
+        </member>
+        <member name="T:Penumbra.TexturedLight">
+            <summary>
+            A <see cref="T:Penumbra.Light"/> which allows its shape to be determined by a
+            custom <see cref="T:Microsoft.Xna.Framework.Graphics.Texture2D"/>.
+            </summary>
+        </member>
+        <member name="M:Penumbra.TexturedLight.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Constructs a new instance of <see cref="T:Penumbra.TexturedLight"/>.
+            </summary>
+            <param name="texture">
+            Texture used to determine light strength at the sampled point. 
+            Pass NULL to set texture later.
+            </param>
+        </member>
+        <member name="P:Penumbra.TexturedLight.Texture">
+            <summary>
+            Gets or sets the texture used to determine in what shape to render the light.
+            A spotlight could be simulated with a spotlight texture. If no texture is set,
+            uses a linear falloff equation to render a point light shaped light. 
+            </summary>
+        </member>
+        <member name="T:Penumbra.PointLight">
+            <summary>
+            A <see cref="T:Penumbra.Light"/> which equally lights the surroundings in all directions.
+            </summary>
+        </member>
+        <member name="T:Penumbra.Spotlight">
+            <summary>
+            A <see cref="T:Penumbra.Light"/> emitting light only in a single direction (similar to flashlight).
+            </summary>
+            <remarks>
+            Default direction is to the right. Use <see cref="P:Penumbra.Light.Rotation"/> to control
+            in which direction the spotlight is aimed at.
+            </remarks>
+        </member>
+        <member name="M:Penumbra.Spotlight.#ctor">
+            <summary>
+            Constructs a new instance of <see cref="T:Penumbra.Spotlight"/>.
+            </summary>
+        </member>
+        <member name="P:Penumbra.Spotlight.ConeDecay">
+            <summary>
+            Gets or sets the rate of cone attenuation to the sides.
+            A higher value means softer edges. Default is 1.5.
+            </summary>
+        </member>
+    </members>
+</doc>

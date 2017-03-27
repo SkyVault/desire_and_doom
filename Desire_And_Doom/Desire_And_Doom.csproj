@@ -40,47 +40,122 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;LINUX</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;LINUX</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets.cs" />
-    <Compile Include="Camera_2D.cs" />
-    <Compile Include="ECS\Animated_Sprite.cs" />
-    <Compile Include="ECS\Animation_Renderer_System.cs" />
-    <Compile Include="ECS\Body.cs" />
-    <Compile Include="ECS\Body_Renderer_System.cs" />
+    <Compile Include="ECS\Components\Light_Emitter.cs" />
+    <Compile Include="ECS\Systems\Light_Emitter_System.cs" />
+    <Compile Include="Graphics\Animation.cs" />
+    <Compile Include="Graphics\Animation_Frame.cs" />
+    <Compile Include="Graphics\Assets.cs" />
+    <Compile Include="Graphics\Camera2D.cs" />
+    <Compile Include="Graphics\Camera_2D.cs" />
+    <Compile Include="Graphics\Default_Viewport_Adapter.cs" />
+    <Compile Include="Graphics\Dialog_Box.cs" />
+    <Compile Include="ECS\Components\AI.cs" />
+    <Compile Include="ECS\Systems\AI_System.cs" />
+    <Compile Include="ECS\Components\Animated_Sprite.cs" />
+    <Compile Include="ECS\Systems\Animation_Renderer_System.cs" />
+    <Compile Include="ECS\Components\Body.cs" />
+    <Compile Include="ECS\Systems\Body_Renderer_System.cs" />
     <Compile Include="ECS\Component.cs" />
     <Compile Include="ECS\Entity.cs" />
-    <Compile Include="ECS\Physics.cs" />
-    <Compile Include="ECS\Player_Controller_System.cs" />
-    <Compile Include="ECS\Sprite.cs" />
-    <Compile Include="ECS\Sprite_Renderer_System.cs" />
+    <Compile Include="ECS\Components\Invatory.cs" />
+    <Compile Include="ECS\Systems\Invatory_Renderer_System.cs" />
+    <Compile Include="ECS\Components\Item.cs" />
+    <Compile Include="ECS\Components\Npc.cs" />
+    <Compile Include="ECS\Systems\Npc_System.cs" />
+    <Compile Include="ECS\Components\Physics.cs" />
+    <Compile Include="ECS\Systems\Player_Controller_System.cs" />
+    <Compile Include="ECS\Components\Sprite.cs" />
+    <Compile Include="ECS\Systems\Sprite_Renderer_System.cs" />
     <Compile Include="ECS\System.cs" />
     <Compile Include="ECS\World.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Input.cs" />
-    <Compile Include="Iso_Tiled_Map.cs" />
-    <Compile Include="ECS\Physics_Engine.cs" />
-    <Compile Include="ECS\Player.cs" />
+    <Compile Include="Graphics\Particle.cs" />
+    <Compile Include="Graphics\Particle_Emitter.cs" />
+    <Compile Include="Graphics\Particle_Systems\Fire_Fly_Emitter.cs" />
+    <Compile Include="Graphics\Particle_Systems\Fire_Fly_Particle.cs" />
+    <Compile Include="Graphics\Particle_World.cs" />
+    <Compile Include="Graphics\Sky_Renderer.cs" />
+    <Compile Include="Graphics\ViewportAdapter.cs" />
+    <Compile Include="Interfaces\IMovable.cs" />
+    <Compile Include="Interfaces\IRectangle.cs" />
+    <Compile Include="Interfaces\IRotatable.cs" />
+    <Compile Include="Utils\Debug_Console.cs" />
+    <Compile Include="Utils\GamePadEventArgs.cs" />
+    <Compile Include="Utils\GamePadListener.cs" />
+    <Compile Include="Utils\GamePadListenerSettings.cs" />
+    <Compile Include="Utils\IInputService.cs" />
+    <Compile Include="Utils\Input.cs" />
+    <Compile Include="Graphics\Iso_Tiled_Map.cs" />
+    <Compile Include="ECS\Systems\Physics_Engine.cs" />
+    <Compile Include="ECS\Components\Player.cs" />
+    <Compile Include="Lua_World\Lua_World.cs" />
+    <Compile Include="Graphics\Monogui.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tiled_Map.cs" />
+    <Compile Include="Screens\Level_1_Screen.cs" />
+    <Compile Include="Screens\Menu_Screen.cs" />
+    <Compile Include="Screens\Screen.cs" />
+    <Compile Include="Screens\Screen_Manager.cs" />
+    <Compile Include="Graphics\Tiled_Map.cs" />
+    <Compile Include="Utils\InputListener.cs" />
+    <Compile Include="Utils\InputListenerComponent.cs" />
+    <Compile Include="Utils\InputListenerSettings.cs" />
+    <Compile Include="Utils\KeyboardEventArgs.cs" />
+    <Compile Include="Utils\KeyboardListener.cs" />
+    <Compile Include="Utils\KeyboardListenerSettings.cs" />
+    <Compile Include="Utils\KeyboardModifiers.cs" />
+    <Compile Include="Utils\Messanger.cs" />
+    <Compile Include="Utils\MouseButton.cs" />
+    <Compile Include="Utils\MouseEventArgs.cs" />
+    <Compile Include="Utils\MouseListener.cs" />
+    <Compile Include="Utils\MouseListenerSettings.cs" />
+    <Compile Include="Utils\RectangleF.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="artemis, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Artemis.1.3.1\lib\net40\artemis.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MonoGame.Extended, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Extended.0.5.149\lib\MonoGame.Extended.dll</HintPath>
+    <Reference Include="KeraLua, Version=1.3.2.0, Culture=neutral, PublicKeyToken=04d04586786c6f34, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLua.1.3.2.1\lib\net45\KeraLua.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.Gui, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\DesktopGL\x86\Debug\MonoGame.Extended.Gui.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework, Version=3.6.0.1625, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Framework.WindowsDX.3.6.0.1625\lib\net40\MonoGame.Framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="OpenTK">
-      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\OpenTK.dll</HintPath>
+    <Reference Include="MonoGame.Penumbra, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Penumbra.WindowsDX.1.3.0\lib\net45\MonoGame.Penumbra.dll</HintPath>
     </Reference>
-    <Reference Include="NVorbis">
-      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\NVorbis.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="MonoGame.Framework">
-      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
+    <Reference Include="NLua, Version=1.3.2.0, Culture=neutral, PublicKeyToken=8df2ab518030ea95, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLua.1.3.2.1\lib\net45\NLua.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -99,25 +174,57 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Content\entities.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\font.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Content\gui.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\items.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Sky.xnb" />
     <None Include="Content\tiles.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Tiles_1.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\tiles_main.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Lua_World\Behaviors\Enemy_Ai.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lua_World\Dialog.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lua_World\Enemies.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lua_World\Items.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lua_World\Player.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MonoGame.Framework.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Entities\" />
     <Folder Include="Physics\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+xcopy /s /y "C:\Users\Dustin.Neumann\Documents\Visual Studio 2017\Projects\Desire_And_Doom\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
