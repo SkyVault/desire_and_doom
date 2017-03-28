@@ -192,6 +192,11 @@ namespace Desire_And_Doom.ECS
             //    Console.WriteLine("systems: {0}", DateTime.Now.Millisecond - timing);
             timing = 0;
         }
+
+        public void Destroy_All()
+        {
+            entities.Clear();
+        }
         
     }
 }

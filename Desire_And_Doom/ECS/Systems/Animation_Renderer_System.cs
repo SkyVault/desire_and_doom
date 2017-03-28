@@ -38,6 +38,11 @@ namespace Desire_And_Doom.ECS
                     animation.Current_Frame = 0;
             }
 
+            if (animation.Current_Frame == current_animation.Frames.Count - 1)
+                animation.Animation_End = true;
+            else
+                animation.Animation_End = false;
+
         }
 
         public override void Draw(SpriteBatch batch, Entity entity)

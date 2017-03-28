@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using static Desire_And_Doom.ECS.Component;
 using System.Collections.Generic;
 using Desire_And_Doom.Utils;
+using Desire_And_Doom.ECS.Components;
 
 namespace Desire_And_Doom.ECS
 {
@@ -25,6 +26,11 @@ namespace Desire_And_Doom.ECS
             return solid;
         }
 
+        public void Clear_Solids()
+        {
+            solids.Clear();
+        }
+
         public override void Update(GameTime time, Entity entity)
         {
             var body = (Body)entity.Get(Types.Body);
@@ -37,23 +43,36 @@ namespace Desire_And_Doom.ECS
             y_body.Z = x_body.Z = body.Z;
 
             if (physics.Other != null) physics.Other = null;
-            if (!entity.Has(Types.Item))
+            if (!entity.Has(Types.Item) && !entity.Has(Types.World_Interaction))
             {
                 var bodies = world.Get_All_With_Component(Types.Physics);
                 foreach (var other in bodies)
                 {
+
                     if (other.UUID == entity.UUID) continue;
                     var o_physics = (Physics)other.Get(Types.Physics);
                     var o_body = (Body)other.Get(Types.Body);
 
-                    bool coll = false;
-                    if (o_body.Contains(x_body)) { x_body = body; coll = true; }
-                    if (o_body.Contains(y_body)) { y_body = body; coll = true; }
-
-                    if (coll)
+                    if (o_physics.Physics_Type == Physics.PType.DYNAMIC || o_physics.Physics_Type == Physics.PType.STATIC)
                     {
-                        physics.Other = other;
-                        physics.Callback?.Invoke(entity, other);
+
+                        bool coll = false;
+                        if (o_body.Contains(x_body)) { x_body = body; coll = true; }
+                        if (o_body.Contains(y_body)) { y_body = body; coll = true; }
+
+                        if (coll)
+                        {
+                            physics.Other = other;
+                            physics.Callback?.Invoke(entity, other);
+                        }
+
+                    }else if (o_physics.Physics_Type == Physics.PType.WORLD_INTERACTION)
+                    {
+                        if (o_body.Contains(body))
+                        {
+                            var o_interaction = (World_Interaction)other.Get(Types.World_Interaction);
+                            o_interaction?.Update(other, entity);
+                        }
                     }
                 }
 

@@ -18,13 +18,14 @@ namespace Desire_And_Doom
 {
     public class Game1 : Game
     {
-        public static int WIDTH     = 800;
-        public static int HEIGHT    = 480;
+        public static int WIDTH     = 1280;
+        public static int HEIGHT    = 720;
 
         public static int Map_Height_Pixels = 0;
         public static bool DEBUG = false;
 
         public static bool SHOULD_QUIT = false;
+        public static readonly float SCALE = 3f;
 
         GraphicsDeviceManager graphics;
         SpriteBatch batch;
@@ -38,12 +39,14 @@ namespace Desire_And_Doom
         Debug_Console       console;
         Lua                 lua;
         RenderTarget2D      scene;
+        Physics_Engine      physics_engine;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this) {
                 PreferredBackBufferWidth = WIDTH,
-                PreferredBackBufferHeight = HEIGHT
+                PreferredBackBufferHeight = HEIGHT,
+                SynchronizeWithVerticalRetrace = true
             };
 
             var width   = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
@@ -87,16 +90,17 @@ namespace Desire_And_Doom
             camera = new Camera_2D(GraphicsDevice, true);
             screen_manager = new Screen_Manager();
 
-            camera.Zoom = 3f;
+            camera.Zoom = SCALE;
 
             world = new World(penumbra);
             world.Add_System<Sprite_Renderer_System>(new Sprite_Renderer_System());
             world.Add_System<Player_Controller_System>(new Player_Controller_System(camera));
             world.Add_System<Animation_Renderer_System>(new Animation_Renderer_System());
-            world.Add_System<Physics_Engine>(new Physics_Engine(world));
+            physics_engine = (Physics_Engine)world.Add_System<Physics_Engine>(new Physics_Engine(world));
             world.Add_System<Invatory_Renderer_System>(new Invatory_Renderer_System());
             world.Add_System<AI_System>(new AI_System());
             world.Add_System<Light_Emitter_System>(new Light_Emitter_System());
+            world.Add_System<World_Interaction_System>(new World_Interaction_System());
             gui = new Monogui();
 
             var npc_system = (Npc_System)world.Add_System<Npc_System>(new Npc_System(this, graphics));
@@ -139,7 +143,7 @@ namespace Desire_And_Doom
             Assets.It.Add_Table("Lua_World/Behaviors/Enemy_Ai.lua");
             Assets.It.Add_Table("Lua_World/Dialog.lua");
 
-            screen_manager.Register(new Level_1_Screen(world, camera, penumbra, particle_world));
+            screen_manager.Register(new Level_1_Screen(world, camera, penumbra, particle_world, physics_engine));
             screen_manager.Register(new Menu_Screen(gui));
 
             screen_manager.Goto_Screen("Level 1");
@@ -175,7 +179,6 @@ namespace Desire_And_Doom
         protected override void Draw(GameTime gameTime)
         {
             penumbra.BeginDraw();
-            //penumbra.SpriteBatchTransformEnabled = false;
             penumbra.Transform = camera.View_Matrix;
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -183,23 +186,15 @@ namespace Desire_And_Doom
             batch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, DepthStencilState.DepthRead, null, null, camera.View_Matrix);
 
             world.Draw(batch);
-            //var targets = GraphicsDevice.GetRenderTargets();
-            //GraphicsDevice.SetRenderTarget(scene);
             screen_manager.Draw(batch);
             batch.Draw(scene, Vector2.Zero, Color.White);
-            //GraphicsDevice.SetRenderTargets(targets);
-
 
             particle_world.Draw(batch);
             batch.End();
-
-            //batch.Begin();
-            //batch.End();
-
+            
             penumbra.Draw(gameTime);
 
             // gui
-
             if (DEBUG)
             {
                 batch.Begin();
@@ -211,6 +206,10 @@ namespace Desire_And_Doom
             world.UIDraw(batch, camera);
             gui.Draw(batch);
             console.Draw(batch);
+
+            float frameRate = 1f / (float)gameTime.ElapsedGameTime.TotalSeconds;
+            batch.DrawString(Assets.It.Get<SpriteFont>("font"), frameRate.ToString(), new Vector2(10, 10), Color.BurlyWood);
+
             batch.End();
 
 

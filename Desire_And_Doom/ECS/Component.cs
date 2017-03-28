@@ -19,6 +19,8 @@ namespace Desire_And_Doom.ECS
             AI,
             Npc,
             Light_Emitter,
+            Entity_Particle_Emitter,
+            World_Interaction,
             Num_Of_Types,
         }
 

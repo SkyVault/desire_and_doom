@@ -12,7 +12,7 @@ namespace Desire_And_Doom.ECS
     {
         public enum PType
         {
-            STATIC, DYNAMIC, WATER, SPACE
+            STATIC, DYNAMIC, WATER, SPACE, WORLD_INTERACTION
         };
 
         public Func<Entity, Entity, bool> Callback = null;

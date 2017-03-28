@@ -24,8 +24,6 @@ namespace Desire_And_Doom
         public float X { get { return Position.X; } }
         public float Y { get { return Position.Y; } }
 
-        private bool scrollable;
-
         public Camera_2D(GraphicsDevice device, bool _scrollable = false)
         {
             
@@ -33,6 +31,7 @@ namespace Desire_And_Doom
             Rotation = 0;
             
             camera = new Camera2D(device);
+            
         }
 
         public void Update(GameTime time)

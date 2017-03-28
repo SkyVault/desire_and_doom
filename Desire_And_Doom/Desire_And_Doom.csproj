@@ -61,8 +61,12 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ECS\Components\Entity_Particle_Emitter.cs" />
     <Compile Include="ECS\Components\Light_Emitter.cs" />
+    <Compile Include="ECS\Components\World_Interaction.cs" />
+    <Compile Include="ECS\Systems\Entity_Emitter_System.cs" />
     <Compile Include="ECS\Systems\Light_Emitter_System.cs" />
+    <Compile Include="ECS\Systems\World_Interaction_System.cs" />
     <Compile Include="Graphics\Animation.cs" />
     <Compile Include="Graphics\Animation_Frame.cs" />
     <Compile Include="Graphics\Assets.cs" />
@@ -92,6 +96,8 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Graphics\Particle.cs" />
     <Compile Include="Graphics\Particle_Emitter.cs" />
+    <Compile Include="Graphics\Particle_Systems\Dust_Emitter.cs" />
+    <Compile Include="Graphics\Particle_Systems\Dust_Particle.cs" />
     <Compile Include="Graphics\Particle_Systems\Fire_Fly_Emitter.cs" />
     <Compile Include="Graphics\Particle_Systems\Fire_Fly_Particle.cs" />
     <Compile Include="Graphics\Particle_World.cs" />
@@ -100,6 +106,7 @@
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IRectangle.cs" />
     <Compile Include="Interfaces\IRotatable.cs" />
+    <Compile Include="Screens\Game_Screen.cs" />
     <Compile Include="Utils\Debug_Console.cs" />
     <Compile Include="Utils\GamePadEventArgs.cs" />
     <Compile Include="Utils\GamePadListener.cs" />

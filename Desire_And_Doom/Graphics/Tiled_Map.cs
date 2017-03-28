@@ -1,7 +1,10 @@
 ﻿using Desire_And_Doom.ECS;
+using Desire_And_Doom.ECS.Components;
+using Desire_And_Doom.Screens;
 using Desire_And_Doom.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using NLua;
 using Penumbra;
 using System;
@@ -22,7 +25,9 @@ namespace Desire_And_Doom
         private List<Rectangle>     quads;
         private Camera_2D           camera;
 
-        public Tiled_Map(string name, Camera_2D _camera, World world, PenumbraComponent lighting = null)
+        public Func<string, float, float, bool> Change_Scene_Callback;
+
+        public Tiled_Map(string name, Camera_2D _camera, World world, Screen level, PenumbraComponent lighting = null)
         {
             this.camera = _camera;
             var current = Directory.GetCurrentDirectory();
@@ -58,6 +63,34 @@ namespace Desire_And_Doom
                         {
                             physics_engine.Add_Solid(new RectangleF((float)obj.X, (float)obj.Y, (float)obj.Width, (float)obj.Height));
                         }
+                    }
+                    else if (obj.Type == "Door")
+                    {
+                        if (obj.Properties.ContainsKey("Door") == false)
+                            throw new Exception("Door object requires the property: Door, for example: Door 100 563");
+                        var str = obj.Properties["Door"];
+                        var toks = str.Split(' ');
+
+                        var door = world.Create_Entity();
+                        door.Add(new Body(new Vector2((float)obj.X, (float)obj.Y), new Vector2((float)obj.Width, (float)obj.Height)));
+                        door.Add(new Physics(Vector2.Zero, Physics.PType.WORLD_INTERACTION));
+
+                        var wi = (World_Interaction)door.Add(new World_Interaction(
+                            (self, other) => {
+                                var _wi = (World_Interaction)self.Get(Component.Types.World_Interaction);
+                                if (other.Has(Component.Types.Player))
+                                {
+                                    if (Input.It.Is_Key_Pressed(Keys.Z))
+                                    {
+                                        Change_Scene_Callback?.Invoke(_wi.ID, _wi.X, _wi.Y);
+                                    }
+                                }
+                                return true;
+                            }));
+                        wi.ID = toks[0];
+                        wi.X = float.Parse(toks[1]);
+                        wi.Y = float.Parse(toks[2]);
+                        
                     }else if (obj.Type == "PointLight")
                     {
                         // light
