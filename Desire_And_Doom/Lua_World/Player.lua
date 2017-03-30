@@ -5,7 +5,7 @@
 			["Body"] = {10, 5},
 			["Physics"] = {},
 			["Animation"] = {
-				"entities", {"new-player-run", 0.08}, {"new-player-idle", 0.1}, {"new-player-attack", 0.08}
+				"entities", {"player-run", 0.08}, {"player-idle", 0.1}, {"player-attack", 0.08}, {"player-claymore-run"}
 			},
 			["Invatory"] = {3, 3},
 			["Player"] = {},

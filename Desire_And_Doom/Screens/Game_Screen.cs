@@ -37,12 +37,13 @@ namespace Desire_And_Doom.Screens
             physics_engine.Clear_Solids();
             world.Destroy_All();
             lighting.Lights.Clear();
-
+            Map?.Destroy();
         }
 
         public override void Update(GameTime time)
         {
             base.Update(time);
+            Map.Update(time);
             if (!can_change) can_change = true;
         }
 

@@ -74,19 +74,21 @@ namespace Desire_And_Doom
         {
             Assets.It.Generate_Quads("quads", 512, 8, 8);
 
-            Assets.It.Generate_Animation("wolf-run",            new Vector2(192, 0),            new Vector2(32, 16), 6);
-            Assets.It.Generate_Animation("wolf-idle",           new Vector2(192 + 32, 0),       new Vector2(32, 16), 1);
-            Assets.It.Generate_Animation("bird-idle",           new Vector2(192, 16),           new Vector2(8, 8), 1);
-            Assets.It.Generate_Animation("bird-fly",            new Vector2(192 + 8 * 2, 16),   new Vector2(8, 8), 3);
-            Assets.It.Generate_Animation("mech-idle",           new Vector2(0, 464),            new Vector2(48, 48), 1);
-            Assets.It.Generate_Animation("mech-attack",         new Vector2(0, 464),            new Vector2(48, 48), 8);
-            Assets.It.Generate_Animation("new-player-idle",     new Vector2(0, 133),            new Vector2(16, 26), 1);
-            Assets.It.Generate_Animation("new-player-run",      new Vector2(34, 133),           new Vector2(18, 26), 8);
-            Assets.It.Generate_Animation("new-player-attack",   new Vector2(37, 183),           new Vector2(32, 26), 4);
+            Assets.It.Load_Animations_From_Lua("Lua_World/Animation.lua");
+
+            //Assets.It.Generate_Animation("wolf-run",            new Vector2(192, 0),            new Vector2(32, 16), 6);
+            //Assets.It.Generate_Animation("wolf-idle",           new Vector2(192 + 32, 0),       new Vector2(32, 16), 1);
+            //Assets.It.Generate_Animation("bird-idle",           new Vector2(192, 16),           new Vector2(8, 8), 1);
+            //Assets.It.Generate_Animation("bird-fly",            new Vector2(192 + 8 * 2, 16),   new Vector2(8, 8), 3);
+            //Assets.It.Generate_Animation("mech-idle",           new Vector2(0, 464),            new Vector2(48, 48), 1);
+            //Assets.It.Generate_Animation("mech-attack",         new Vector2(0, 464),            new Vector2(48, 48), 8);
+            //Assets.It.Generate_Animation("new-player-idle",     new Vector2(0, 133),            new Vector2(16, 26), 1);
+            //Assets.It.Generate_Animation("new-player-run",      new Vector2(34, 133),           new Vector2(18, 26), 8);
+            //Assets.It.Generate_Animation("new-player-attack",   new Vector2(37, 183),           new Vector2(32, 26), 4);
             Assets.It.Generate_Animation("grendle-run",         new Vector2(0, 400),            new Vector2(64, 64), 6);
             Assets.It.Generate_Animation("grendle-idle",        new Vector2(0, 400),            new Vector2(64, 64), 1);
 
-            var frames = Assets.It.Get_Quads("new-player-attack");
+            //var frames = Assets.It.Get_Quads("player-attack");
             camera = new Camera_2D(GraphicsDevice, true);
             screen_manager = new Screen_Manager();
 

@@ -55,3 +55,4 @@ C:\Users\Dustin.Neumann\Documents\Visual Studio 2017\Projects\Desire_And_Doom\De
 C:\Users\Dustin.Neumann\Documents\Visual Studio 2017\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\SharpDX.Direct3D9.dll
 C:\Users\Dustin.Neumann\Documents\Visual Studio 2017\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Desire_And_Doom.exe.config
 C:\Users\Dustin.Neumann\Documents\Visual Studio 2017\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\Sky.xnb
+C:\Users\Dustin.Neumann\Documents\Visual Studio 2017\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Lua_World\Animation.lua

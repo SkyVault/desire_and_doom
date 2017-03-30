@@ -44,12 +44,21 @@ namespace Desire_And_Doom.ECS
             var player      = (Player)entity.Get(Types.Player);
 
             if (player.State != Player.Action_State.ATTACKING)
-                sprite.Current_Animation_ID = "new-player-idle";
+                sprite.Current_Animation_ID = "player-idle";
 
             if (Messanger.It.Top() == "Dialog_Open")    player.Can_Move = false;
             if (Messanger.It.Top() == "Dialog_Closed")  player.Can_Move = true;
             if (Debug_Console.Open) player.Can_Move = false;
-            
+
+            var state = GamePad.GetState(PlayerIndex.One);
+            var x_axis = state.ThumbSticks.Left.X;
+            var y_axis = state.ThumbSticks.Left.Y;
+            var dash = (state.Triggers.Left > 0.2f);
+            var action = state.Buttons.A == ButtonState.Pressed;
+            var attack = state.Buttons.X == ButtonState.Pressed;
+
+            string player_run_anim = "player-claymore-run";
+
             if (player.Can_Move && player.State != Player.Action_State.ATTACKING && player.State != Player.Action_State.DASHING)
             {
                 if (Input.It.Is_Key_Down(Keys.Space))
@@ -58,29 +67,29 @@ namespace Desire_And_Doom.ECS
                 }
                 else body.Z = 0;
                 
-                if (Input.It.Is_Key_Down(Keys.Left))
+                if (Input.It.Is_Key_Down(Keys.Left) || x_axis < 0)
                 {
-                    sprite.Current_Animation_ID = "new-player-run";
+                    sprite.Current_Animation_ID = player_run_anim;
                     physics.Apply_Force(10, Physics.Deg_To_Rad(180));
                     sprite.Scale = new Vector2(-1, sprite.Scale.Y);
                 }
 
-                if (Input.It.Is_Key_Down(Keys.Right))
+                if (Input.It.Is_Key_Down(Keys.Right) || x_axis > 0)
                 {
-                    sprite.Current_Animation_ID = "new-player-run";
+                    sprite.Current_Animation_ID = player_run_anim;
                     physics.Apply_Force(10, Physics.Deg_To_Rad(0));
                     sprite.Scale = new Vector2(1, sprite.Scale.Y);
                 }
 
-                if (Input.It.Is_Key_Down(Keys.Up))
+                if (Input.It.Is_Key_Down(Keys.Up) || y_axis > 0)
                 {
                     physics.Apply_Force(10, Physics.Deg_To_Rad(270));
-                    sprite.Current_Animation_ID = "new-player-run";
+                    sprite.Current_Animation_ID = player_run_anim;
                 }
 
-                if (Input.It.Is_Key_Down(Keys.Down))
+                if (Input.It.Is_Key_Down(Keys.Down) || y_axis < 0)
                 {
-                    sprite.Current_Animation_ID = "new-player-run";
+                    sprite.Current_Animation_ID = player_run_anim;
                     physics.Apply_Force(10, Physics.Deg_To_Rad(90));
                 }
             }
@@ -92,13 +101,16 @@ namespace Desire_And_Doom.ECS
 
             if (player.Can_Move)
             {
-                if (Input.It.Is_Key_Pressed(Keys.LeftShift) && player.Dash_Timer <= 0 && player.State != Player.Action_State.DASHING)
+                if (Input.It.Is_Key_Pressed(Keys.LeftShift) == true || dash == true)
                 {
-                    player.State = Player.Action_State.DASHING;
-                    var direction = physics.Direction;
-                    physics.Velocity = Vector2.Zero;
-                    physics.Apply_Force(300, direction);
-                    player.Dash_Timer = player.Max_Dash_Time;
+                    if (player.Dash_Timer <= 0 && player.State != Player.Action_State.DASHING)
+                    {
+                        player.State = Player.Action_State.DASHING;
+                        var direction = physics.Direction;
+                        physics.Velocity = Vector2.Zero;
+                        physics.Apply_Force(300, direction);
+                        player.Dash_Timer = player.Max_Dash_Time;
+                    }
                 }
 
                 if (player.Dash_Timer <= 0 && player.State == Player.Action_State.DASHING)
@@ -106,9 +118,9 @@ namespace Desire_And_Doom.ECS
                     player.State = Player.Action_State.RUNNING;
                 }
 
-                if (Input.It.Is_Key_Down(Keys.X) && player.State != Player.Action_State.ATTACKING)
+                if (Input.It.Is_Key_Down(Keys.X) || attack && player.State != Player.Action_State.ATTACKING)
                 {
-                    sprite.Current_Animation_ID = "new-player-attack";
+                    sprite.Current_Animation_ID = "player-attack";
                     sprite.Current_Frame = 0;
                     player.State = Player.Action_State.ATTACKING;
                 }
@@ -116,8 +128,7 @@ namespace Desire_And_Doom.ECS
                 {
                     if (player.State == Player.Action_State.ATTACKING)
                     {
-                        if (sprite.Animation_End)
-                        {
+                        if (sprite.Animation_End) {
                             player.State = Player.Action_State.IDLE;
                         }
                     }

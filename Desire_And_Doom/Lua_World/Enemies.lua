@@ -36,7 +36,7 @@
 		components = {
 			["Body"] = {8, 4},
 			["Animation"] =
-				{"entities", {"new-player-run", 0.8}},
+				{"entities", {"player-run", 0.8}},
 			["Physics"]={},
 		}
 	},

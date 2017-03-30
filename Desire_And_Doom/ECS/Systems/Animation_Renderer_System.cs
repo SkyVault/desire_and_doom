@@ -23,6 +23,9 @@ namespace Desire_And_Doom.ECS
 
             animation.Timer += (float)time.ElapsedGameTime.TotalSeconds;
 
+            if (animation.Animations.ContainsKey(animation.Current_Animation_ID) == false)
+                throw new Exception("Animation does not contain the key: "+ animation.Current_Animation_ID);
+
             Animation current_animation     = animation.Animations[animation.Current_Animation_ID];
 
             if (animation.Current_Frame > current_animation.Frames.Count - 1)

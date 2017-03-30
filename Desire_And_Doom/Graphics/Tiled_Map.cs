@@ -18,12 +18,19 @@ using TiledSharp;
 
 namespace Desire_And_Doom
 {
+    class Billboard
+    {
+        public Vector2 Position { get; set; } = Vector2.Zero;
+        public Rectangle Region { get; set; } = Rectangle.Empty;
+    }
+
     class Tiled_Map
     {
         private TmxMap              map;
         private Texture2D           texture;
         private List<Rectangle>     quads;
         private Camera_2D           camera;
+        private List<Billboard>     billboards;
 
         public Func<string, float, float, bool> Change_Scene_Callback;
 
@@ -46,11 +53,19 @@ namespace Desire_And_Doom
                 Console.ReadKey();
             }
 
-            map     = new TmxMap(Directory.GetCurrentDirectory() + "/Content/Maps/" + name + ".tmx");
-            quads   = Assets.It.Get_Quads("quads");
-            texture = Assets.It.Get<Texture2D>(map.Tilesets[0].Name);
+            map         = new TmxMap(Directory.GetCurrentDirectory() + "/Content/Maps/" + name + ".tmx");
+            quads       = Assets.It.Get_Quads("quads");
+            texture     = Assets.It.Get<Texture2D>(map.Tilesets[0].Name);
+            billboards  = new List<Billboard>();
             
             Game1.Map_Height_Pixels = map.Height * map.TileHeight;
+
+            for (int i = map.Layers.Count - 1; i >= 0; i--)
+            {
+                var layer = map.Layers[i];
+                if (layer.Properties.ContainsKey("ignore") == true)
+                    map.Layers.RemoveAt(i);
+            }
 
             foreach(var layer in map.ObjectGroups)
             {
@@ -64,10 +79,22 @@ namespace Desire_And_Doom
                             physics_engine.Add_Solid(new RectangleF((float)obj.X, (float)obj.Y, (float)obj.Width, (float)obj.Height));
                         }
                     }
+                    else if (obj.Type == "Billboard")
+                    {
+                        Debug.Assert(obj.Properties.ContainsKey("Region"), "Billboard object requires the property: Region, for example: x y width height");
+                        var str = obj.Properties["Region"];
+                        var toks = str.Split(' ');
+
+                        var billboard = new Billboard() {
+                            Position = new Vector2((float)obj.X, (float)obj.Y),
+                            Region = new Rectangle(int.Parse(toks[0]), int.Parse(toks[1]), int.Parse(toks[2]), int.Parse(toks[3]))
+                        };
+                        billboards.Add(billboard);
+                    }
                     else if (obj.Type == "Door")
                     {
-                        if (obj.Properties.ContainsKey("Door") == false)
-                            throw new Exception("Door object requires the property: Door, for example: Door 100 563");
+                        Debug.Assert(obj.Properties.ContainsKey("Door"), "Door object requires the property: Door, for example: Door 100 563");
+
                         var str = obj.Properties["Door"];
                         var toks = str.Split(' ');
 
@@ -80,7 +107,7 @@ namespace Desire_And_Doom
                                 var _wi = (World_Interaction)self.Get(Component.Types.World_Interaction);
                                 if (other.Has(Component.Types.Player))
                                 {
-                                    if (Input.It.Is_Key_Pressed(Keys.Z))
+                                    if (Input.It.Is_Key_Pressed(Keys.Z) || GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed)
                                     {
                                         Change_Scene_Callback?.Invoke(_wi.ID, _wi.X, _wi.Y);
                                     }
@@ -126,8 +153,37 @@ namespace Desire_And_Doom
             }
         }
 
+        public void Destroy()
+        {
+            billboards.Clear();
+        }
+
+        public void Update(GameTime time)
+        {
+            var camera_pos = camera.Left;
+            var controller = camera.Get_Controller();
+
+
+            if (camera_pos.X < 0)
+                controller.Position = new Vector2(-Game1.WIDTH / camera.Zoom, camera.Y);
+            if (camera_pos.Y < 0)
+                controller.Position = new Vector2(camera.X, -Game1.HEIGHT / camera.Zoom);
+
+            var camera_bottom_right = camera.Left + new Vector2(Game1.WIDTH / camera.Zoom, Game1.HEIGHT / camera.Zoom);
+            if (camera_bottom_right.X > map.Width * map.TileWidth)
+                controller.Position = new Vector2((map.Width * map.TileWidth) - (Game1.WIDTH / camera.Zoom) * 2, camera.Y);
+            if (camera_bottom_right.Y > map.Height * map.TileHeight)
+                controller.Position = new Vector2(camera.X, (map.Height * map.TileHeight) - (Game1.HEIGHT / camera.Zoom) * 2);
+
+            //if (camera_bottom_right.Y > map.Height * map.TileHeight)
+
+        }
+
         public void Draw(SpriteBatch batch)
         {
+            Vector2 camera_position = camera.Left;
+            //Console.WriteLine(camera_frustum.GetCorners()[0]);
+
             foreach (var layer in map.Layers)
             {
                 var render_layer = 0.0f;
@@ -137,15 +193,17 @@ namespace Desire_And_Doom
                 if (layer.Properties.ContainsKey("sort"))
                     sort = bool.Parse(layer.Properties["sort"]);
 
-                for (int y = 0; y < map.Height; y++)
-                    for (int x = 0; x < map.Width; x++)
-                    {
-                        //if (sort)
-                        //{
-                        //    //render_layer = (y / (Game1.Map_Height_Pixels));
-                        //    //Console.WriteLine(y * map.TileHeight);
-                        //}
+                int cx = (int)(camera_position.X / 8);
+                int cy = (int)(camera_position.Y / 8);
+                int cw = (int)((Game1.WIDTH  / camera.Zoom) / 8);
+                int ch = (int)((Game1.HEIGHT / camera.Zoom) / 8);
 
+                if (cx < 0) cx = 0;
+                if (cy < 0) cy = 0;
+
+                for (int y = cy; y < cy + ch + 2; y++)
+                    for (int x = cx; x < cx + cw + 2; x++)
+                    {
                         if (x > map.Width - 1)  continue;
                         if (y > map.Height - 1) continue;
 
@@ -153,6 +211,13 @@ namespace Desire_And_Doom
                         if (tile.Gid != 0)
                             batch.Draw(texture, new Vector2(x * map.TileWidth, y * map.TileHeight), quads[tile.Gid - 1], Color.White, 0, Vector2.Zero, 1f,SpriteEffects.None, render_layer);
                     }
+            }
+
+            foreach (var billboard in billboards)
+            {
+                var y = billboard.Position.Y + (billboard.Region.Height * 0.8f);
+                var layer = 0.3f + (y / Game1.Map_Height_Pixels) * 0.1f;
+                batch.Draw(texture, billboard.Position, billboard.Region, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, layer);
             }
         }
     }

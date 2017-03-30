@@ -72,6 +72,25 @@ namespace Desire_And_Doom
             animations.Add(id, animation);
         }
 
+        public void Load_Animations_From_Lua(string file)
+        {
+            LuaTable data = lua.DoFile(file)[0] as LuaTable;
+            if (data["generate"] is LuaTable generate)
+            {
+                foreach (String key in generate.Keys)
+                {
+                    LuaTable gen_data = generate[key] as LuaTable;
+                    int sx = (int)(gen_data[1] as double?);
+                    int sy = (int)(gen_data[2] as double?);
+                    int fw = (int)(gen_data[3] as double?);
+                    int fh = (int)(gen_data[4] as double?);
+                    int nm = (int)(gen_data[5] as double?);
+
+                    Generate_Animation(key, new Vector2(sx, sy), new Vector2(fw, fh), nm);
+                }
+            }
+        }
+
         public void Generate_Quads(string id,int imgsize, int twidth, int theight)
         {
             var tile_quads = new List<Rectangle>();
@@ -84,7 +103,11 @@ namespace Desire_And_Doom
             quads.Add(id, tile_quads);
         }
 
-        public List<Rectangle> Get_Quads(string id) { return quads[id]; }
+        public List<Rectangle> Get_Quads(string id) {
+            if (quads.ContainsKey(id) == false)
+                throw new Exception("ERROR:: cannot find quads: " + id);
+            return quads[id];
+        }
 
         public T Get <T>(string id){
             if (typeof(T) == typeof(Texture2D))

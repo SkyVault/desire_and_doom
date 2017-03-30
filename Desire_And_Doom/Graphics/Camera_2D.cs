@@ -15,7 +15,7 @@ namespace Desire_And_Doom
     {
         private readonly Camera2D camera;
 
-        public float Zoom { get; set; }
+        public float Zoom { get => camera.Zoom; set => camera.Zoom = value; }
         public float Rotation { get; set; }
 
         public Vector2 Position { get => camera.Position; }
@@ -24,14 +24,13 @@ namespace Desire_And_Doom
         public float X { get { return Position.X; } }
         public float Y { get { return Position.Y; } }
 
+        bool can_move = true;
+
         public Camera_2D(GraphicsDevice device, bool _scrollable = false)
-        {
-            
-            Zoom = 1;
+        { 
             Rotation = 0;
             
             camera = new Camera2D(device);
-            
         }
 
         public void Update(GameTime time)
@@ -40,6 +39,12 @@ namespace Desire_And_Doom
 
         public void Track(Body body, float smoothing)
         {
+            
+            if (!can_move) {
+                can_move = true;
+                return;
+            }
+
             var dx = (X - (body.X + body.Width / 2) + Game1.WIDTH / 2);
             var dy = (Y - (body.Y + body.Height / 2) + Game1.HEIGHT / 2);
 
@@ -48,6 +53,29 @@ namespace Desire_And_Doom
 
             //camera.Position = new Vector2((float)Math.Floor(camera.Position.X), (float)Math.Floor(camera.Position.Y));
             //Console.WriteLine(bounds.X);
+        }
+
+        public BoundingFrustum Get_Camera_Frustum()
+        {
+            return camera.GetBoundingFrustum();
+        }
+
+        public Vector2 Left
+        {
+            get => camera.Position + new Vector2(Game1.WIDTH / 2, Game1.HEIGHT / 2) - new Vector2(Game1.WIDTH / 2 / Zoom, Game1.HEIGHT / 2 / Zoom);
+        }
+
+        public void Move(Vector2 by)
+        {
+            can_move = false;
+            camera.Move(by);
+        }
+
+        public Camera2D Get_Controller() => camera;
+
+        public Vector2 Get_Camera_Position_In_Worldspace()
+        {
+            return Left;
         }
 
         public Vector2 World_To_Screen(Vector2 point)
