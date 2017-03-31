@@ -38,6 +38,7 @@ namespace Desire_And_Doom.Screens
             world.Destroy_All();
             lighting.Lights.Clear();
             Map?.Destroy();
+            particle_world.Destroy();
         }
 
         public override void Update(GameTime time)
@@ -60,18 +61,22 @@ namespace Desire_And_Doom.Screens
 
             Destroy();
 
-            Map = new Tiled_Map(id, camera, world, this, lighting) {
+            Map = new Tiled_Map(id, camera, world, this, particle_world, lighting) {
                 Change_Scene_Callback = Load_Map
             };
 
             if (x != -1 && y != -1)
             {
-                var player = world.Get_All_With_Component(Component.Types.Player).Last();
-                if (player != null)
+                var list = world.Get_All_With_Component(Component.Types.Player);
+                if (list.Count > 0 )
                 {
-                    var body = (Body)player.Get(Component.Types.Body);
-                    body.X = x;
-                    body.Y = y;
+                    var player = list.Last();
+                    if (player != null)
+                    {
+                        var body = (Body)player.Get(Component.Types.Body);
+                        body.X = x;
+                        body.Y = y;
+                    }
                 }
             }
 

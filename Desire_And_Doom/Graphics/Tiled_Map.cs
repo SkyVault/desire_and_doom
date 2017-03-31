@@ -1,5 +1,7 @@
 ﻿using Desire_And_Doom.ECS;
 using Desire_And_Doom.ECS.Components;
+using Desire_And_Doom.Graphics;
+using Desire_And_Doom.Graphics.Particle_Systems;
 using Desire_And_Doom.Screens;
 using Desire_And_Doom.Utils;
 using Microsoft.Xna.Framework;
@@ -34,7 +36,9 @@ namespace Desire_And_Doom
 
         public Func<string, float, float, bool> Change_Scene_Callback;
 
-        public Tiled_Map(string name, Camera_2D _camera, World world, Screen level, PenumbraComponent lighting = null)
+        public bool Has_Sky { get; private set; } = false;
+
+        public Tiled_Map(string name, Camera_2D _camera, World world, Screen level, Particle_World particle_world, PenumbraComponent lighting = null)
         {
             this.camera = _camera;
             var current = Directory.GetCurrentDirectory();
@@ -57,6 +61,11 @@ namespace Desire_And_Doom
             quads       = Assets.It.Get_Quads("quads");
             texture     = Assets.It.Get<Texture2D>(map.Tilesets[0].Name);
             billboards  = new List<Billboard>();
+
+            if ( map.Properties.ContainsKey("Sky") )
+            {
+                Has_Sky = map.Properties["Sky"] ==  "true";
+            }
             
             Game1.Map_Height_Pixels = map.Height * map.TileHeight;
 
@@ -69,29 +78,44 @@ namespace Desire_And_Doom
 
             foreach(var layer in map.ObjectGroups)
             {
-                foreach(var obj in layer.Objects)
+                foreach ( var obj in layer.Objects )
                 {
-                    if (obj.Type == "")
+                    if ( obj.Type == "" )
                     {
-                        var physics_engine = (Physics_Engine)world.Get_System<Physics_Engine>();
-                        if (physics_engine != null)
+                        var physics_engine = (Physics_Engine) world.Get_System<Physics_Engine>();
+                        if ( physics_engine != null )
                         {
-                            physics_engine.Add_Solid(new RectangleF((float)obj.X, (float)obj.Y, (float)obj.Width, (float)obj.Height));
+                            physics_engine.Add_Solid(new RectangleF((float) obj.X, (float) obj.Y, (float) obj.Width, (float) obj.Height));
+                        }
+                    } else if ( obj.Type == "Particle" )
+                    {
+                        //if ()
+                        Debug.Assert(obj.Properties.ContainsKey("Type"), "ERROR:: Particle object requires a Type property!");
+                        var type = obj.Properties["Type"];
+
+                        switch ( type ) {
+                            case "Fire_Fly":
+                                particle_world.Add(new Fire_Fly_Emitter(new Vector2(0, 0))); break;
+                            default:
+                                Console.WriteLine("WARNING:: unknown particle type: " + type);
+                                Console.WriteLine("Did you mean one of these?");
+                                Console.Write("1) Fire_Fly\n2) Fire\n3) Blue_Fire");
+                                break;
                         }
                     }
-                    else if (obj.Type == "Billboard")
+                    else if ( obj.Type == "Billboard" )
                     {
                         Debug.Assert(obj.Properties.ContainsKey("Region"), "Billboard object requires the property: Region, for example: x y width height");
                         var str = obj.Properties["Region"];
                         var toks = str.Split(' ');
 
                         var billboard = new Billboard() {
-                            Position = new Vector2((float)obj.X, (float)obj.Y),
+                            Position = new Vector2((float) obj.X, (float) obj.Y),
                             Region = new Rectangle(int.Parse(toks[0]), int.Parse(toks[1]), int.Parse(toks[2]), int.Parse(toks[3]))
                         };
                         billboards.Add(billboard);
                     }
-                    else if (obj.Type == "Door")
+                    else if ( obj.Type == "Door" )
                     {
                         Debug.Assert(obj.Properties.ContainsKey("Door"), "Door object requires the property: Door, for example: Door 100 563");
 
@@ -99,15 +123,15 @@ namespace Desire_And_Doom
                         var toks = str.Split(' ');
 
                         var door = world.Create_Entity();
-                        door.Add(new Body(new Vector2((float)obj.X, (float)obj.Y), new Vector2((float)obj.Width, (float)obj.Height)));
+                        door.Add(new Body(new Vector2((float) obj.X, (float) obj.Y), new Vector2((float) obj.Width, (float) obj.Height)));
                         door.Add(new Physics(Vector2.Zero, Physics.PType.WORLD_INTERACTION));
 
-                        var wi = (World_Interaction)door.Add(new World_Interaction(
+                        var wi = (World_Interaction) door.Add(new World_Interaction(
                             (self, other) => {
-                                var _wi = (World_Interaction)self.Get(Component.Types.World_Interaction);
-                                if (other.Has(Component.Types.Player))
+                                var _wi = (World_Interaction) self.Get(Component.Types.World_Interaction);
+                                if ( other.Has(Component.Types.Player) )
                                 {
-                                    if (Input.It.Is_Key_Pressed(Keys.Z) || GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed)
+                                    if ( Input.It.Is_Key_Pressed(Keys.Z) || GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed )
                                     {
                                         Change_Scene_Callback?.Invoke(_wi.ID, _wi.X, _wi.Y);
                                     }
@@ -117,14 +141,14 @@ namespace Desire_And_Doom
                         wi.ID = toks[0];
                         wi.X = float.Parse(toks[1]);
                         wi.Y = float.Parse(toks[2]);
-                        
-                    }else if (obj.Type == "PointLight")
+
+                    } else if ( obj.Type == "PointLight" )
                     {
                         // light
                         var scale = 200f;
-                        if (obj.Properties.ContainsKey("Scale")) scale = float.Parse(obj.Properties["Scale"]);
+                        if ( obj.Properties.ContainsKey("Scale") ) scale = float.Parse(obj.Properties["Scale"]);
                         var color = Color.White;
-                        if (obj.Properties.ContainsKey("Color"))
+                        if ( obj.Properties.ContainsKey("Color") )
                         {
                             string color_string = obj.Properties["Color"];
                             var tokens = color_string.Split(' ');
@@ -136,17 +160,17 @@ namespace Desire_And_Doom
                         }
 
                         lighting.Lights.Add(new PointLight() {
-                            Position = new Vector2((float)(obj.X + obj.Width / 2), (float)(obj.Y + obj.Height / 2)),
+                            Position = new Vector2((float) (obj.X + obj.Width / 2), (float) (obj.Y + obj.Height / 2)),
                             Scale = new Vector2(scale),
                             Color = color,
                             Intensity = 1f
                         });
                     }
-                    else 
+                    else
                     {
                         world.Create_Entity(
                             Assets.It.Get<LuaTable>(obj.Type),
-                            (float)obj.X, (float)obj.Y
+                            (float) obj.X, (float) obj.Y
                             );
                     }
                 }

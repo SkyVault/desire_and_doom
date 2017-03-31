@@ -57,7 +57,7 @@ namespace Desire_And_Doom.ECS
             var action = state.Buttons.A == ButtonState.Pressed;
             var attack = state.Buttons.X == ButtonState.Pressed;
 
-            string player_run_anim = "player-claymore-run";
+            string player_run_anim = "player-run";
 
             if (player.Can_Move && player.State != Player.Action_State.DASHING)
             {

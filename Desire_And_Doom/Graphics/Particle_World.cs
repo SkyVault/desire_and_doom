@@ -36,6 +36,11 @@ namespace Desire_And_Doom.Graphics
             }
         }
 
+        public void Destroy()
+        {
+            emitters.Clear();
+        }
+
         public void Draw(SpriteBatch batch)
         {
             emitters.ForEach(e => e.Draw(batch));

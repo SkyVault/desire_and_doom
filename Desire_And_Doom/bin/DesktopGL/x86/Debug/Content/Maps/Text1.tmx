@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" nextobjectid="117">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" nextobjectid="118">
+ <properties>
+  <property name="Sky" value="true"/>
+ </properties>
  <tileset firstgid="1" name="Tiles_1" tilewidth="8" tileheight="8" tilecount="4096" columns="64">
   <image source="../../../../../../Content/Tiles_1.png" width="512" height="512"/>
   <tile id="108">
@@ -1062,6 +1065,13 @@
   <object id="59" type="Door" x="952" y="392" width="16" height="32.6667">
    <properties>
     <property name="Door" value="Demo 144 255"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Particles">
+  <object id="117" name="Fire_Fly" type="Particle" x="0" y="0" width="16" height="16">
+   <properties>
+    <property name="Type" value="Fire_Fly"/>
    </properties>
   </object>
  </objectgroup>

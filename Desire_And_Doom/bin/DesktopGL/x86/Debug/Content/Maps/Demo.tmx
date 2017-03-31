@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" nextobjectid="77">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" nextobjectid="78">
+ <properties>
+  <property name="Sky" type="bool" value="true"/>
+ </properties>
  <tileset firstgid="1" name="Tiles_1" tilewidth="8" tileheight="8" tilecount="4096" columns="64">
   <image source="../../../../../../Content/Tiles_1.png" width="512" height="512"/>
  </tileset>
@@ -856,7 +859,7 @@
   <object id="76" name="Shulk" type="Shulk" x="48" y="288" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Billboards">
-  <object id="50" name="Lamp Post" type="Billboard" x="368" y="304" width="16" height="32">
+  <object id="50" name="Lamp Post" type="Billboard" x="368" y="303.818" width="16" height="32">
    <properties>
     <property name="Region" value="48 64 16 36"/>
    </properties>
@@ -926,7 +929,14 @@
  <objectgroup name="Doors">
   <object id="49" type="Door" x="136" y="220.333" width="16" height="35">
    <properties>
-    <property name="Door" value="Text1 960 420"/>
+    <property name="Door" value="DustysDive 32 128"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Particles">
+  <object id="77" name="Fire_Fly" type="Particle" x="0" y="0" width="16" height="16">
+   <properties>
+    <property name="Type" value="Fire_Fly"/>
    </properties>
   </object>
  </objectgroup>
