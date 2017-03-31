@@ -14,6 +14,7 @@ namespace Desire_And_Doom.Screens
         public Level_1_Screen(World _world, Camera_2D _camera, PenumbraComponent _lighting, Particle_World _particle_world, Physics_Engine _physics_engine) : base(_world, _camera, _lighting, _particle_world, _physics_engine, "Level 1")
         {
             sky = new Sky_Renderer(Assets.It.Get<Texture2D>("sky_1"));
+            //lighting.AmbientColor = new Color(255, 0, 0);
             _particle_world.Add(new Fire_Fly_Emitter(new Vector2(0, 0)));
         }
 

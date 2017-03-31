@@ -9,10 +9,10 @@ namespace Desire_And_Doom.Screens
 {
     class Menu_Screen : Screen
     {
-        Monogui GUI;
+        Monogui gui;
         public Menu_Screen(Monogui gui) : base("Menu")
         {
-            GUI = gui;
+            this.gui = gui;
         }
 
         public override void Load()

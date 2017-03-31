@@ -10,13 +10,13 @@ namespace Desire_And_Doom.ECS
 {
     class Sprite : Component
     {
-        public Texture2D Texture    { get; private set; }
-        public Rectangle Quad       { get; private set; }
+        public Texture2D Texture    { get; protected set; }
+        public Rectangle Quad       { get; protected set; }
 
         public Color    Color  { get; set; } = Color.White;
         public Vector2  Offset { get; set; } = Vector2.Zero;
         public Vector2  Scale  { get; set; } = Vector2.One;
-        public float    Layer { get; set; } = 0.5f;
+        public float    Layer  { get; set; } = 0.5f;
 
         public Sprite(Texture2D _texture, Rectangle _quad) : base(Types.Sprite)
         {

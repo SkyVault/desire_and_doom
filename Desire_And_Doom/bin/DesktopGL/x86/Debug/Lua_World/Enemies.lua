@@ -61,5 +61,17 @@
 			["Ai"] = {"Table","Grendle_Ai"},
 			["Light"] = {}
 		}
+	},
+
+	["Shulk"] = {
+		tags = {"Enemy"},
+		components = {
+			["Body"] = {32, 24},
+			["Animation"] = {"entities", {"shulk-idle", 0.1}, {"shulk-attack", 0.1}},
+			["Physics"] = {},
+			["Ai"] = {"Table", "Shulk_Ai"},
+			["Light"] = {}
+		}
 	}
+
 }

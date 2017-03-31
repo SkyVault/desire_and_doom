@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" nextobjectid="74">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" nextobjectid="77">
  <tileset firstgid="1" name="Tiles_1" tilewidth="8" tileheight="8" tilecount="4096" columns="64">
   <image source="../../../../../../Content/Tiles_1.png" width="512" height="512"/>
  </tileset>
@@ -813,7 +813,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Object Layer 1" visible="0">
+ <objectgroup name="Object Layer 1">
   <object id="2" x="468.5" y="504.5" width="54.5" height="51.5"/>
   <object id="3" x="360" y="256" width="392" height="16"/>
   <object id="8" x="560" y="272" width="192" height="40"/>
@@ -853,8 +853,9 @@
   <object id="56" x="484" y="460" width="8" height="8"/>
   <object id="58" x="595.333" y="387.333" width="8" height="8"/>
   <object id="73" x="419.708" y="648.667" width="43.25" height="21.3333"/>
+  <object id="76" name="Shulk" type="Shulk" x="48" y="288" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="Billboards" visible="0">
+ <objectgroup name="Billboards">
   <object id="50" name="Lamp Post" type="Billboard" x="368" y="304" width="16" height="32">
    <properties>
     <property name="Region" value="48 64 16 36"/>
@@ -922,7 +923,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Doors" visible="0">
+ <objectgroup name="Doors">
   <object id="49" type="Door" x="136" y="220.333" width="16" height="35">
    <properties>
     <property name="Door" value="Text1 960 420"/>

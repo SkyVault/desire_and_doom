@@ -80,5 +80,16 @@ return {
 			{"block",
 				{"set_animation", "grendle-idle"},
 			}
+	},
+
+	["Shulk_Ai"] = {
+	"block",
+		{"entity_within", "Player", 150},
+		{"block_with_skip",
+			{"set_animation", "shulk-attack"}
+		},
+		{"block",
+			{"set_animation", "shulk-idle"}
+		}
 	}
 }

@@ -59,7 +59,7 @@ namespace Desire_And_Doom.ECS
 
             string player_run_anim = "player-claymore-run";
 
-            if (player.Can_Move && player.State != Player.Action_State.ATTACKING && player.State != Player.Action_State.DASHING)
+            if (player.Can_Move && player.State != Player.Action_State.DASHING)
             {
                 if (Input.It.Is_Key_Down(Keys.Space))
                 {
@@ -69,14 +69,16 @@ namespace Desire_And_Doom.ECS
                 
                 if (Input.It.Is_Key_Down(Keys.Left) || x_axis < 0)
                 {
-                    sprite.Current_Animation_ID = player_run_anim;
+                    if (player.State != Player.Action_State.ATTACKING)
+                        sprite.Current_Animation_ID = player_run_anim;
                     physics.Apply_Force(10, Physics.Deg_To_Rad(180));
                     sprite.Scale = new Vector2(-1, sprite.Scale.Y);
                 }
 
                 if (Input.It.Is_Key_Down(Keys.Right) || x_axis > 0)
                 {
-                    sprite.Current_Animation_ID = player_run_anim;
+                    if (player.State != Player.Action_State.ATTACKING)
+                        sprite.Current_Animation_ID = player_run_anim;
                     physics.Apply_Force(10, Physics.Deg_To_Rad(0));
                     sprite.Scale = new Vector2(1, sprite.Scale.Y);
                 }
@@ -84,12 +86,14 @@ namespace Desire_And_Doom.ECS
                 if (Input.It.Is_Key_Down(Keys.Up) || y_axis > 0)
                 {
                     physics.Apply_Force(10, Physics.Deg_To_Rad(270));
-                    sprite.Current_Animation_ID = player_run_anim;
+                    if (player.State != Player.Action_State.ATTACKING)
+                        sprite.Current_Animation_ID = player_run_anim;
                 }
 
                 if (Input.It.Is_Key_Down(Keys.Down) || y_axis < 0)
                 {
-                    sprite.Current_Animation_ID = player_run_anim;
+                    if (player.State != Player.Action_State.ATTACKING)
+                        sprite.Current_Animation_ID = player_run_anim;
                     physics.Apply_Force(10, Physics.Deg_To_Rad(90));
                 }
             }
@@ -118,7 +122,7 @@ namespace Desire_And_Doom.ECS
                     player.State = Player.Action_State.RUNNING;
                 }
 
-                if (Input.It.Is_Key_Down(Keys.X) || attack && player.State != Player.Action_State.ATTACKING)
+                if (Input.It.Is_Key_Down(Keys.X) && player.State != Player.Action_State.ATTACKING)
                 {
                     sprite.Current_Animation_ID = "player-attack";
                     sprite.Current_Frame = 0;
