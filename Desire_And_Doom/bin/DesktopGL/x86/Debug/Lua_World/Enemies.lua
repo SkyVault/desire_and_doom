@@ -1,4 +1,6 @@
-﻿return {
+﻿local AI = require "Lua_World/AI"
+
+return {
 	["Zombie"] = {
 		tags = {"Enemy","Zombie"},
 		components = {
@@ -16,7 +18,7 @@
 			["Animation"] = 
 				{"entities",  {"wolf-run", 0.08},{"wolf-idle", 0.1}},
 			["Physics"] = {},
-			["Ai"] = {"Table","Wolf_Ai"}
+			["Ai"] = {"Function",AI.Wolf}
 		}
 	},
 
@@ -69,7 +71,7 @@
 			["Body"] = {32, 24},
 			["Animation"] = {"entities", {"shulk-idle", 0.1}, {"shulk-attack", 0.1}},
 			["Physics"] = {},
-			["Ai"] = {"Table", "Shulk_Ai"},
+			["Ai"] = {"Function", AI.Shulk},
 			["Light"] = {}
 		}
 	}

@@ -43,7 +43,15 @@ namespace Desire_And_Doom.Graphics
 
         public void Draw(SpriteBatch batch)
         {
-            emitters.ForEach(e => e.Draw(batch));
+            emitters.ForEach(e => { if (e.BlendState == BlendState.NonPremultiplied) e.Draw(batch); });
+        }
+
+        public void Additive_Draw(SpriteBatch batch)
+        {
+            emitters.ForEach(e => { if ( e.BlendState == BlendState.Additive ) {
+                    //Console.WriteLine("yogurt");
+                    e.Draw(batch);
+                } });
         }
     }
 }

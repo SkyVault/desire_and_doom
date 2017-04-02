@@ -12,7 +12,7 @@ namespace Desire_And_Doom.ECS
     {
 
         //private Dictionary<Component.Types, Component> components;
-        private Component[] components;
+        private Dictionary<Component.Types, Component> components;
         private static int uuid_generater = 0;
 
         public List<string> Tags { get; set; }
@@ -22,7 +22,7 @@ namespace Desire_And_Doom.ECS
 
         public Entity()
         {
-            components = new Component[(int)Component.Types.Num_Of_Types];
+            components = new Dictionary<Types, Component>();
             Tags = new List<string>();
         }
 
@@ -31,31 +31,27 @@ namespace Desire_And_Doom.ECS
         }
 
         public bool Has(Types name) {
-            return components[(int)name] != null;
+            return components.ContainsKey(name);
         }
 
         public List<Component> Get_Components_List() {
-            return components.ToList();
+            return components.Values.ToList();
         }
 
         public List<Types> Get_Component_Types_List() {
-            List<Types> types = new List<Types>();
-            foreach (var c in components)
-                if (c != null)
-                    types.Add(c.Type);
-            return types;
+            return components.Keys.ToList();
         }
 
         public Component Add(Component component){
-            if (components[(int)component.Type] == null){
-                components[(int)component.Type] = component;
+            if (components.ContainsKey(component.Type) == false){
+                components.Add(component.Type, component);
             }
             return component;
         }
 
         public Component Get(Component.Types id)
         {
-            return (components[(int)id]);
+            return (components[id]);
         }
     }
 }

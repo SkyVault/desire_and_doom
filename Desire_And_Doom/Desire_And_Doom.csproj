@@ -63,9 +63,11 @@
   <ItemGroup>
     <Compile Include="ECS\Components\Entity_Particle_Emitter.cs" />
     <Compile Include="ECS\Components\Light_Emitter.cs" />
+    <Compile Include="ECS\Components\Lua_Function.cs" />
     <Compile Include="ECS\Components\World_Interaction.cs" />
     <Compile Include="ECS\Systems\Entity_Emitter_System.cs" />
     <Compile Include="ECS\Systems\Light_Emitter_System.cs" />
+    <Compile Include="ECS\Systems\Lua_Function_System.cs" />
     <Compile Include="ECS\Systems\World_Interaction_System.cs" />
     <Compile Include="Graphics\Animation.cs" />
     <Compile Include="Graphics\Animation_Frame.cs" />
@@ -98,8 +100,10 @@
     <Compile Include="Graphics\Particle_Emitter.cs" />
     <Compile Include="Graphics\Particle_Systems\Dust_Emitter.cs" />
     <Compile Include="Graphics\Particle_Systems\Dust_Particle.cs" />
+    <Compile Include="Graphics\Particle_Systems\Fire_Emitter.cs" />
     <Compile Include="Graphics\Particle_Systems\Fire_Fly_Emitter.cs" />
     <Compile Include="Graphics\Particle_Systems\Fire_Fly_Particle.cs" />
+    <Compile Include="Graphics\Particle_Systems\Fire_Particle.cs" />
     <Compile Include="Graphics\Particle_World.cs" />
     <Compile Include="Graphics\Sky_Renderer.cs" />
     <Compile Include="Graphics\ViewportAdapter.cs" />
@@ -202,6 +206,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\tiles_main.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lua_World\AI.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Lua_World\Animation.lua">

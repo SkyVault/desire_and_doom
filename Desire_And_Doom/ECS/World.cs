@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Desire_And_Doom.ECS.Components;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using NLua;
@@ -103,9 +104,10 @@ namespace Desire_And_Doom.ECS
                         {
                             var ai = Assets.It.Get<LuaTable>(component[2] as string);
                             entity.Add(new AI(ai));
-                        }else
+                        }else if (type == "Function")
                         {
-
+                            var function = component[2] as LuaFunction;
+                            entity.Add(new Lua_Function(function));
                         }
                         break;
                     default:

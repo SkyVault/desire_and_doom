@@ -12,6 +12,8 @@ namespace Desire_And_Doom.Graphics
     {
         List<Particle> particles;
 
+        public BlendState BlendState { get; set; } = BlendState.NonPremultiplied;
+
         public Vector2 Position { get; set; }
         public Vector2 Size { get; set; }
 

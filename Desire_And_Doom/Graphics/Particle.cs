@@ -19,6 +19,8 @@ namespace Desire_And_Doom.Graphics
         public float    Transparency { get; set; } = 1f;
         public bool     Remove { get; set; } = false;
 
+        public SpriteEffects Flip { get; set; } = SpriteEffects.None;
+
         public Rectangle Region { get; set; }
         public Texture2D Image  { get; set; }
 
@@ -39,46 +41,31 @@ namespace Desire_And_Doom.Graphics
 
         public float Speed { get; set; } = 10f;
         public float Scale { get; set; } = 1f;
+        public float Rotation { get; set; } = 0f;
 
         public Particle()
         {
             Life = Life_Max;
         }
 
-        public void Destroy()
-        {
-            Remove = true;
-        }
+        public  void Destroy()              => Remove = true;
+        protected void Scale_Down(float by = 0.99f) => Scale *= by;
+        protected void Apply_Friction()     => Velocity *= Friction;
 
-        protected void Apply_Friction()
-        {
-            Velocity *= Friction;
-        }
-
-        protected void Move_In_Direction()
-        {
+        protected void Move_In_Direction() =>
             Velocity = new Vector2((float)Math.Cos(Direction), (float)Math.Sin(Direction)) * Speed;
-        }
 
-        protected void Find_Direction()
-        {
+        protected void Find_Direction() =>
             Direction = (float)Math.Atan2(Y - Vel_Y, X - Vel_X);
-        }
 
-        protected void Apply_Velocity(GameTime time)
-        {
+        protected void Apply_Velocity(GameTime time) =>
             Position += Velocity * (float)time.ElapsedGameTime.TotalSeconds;
-        }
 
-        protected float Lerp(float a, float b, float time)
-        {
-            return (1f - time) * a + time * b;
-        }
+        protected float Lerp(float a, float b, float time) =>
+            (1f - time) * a + time * b;
 
-        protected float Lerp2(float a, float b, float time)
-        {
-            return a + (b - a) * time;
-        }
+        protected float Lerp2(float a, float b, float time) =>
+            a + (b - a) * time;
 
         public void Fade_Out()
         {
@@ -103,7 +90,16 @@ namespace Desire_And_Doom.Graphics
 
         public virtual void Draw(SpriteBatch batch)
         {
-            batch.Draw(Image, Position, Region, new Color(Transparency, Transparency, Transparency, Transparency), 0, Vector2.Zero, Scale, SpriteEffects.None, 0.4f);
+            batch.Draw(
+                Image, 
+                Position + new Vector2(Region.Width/2, Region.Width / 2), 
+                Region, 
+                new Color(Transparency, Transparency, Transparency, Transparency), 
+                Rotation, 
+                new Vector2(Region.Width / 2, Region.Height /2), Scale, 
+                Flip, 
+                0.4f
+                );
         }
     }
 }

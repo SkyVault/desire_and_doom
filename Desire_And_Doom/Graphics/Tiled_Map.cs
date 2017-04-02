@@ -96,6 +96,9 @@ namespace Desire_And_Doom
                         switch ( type ) {
                             case "Fire_Fly":
                                 particle_world.Add(new Fire_Fly_Emitter(new Vector2(0, 0))); break;
+                            case "Fire":
+                                Console.WriteLine("Hey");
+                                particle_world.Add(new Fire_Emitter(new Vector2((float) obj.X, (float) obj.Y))); break;
                             default:
                                 Console.WriteLine("WARNING:: unknown particle type: " + type);
                                 Console.WriteLine("Did you mean one of these?");

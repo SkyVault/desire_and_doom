@@ -93,6 +93,7 @@ namespace Desire_And_Doom
             world.Add_System<AI_System>(new AI_System());
             world.Add_System<Light_Emitter_System>(new Light_Emitter_System());
             world.Add_System<World_Interaction_System>(new World_Interaction_System());
+            world.Add_System<Lua_Function_System>(new Lua_Function_System());
             gui = new Monogui();
 
             var npc_system = (Npc_System)world.Add_System<Npc_System>(new Npc_System(this, graphics));
@@ -175,6 +176,7 @@ namespace Desire_And_Doom
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            // main draw
             batch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, DepthStencilState.DepthRead, null, null, camera.View_Matrix);
 
             world.Draw(batch);
@@ -183,7 +185,11 @@ namespace Desire_And_Doom
 
             particle_world.Draw(batch);
             batch.End();
-            
+
+            batch.Begin(SpriteSortMode.FrontToBack, BlendState.Additive, SamplerState.PointClamp, DepthStencilState.DepthRead, null, null, camera.View_Matrix);
+            particle_world.Additive_Draw(batch);
+            batch.End();
+
             penumbra.Draw(gameTime);
 
             // gui

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Desire_And_Doom.ECS
 {
     abstract class Component {
-        public enum Types : int
+        public enum Types
         {
             Player,
             Item,
@@ -21,6 +21,7 @@ namespace Desire_And_Doom.ECS
             Light_Emitter,
             Entity_Particle_Emitter,
             World_Interaction,
+            Lua_Function,
             Num_Of_Types,
         }
 
