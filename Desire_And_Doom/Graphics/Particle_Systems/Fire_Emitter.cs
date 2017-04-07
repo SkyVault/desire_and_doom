@@ -9,7 +9,7 @@ namespace Desire_And_Doom.Graphics.Particle_Systems
 {
     class Fire_Emitter : Particle_Emitter
     {
-        public Fire_Emitter(Vector2 _position) : base(_position, true)
+        public Fire_Emitter(Vector2 _position, bool create_fire_on_creation = true) : base(_position, create_fire_on_creation)
         {
             Spawn_Time_Max = 0.02f;
             Position = _position;

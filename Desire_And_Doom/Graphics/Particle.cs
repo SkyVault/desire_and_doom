@@ -16,7 +16,6 @@ namespace Desire_And_Doom.Graphics
 
         public Color Color { get; set; } = Color.White;
         
-        public float    Transparency { get; set; } = 1f;
         public bool     Remove { get; set; } = false;
 
         public SpriteEffects Flip { get; set; } = SpriteEffects.None;
@@ -43,14 +42,19 @@ namespace Desire_And_Doom.Graphics
         public float Scale { get; set; } = 1f;
         public float Rotation { get; set; } = 0f;
 
+        public float Transparency {
+            get => this.Color.A / 255f;
+            set => Color = new Color(Color.R, Color.G, Color.B, (byte) (255 * value));
+        }
+
         public Particle()
         {
             Life = Life_Max;
         }
 
-        public  void Destroy()              => Remove = true;
+        public    void Destroy()                    => Remove = true;
         protected void Scale_Down(float by = 0.99f) => Scale *= by;
-        protected void Apply_Friction()     => Velocity *= Friction;
+        protected void Apply_Friction()             => Velocity *= Friction;
 
         protected void Move_In_Direction() =>
             Velocity = new Vector2((float)Math.Cos(Direction), (float)Math.Sin(Direction)) * Speed;
@@ -61,11 +65,8 @@ namespace Desire_And_Doom.Graphics
         protected void Apply_Velocity(GameTime time) =>
             Position += Velocity * (float)time.ElapsedGameTime.TotalSeconds;
 
-        protected float Lerp(float a, float b, float time) =>
-            (1f - time) * a + time * b;
-
-        protected float Lerp2(float a, float b, float time) =>
-            a + (b - a) * time;
+        protected float Lerp(float a, float b, float time)  => (1f - time) * a + time * b;
+        protected float Lerp2(float a, float b, float time) => a + (b - a) * time;
 
         public void Fade_Out()
         {
@@ -94,7 +95,7 @@ namespace Desire_And_Doom.Graphics
                 Image, 
                 Position + new Vector2(Region.Width/2, Region.Width / 2), 
                 Region, 
-                new Color(Transparency, Transparency, Transparency, Transparency), 
+                new Color (this.Color.R/255f, this.Color.G/255f, this.Color.B/255f, Transparency), 
                 Rotation, 
                 new Vector2(Region.Width / 2, Region.Height /2), Scale, 
                 Flip, 

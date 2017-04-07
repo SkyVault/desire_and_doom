@@ -15,7 +15,14 @@ namespace Desire_And_Doom.ECS
         private Dictionary<Component.Types, Component> components;
         private static int uuid_generater = 0;
 
+        public bool Loaded { get; set; } = false;
         public List<string> Tags { get; set; }
+        public Func<Entity, bool> Update { get; set; }
+
+        public bool Has_Tag(string tag)
+        {
+            return Tags.Contains(tag);
+        }
 
         public int UUID { get; private set; } = uuid_generater++;
         public bool Remove { get; private set; }
@@ -51,7 +58,9 @@ namespace Desire_And_Doom.ECS
 
         public Component Get(Component.Types id)
         {
-            return (components[id]);
+            if (components.ContainsKey(id))
+                return (components[id]);
+            return null;
         }
     }
 }

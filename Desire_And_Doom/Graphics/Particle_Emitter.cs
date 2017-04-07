@@ -27,6 +27,7 @@ namespace Desire_And_Doom.Graphics
         public float Life_Timer { get; set; } = 0;
 
         public bool Remove { get; set; } = false;
+        public bool Active { get; set; } = true;
 
         public Particle_Emitter(Vector2 _position, bool spawn_right_off = false)
         {
@@ -57,11 +58,14 @@ namespace Desire_And_Doom.Graphics
                 }
             }
 
-            Spawn_Timer += (float)time.ElapsedGameTime.TotalSeconds;
-            if (Spawn_Timer > Spawn_Time_Max)
+            if ( Active )
             {
-                Spawn();
-                Spawn_Timer = 0;
+                Spawn_Timer += (float) time.ElapsedGameTime.TotalSeconds;
+                if ( Spawn_Timer > Spawn_Time_Max )
+                {
+                    Spawn();
+                    Spawn_Timer = 0;
+                }
             }
         }
 

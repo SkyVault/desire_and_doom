@@ -23,28 +23,20 @@ namespace Desire_And_Doom.ECS
             
             if (!invatory.Draw) return;
 
-            var offset = new Vector2(0, 0);
-            if (invatory.Spot == Invatory.Render_Spot.Left)
-                offset.X -= 50;
+            var offset = new Vector2(256, 32);
+            //if (invatory.Spot == Invatory.Render_Spot.Left)
+            //    offset.X -= 50;
+
+            var gui = (Texture2D) Assets.It.Get<Texture2D>("gui");
 
             for (int y = 0; y < invatory.H; y++)
                 for (int x = 0; x < invatory.W; x++)
                 {
-                    var pos = new Vector2(x * 16, y * 16) + offset;
-                    var off = new Vector2((invatory.W * 16) / 2, (invatory.H * 16) / 2);
-                    //batch.DrawRectangle(body.Position + pos - off, new Vector2(16, 16), Color.White);
+                    var pos     = new Vector2(x * 16, y * 16) + offset;
+                    var region  = new Rectangle(24, 0, 24, 24);
+                    var size = 48;
 
-                    if (invatory.Get(y, x) != null)
-                    {
-                        Entity item = invatory.Get(y, x);
-                        var sprite = (Sprite)item.Get(Types.Sprite);
-
-                        batch.Draw(
-                            sprite.Texture,
-                            pos - off,
-                            sprite.Quad, Color.White
-                            );
-                    }
+                    batch.Draw(gui, new Rectangle((int)offset.X + size * x + (2 * x), (int)offset.Y + size * y + (2 * y), size, size), new Rectangle(24, 0, 24, 24), new Color(0, 0, 0, 100));
                 }
         }
     }

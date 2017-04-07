@@ -55,12 +55,12 @@ namespace Desire_And_Doom.ECS
 
                     if (o_physics.Physics_Type == Physics.PType.DYNAMIC || o_physics.Physics_Type == Physics.PType.STATIC)
                     {
-
+                        bool blacklisted = physics.Contains_Blacklisted_Tag(other.Tags);
                         bool coll = false;
-                        if (o_body.Contains(x_body)) { x_body = body; coll = true; }
-                        if (o_body.Contains(y_body)) { y_body = body; coll = true; }
+                        if (o_body.Contains(x_body) && !blacklisted) { x_body = body; coll = true; }
+                        if (o_body.Contains(y_body) && !blacklisted) { y_body = body; coll = true; }
 
-                        if (coll)
+                        if (coll && !blacklisted)
                         {
                             physics.Other = other;
                             physics.Callback?.Invoke(entity, other);
@@ -93,25 +93,35 @@ namespace Desire_And_Doom.ECS
 
             body.X = x_body.X;
             body.Y = y_body.Y;
-
-            can_draw = true;
+            
         }
 
-        bool can_draw = true;
         public void Draw_Solids(SpriteBatch batch, Camera_2D camera)
         {
-            //solids.ForEach(s => batch.DrawRectangle(s, Color.Red, 1));
-            can_draw = false;
+            var gui = (Texture2D) Assets.It.Get<Texture2D>("gui");
+            solids.ForEach(s => {
+                batch.Draw(gui, new Rectangle((int)s.X, (int)s.Y, (int)s.Width, (int)s.Height), new Rectangle(24, 0, 24, 24), new Color(0, 0, 0, 10));
+            });
+
+            var bodies = World_Ref.Get_All_With_Component(Types.Physics);
+            foreach(var entity in bodies )
+            {
+                var physics = (Physics) entity.Get(Types.Physics);
+                var body = (Body) entity.Get(Types.Body);
+                batch.Draw(gui, new Rectangle((int) body.X, (int) body.Y, (int) body.Width, (int) body.Height), new Rectangle(24, 0, 24, 24), new Color(0, 0, 0, 10));
+            }
+
         }
 
         public override void UIDraw(SpriteBatch batch,Camera_2D camera,Entity entity)
         {
+
             if (!Game1.DEBUG) return;
             var body = (Body)(entity.Get(Types.Body));
+            Draw_Solids(batch, camera);
             //batch.DrawRectangle(body.Position, body.Size, Color.Red, 1);
 
-            if (can_draw)
-                Draw_Solids(batch, camera);
+            //if (can_draw)
         }
 
     }

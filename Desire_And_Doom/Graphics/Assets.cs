@@ -55,7 +55,7 @@ namespace Desire_And_Doom
             }
         }
         
-        public void Generate_Animation(string id,Vector2 start_pos, Vector2 frame_size, int num_frames)
+        public Animation Generate_Animation(string id,Vector2 start_pos, Vector2 frame_size, int num_frames)
         {
             // TODO: Remove the aquads and rectangle frames
             var aquads = new List<Rectangle>();
@@ -70,6 +70,8 @@ namespace Desire_And_Doom
 
             var animation = new Animation(frames, id);
             animations.Add(id, animation);
+
+            return animation;
         }
 
         public void Load_Animations_From_Lua(string file)
@@ -85,8 +87,36 @@ namespace Desire_And_Doom
                     int fw = (int)(gen_data[3] as double?);
                     int fh = (int)(gen_data[4] as double?);
                     int nm = (int)(gen_data[5] as double?);
+                    
+                    Animation animation = Generate_Animation(key, new Vector2(sx, sy), new Vector2(fw, fh), nm);
 
-                    Generate_Animation(key, new Vector2(sx, sy), new Vector2(fw, fh), nm);
+                    if (gen_data["offset_x"] != null )
+                    {
+                        animation.Offset_X = (float)(gen_data["offset_x"] as double?);
+                    }
+
+                    if ( gen_data["offset_y"] != null )
+                    {
+                        animation.Offset_Y = (float) (gen_data["offset_y"] as double?);
+                    }
+
+                    if ( gen_data["left_offset_x"] != null )
+                    {
+                        animation.Left_Face_Offset = new Vector2((float) (gen_data["left_offset_x"] as double?), 0);
+                    }
+
+                    if ( gen_data["right_offset_x"] != null )
+                    {
+                        animation.Right_Face_Offset = new Vector2((float) (gen_data["right_offset_x"] as double?), 0);
+                    }
+
+                    if (gen_data["speed"] != null )
+                    {
+                        float speed = (float) (gen_data["speed"] as double?);
+                        foreach ( Animation_Frame frame in animation.Frames )
+                            frame.Frame_Time = speed;
+                    }
+
                 }
             }
         }

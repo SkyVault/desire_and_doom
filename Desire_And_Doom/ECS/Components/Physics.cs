@@ -15,6 +15,8 @@ namespace Desire_And_Doom.ECS
             STATIC, DYNAMIC, WATER, SPACE, WORLD_INTERACTION
         };
 
+        public List<string> Blacklisted_Collision_Tags { get; set; } = new List<string>();
+
         public Func<Entity, Entity, bool> Callback = null;
         public PType Physics_Type { get; }
 
@@ -52,6 +54,13 @@ namespace Desire_And_Doom.ECS
         {
             Physics_Type = _physics_type;
             Velocity = new Vector2(0, 0);
+        }
+
+        public bool Contains_Blacklisted_Tag(List<string> tags)
+        {
+            foreach(var tag in tags )
+                if ( Blacklisted_Collision_Tags.Contains(tag) ) return true;
+            return false;
         }
     }
 }

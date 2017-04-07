@@ -78,7 +78,7 @@ namespace Desire_And_Doom
             if (states.ContainsKey(key) == false)
             {
                 var key_state = new Key_State() {
-                    key = key
+                    key = key, current = Is_Key_Down(key)
                 };
                 states.Add(key, key_state);
                 return false;

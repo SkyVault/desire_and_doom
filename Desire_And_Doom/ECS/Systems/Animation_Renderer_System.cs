@@ -46,6 +46,20 @@ namespace Desire_And_Doom.ECS
             else
                 animation.Animation_End = false;
 
+            // flashes red when the timer is high
+            if (animation.Flash_Timer > 0 )
+            {
+                if ( animation.Color == Color.White )
+                {
+                    animation.Color = Color.Red;
+                }else
+                {
+                    animation.Color = Color.White;
+                }
+
+                animation.Flash_Timer -= (float) time.ElapsedGameTime.TotalSeconds;
+            }
+
         }
 
         public override void Draw(SpriteBatch batch, Entity entity)
@@ -59,10 +73,18 @@ namespace Desire_And_Doom.ECS
             if (animation.Current_Frame > current_animation.Frames.Count - 1)
                 animation.Current_Frame = 0;
             var quad = current_animation.Frames[animation.Current_Frame].Rectangle;
-            
+            var side = animation.Scale.X > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+
+
+            var offset = Vector2.Zero;
+            if ( side == SpriteEffects.None )
+                offset = current_animation.Right_Face_Offset;
+            else
+                offset = current_animation.Left_Face_Offset;
+
             batch.Draw(
                 animation.Texture,
-                body.Position - new Vector2(quad.Width / 2 - body.Width / 2, quad.Height - body.Height),
+                body.Position - new Vector2(quad.Width / 2 - body.Width / 2, quad.Height - body.Height) + current_animation.Offset + offset,
                 quad,
                 animation.Color,
                 0,

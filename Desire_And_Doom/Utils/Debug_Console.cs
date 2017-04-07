@@ -19,6 +19,7 @@ namespace Desire_And_Doom.Utils
         }
 
         public void Exit() { Game1.SHOULD_QUIT = true; }
+        //public void Spawn() { }
     }
 
     class Debug_Console : GameComponent

@@ -11,7 +11,7 @@ namespace Desire_And_Doom.Graphics.Particle_Systems
     {
         public Fire_Fly_Emitter(Vector2 _position) : base(_position, true)
         {
-            Spawn_Time_Max = 0.01f;
+            Spawn_Time_Max = 0.02f;
         }
 
         public override void Spawn()

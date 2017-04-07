@@ -82,10 +82,13 @@ namespace Desire_And_Doom
 
             camera.Zoom = SCALE;
 
-            world = new World(penumbra);
+            world           = new World(penumbra);
+            particle_world  = new Particle_World();
+
+            //UserInterface.Initialize(Content, BuiltinThemes.hd);
 
             world.Add_System<Sprite_Renderer_System>(new Sprite_Renderer_System());
-            world.Add_System<Player_Controller_System>(new Player_Controller_System(camera));
+            world.Add_System<Player_Controller_System>(new Player_Controller_System(camera, particle_world));
             world.Add_System<Animation_Renderer_System>(new Animation_Renderer_System());
             physics_engine = (Physics_Engine)world.Add_System<Physics_Engine>(new Physics_Engine(world));
             
@@ -94,6 +97,9 @@ namespace Desire_And_Doom
             world.Add_System<Light_Emitter_System>(new Light_Emitter_System());
             world.Add_System<World_Interaction_System>(new World_Interaction_System());
             world.Add_System<Lua_Function_System>(new Lua_Function_System());
+            world.Add_System<Timed_Destroy_System>(new Timed_Destroy_System());
+            world.Add_System<Particle_Emitter_System>(new Particle_Emitter_System());
+            world.Add_System<Enemy_System>(new Enemy_System());
             gui = new Monogui();
 
             var npc_system = (Npc_System)world.Add_System<Npc_System>(new Npc_System(this, graphics));
@@ -107,7 +113,6 @@ namespace Desire_And_Doom
 
             keyboard_listener.KeyTyped += console.Key_Typed;
 
-            particle_world = new Particle_World();
 
             scene = new RenderTarget2D(graphics.GraphicsDevice, WIDTH, HEIGHT, false, SurfaceFormat.Color, DepthFormat.None, 2, RenderTargetUsage.DiscardContents);
 
@@ -152,15 +157,14 @@ namespace Desire_And_Doom
                 Exit();
 
             if (SHOULD_QUIT) Quit();
-
+            
             Input.It.Update(gameTime);
             camera.Update(gameTime);
             world.Update(gameTime);
             screen_manager.Update(gameTime);
+            //UserInterface.Update(gameTime);
 
-            if (Input.It.Is_Key_Pressed(Keys.D)) {
-                DEBUG = !DEBUG;
-            }
+            if (Input.It.Is_Key_Pressed(Keys.P)) DEBUG = !DEBUG;
 
             particle_world.Update(gameTime);
 
@@ -205,11 +209,15 @@ namespace Desire_And_Doom
             gui.Draw(batch);
             console.Draw(batch);
 
-            float frameRate = 1f / (float)gameTime.ElapsedGameTime.TotalSeconds;
-            batch.DrawString(Assets.It.Get<SpriteFont>("font"), frameRate.ToString(), new Vector2(10, 10), Color.BurlyWood);
+            if ( DEBUG )
+            {
+                float frameRate = 1f / (float) gameTime.ElapsedGameTime.TotalSeconds;
+                batch.DrawString(Assets.It.Get<SpriteFont>("font"), frameRate.ToString(), new Vector2(10, 10), Color.BurlyWood);
+            }
 
             batch.End();
 
+            //UserInterface.Draw(batch);
 
             //base.Draw(gameTime);
         }

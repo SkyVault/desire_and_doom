@@ -18,6 +18,9 @@ namespace Desire_And_Doom.ECS
 
         //public Texture2D Texture { get; private set; }
         public float Timer { get; set; } = 0;
+        
+        public float Flash_Timer { get; set; } = 0;
+        //public Color Current_Color { get; set; }
 
         public Animated_Sprite(Texture2D _texture, List<string> anim_ids) : base(_texture, new Rectangle())
         {

@@ -18,6 +18,7 @@ namespace Desire_And_Doom.ECS
         private List<Entity> entities;
         private Dictionary<Type, System> systems;
         private PenumbraComponent lighting;
+        private GameTime time_ref;
 
         public World(PenumbraComponent lighting)
         {
@@ -43,6 +44,7 @@ namespace Desire_And_Doom.ECS
                 foreach (var t in tags.Values)
                     entity.Tags.Add(t as string);
 
+            // TODO: refactor all of this into a seperate entity assembler class
             foreach (var key in components.Keys)
             {
                 var component = components[key] as LuaTable;
@@ -68,8 +70,20 @@ namespace Desire_And_Doom.ECS
                             break;
                         }
                     case "Physics":
-                        entity.Add(new Physics(Vector2.Zero));
-                        break;
+                        {
+                            var physics = (Physics)entity.Add(new Physics(Vector2.Zero));
+
+                            if ( component["btags"] is LuaTable btags )
+                            {
+                                for (int i = 1; i < btags.Values.Count + 1; i++ )
+                                {
+                                    var tag = btags[i] as string;
+                                    physics.Blacklisted_Collision_Tags.Add(tag);
+                                }
+                            }
+
+                            break;
+                        }
                     case "Animation": {
                             string image = component[1] as string;
                             
@@ -88,6 +102,9 @@ namespace Desire_And_Doom.ECS
                     case "Player":
                         entity.Add(new Player());
                         break;
+                    case "Equipment":
+                        entity.Add(new Equipment());
+                        break;
                     case "Invatory": {
                             float w = (float)(component[1] as double?);
                             float h = (float)(component[2] as double?);
@@ -95,6 +112,9 @@ namespace Desire_And_Doom.ECS
                             break;
                         }
                     case "Item": entity.Add(new Item());  break;
+                    case "Health": entity.Add(new Health(
+                        (int) (component[1] as double?)
+                        )); break;
                     case "Light":
                         entity.Add(new Light_Emitter(lighting));
                         break;
@@ -110,6 +130,26 @@ namespace Desire_And_Doom.ECS
                             entity.Add(new Lua_Function(function));
                         }
                         break;
+                    case "Enemy": {
+                            List<string> drop_items = new List<string>();
+                            if ( component["drops"] is LuaTable drops )
+                            {
+                                for (int i = 1; i < drops.Values.Count+1; i++ )
+                                {
+                                    LuaTable dps = drops[i] as LuaTable;
+                                    string item_name = dps[1] as string;
+                                    int min = (int) (dps[2] as double?);
+                                    int max = (int) (dps[3] as double?);
+
+                                    float ammout = min + (new Random().Next()) % max;
+                                    for ( int j = 0; j < ammout; j++ )
+                                        drop_items.Add(item_name);
+
+                                }
+                            }
+                            var enemy = (Enemy) entity.Add(new Enemy(drop_items));
+                            break;
+                    }
                     default:
                         Console.WriteLine("Unknown Component: " + key);
                         break;
@@ -125,9 +165,7 @@ namespace Desire_And_Doom.ECS
             entities.Add(entity);
             return entity;
         }
-
-
-
+        
         public System Add_System<T>(System system) {
             systems.Add(typeof(T), system);
             system.World_Ref = this;
@@ -148,8 +186,7 @@ namespace Desire_And_Doom.ECS
         
             return list;
         }
-
-        bool load = true;
+        
         public int timing = 0;
         public void Update(GameTime time)
         {
@@ -157,19 +194,24 @@ namespace Desire_And_Doom.ECS
             for(int i = entities.Count - 1; i >= 0; i--) {
                 var entity = entities[i];
                 if (entity.Remove) {
+                    foreach ( var system in systems.Values )
+                        if ( system.Has_All_Types(entity) )
+                            system.Destroy(entity);    
                     entities.Remove(entity);
                     continue;
                 }
 
+                entity.Update?.Invoke(entity);
+
                 foreach (var system in systems.Values)
-                    if (system.Has_All_Types(entity))
-                    {
-                        if (load)
+                    if (system.Has_All_Types(entity)) {
+                        if ( !entity.Loaded )
                             system.Load(entity);
                         system.Update(time, entity);
                     }
+
+                entity.Loaded = true;
             }
-            if (load) load = false;
         }
 
         public void Draw(SpriteBatch batch)
@@ -190,8 +232,6 @@ namespace Desire_And_Doom.ECS
                         system.UIDraw(batch, camera, entity);
             }
 
-            //if (DateTime.Now.Millisecond % 100 == 0)
-            //    Console.WriteLine("systems: {0}", DateTime.Now.Millisecond - timing);
             timing = 0;
         }
 

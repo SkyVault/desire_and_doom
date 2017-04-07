@@ -18,7 +18,8 @@ return {
 			["Animation"] = 
 				{"entities",  {"wolf-run", 0.08},{"wolf-idle", 0.1}},
 			["Physics"] = {},
-			["Ai"] = {"Function",AI.Wolf}
+			["Ai"] = {"Function",AI.Wolf},
+			["Health"] = {3}
 		}
 	},
 
@@ -60,8 +61,18 @@ return {
 			["Body"] = {12, 6},
 			["Animation"] = {"entities", {"grendle-idle", 0.1}, {"grendle-run", 0.1}},
 			["Physics"] = {},
-			["Ai"] = {"Table","Grendle_Ai"},
-			["Light"] = {}
+			["Ai"] = {"Function", AI.Grendle},
+			["Light"] = {},
+			["Health"] = {10}
+		}
+	},
+	
+	["Flag"] = {
+		tags = {"Flag"},
+		components = {
+			["Body"] = {4, 4},
+			["Animation"] = {"entities", {"flag", 0.01}},
+			["Physics"] = {},
 		}
 	},
 
@@ -72,7 +83,21 @@ return {
 			["Animation"] = {"entities", {"shulk-idle", 0.1}, {"shulk-attack", 0.1}},
 			["Physics"] = {},
 			["Ai"] = {"Function", AI.Shulk},
-			["Light"] = {}
+			["Light"] = {},
+			["Health"] = {3},
+			["Enemy"] = {
+				drops = {
+					{"Coin", 1, 1}, -- name, min, max
+					{"Orange", 1, 1}, -- name, min, max
+					{"Apple", 1, 1}, -- name, min, max
+					{"Baseball", 1, 1}, -- name, min, max
+					{"Potato", 1, 1}, -- name, min, max
+					{"Bread", 1, 1}, -- name, min, max
+					{"Tomato", 1, 1}, -- name, min, max
+					{"Blueberrys", 1, 1}, -- name, min, max
+					{"Carrot", 1, 1}, -- name, min, max
+				},
+			}
 		}
 	}
 

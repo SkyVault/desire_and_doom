@@ -25,6 +25,8 @@ namespace Desire_And_Doom.ECS.Components
             Emitter = emitter;
             World = world;
             Active = active;
+
+            world.Add(emitter);
         }
     }
 }

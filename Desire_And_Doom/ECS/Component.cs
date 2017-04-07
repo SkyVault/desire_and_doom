@@ -18,10 +18,14 @@ namespace Desire_And_Doom.ECS
             Body,
             AI,
             Npc,
+            Equipment,
             Light_Emitter,
             Entity_Particle_Emitter,
             World_Interaction,
             Lua_Function,
+            Health,
+            Timed_Destroy,
+            Enemy,
             Num_Of_Types,
         }
 

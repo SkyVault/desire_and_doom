@@ -89,7 +89,6 @@ namespace Desire_And_Doom
                         }
                     } else if ( obj.Type == "Particle" )
                     {
-                        //if ()
                         Debug.Assert(obj.Properties.ContainsKey("Type"), "ERROR:: Particle object requires a Type property!");
                         var type = obj.Properties["Type"];
 
@@ -201,16 +200,13 @@ namespace Desire_And_Doom
                 controller.Position = new Vector2((map.Width * map.TileWidth) - (Game1.WIDTH / camera.Zoom) * 2, camera.Y);
             if (camera_bottom_right.Y > map.Height * map.TileHeight)
                 controller.Position = new Vector2(camera.X, (map.Height * map.TileHeight) - (Game1.HEIGHT / camera.Zoom) * 2);
-
-            //if (camera_bottom_right.Y > map.Height * map.TileHeight)
-
+            
         }
 
         public void Draw(SpriteBatch batch)
         {
             Vector2 camera_position = camera.Left;
-            //Console.WriteLine(camera_frustum.GetCorners()[0]);
-
+            
             foreach (var layer in map.Layers)
             {
                 var render_layer = 0.0f;
