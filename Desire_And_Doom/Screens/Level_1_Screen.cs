@@ -21,7 +21,7 @@ namespace Desire_And_Doom.Screens
 
         public override void Load()
         {
-            Load_Map("Demo");
+            Load_Map("DemoArena");
         }
         public override void Update(GameTime time)
         {

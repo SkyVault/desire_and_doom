@@ -38,6 +38,9 @@ namespace Desire_And_Doom
 
         public bool Has_Sky { get; private set; } = false;
 
+        private float timer = 0;
+        private int frame = 0;
+
         public Tiled_Map(string name, Camera_2D _camera, World world, Screen level, Particle_World particle_world, PenumbraComponent lighting = null)
         {
             this.camera = _camera;
@@ -65,6 +68,18 @@ namespace Desire_And_Doom
             if ( map.Properties.ContainsKey("Sky") )
             {
                 Has_Sky = map.Properties["Sky"] ==  "true";
+            }
+
+            if ( map.Properties.ContainsKey("Ambiant") )
+            {
+                string color_string = map.Properties["Ambiant"];
+                var tokens = color_string.Split(' ');
+                var color = new Color(
+                    byte.Parse(tokens[0]),
+                    byte.Parse(tokens[1]),
+                    byte.Parse(tokens[2])
+                    );
+                lighting.AmbientColor = color;
             }
             
             Game1.Map_Height_Pixels = map.Height * map.TileHeight;
@@ -200,7 +215,9 @@ namespace Desire_And_Doom
                 controller.Position = new Vector2((map.Width * map.TileWidth) - (Game1.WIDTH / camera.Zoom) * 2, camera.Y);
             if (camera_bottom_right.Y > map.Height * map.TileHeight)
                 controller.Position = new Vector2(camera.X, (map.Height * map.TileHeight) - (Game1.HEIGHT / camera.Zoom) * 2);
-            
+
+            timer += (float)time.ElapsedGameTime.TotalSeconds * 2;
+            frame = (int) timer;
         }
 
         public void Draw(SpriteBatch batch)
@@ -230,9 +247,35 @@ namespace Desire_And_Doom
                         if (x > map.Width - 1)  continue;
                         if (y > map.Height - 1) continue;
 
+                        var tileset = map.Tilesets[0];
+
                         var tile = layer.Tiles[x + y * map.Width];
-                        if (tile.Gid != 0)
-                            batch.Draw(texture, new Vector2(x * map.TileWidth, y * map.TileHeight), quads[tile.Gid - 1], Color.White, 0, Vector2.Zero, 1f,SpriteEffects.None, render_layer);
+                        if ( tile.Gid != 0 )
+                        {
+                            // TODO: this animation system is very slow, try to find a way
+                            // to refactor this, one idea is to create your own data structure
+                            // like a Dictionary, that contains all of the keys and animations
+                            int gid = tile.Gid;
+                            bool contains = false;
+                            foreach(var t in tileset.Tiles )
+                                if (t.Id+1 == gid )
+                                {
+                                    contains = true; break;
+                                }
+
+                            if (contains)
+                            {
+                                var anim_tile = tileset.Tiles[0];
+                                var aframe = anim_tile.AnimationFrames[
+                                    (frame % anim_tile.AnimationFrames.Count)
+                                    ];
+                                gid = aframe.Id+1;
+
+                                
+                            }
+
+                            batch.Draw(texture, new Vector2(x * map.TileWidth, y * map.TileHeight), quads[gid - 1], Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, render_layer);
+                        }
                     }
             }
 

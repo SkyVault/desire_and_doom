@@ -87,7 +87,7 @@ return {
 			["Health"] = {3},
 			["Enemy"] = {
 				drops = {
-					{"Coin", 400, 400}, -- name, min, max
+					{"Coin", 1, 1}, -- name, min, max
 					{"Orange", 1, 1}, -- name, min, max
 					{"Apple", 1, 1}, -- name, min, max
 					{"Baseball", 1, 1}, -- name, min, max
