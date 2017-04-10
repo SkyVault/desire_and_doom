@@ -34,7 +34,7 @@ namespace Desire_And_Doom.ECS
                 Vector2.Zero, 
                 Vector2.One, 
                 SpriteEffects.None, 
-                sprite.Layer);
+                sprite.Layer + sprite.Layer_Offset);
         }
     }
 }

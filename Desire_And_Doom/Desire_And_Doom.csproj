@@ -67,15 +67,18 @@
     <Compile Include="ECS\Components\Health.cs" />
     <Compile Include="ECS\Components\Light_Emitter.cs" />
     <Compile Include="ECS\Components\Lua_Function.cs" />
+    <Compile Include="ECS\Components\Multipart_Animation.cs" />
     <Compile Include="ECS\Components\Timed_Destroy.cs" />
     <Compile Include="ECS\Components\World_Interaction.cs" />
     <Compile Include="ECS\Systems\Enemy_System.cs" />
     <Compile Include="ECS\Systems\Entity_Emitter_System.cs" />
     <Compile Include="ECS\Systems\Light_Emitter_System.cs" />
     <Compile Include="ECS\Systems\Lua_Function_System.cs" />
+    <Compile Include="ECS\Systems\Multipart_Animation_System.cs" />
     <Compile Include="ECS\Systems\Particle_Emitter_System.cs" />
     <Compile Include="ECS\Systems\Timed_Destroy_System.cs" />
     <Compile Include="ECS\Systems\World_Interaction_System.cs" />
+    <Compile Include="Entities\Boss_1.cs" />
     <Compile Include="Graphics\Animation.cs" />
     <Compile Include="Graphics\Animation_Frame.cs" />
     <Compile Include="Graphics\Assets.cs" />
@@ -118,6 +121,7 @@
     <Compile Include="Interfaces\IRectangle.cs" />
     <Compile Include="Interfaces\IRotatable.cs" />
     <Compile Include="Items\Equipable.cs" />
+    <Compile Include="Screens\Boss_Room_1.cs" />
     <Compile Include="Screens\Game_Screen.cs" />
     <Compile Include="Utils\Debug_Console.cs" />
     <Compile Include="Utils\GamePadEventArgs.cs" />
@@ -583,6 +587,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Content\boss_1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\entities.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

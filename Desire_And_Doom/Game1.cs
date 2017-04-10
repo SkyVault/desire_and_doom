@@ -100,6 +100,7 @@ namespace Desire_And_Doom
             world.Add_System<Timed_Destroy_System>(new Timed_Destroy_System());
             world.Add_System<Particle_Emitter_System>(new Particle_Emitter_System());
             world.Add_System<Enemy_System>(new Enemy_System());
+            world.Add_System<Multipart_Animation_System>(new Multipart_Animation_System());
             gui = new Monogui();
 
             var npc_system = (Npc_System)world.Add_System<Npc_System>(new Npc_System(this, graphics));
@@ -112,8 +113,7 @@ namespace Desire_And_Doom
             Components.Add(new InputListenerComponent(this, keyboard_listener));
 
             keyboard_listener.KeyTyped += console.Key_Typed;
-
-
+            
             scene = new RenderTarget2D(graphics.GraphicsDevice, WIDTH, HEIGHT, false, SurfaceFormat.Color, DepthFormat.None, 2, RenderTargetUsage.DiscardContents);
 
             base.Initialize();
@@ -142,9 +142,10 @@ namespace Desire_And_Doom
             Assets.It.Add_Table("Lua_World/Dialog.lua");
 
             screen_manager.Register(new Level_1_Screen(world, camera, penumbra, particle_world, physics_engine));
+            screen_manager.Register(new Boss_Room_1(world, camera, penumbra, particle_world, physics_engine, Content, lua));
             screen_manager.Register(new Menu_Screen(gui));
-
-            screen_manager.Goto_Screen("Level 1");
+            
+            screen_manager.Goto_Screen("Boss Room 1");
         }
 
         protected override void UnloadContent()

@@ -72,26 +72,33 @@ namespace Desire_And_Doom.ECS
             Animation current_animation = animation.Animations[animation.Current_Animation_ID];
             if (animation.Current_Frame > current_animation.Frames.Count - 1)
                 animation.Current_Frame = 0;
-            var quad = current_animation.Frames[animation.Current_Frame].Rectangle;
+
+            var frame = current_animation.Frames[animation.Current_Frame];
+            var quad = frame.Rectangle;
             var side = animation.Scale.X > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
-
-
+            
             var offset = Vector2.Zero;
             if ( side == SpriteEffects.None )
                 offset = current_animation.Right_Face_Offset;
             else
                 offset = current_animation.Left_Face_Offset;
-
+            
             batch.Draw(
                 animation.Texture,
-                body.Position - new Vector2(quad.Width / 2 - body.Width / 2, quad.Height - body.Height) + current_animation.Offset + offset,
+                
+                body.Position - new Vector2(quad.Width / 2 - body.Width / 2, quad.Height - body.Height) 
+                + current_animation.Offset 
+                + offset 
+                + animation.Offset
+                + frame.Offset,
+                
                 quad,
                 animation.Color,
                 0,
                 Vector2.Zero,
                 Vector2.One,
                 (animation.Scale.X > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally),
-                animation.Layer
+                animation.Layer + animation.Layer_Offset
                 );
         }
     }

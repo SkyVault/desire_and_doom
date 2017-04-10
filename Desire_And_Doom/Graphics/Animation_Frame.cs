@@ -11,6 +11,7 @@ namespace Desire_And_Doom.Graphics
     class Animation_Frame : RectangleF
     {
         public float Frame_Time { get; set; }
+        public Vector2 Offset { get; set; }
 
         public Animation_Frame(int x, int y, int w, int h, float time = 0.1f) : base(x, y, w, h)
         {

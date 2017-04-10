@@ -11,7 +11,15 @@ namespace Desire_And_Doom.Graphics
     {
         public List<Animation_Frame> Frames { get; set; }
 
+        public enum Playback_Types
+        {
+            FORWARD,
+            BACKWARD,
+            BOUNCE
+        };
+
         public string ID { get; private set; }
+        public Playback_Types Playback_Type { get; set; } = Playback_Types.FORWARD;
 
         public Vector2 Offset { get; set; } = Vector2.Zero;
         public Vector2 Left_Face_Offset { get; set; } = Vector2.Zero;
