@@ -349,7 +349,7 @@
  <objectgroup name="Doors">
   <object id="62" type="Door" x="40" y="48" width="16" height="35">
    <properties>
-    <property name="Door" value="Demo 17 31"/>
+    <property name="Door" value="Demo 144 255"/>
    </properties>
   </object>
  </objectgroup>

@@ -46,6 +46,16 @@ namespace Desire_And_Doom
             }
         }
 
+        public void Remove(string id, object T)
+        {
+            if (T.GetType() == typeof(Texture2D) )
+            {
+                textures.Remove(id);
+                Texture2D texture = (Texture2D) T;
+                texture.Dispose();
+            }
+        }
+
         public void Add_Table(string file)
         {
             var table = lua.DoFile(file)[0] as LuaTable;
@@ -102,12 +112,22 @@ namespace Desire_And_Doom
 
                     if ( gen_data["left_offset_x"] != null )
                     {
-                        animation.Left_Face_Offset = new Vector2((float) (gen_data["left_offset_x"] as double?), 0);
+                        animation.Left_Face_Offset += new Vector2((float) (gen_data["left_offset_x"] as double?), 0);
                     }
 
                     if ( gen_data["right_offset_x"] != null )
                     {
-                        animation.Right_Face_Offset = new Vector2((float) (gen_data["right_offset_x"] as double?), 0);
+                        animation.Right_Face_Offset += new Vector2((float) (gen_data["right_offset_x"] as double?), 0);
+                    }
+
+                    if (gen_data["right_offset_y"] != null )
+                    {
+                        animation.Right_Face_Offset += new Vector2(0, (float) (gen_data["right_offset_y"] as double?));
+                    }
+
+                    if (gen_data["left_offset_y"] != null )
+                    {
+                        animation.Left_Face_Offset += new Vector2(0, (float) (gen_data["left_offset_y"] as double?));
                     }
 
                     if (gen_data["speed"] != null )

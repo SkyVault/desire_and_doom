@@ -82,6 +82,7 @@ namespace Desire_And_Doom.Graphics
         public void Destroy()
         {
             particles.Clear();
+            Remove = true;
         }
 
         public abstract void Spawn();

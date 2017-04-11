@@ -72,7 +72,7 @@ namespace Desire_And_Doom.ECS
             var hit_size = 16;
             var hit = World_Ref.Create_Entity();
             hit.Tags.Add("Player-Hit");
-            hit.Add(new Body(new Vector2(body.Position.X + hit_size * side, body.Position.Y - body.Height / 2 - hit_size / 2), new Vector2(hit_size, hit_size)));
+            hit.Add(new Body(new Vector2(body.Position.X + hit_size * side, body.Position.Y - body.Height / 2 - hit_size), new Vector2(hit_size * 1.8f, hit_size * 2)));
             hit.Add(new Timed_Destroy(0.1f));
             var phy = (Physics) hit.Add(new Physics(Vector2.Zero, Physics.PType.DYNAMIC));
             phy.Blacklisted_Collision_Tags.Add("Player");
@@ -80,7 +80,7 @@ namespace Desire_And_Doom.ECS
             hit.Update = (self) => {
 
                 var h_body = (Body) self.Get(Types.Body);
-                h_body.Position = body.Position + new Vector2(physics.Velocity.X > 0 ? hit_size : -hit_size, -body.Height / 2 - h_body.Height / 4);
+                h_body.Position = body.Position + new Vector2(physics.Velocity.X > 0 ? hit_size : -hit_size, -h_body.Height + 16);
 
                 return true;
             };

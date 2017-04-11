@@ -18,8 +18,8 @@ namespace Desire_And_Doom
 {
     public class Game1 : Game
     {
-        public static int WIDTH     = 1280;
-        public static int HEIGHT    = 720;
+        public static int WIDTH     = 800;
+        public static int HEIGHT    = 480;
 
         public static int Map_Height_Pixels = 0;
         public static bool DEBUG = false;
@@ -53,7 +53,8 @@ namespace Desire_And_Doom
             var height  = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             Window.AllowUserResizing    = true;
             Window.AllowAltF4           = true;
-            Window.Position = new Point(width / 2 - WIDTH / 2, height / 2 - HEIGHT / 2);
+            //Window.Position = new Point(width / 2 - WIDTH / 2, height / 2 - HEIGHT / 2);
+            Window.Position = new Point(0, 0);
             graphics.ApplyChanges();
 
             this.IsMouseVisible = true;
@@ -96,7 +97,7 @@ namespace Desire_And_Doom
             world.Add_System<AI_System>(new AI_System());
             world.Add_System<Light_Emitter_System>(new Light_Emitter_System());
             world.Add_System<World_Interaction_System>(new World_Interaction_System());
-            world.Add_System<Lua_Function_System>(new Lua_Function_System());
+            world.Add_System<Lua_Function_System>(new Lua_Function_System(lua, camera));
             world.Add_System<Timed_Destroy_System>(new Timed_Destroy_System());
             world.Add_System<Particle_Emitter_System>(new Particle_Emitter_System());
             world.Add_System<Enemy_System>(new Enemy_System());
@@ -134,6 +135,7 @@ namespace Desire_And_Doom
             Assets.It.Add("gui",        Content.Load<Texture2D>("gui"));
             Assets.It.Add("sky_1",      Content.Load<Texture2D>("sky"));
             Assets.It.Add("font",       Content.Load<SpriteFont>("font"));
+            Assets.It.Add("Boss_Texture", Content.Load<Texture2D>("boss_1"));
 
             Assets.It.Add_Table("Lua_World/items.lua");
             Assets.It.Add_Table("Lua_World/Player.lua");
@@ -141,11 +143,11 @@ namespace Desire_And_Doom
             Assets.It.Add_Table("Lua_World/Behaviors/Enemy_Ai.lua");
             Assets.It.Add_Table("Lua_World/Dialog.lua");
 
-            screen_manager.Register(new Level_1_Screen(world, camera, penumbra, particle_world, physics_engine));
+            screen_manager.Register(new Level_1_Screen(world, camera, penumbra, particle_world, physics_engine, lua));
             screen_manager.Register(new Boss_Room_1(world, camera, penumbra, particle_world, physics_engine, Content, lua));
             screen_manager.Register(new Menu_Screen(gui));
             
-            screen_manager.Goto_Screen("Boss Room 1");
+            screen_manager.Goto_Screen("Level 1");
         }
 
         protected override void UnloadContent()

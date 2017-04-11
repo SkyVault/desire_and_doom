@@ -13,7 +13,7 @@ namespace Desire_And_Doom.Screens
         Sky_Renderer sky;
         World world;
 
-        public Level_1_Screen(World _world, Camera_2D _camera, PenumbraComponent _lighting, Particle_World _particle_world, Physics_Engine _physics_engine) : base(_world, _camera, _lighting, _particle_world, _physics_engine, "Level 1")
+        public Level_1_Screen(World _world, Camera_2D _camera, PenumbraComponent _lighting, Particle_World _particle_world, Physics_Engine _physics_engine, Lua lua) : base(_world, _camera, _lighting, _particle_world, _physics_engine, lua, "Level 1")
         {
             sky = new Sky_Renderer(Assets.It.Get<Texture2D>("sky_1"));
             world = _world;
@@ -21,7 +21,7 @@ namespace Desire_And_Doom.Screens
 
         public override void Load()
         {
-            Load_Map("DemoArena");
+            Load_Map("Demo");
         }
         public override void Update(GameTime time)
         {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" nextobjectid="83">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" nextobjectid="85">
  <properties>
   <property name="Sky" type="bool" value="true"/>
  </properties>
@@ -1061,18 +1061,23 @@
     <property name="Region" value="160 64 48 48"/>
    </properties>
   </object>
-  <object id="79" type="Billboard" x="107.273" y="352.182" width="64" height="64">
+  <object id="79" type="Billboard" x="201.273" y="161.182" width="64" height="64">
    <properties>
     <property name="Region" value="0 240 64 72"/>
    </properties>
   </object>
-  <object id="80" x="128" y="408" width="24" height="8"/>
-  <object id="82" type="PointLight" x="132" y="403.25" width="16" height="16"/>
+  <object id="80" x="222" y="217" width="24" height="8"/>
+  <object id="82" type="PointLight" x="226" y="212.25" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Doors">
   <object id="49" type="Door" x="136" y="220.333" width="16" height="35">
    <properties>
-    <property name="Door" value="DustysDive 32 128"/>
+    <property name="Door" value="DustysDive 48 86"/>
+   </properties>
+  </object>
+  <object id="84" type="Door" x="226" y="199.333" width="16" height="35">
+   <properties>
+    <property name="Door" value="DemoArena 410 758"/>
    </properties>
   </object>
  </objectgroup>

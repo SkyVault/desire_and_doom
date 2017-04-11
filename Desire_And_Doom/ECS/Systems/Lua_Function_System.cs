@@ -6,14 +6,21 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using static Desire_And_Doom.ECS.Component;
 using Desire_And_Doom.ECS.Components;
+using System.IO;
+using NLua;
 
 namespace Desire_And_Doom.ECS.Systems
 {
     class Lua_Function_System : System
     {
+        Lua lua;
+        GameTime time;
+        Camera_2D camera;
 
-        public Lua_Function_System() : base(Types.Lua_Function)
+        public Lua_Function_System(Lua lua, Camera_2D _camera) : base(Types.Lua_Function)
         {
+            this.lua = lua;
+            camera = _camera;
         }
 
         public World Get_World() => World_Ref;
@@ -24,6 +31,13 @@ namespace Desire_And_Doom.ECS.Systems
             if ( entities.Count > 0 )
                 return entities.Last();
             return null;
+        }
+
+        public Camera_2D Get_Camera() => camera;
+
+        public Entity Spawn(LuaTable e, float x, float y)
+        {
+            return World_Ref.Create_Entity(e, x, y);
         }
 
         public float Dist(float x1, float y1, float x2, float y2)
@@ -61,6 +75,8 @@ namespace Desire_And_Doom.ECS.Systems
             return World_Ref.Find_With_Tag(tag);
         }
 
+        public float Get_DT() => (float)time.ElapsedGameTime.TotalSeconds;
+
         public void Track(Entity self, Entity other, float force)
         {
             var physics = (Physics) self.Get(Types.Physics);
@@ -89,10 +105,39 @@ namespace Desire_And_Doom.ECS.Systems
 
         public override void Update(GameTime time, Entity entity)
         {
+            this.time = time;
             base.Update(time, entity);
 
             var fn = (Lua_Function) entity.Get(Types.Lua_Function);
-            fn.Function?.Call(entity, this);
+
+            try {
+                fn.Function?.Call(entity, this);
+            } catch (Exception e) {
+                Console.WriteLine(e.Message);
+            }
+
+            if ( fn.Auto_Reload )
+            {
+                var date_time = File.GetLastWriteTime(fn.File_Name);
+                if ( fn.Last_Date_Time == DateTime.MaxValue )
+                {
+                    fn.Last_Date_Time = date_time;
+                }
+                else
+                {
+                    if ( date_time != fn.Last_Date_Time )
+                    {
+                        try
+                        {
+                            fn.Function = lua.DoFile(fn.File_Name)[0] as LuaFunction;
+                        } catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                        fn.Last_Date_Time = date_time;
+                    }
+                }
+            }
         }
     }
 }

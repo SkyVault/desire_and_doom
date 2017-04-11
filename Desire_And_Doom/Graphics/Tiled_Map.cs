@@ -1,5 +1,6 @@
 ﻿using Desire_And_Doom.ECS;
 using Desire_And_Doom.ECS.Components;
+using Desire_And_Doom.Entities;
 using Desire_And_Doom.Graphics;
 using Desire_And_Doom.Graphics.Particle_Systems;
 using Desire_And_Doom.Screens;
@@ -41,7 +42,7 @@ namespace Desire_And_Doom
         private float timer = 0;
         private int frame = 0;
 
-        public Tiled_Map(string name, Camera_2D _camera, World world, Screen level, Particle_World particle_world, PenumbraComponent lighting = null)
+        public Tiled_Map(string name, Camera_2D _camera, World world, Screen level, Particle_World particle_world, Lua lua, PenumbraComponent lighting = null)
         {
             this.camera = _camera;
             var current = Directory.GetCurrentDirectory();
@@ -119,6 +120,9 @@ namespace Desire_And_Doom
                                 Console.Write("1) Fire_Fly\n2) Fire\n3) Blue_Fire");
                                 break;
                         }
+                    }else if (obj.Type == "Boss" )
+                    {
+                        var boss = Boss_1.Create(lua, world, particle_world, new Vector2((float)obj.X, (float)obj.Y));
                     }
                     else if ( obj.Type == "Billboard" )
                     {
@@ -266,15 +270,25 @@ namespace Desire_And_Doom
                             if (contains)
                             {
                                 var anim_tile = tileset.Tiles[0];
-                                var aframe = anim_tile.AnimationFrames[
-                                    (frame % anim_tile.AnimationFrames.Count)
-                                    ];
-                                gid = aframe.Id+1;
-
+                                if ( anim_tile.AnimationFrames.Count != 0 )
+                                {
+                                    var aframe = anim_tile.AnimationFrames[
+                                        (frame % anim_tile.AnimationFrames.Count)
+                                        ];
+                                    gid = aframe.Id + 1;
+                                }
                                 
                             }
 
-                            batch.Draw(texture, new Vector2(x * map.TileWidth, y * map.TileHeight), quads[gid - 1], Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, render_layer);
+                            if ( !contains )
+                            {
+                                //var other = new Rectangle(x * map.TileWidth, y * map.TileHeight, map.TileWidth + 1, map.TileHeight + 1);
+                                //batch.Draw(texture, other, quads[gid - 1], Color.White, 0, Vector2.Zero, SpriteEffects.None, render_layer - 0.01f);
+                            }
+
+                            var location = new Rectangle(x * map.TileWidth, y * map.TileHeight, map.TileWidth, map.TileHeight);
+                            batch.Draw(texture, location, quads[gid - 1], Color.White, 0, Vector2.Zero, SpriteEffects.None, render_layer);
+
                         }
                     }
             }

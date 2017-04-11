@@ -30,7 +30,7 @@ namespace Desire_And_Doom.ECS
 
         public float Density  { get; set; } = 0.01f;
         public float Friction { get; set; } = 0.90f;
-
+        
         public float Direction { get; set; } = 0f;
         public float Current_Speed { get; set; } = 0f;
 

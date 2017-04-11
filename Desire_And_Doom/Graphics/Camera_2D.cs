@@ -26,6 +26,9 @@ namespace Desire_And_Doom
 
         bool can_move = true;
 
+        private float shake_timer = 0;
+        private float shake_intensity = 10;
+
         public Camera_2D(GraphicsDevice device, bool _scrollable = false)
         { 
             Rotation = 0;
@@ -35,6 +38,15 @@ namespace Desire_And_Doom
 
         public void Update(GameTime time)
         {
+            var rnd = new Random();
+            if (shake_timer > 0 && (int)time.TotalGameTime.TotalMilliseconds % 2 == 0)
+            {
+                camera.Move(new Vector2(
+                    (float)((-shake_intensity / 2) + rnd.NextDouble() * shake_intensity),
+                    (float)((-shake_intensity / 2) + rnd.NextDouble() * shake_intensity)
+                    ));
+                shake_timer -= (float) time.ElapsedGameTime.TotalSeconds;
+            }
         }
 
         public void Track(Body body, float smoothing)
@@ -53,6 +65,12 @@ namespace Desire_And_Doom
 
             //camera.Position = new Vector2((float)Math.Floor(camera.Position.X), (float)Math.Floor(camera.Position.Y));
             //Console.WriteLine(bounds.X);
+        }
+
+        public void Shake(float intensity, float time)
+        {
+            shake_timer = time;
+            shake_intensity = intensity;
         }
 
         public BoundingFrustum Get_Camera_Frustum()

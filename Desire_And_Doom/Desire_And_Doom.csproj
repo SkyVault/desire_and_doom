@@ -84,6 +84,7 @@
     <Compile Include="Graphics\Assets.cs" />
     <Compile Include="Graphics\Camera2D.cs" />
     <Compile Include="Graphics\Camera_2D.cs" />
+    <Compile Include="Graphics\Debug_Drawing.cs" />
     <Compile Include="Graphics\Default_Viewport_Adapter.cs" />
     <Compile Include="Graphics\Dialog_Box.cs" />
     <Compile Include="ECS\Components\AI.cs" />
@@ -108,6 +109,8 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Graphics\Particle.cs" />
     <Compile Include="Graphics\Particle_Emitter.cs" />
+    <Compile Include="Graphics\Particle_Systems\Boss_1_Emitter.cs" />
+    <Compile Include="Graphics\Particle_Systems\Boss_1_Particle.cs" />
     <Compile Include="Graphics\Particle_Systems\Dust_Emitter.cs" />
     <Compile Include="Graphics\Particle_Systems\Dust_Particle.cs" />
     <Compile Include="Graphics\Particle_Systems\Fire_Emitter.cs" />
@@ -637,6 +640,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Lua_World\Player.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lua_World\Utilities.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="MonoGame.Framework.dll.config" />

@@ -21,6 +21,8 @@ namespace Desire_And_Doom.ECS
             var animation = (Animated_Sprite)entity.Get(Types.Animation);
             var body = (Body)entity.Get(Types.Body);
 
+            if ( !animation.Playing ) return;
+
             animation.Timer += (float)time.ElapsedGameTime.TotalSeconds;
 
             if (animation.Animations.ContainsKey(animation.Current_Animation_ID) == false)

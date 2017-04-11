@@ -5,6 +5,7 @@ using static Desire_And_Doom.ECS.Component;
 using System.Collections.Generic;
 using Desire_And_Doom.Utils;
 using Desire_And_Doom.ECS.Components;
+using Desire_And_Doom.Graphics;
 
 namespace Desire_And_Doom.ECS
 {
@@ -96,11 +97,31 @@ namespace Desire_And_Doom.ECS
             
         }
 
+        //public override void UIDraw(SpriteBatch batch, Entity entity)
+        //{
+        //    base.Draw(batch, entity);
+
+        //    if ( !Game1.DEBUG ) return;
+
+        //    Draw_Solids(batch, camera);
+        //}
+
+        public override void UIDraw(SpriteBatch batch, Camera_2D camera, Entity entity)
+        {
+            base.UIDraw(batch, camera, entity);
+
+            if ( !Game1.DEBUG ) return;
+
+            Draw_Solids(batch, camera);
+        }
+
         public void Draw_Solids(SpriteBatch batch, Camera_2D camera)
         {
             var gui = (Texture2D) Assets.It.Get<Texture2D>("gui");
             solids.ForEach(s => {
-                batch.Draw(gui, new Rectangle((int)s.X, (int)s.Y, (int)s.Width, (int)s.Height), new Rectangle(24, 0, 24, 24), new Color(0, 0, 0, 10));
+                //batch.Draw(gui, new Rectangle((int)s.X, (int)s.Y, (int)s.Width, (int)s.Height), new Rectangle(24, 0, 24, 24), new Color(0, 0, 0, 10));
+                var proj = camera.World_To_Screen(new Vector2(s.X, s.Y));
+                Debug_Drawing.Draw_Line_Rect(batch, proj.X, proj.Y, s.Width * camera.Zoom, s.Height * camera.Zoom, Color.Red);
             });
 
             var bodies = World_Ref.Get_All_With_Component(Types.Physics);
@@ -108,21 +129,19 @@ namespace Desire_And_Doom.ECS
             {
                 var physics = (Physics) entity.Get(Types.Physics);
                 var body = (Body) entity.Get(Types.Body);
-                batch.Draw(gui, new Rectangle((int) body.X, (int) body.Y, (int) body.Width, (int) body.Height), new Rectangle(24, 0, 24, 24), new Color(0, 0, 0, 10));
+                //batch.Draw(gui, new Rectangle((int) body.X, (int) body.Y, (int) body.Width, (int) body.Height), new Rectangle(24, 0, 24, 24), new Color(0, 0, 0, 10));
+
+                // TODO: make it so that it turns red if it is collideing
+                var proj = camera.World_To_Screen(new Vector2(body.X, body.Y));
+
+                var color = Color.LimeGreen;
+                if ( physics.Other != null )
+                    color = Color.Red;
+
+                Debug_Drawing.Draw_Line_Rect(batch, proj.X, proj.Y, body.Width * camera.Zoom, body.Height * camera.Zoom, color);
             }
 
         }
-
-        public override void UIDraw(SpriteBatch batch,Camera_2D camera,Entity entity)
-        {
-
-            if (!Game1.DEBUG) return;
-            var body = (Body)(entity.Get(Types.Body));
-            Draw_Solids(batch, camera);
-            //batch.DrawRectangle(body.Position, body.Size, Color.Red, 1);
-
-            //if (can_draw)
-        }
-
+        
     }
 }

@@ -15,6 +15,14 @@ namespace Desire_And_Doom.ECS.Systems
         {
         }
 
+        public override void Destroy(Entity entity)
+        {
+            base.Destroy(entity);
+
+            var emitter = (Entity_Particle_Emitter) entity.Get(Types.Entity_Particle_Emitter);
+            emitter.Emitter.Destroy();
+        }
+
         public override void Update(GameTime time, Entity entity)
         {
             base.Update(time, entity);

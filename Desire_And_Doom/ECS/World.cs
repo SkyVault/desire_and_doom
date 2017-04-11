@@ -130,6 +130,13 @@ namespace Desire_And_Doom.ECS
                             entity.Add(new Lua_Function(function));
                         }
                         break;
+                    case "Timed_Destroy":
+                        {
+                            var time = (float) (component[1] as double?);
+                            Console.WriteLine(time);
+                            entity.Add(new Timed_Destroy(time));
+                            break;
+                        }
                     case "Enemy": {
                             List<string> drop_items = new List<string>();
                             if ( component["drops"] is LuaTable drops )

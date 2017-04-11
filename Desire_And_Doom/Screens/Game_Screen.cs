@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using NLua;
 
 namespace Desire_And_Doom.Screens
 {
@@ -18,17 +19,19 @@ namespace Desire_And_Doom.Screens
         protected PenumbraComponent     lighting;
         protected Particle_World        particle_world;
         protected Physics_Engine        physics_engine;
+        protected Lua lua;
         public Tiled_Map                Map { get; private set; }
 
         bool can_change = true;
 
-        public Game_Screen(World _world, Camera_2D _camera, PenumbraComponent _lighting, Particle_World _particle_world, Physics_Engine _physics_engine, string _id) : base(_id)
+        public Game_Screen(World _world, Camera_2D _camera, PenumbraComponent _lighting, Particle_World _particle_world, Physics_Engine _physics_engine,Lua _lua, string _id) : base(_id)
         {
             world           = _world;
             camera          = _camera;
             lighting        = _lighting;
             particle_world  = _particle_world;
             physics_engine  = _physics_engine;
+            lua             = _lua;
         }
 
         public override void Destroy()
@@ -61,7 +64,7 @@ namespace Desire_And_Doom.Screens
 
             Destroy();
 
-            Map = new Tiled_Map(id, camera, world, this, particle_world, lighting) {
+            Map = new Tiled_Map(id, camera, world, this, particle_world, lua, lighting) {
                 Change_Scene_Callback = Load_Map
             };
 

@@ -15,7 +15,7 @@
 		["player-attack"]			= {37, 183, 32, 26, 4},
 		["player-claymore-run"]		= {0, 209, 36, 26, 8,	left_offset_x = 10, right_offset_x = -4},
 		["player-claymore-idle"]	= {0, 209, 36, 26, 1,	left_offset_x = 10},
-		["player-claymore-attack"]	= {128, 64, 64, 36, 4,	left_offset_x = 10},
+		["player-claymore-attack"]	= {128, 64, 64, 36, 6,	right_offset_x = 15, right_offset_y = 10, left_offset_x = -3, left_offset_y = 10, speed = 0.08},
 		--
 		["grendle-run"]				= {0, 400, 64, 64, 6},
 		["grendle-idle"]			= {0, 400, 64, 64, 1},
