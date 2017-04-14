@@ -10,12 +10,12 @@
 		["mech-idle"]				= {0, 464, 48, 48, 1},
 		["mech-attack"]				= {0, 464, 48, 48, 8},
 		--
-		["player-idle"]				= {0, 133, 16, 26, 1},
-		["player-run"]				= {34, 133, 18, 26, 8},
-		["player-attack"]			= {37, 183, 32, 26, 4},
-		["player-claymore-run"]		= {0, 209, 36, 26, 8,	left_offset_x = 10, right_offset_x = -4},
-		["player-claymore-idle"]	= {0, 209, 36, 26, 1,	left_offset_x = 10},
-		["player-claymore-attack"]	= {128, 64, 64, 36, 6,	right_offset_x = 15, right_offset_y = 10, left_offset_x = -3, left_offset_y = 10, speed = 0.08},
+		["player-idle"]				= {0, 69, 16, 26, 1},
+		["player-run"]				= {34, 69, 18, 26, 8},
+		["player-attack"]			= {37, 121, 32, 26, 4},
+		["player-claymore-run"]		= {0, 146, 36, 26, 8,	left_offset_x = 10, right_offset_x = -4},
+		["player-claymore-idle"]	= {0, 146, 36, 26, 1,	left_offset_x = 10},
+		["player-claymore-attack"]	= {128, 0, 64, 36, 6,	right_offset_x = 15, right_offset_y = 10, left_offset_x = -3, left_offset_y = 10, speed = 0.08},
 		--
 		["grendle-run"]				= {0, 400, 64, 64, 6},
 		["grendle-idle"]			= {0, 400, 64, 64, 1},
@@ -25,7 +25,30 @@
 
 		["coin-flip"] = {0, 0, 8, 8, 4},
 
-		["flag"] = {0, 268, 24, 24, 4, offset_x = 24-8, speed = 0.15}
+		["flag"] = {0, 268, 24, 24, 4, offset_x = 24-8, speed = 0.15},
+
+
+		-- npcs
+		["npc-1-idle"] = {0, 172, 16, 26, 1},
+		["npc-1-walk"] = {0, 172, 16, 26, 9},
+
+		["npc-2-idle"] = {0, 224, 16, 26, 1},
+		["npc-2-walk"] = {0, 224, 16, 26, 9},
+
+		["npc-3-idle"] = {0, 224 + 26 * 1, 16, 26, 1},
+		["npc-3-walk"] = {0, 224 + 26 * 1, 16, 26, 9},
+
+		["npc-4-idle"] = {0, 224 + 26 * 2, 16, 26, 1},
+		["npc-4-walk"] = {0, 224 + 26 * 2, 16, 26, 9},
+
+		["npc-5-idle"] = {0, 224 + 26 * 3, 16, 26, 1},
+		["npc-5-walk"] = {0, 224 + 26 * 3, 16, 26, 9},
+
+		["npc-6-idle"] = {0, 224 + 26 * 4, 16, 26, 1},
+		["npc-6-walk"] = {0, 224 + 26 * 4, 16, 26, 9},
+
+		["npc-7-idle"] = {0, 224 + 26 * 5, 16, 26, 1},
+		["npc-7-walk"] = {0, 224 + 26 * 5, 16, 26, 9},
 	},
 	-- TODO: implement explicit frame creation, with seperate speeds and offsets
 	frames = {

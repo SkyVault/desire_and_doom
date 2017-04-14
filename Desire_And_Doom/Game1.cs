@@ -136,10 +136,12 @@ namespace Desire_And_Doom
             Assets.It.Add("sky_1",      Content.Load<Texture2D>("sky"));
             Assets.It.Add("font",       Content.Load<SpriteFont>("font"));
             Assets.It.Add("Boss_Texture", Content.Load<Texture2D>("boss_1"));
+            Assets.It.Add("Charactors", Content.Load<Texture2D>("Charactors"));
 
             Assets.It.Add_Table("Lua_World/items.lua");
             Assets.It.Add_Table("Lua_World/Player.lua");
             Assets.It.Add_Table("Lua_World/Enemies.lua");
+            Assets.It.Add_Table("Lua_World/Npcs.lua");
             Assets.It.Add_Table("Lua_World/Behaviors/Enemy_Ai.lua");
             Assets.It.Add_Table("Lua_World/Dialog.lua");
 
