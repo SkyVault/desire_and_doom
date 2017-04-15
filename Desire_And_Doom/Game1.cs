@@ -18,8 +18,8 @@ namespace Desire_And_Doom
 {
     public class Game1 : Game
     {
-        public static int WIDTH     = 800;
-        public static int HEIGHT    = 480;
+        public static int WIDTH     = 1280;
+        public static int HEIGHT    = 700;
 
         public static int Map_Height_Pixels = 0;
         public static bool DEBUG = false;
@@ -129,14 +129,15 @@ namespace Desire_And_Doom
         {
             batch = new SpriteBatch(GraphicsDevice);
 
-            Assets.It.Add("entities",   Content.Load<Texture2D>("entities"));
-            Assets.It.Add("items",      Content.Load<Texture2D>("items"));
-            Assets.It.Add("Tiles_1",    Content.Load<Texture2D>("Tiles_1"));
-            Assets.It.Add("gui",        Content.Load<Texture2D>("gui"));
-            Assets.It.Add("sky_1",      Content.Load<Texture2D>("sky"));
-            Assets.It.Add("font",       Content.Load<SpriteFont>("font"));
-            Assets.It.Add("Boss_Texture", Content.Load<Texture2D>("boss_1"));
-            Assets.It.Add("Charactors", Content.Load<Texture2D>("Charactors"));
+            Assets.It.Add("entities",       Content.Load<Texture2D>("entities"));
+            Assets.It.Add("items",          Content.Load<Texture2D>("items"));
+            Assets.It.Add("Tiles_1",        Content.Load<Texture2D>("Tiles_1"));
+            Assets.It.Add("gui",            Content.Load<Texture2D>("gui"));
+            Assets.It.Add("sky_1",          Content.Load<Texture2D>("sky"));
+            Assets.It.Add("Boss_Texture",   Content.Load<Texture2D>("boss_1"));
+            Assets.It.Add("Charactors",     Content.Load<Texture2D>("Charactors"));
+            Assets.It.Add("Logo",           Content.Load<Texture2D>("logo"));
+            Assets.It.Add("font",           Content.Load<SpriteFont>("font"));
 
             Assets.It.Add_Table("Lua_World/items.lua");
             Assets.It.Add_Table("Lua_World/Player.lua");
@@ -147,9 +148,9 @@ namespace Desire_And_Doom
 
             screen_manager.Register(new Level_1_Screen(world, camera, penumbra, particle_world, physics_engine, lua));
             screen_manager.Register(new Boss_Room_1(world, camera, penumbra, particle_world, physics_engine, Content, lua));
-            screen_manager.Register(new Menu_Screen(gui));
+            screen_manager.Register(new Menu_Screen(screen_manager, penumbra, camera));
             
-            screen_manager.Goto_Screen("Level 1");
+            screen_manager.Goto_Screen("Menu");
         }
 
         protected override void UnloadContent()
@@ -163,7 +164,9 @@ namespace Desire_And_Doom
 
             if (SHOULD_QUIT) Quit();
             
+            Timers.It.Update(gameTime);
             Input.It.Update(gameTime);
+
             camera.Update(gameTime);
             world.Update(gameTime);
             screen_manager.Update(gameTime);
@@ -183,7 +186,7 @@ namespace Desire_And_Doom
             penumbra.BeginDraw();
             penumbra.Transform = camera.View_Matrix;
 
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(new Color(105, 205, 241, 255));
 
             // main draw
             batch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, DepthStencilState.DepthRead, null, null, camera.View_Matrix);

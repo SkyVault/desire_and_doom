@@ -2,3 +2,4 @@
 
 FIXES:
 -- flags hit box is off center
+-- players claymore facing right hitbox is off center

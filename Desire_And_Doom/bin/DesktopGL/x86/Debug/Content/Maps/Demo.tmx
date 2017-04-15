@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" nextobjectid="85">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" nextobjectid="89">
  <properties>
   <property name="Sky" type="bool" value="true"/>
  </properties>
@@ -1070,6 +1070,9 @@
   <object id="82" type="PointLight" x="226" y="212.25" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Doors">
+  <properties>
+   <property name="Ambiant" value="100 100 100 255"/>
+  </properties>
   <object id="49" type="Door" x="136" y="220.333" width="16" height="35">
    <properties>
     <property name="Door" value="DustysDive 48 86"/>
@@ -1078,6 +1081,11 @@
   <object id="84" type="Door" x="226" y="199.333" width="16" height="35">
    <properties>
     <property name="Door" value="DemoArena 410 758"/>
+   </properties>
+  </object>
+  <object id="88" type="Door" x="0" y="0" width="8" height="1024">
+   <properties>
+    <property name="Door" value="Text1 965 470"/>
    </properties>
   </object>
  </objectgroup>

@@ -60,3 +60,4 @@ C:\Users\Dustin.Neumann\Documents\Visual Studio 2017\Projects\Desire_And_Doom\De
 C:\Users\Dustin.Neumann\Documents\Visual Studio 2017\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Lua_World\Utilities.lua
 C:\Users\Dustin.Neumann\Documents\Visual Studio 2017\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\Charactors.xnb
 C:\Users\Dustin.Neumann\Documents\Visual Studio 2017\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Lua_World\Npcs.lua
+C:\Users\Dustin.Neumann\Documents\Visual Studio 2017\Projects\Desire_And_Doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\logo.xnb

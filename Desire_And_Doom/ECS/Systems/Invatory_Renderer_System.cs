@@ -37,6 +37,27 @@ namespace Desire_And_Doom.ECS
                     var size = 48;
 
                     batch.Draw(gui, new Rectangle((int)offset.X + size * x + (2 * x), (int)offset.Y + size * y + (2 * y), size, size), new Rectangle(24, 0, 24, 24), new Color(0, 0, 0, 100));
+
+                    var item = invatory.Get(y, x);
+
+                    if ( item != null )
+                    {
+                        var spr = (Sprite) item.Get(Types.Sprite);
+                        if ( spr != null )
+                        {
+                            batch.Draw(
+                                spr.Texture,
+                                new Vector2((float) offset.X + size * x + (2 * x), (float) offset.Y + size * y + (2 * y)),
+                                spr.Quad,
+                                Color.White,
+                                0f,
+                                Vector2.Zero,
+                                4,
+                                SpriteEffects.None,
+                                1
+                                );
+                        }
+                    }
                 }
         }
     }

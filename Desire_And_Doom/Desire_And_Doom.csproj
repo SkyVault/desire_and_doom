@@ -157,6 +157,8 @@
     <Compile Include="Utils\MouseListener.cs" />
     <Compile Include="Utils\MouseListenerSettings.cs" />
     <Compile Include="Utils\RectangleF.cs" />
+    <Compile Include="Utils\Tasker.cs" />
+    <Compile Include="Utils\Timers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="artemis, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -613,6 +615,7 @@
     <None Include="Content\items.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Content\logo.xnb" />
     <None Include="Content\Sky.xnb" />
     <None Include="Content\tiles.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

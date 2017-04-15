@@ -1,4 +1,8 @@
-﻿return {
+﻿function npc_ai(entity, engine)
+
+end
+
+return {
 	["npc-1"] = {
 		tags = {"Npc"},
 		components = {
@@ -6,6 +10,8 @@
 			["Animation"] =
 				{"Charactors", {"npc-1-walk", 0.8}},
 			["Physics"]={},
+			["Npc"] = {},
+			["Ai"] = {"Function", npc_ai},
 		}
 	},
 	["npc-2"] = {
@@ -15,6 +21,8 @@
 			["Animation"] =
 				{"Charactors", {"npc-2-walk", 0.8}},
 			["Physics"]={},
+			["Npc"] = {},
+			["Ai"] = {"Function", npc_ai},
 		}
 	},
 	["npc-3"] = {
@@ -24,6 +32,8 @@
 			["Animation"] =
 				{"Charactors", {"npc-3-walk", 0.8}},
 			["Physics"]={},
+			["Npc"] = {},
+			["Ai"] = {"Function", npc_ai},
 		}
 	},
 
@@ -34,6 +44,8 @@
 			["Animation"] =
 				{"Charactors", {"npc-4-walk", 0.8}},
 			["Physics"]={},
+			["Npc"] = {},
+			["Ai"] = {"Function", npc_ai},
 		}
 	},
 
@@ -44,6 +56,8 @@
 			["Animation"] =
 				{"Charactors", {"npc-5-walk", 0.8}},
 			["Physics"]={},
+			["Npc"] = {},
+			["Ai"] = {"Function", npc_ai},
 		}
 	},
 
@@ -54,6 +68,8 @@
 			["Animation"] =
 				{"Charactors", {"npc-6-walk", 0.8}},
 			["Physics"]={},
+			["Npc"] = {},
+			["Ai"] = {"Function", npc_ai},
 		}
 	},
 
@@ -64,6 +80,8 @@
 			["Animation"] =
 				{"Charactors", {"npc-7-walk", 0.8}},
 			["Physics"]={},
+			["Npc"] = {},
+			["Ai"] = {"Function", npc_ai},
 		}
 	},
 

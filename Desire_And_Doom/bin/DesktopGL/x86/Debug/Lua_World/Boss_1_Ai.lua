@@ -65,26 +65,6 @@ function Load_Ai(entity, engine)
 			local health 	= engine:Get_Component(entity, "Health")
 			local body 		= engine:Get_Component(entity, "Body")
 
-			shoot_timer = shoot_timer + 1
-			if shoot_timer % 6 == 0 then
-				local e = engine:Spawn({
-					tags = {"Enemy", "Wolf"},
-					components = {
-						["Body"] = {16, 16},
-						-- ["Animation"] = 
-						-- 	{"entities",  {"wolf-run", 0.08},{"wolf-idle", 0.1}},
-						["Physics"] = {},
-						-- ["Ai"] = {"Function",AI.Wolf},
-						["Timed_Destroy"] = {1},
-						["Health"] = {3}
-					}
-				}, body.X, body.Y + body.Height)
-				local e_phy 	= engine:Get_Component(e,"Physics")
-				e_phy.Vel_Y 	= 100
-				e_phy.Friction 	= 1
-				print(e_phy.Vel_Y)
-			end
-
 			if emitter then
 				emitter.Active = true
 			end

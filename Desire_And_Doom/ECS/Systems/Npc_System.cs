@@ -51,15 +51,16 @@ namespace Desire_And_Doom.ECS
         {
             base.Draw(batch, entity);
             var body = (Body)(entity.Get(Component.Types.Body));
-            var sprite = (Sprite)(entity.Get(Component.Types.Sprite));
+            var sprite = (Animated_Sprite)(entity.Get(Component.Types.Animation));
             var player = World_Ref.Find_With_Tag("Player");
+
             if (player != null)
             {
                 var pbody = (Body)(player.Get(Component.Types.Body));
                 if (Vector2.Distance(body.Position, pbody.Position) < 25)
                 {
                     var entities = Assets.It.Get<Texture2D>("entities");
-                    batch.Draw(entities, body.Position - new Vector2(-body.Width / 2, sprite.Quad.Height + 14), new Rectangle(458, 0, 24, 24), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
+                    batch.Draw(entities, body.Position - new Vector2(-body.Width / 2, 32), new Rectangle(458, 0, 24, 24), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
                 }
             }
         }
