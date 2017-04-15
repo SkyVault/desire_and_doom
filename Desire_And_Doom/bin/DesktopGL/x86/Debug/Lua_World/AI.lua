@@ -11,6 +11,9 @@
 					health:Hurt(dammage)
 					physics.Other:Destroy()
 
+					local camera = engine:Get_Camera()
+					camera:Shake(5, 0.1);
+
 					local sprite = engine:Get_Component(entity, "Animation")
 					sprite.Flash_Timer = 0.1
 

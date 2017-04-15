@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" nextobjectid="89">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" nextobjectid="95">
  <properties>
   <property name="Sky" type="bool" value="true"/>
  </properties>
@@ -993,6 +993,10 @@
   <object id="73" x="419.708" y="648.667" width="43.25" height="21.3333"/>
   <object id="76" name="Shulk" type="Shulk" x="48" y="288" width="16" height="16"/>
   <object id="78" name="Flag" type="Flag" x="96" y="270.667" width="8" height="8"/>
+  <object id="90" x="-16" y="0" width="16" height="1024"/>
+  <object id="91" x="1024" y="-1" width="16" height="1024"/>
+  <object id="93" x="-8" y="-16" width="1040" height="16"/>
+  <object id="94" x="0" y="1024" width="1024" height="16"/>
  </objectgroup>
  <objectgroup name="Billboards">
   <object id="50" name="Lamp Post" type="Billboard" x="368" y="303.818" width="16" height="32">

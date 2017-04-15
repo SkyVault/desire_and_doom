@@ -77,6 +77,11 @@ namespace Desire_And_Doom.ECS.Systems
 
         public float Get_DT() => (float)time.ElapsedGameTime.TotalSeconds;
 
+        public Vector2 Vec2(float x, float y)
+        {
+            return new Vector2(x, y);
+        }
+
         public void Track(Entity self, Entity other, float force)
         {
             var physics = (Physics) self.Get(Types.Physics);
@@ -101,6 +106,14 @@ namespace Desire_And_Doom.ECS.Systems
                 Console.WriteLine("Unknown component: " + type);
             }
             return null;
+        }
+
+        public override void Load(Entity entity)
+        {
+            base.Load(entity);
+
+            //Lua_Function l = (Lua_Function)entity.Get(Types.Lua_Function);
+            //l.Table = new LuaTable(0, lua);
         }
 
         public override void Update(GameTime time, Entity entity)

@@ -10,6 +10,7 @@ namespace Desire_And_Doom.ECS.Components
     class Lua_Function : Component
     {
         public LuaFunction Function { get; set; }
+        public LuaTable Table { get; set; }
 
         public string File_Name { get; set; } = "";
         public bool Auto_Reload { get; set; } = false;
