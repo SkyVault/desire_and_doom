@@ -18,8 +18,24 @@ namespace Desire_And_Doom
 {
     public class Game1 : Game
     {
+        public enum State
+        {
+            PLAYING,
+            PAUSED,
+        }
+
+        public static State Game_State { get; set;  } = State.PLAYING;
+        public static void Toggle_Pause()
+        {
+            if ( Game1.Game_State == Game1.State.PLAYING )
+                Game1.Game_State = Game1.State.PAUSED;
+            else Game1.Game_State = Game1.State.PLAYING;
+        }
+
         public static int WIDTH     = 1280;
         public static int HEIGHT    = 700;
+
+        private bool skip_intro_animation = true;
 
         public static int Map_Height_Pixels = 0;
         public static bool DEBUG = false;
@@ -53,8 +69,8 @@ namespace Desire_And_Doom
             var height  = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             Window.AllowUserResizing    = true;
             Window.AllowAltF4           = true;
-            //Window.Position = new Point(width / 2 - WIDTH / 2, height / 2 - HEIGHT / 2);
-            Window.Position = new Point(0, 0);
+            Window.Position = new Point(width / 2 - WIDTH / 2, 0);
+            //Window.Position = new Point(0, 0);
             graphics.ApplyChanges();
 
             this.IsMouseVisible = true;
@@ -149,8 +165,11 @@ namespace Desire_And_Doom
             screen_manager.Register(new Level_1_Screen(world, camera, penumbra, particle_world, physics_engine, lua));
             screen_manager.Register(new Boss_Room_1(world, camera, penumbra, particle_world, physics_engine, Content, lua));
             screen_manager.Register(new Menu_Screen(screen_manager, penumbra, camera));
-            
-            screen_manager.Goto_Screen("Menu");
+
+            if ( skip_intro_animation == false )
+                screen_manager.Goto_Screen("Menu");
+            else
+                screen_manager.Goto_Screen("Level 1");
         }
 
         protected override void UnloadContent()
@@ -174,7 +193,8 @@ namespace Desire_And_Doom
 
             if (Input.It.Is_Key_Pressed(Keys.P)) DEBUG = !DEBUG;
 
-            particle_world.Update(gameTime);
+            if (Game_State == State.PLAYING)
+                particle_world.Update(gameTime);
 
             base.Update(gameTime);
 
@@ -212,7 +232,7 @@ namespace Desire_And_Doom
                 batch.End();
             }
             
-            batch.Begin(SpriteSortMode.Immediate, null, SamplerState.PointClamp);
+            batch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             world.UIDraw(batch, camera);
             gui.Draw(batch);
             console.Draw(batch);

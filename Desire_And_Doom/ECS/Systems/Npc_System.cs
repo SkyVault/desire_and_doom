@@ -16,6 +16,8 @@ namespace Desire_And_Doom.ECS
 
         Dialog_Box dialog;
 
+        float timer = 0;
+
         public Npc_System(Game game, GraphicsDeviceManager graphics) : base(Component.Types.Npc, Component.Types.Body)
         {
             this.graphics = graphics;
@@ -25,22 +27,47 @@ namespace Desire_And_Doom.ECS
             //
         }
         
-        public override void Update(GameTime time, Entity entity)
+        public override void Constant_Update(GameTime time, Entity entity)
         {
-            base.Update(time, entity);
+            base.Constant_Update(time, entity);
 
-            var body = (Body)(entity.Get(Component.Types.Body));
-            var sprite = (Sprite)(entity.Get(Component.Types.Sprite));
+            if ( timer >= 0 ) timer -= (float) time.ElapsedGameTime.TotalSeconds;
+
+            var body = (Body) (entity.Get(Component.Types.Body));
+            var anim = (Animated_Sprite) (entity.Get(Component.Types.Animation));
+            var physics = (Physics) entity.Get(Component.Types.Physics);
             var player = World_Ref.Find_With_Tag("Player");
-            if (player != null)
+
+            if ( player != null )
             {
-                var pbody = (Body)(player.Get(Component.Types.Body));
-                if (Vector2.Distance(body.Position, pbody.Position) < 25)
+                var pbody = (Body) (player.Get(Component.Types.Body));
+                if ( Vector2.Distance(body.Position, pbody.Position) < 25 )
                 {
-                    if (Input.It.Is_Key_Pressed(Microsoft.Xna.Framework.Input.Keys.Z))
+                    physics.Velocity = Vector2.Zero;
+                    if ( Input.It.Is_Key_Pressed(Microsoft.Xna.Framework.Input.Keys.Z) && timer <= 0 )
                     {
-                        dialog.Animate_Toggle("Hello I am an <Cyan> Npc!");
+                        dialog.Show_Portait = true;
+                        dialog.Image = anim.Texture;
+
+                        foreach ( var id in anim.Animations.Keys )
+                        {
+                            if ( id.Contains("idle") )
+                            {
+                                dialog.Region = anim.Animations[id].Frames[0].Rectangle;
+                            }
+                        }
+
+                        dialog.Animate_Toggle("#White Hello I am an #Cyan Npc! #White What can I #Yellow do #White for you?");
+                        Game1.Toggle_Pause();
+                        timer = 2;
                     }
+                }
+
+                var pphysics = (Physics) player.Get(Component.Types.Physics);
+                if ( pphysics != null )
+                {
+                    if ( pphysics.Current_Speed > 2 )
+                        dialog.Stop();
                 }
 
                 dialog.Update(time);

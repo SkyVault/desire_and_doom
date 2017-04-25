@@ -11,6 +11,8 @@ namespace Desire_And_Doom.ECS
     {
         //LuaTable dialog;
 
+        
+
         public Npc(LuaTable dialog) : base(Types.Npc)
         {
         }

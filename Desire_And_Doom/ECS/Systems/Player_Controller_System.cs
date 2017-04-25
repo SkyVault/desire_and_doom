@@ -102,8 +102,8 @@ namespace Desire_And_Doom.ECS
                 sprite.Current_Animation_ID = "player-idle";
 
             // check if a dialog box opened up
-            if (Messanger.It.Top() == "Dialog_Open")    player.Can_Move = false;
-            if (Messanger.It.Top() == "Dialog_Closed")  player.Can_Move = true;
+            //if (Messanger.It.Top() == "Dialog_Open")    player.Can_Move = false;
+            //if (Messanger.It.Top() == "Dialog_Closed")  player.Can_Move = true;
             if (Debug_Console.Open) player.Can_Move = false;
 
             // get input 
@@ -209,18 +209,12 @@ namespace Desire_And_Doom.ECS
             }
             player.Dash_Timer -= (float)time.ElapsedGameTime.TotalSeconds;
 
-            // show gui
-            if ( Input.It.Is_Key_Pressed(Keys.Q) )
-            {
-                show_overlay_gui = !show_overlay_gui;
-                invatory.Draw = show_overlay_gui;
-            }
-
             // (TEMP): toggle the equipment
             if ( Input.It.Is_Key_Pressed(Keys.E) ) {
                 if (equipment.Left_Hand != null)
                     equipment.Left_Hand = null;
                 else {
+                    // TODO: Clean this up so that i dont hard code the player equipment
                     equipment.Left_Hand = new Items.Equipable(Items.Equipable.Equipment_Type.WEAPON) {
                         Run_Animation_ID = "player-claymore-run",
                         Idle_Animation_ID = "player-claymore-idle",
@@ -248,6 +242,25 @@ namespace Desire_And_Doom.ECS
             camera.Track(body, 0.1f);
         }
 
+        public override void Constant_Update(GameTime time, Entity entity)
+        {
+            base.Constant_Update(time, entity);
+
+            if ( Input.It.Is_Key_Down(Keys.LeftControl) && Input.It.Is_Key_Pressed(Keys.P) )
+            {
+                Game1.Toggle_Pause();
+            }
+
+            // show gui
+            if ( Input.It.Is_Key_Pressed(Keys.Q) )
+            {
+                var invatory = (Invatory) entity.Get(Types.Invatory);
+                show_overlay_gui = !show_overlay_gui;
+                invatory.Draw = show_overlay_gui;
+                Game1.Toggle_Pause();
+            }
+        }
+
         public override void Draw(SpriteBatch batch, Entity entity)
         {
         }
@@ -259,23 +272,33 @@ namespace Desire_And_Doom.ECS
 
             var gui = Assets.It.Get<Texture2D>("gui");
 
+            int y_offset = 32;
+
             var region = new Rectangle(24, 0, 24, 24);
-            batch.Draw(gui, new Rectangle(96, 32, 48, 48), region, new Color(0, 0, 0, 100));
-            batch.Draw(gui, new Rectangle(96, 32 + 48 + 2, 48, 48), region, new Color(0, 0, 0, 100));
+            batch.Draw(gui, new Rectangle(96, 32+y_offset, 48, 48), region, new Color(0, 0, 0, 100));
+            batch.Draw(gui, new Rectangle(96, 32+ y_offset + 48 + 2, 48, 48), region, new Color(0, 0, 0, 100));
 
             // left hand box
-            batch.Draw(gui, new Rectangle(96 - 48 - 2, 32 + 48 + 2, 48, 48), region, new Color(0, 0, 0, 100));
+            batch.Draw(gui, new Rectangle(96 - 48 - 2, 32 + 48 + 2 + y_offset, 48, 48), region, new Color(0, 0, 0, 100));
             // right hand box
-            batch.Draw(gui, new Rectangle(96 + 48 + 2, 32 + 48 + 2, 48, 48), region, new Color(0, 0, 0, 100));
+            batch.Draw(gui, new Rectangle(96 + 48 + 2, 32 + 48 + 2 + y_offset, 48, 48), region, new Color(0, 0, 0, 100));
 
-            batch.Draw(gui, new Rectangle(96, 32 + 48 * 2 + 4, 48, 48), region, new Color(0, 0, 0, 100));
+            batch.Draw(gui, new Rectangle(96, 32 + 48 * 2 + 4 + y_offset, 48, 48), region, new Color(0, 0, 0, 100));
 
             var equipment = (Equipment) entity.Get(Types.Equipment);
             var font = (SpriteFont) Assets.It.Get<SpriteFont>("font");
-            
+            var inv = (Invatory) entity.Get(Types.Invatory);
+
+            // draw money
+            var items = Assets.It.Get<Texture2D>("items");
+            var coin_region = new Rectangle(0, 0, 8, 8);
+            var coin_pos = new Vector2(16, 16);
+            batch.Draw(items, coin_pos, coin_region, Color.White, 0, Vector2.Zero, 4, SpriteEffects.None, 1);
+            batch.DrawString(font, inv.Money.ToString(),coin_pos + new Vector2(48, 0), Color.White);
+
             // left hand (TODO): finish the rest of the boxes
             if ( equipment.Left_Hand != null )
-                batch.DrawString(font, equipment.Left_Hand.ID, new Vector2(96 - 48 - 2, 32 + 48 + 2), Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 1);
+                batch.DrawString(font, equipment.Left_Hand.ID, new Vector2(96 - 48 - 2, 32 + 48 + 2 + y_offset), Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 1);
 
             // right hand
 

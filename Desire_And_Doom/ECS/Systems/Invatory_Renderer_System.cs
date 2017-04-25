@@ -23,7 +23,7 @@ namespace Desire_And_Doom.ECS
             
             if (!invatory.Draw) return;
 
-            var offset = new Vector2(256, 32);
+            var offset = new Vector2(256, 64);
             //if (invatory.Spot == Invatory.Render_Spot.Left)
             //    offset.X -= 50;
 

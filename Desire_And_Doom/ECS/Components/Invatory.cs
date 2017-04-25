@@ -18,12 +18,20 @@ namespace Desire_And_Doom.ECS
         public int H { get => slots.GetLength(0); }
         public int W { get => slots.GetLength(1); }
 
+        public int Money { get; set; } = 0;
+
         public Invatory(int w, int h) :base(Types.Invatory) {
             slots = new Entity[w, h];
         }
 
         public void Add_Item(Entity e)
         {
+            if ( e.Has_Tag("Coin") )
+            {
+                Money++;
+                return;
+            }
+
             for (int y = 0; y < slots.GetLength(0); y++) {
                 for (int x = 0; x < slots.GetLength(1); x++) {
                     if (slots[y, x] == null) {
