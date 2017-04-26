@@ -61,6 +61,7 @@ namespace Desire_And_Doom.ECS
                         }
 
                         dialog.Animate_Toggle("#White Hello I am an #Cyan Npc! #White What can I #Yellow do #White for you?");
+
                         Game1.Toggle_Pause();
 
                         var invatory = (Invatory) entity.Get(Component.Types.Invatory);

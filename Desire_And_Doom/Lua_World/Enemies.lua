@@ -59,7 +59,7 @@ return {
 		tags = {"Enemy"},
 		components = {
 			["Body"] = {12, 6},
-			["Animation"] = {"entities", {"grendle-idle", 0.1}, {"grendle-run", 0.1}},
+			["Animation"] = {"entities", {"grendle-idle", 0.1}, {"grendle-run", 0.1}, {"grendle-attack", 0.02}},
 			["Physics"] = {},
 			["Ai"] = {"Function", AI.Grendle},
 			["Light"] = {},

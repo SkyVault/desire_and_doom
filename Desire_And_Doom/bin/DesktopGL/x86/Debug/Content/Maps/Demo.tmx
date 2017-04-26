@@ -979,7 +979,7 @@
   <object id="37" type="PointLight" x="496" y="574" width="16" height="16"/>
   <object id="38" type="Player" x="264" y="328" width="16" height="16"/>
   <object id="40" type="Mech" x="464" y="392" width="16" height="16"/>
-  <object id="41" type="Grendle" x="376" y="488" width="16" height="16"/>
+  <object id="41" type="Grendle" x="360" y="384" width="16" height="16"/>
   <object id="42" type="Grendle" x="592" y="528" width="16" height="16"/>
   <object id="43" type="Mech" x="528" y="640" width="16" height="16"/>
   <object id="44" type="Wolf" x="512" y="460" width="16" height="16"/>

@@ -19,6 +19,8 @@
 		--
 		["grendle-run"]				= {0, 400, 64, 64, 6},
 		["grendle-idle"]			= {0, 400, 64, 64, 1},
+		["grendle-attack"]			= {0, 292, 64, 80, 5, right_offset_y = 16, left_offset_y = 16, speed = 0.2},
+
 		--
 		["shulk-attack"]			= {0, 236, 32, 32, 16},
 		["shulk-idle"]				= {0, 236, 32, 32, 1},

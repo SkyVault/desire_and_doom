@@ -33,9 +33,13 @@ namespace Desire_And_Doom
             else Game1.Game_State = Game1.State.PLAYING;
         }
 
+        public static void Request_Pause()  => Game_State = State.PAUSED;
+        public static void Request_Resume() => Game_State = State.PLAYING;
+        
         public static int WIDTH     = 1280;
         public static int HEIGHT    = 700;
 
+        // TEMP
         private bool skip_intro_animation = true;
 
         public static int Map_Height_Pixels = 0;

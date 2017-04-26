@@ -95,8 +95,14 @@ return {
 		local body = engine:Get_Component(entity, "Body")
 		local anim = engine:Get_Component(entity, "Animation")
 		local physics = engine:Get_Component(entity, "Physics")
+		local fn = engine:Get_Component(entity, "Lua_Function")
 
 		engine:Face_Move_Dir(entity)
+		
+		-- initialize the table if it is nil
+		if fn.Table == nil then 
+			fn.Table = {}
+		end
 
 		if body and anim and physics then
 			local player = engine:Get_Player()
@@ -108,13 +114,16 @@ return {
 			end
 
 			if (engine:Entity_Within("Player", body.X, body.Y, 150)) then
-				if engine:Entity_Within("Player", body.X, body.Y, 35) then
+				if engine:Entity_Within("Player", body.X, body.Y, 75) then
 					-- do attack
-
-
+					anim.Current_Animation_ID = "grendle-attack"
+					fn.Table["state"] = "attacking"
 				else
+					fn.Table["state"] = "tracking"
 					engine:Track(entity, engine:Get_With_Tag "Player", 4)
 				end
+			else
+				fn.Table["state"] = "idling"
 			end
 
 			handle_player_hit(entity, engine, 1, 100)
