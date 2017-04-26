@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
+using Desire_And_Doom.Gui;
+using static Desire_And_Doom.ECS.Component;
 
 namespace Desire_And_Doom.ECS
 {
@@ -13,18 +15,16 @@ namespace Desire_And_Doom.ECS
     {
         GraphicsDeviceManager graphics;
         Game game;
-
-        Dialog_Box dialog;
+        Invatory_Manager invatory_manager;
 
         float timer = 0;
 
-        public Npc_System(Game game, GraphicsDeviceManager graphics) : base(Component.Types.Npc, Component.Types.Body)
+        public Npc_System(Game game, GraphicsDeviceManager graphics, Invatory_Manager invatory_manager) : base(Component.Types.Npc, Component.Types.Body)
         {
             this.graphics = graphics;
             this.game = game;
+            this.invatory_manager = invatory_manager;
 
-            dialog = new Dialog_Box();
-            //
         }
         
         public override void Constant_Update(GameTime time, Entity entity)
@@ -36,7 +36,10 @@ namespace Desire_And_Doom.ECS
             var body = (Body) (entity.Get(Component.Types.Body));
             var anim = (Animated_Sprite) (entity.Get(Component.Types.Animation));
             var physics = (Physics) entity.Get(Component.Types.Physics);
+            var npc = (Npc) entity.Get(Types.Npc);
             var player = World_Ref.Find_With_Tag("Player");
+
+            var dialog = npc.Dialog;
 
             if ( player != null )
             {
@@ -59,6 +62,20 @@ namespace Desire_And_Doom.ECS
 
                         dialog.Animate_Toggle("#White Hello I am an #Cyan Npc! #White What can I #Yellow do #White for you?");
                         Game1.Toggle_Pause();
+
+                        var invatory = (Invatory) entity.Get(Component.Types.Invatory);
+                        if (invatory != null )
+                        {
+
+                            // Draw the invatory
+                            invatory_manager.Showing = dialog.Showing();
+                            if ( dialog.Showing() )
+                            {
+                                invatory_manager.Add(invatory);
+                            }
+                            else invatory_manager.Remove(invatory);
+                        }
+
                         timer = 2;
                     }
                 }
@@ -72,6 +89,13 @@ namespace Desire_And_Doom.ECS
 
                 dialog.Update(time);
             }
+        }
+
+        public override void Destroy(Entity entity)
+        {
+            base.Destroy(entity);
+
+            invatory_manager.Remove((Invatory) entity.Get(Types.Invatory));
         }
 
         public override void Draw(SpriteBatch batch, Entity entity)
@@ -95,9 +119,9 @@ namespace Desire_And_Doom.ECS
         public override void UIDraw(SpriteBatch batch, Camera_2D camera,Entity entity)
         {
             base.UIDraw(batch, camera,entity);
+            var npc = (Npc) entity.Get(Types.Npc);
 
-
-            dialog.Draw(batch, camera);
+            npc.Dialog.Draw(batch, camera);
         }
     }
 }

@@ -9,12 +9,11 @@ namespace Desire_And_Doom.ECS
 {
     class Npc : Component
     {
-        //LuaTable dialog;
+        public Dialog_Box Dialog { get; private set; }
 
-        
-
-        public Npc(LuaTable dialog) : base(Types.Npc)
+        public Npc(LuaTable dialog_table) : base(Types.Npc)
         {
+            Dialog = new Dialog_Box();
         }
     }
 }

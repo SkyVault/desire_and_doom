@@ -23,10 +23,7 @@ namespace Desire_And_Doom
         public Vector2 Position { get; set; } = Vector2.Zero;
         public string Text { get; set; } = "";
 
-        private bool animating  = false;
-        private int char_ptr    = 1;
-        private float timer     = 0;
-        private float max_time  = 0.08f;
+        private bool animating { get; set; } = false;
 
         public int Width { get; set; } = 10;
         public int Height { get; set; } = 6;
@@ -36,7 +33,9 @@ namespace Desire_And_Doom
         public Texture2D Image { get; set; }
         public Rectangle Region { get; set; }
 
-        private Color color = Color.White;
+        public float Speed { get; set; } = 0.9f;
+
+        private Color color = new Color(0, 150, 255, 100);
         private List<Dialog_Word> words;
 
         private Vector2 position_offset { get; set; }
@@ -54,10 +53,8 @@ namespace Desire_And_Doom
             {
                 position_offset += new Vector2(0, Height * 8 * Scale);
             }
-
-            char_ptr    = 1;
+            
             Text        = text;
-            timer       = 0;
             words       = Compile_To_Words(text);
 
             Width = (Game1.WIDTH / (int)(8 * Scale));
@@ -93,7 +90,7 @@ namespace Desire_And_Doom
         {
             if ( animating )
             {
-                position_offset *= 0.98f;
+                position_offset *= Speed;
             }
         }
         
@@ -122,24 +119,25 @@ namespace Desire_And_Doom
                     for(int y = 0; y < h; y++)
                         for (int x = 0; x < w; x++)
                         {
+                            // TODO: Change this, we probably wont use a border, just incase we do, keep it for now
                             if (x == 0 && y == 0)
                                 batch.Draw(image, Position, new Rectangle(0, 0, 8, 8), Color.White, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 1f);
                             if (x > 0 && x < Width - 1 && y == 0)
-                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(8, 0, 8, 8), Color.White, 0, Vector2.Zero,new Vector2(Scale), SpriteEffects.None, 1f);
+                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(8, 0, 8, 8), color, 0, Vector2.Zero,new Vector2(Scale), SpriteEffects.None, 1f);
                             if (x == Width - 1 && y == 0)
-                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(16, 0, 8, 8), Color.White, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 1f);
+                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(16, 0, 8, 8), color, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 1f);
                             if (x == 0 && y > 0 && y < Height - 1)
-                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(0, 8, 8, 8), Color.White, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 1f);
+                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(0, 8, 8, 8), color, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 1f);
                             if (x == Width - 1 && y > 0 && y < Height - 1)
-                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(16, 8, 8, 8), Color.White, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 1f);
+                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(16, 8, 8, 8), color, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 1f);
                             if (x == 0 && y == Height - 1)
-                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(0, 16, 8, 8), Color.White, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 1f);
+                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(0, 16, 8, 8), color, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 1f);
                             if (x == Width-1 && y == Height - 1)
-                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(16, 16, 8, 8), Color.White, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 1f);
+                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(16, 16, 8, 8), color, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 1f);
                             if (x > 0 && x < Width - 1 && y == Height - 1)
-                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(8, 16, 8, 8), Color.White, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 1f);
+                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(8, 16, 8, 8), color, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 1f);
                             if (x > 0 && x < Width - 1 && y > 0 && y < Height - 1)
-                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(8, 8, 8, 8), Color.White, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 1f);
+                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(8, 8, 8, 8), color, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 1f);
                         }
                     Position = pre_pos;
                 }

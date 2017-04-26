@@ -12,6 +12,7 @@ using Desire_And_Doom.ECS.Components;
 using Desire_And_Doom.Items;
 using Desire_And_Doom.Graphics;
 using Desire_And_Doom.Graphics.Particle_Systems;
+using Desire_And_Doom.Gui;
 
 namespace Desire_And_Doom.ECS
 {
@@ -20,11 +21,15 @@ namespace Desire_And_Doom.ECS
         Camera_2D camera;
         Particle_World particle_world;
 
+        Invatory_Container invatory_container;
+        Invatory_Manager invatory_manager;
+
         bool show_overlay_gui = false;
         const float dash_speed = 500;
 
-        public Player_Controller_System(Camera_2D _camera, Particle_World particle_world) : base(Types.Body, Types.Player, Types.Physics)
+        public Player_Controller_System(Camera_2D _camera, Particle_World particle_world, Invatory_Manager invatory_manager) : base(Types.Body, Types.Player, Types.Physics)
         {
+            this.invatory_manager = invatory_manager;
             this.camera = _camera;
             this.particle_world = particle_world;
         }
@@ -38,6 +43,14 @@ namespace Desire_And_Doom.ECS
             //    particle_world, 
             //    true
             //    ));
+            invatory_container = new Invatory_Container();
+
+            var invatory = (Invatory) entity.Get(Types.Invatory);
+            if (invatory != null )
+            {
+                // add the invatory to the manager
+                invatory_manager.Add(invatory);
+            }
             
             var physics = (Physics)entity.Get(Types.Physics);
             physics.Blacklisted_Collision_Tags.Add("Player-Hit");
@@ -63,6 +76,13 @@ namespace Desire_And_Doom.ECS
                     ID = "Claymore"
                 };
             }
+        }
+
+        public override void Destroy(Entity entity)
+        {
+            base.Destroy(entity);
+
+            invatory_manager.Remove((Invatory) entity.Get(Types.Invatory));
         }
 
         public void Create_Sword_Hitbox(Physics physics, Body body)
@@ -162,8 +182,11 @@ namespace Desire_And_Doom.ECS
             }
 
             // Open the invatory
-            if (Input.It.Is_Key_Pressed(Keys.I))
-                invatory.Draw = !invatory.Draw;
+            if ( Input.It.Is_Key_Pressed(Keys.I) )
+            {
+                //Draw the invatory
+            }
+                
 
             if (player.Can_Move)
             {
@@ -250,15 +273,19 @@ namespace Desire_And_Doom.ECS
             {
                 Game1.Toggle_Pause();
             }
-
-            // show gui
+            
+            // toggle the gui and invatory screen
+            var invatory = (Invatory) entity.Get(Types.Invatory);
             if ( Input.It.Is_Key_Pressed(Keys.Q) )
             {
-                var invatory = (Invatory) entity.Get(Types.Invatory);
                 show_overlay_gui = !show_overlay_gui;
-                invatory.Draw = show_overlay_gui;
+                invatory_manager.Showing = show_overlay_gui;
+
                 Game1.Toggle_Pause();
             }
+
+            //if (Game1.Game_State == Game1.State.PAUSED && invatory.Draw)
+            //    invatory_container.Update(time);
         }
 
         public override void Draw(SpriteBatch batch, Entity entity)

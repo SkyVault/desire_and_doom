@@ -12,14 +12,14 @@ namespace Desire_And_Doom.ECS
         public enum Render_Spot{ Left, Center, Right };
 
         Entity[,] slots;
-        public bool Draw { get; set; } = false;
-        public Render_Spot Spot { get; set; } = Invatory.Render_Spot.Left;
-
+        
         public int H { get => slots.GetLength(0); }
         public int W { get => slots.GetLength(1); }
 
         public int Money { get; set; } = 0;
 
+        public Vector2 Offset { get; set; } = Vector2.Zero;
+        
         public Invatory(int w, int h) :base(Types.Invatory) {
             slots = new Entity[w, h];
         }

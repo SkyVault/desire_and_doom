@@ -13,6 +13,7 @@ using Desire_And_Doom.Utils;
 using Desire_And_Doom.ECS.Systems;
 using MonoGame.Extended.Input.InputListeners;
 using Desire_And_Doom.Graphics;
+using Desire_And_Doom.Gui;
 
 namespace Desire_And_Doom
 {
@@ -56,6 +57,7 @@ namespace Desire_And_Doom
         Lua                 lua;
         RenderTarget2D      scene;
         Physics_Engine      physics_engine;
+        Invatory_Manager    invatory_manager;
 
         public Game1()
         {
@@ -101,15 +103,16 @@ namespace Desire_And_Doom
 
             world           = new World(penumbra);
             particle_world  = new Particle_World();
+            invatory_manager= new Invatory_Manager();
 
             //UserInterface.Initialize(Content, BuiltinThemes.hd);
 
             world.Add_System<Sprite_Renderer_System>(new Sprite_Renderer_System());
-            world.Add_System<Player_Controller_System>(new Player_Controller_System(camera, particle_world));
+            world.Add_System<Player_Controller_System>(new Player_Controller_System(camera, particle_world, invatory_manager));
             world.Add_System<Animation_Renderer_System>(new Animation_Renderer_System());
             physics_engine = (Physics_Engine)world.Add_System<Physics_Engine>(new Physics_Engine(world));
             
-            world.Add_System<Invatory_Renderer_System>(new Invatory_Renderer_System());
+            world.Add_System<Invatory_System>(new Invatory_System(invatory_manager));
             world.Add_System<AI_System>(new AI_System());
             world.Add_System<Light_Emitter_System>(new Light_Emitter_System());
             world.Add_System<World_Interaction_System>(new World_Interaction_System());
@@ -120,7 +123,7 @@ namespace Desire_And_Doom
             world.Add_System<Multipart_Animation_System>(new Multipart_Animation_System());
             gui = new Monogui();
 
-            var npc_system = (Npc_System)world.Add_System<Npc_System>(new Npc_System(this, graphics));
+            var npc_system = (Npc_System)world.Add_System<Npc_System>(new Npc_System(this, graphics, invatory_manager));
             //npc_system.Text_Console.Initialize();
 
             penumbra.Initialize();
@@ -189,6 +192,7 @@ namespace Desire_And_Doom
             camera.Update(gameTime);
             world.Update(gameTime);
             screen_manager.Update(gameTime);
+            invatory_manager.Update(gameTime);
             //UserInterface.Update(gameTime);
 
             if (Input.It.Is_Key_Pressed(Keys.P)) DEBUG = !DEBUG;
@@ -235,6 +239,7 @@ namespace Desire_And_Doom
             batch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             world.UIDraw(batch, camera);
             gui.Draw(batch);
+            invatory_manager.UIDraw(batch);
             console.Draw(batch);
 
             if ( DEBUG )

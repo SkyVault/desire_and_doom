@@ -96,7 +96,7 @@
     <Compile Include="ECS\Component.cs" />
     <Compile Include="ECS\Entity.cs" />
     <Compile Include="ECS\Components\Invatory.cs" />
-    <Compile Include="ECS\Systems\Invatory_Renderer_System.cs" />
+    <Compile Include="ECS\Systems\Invatory_System.cs" />
     <Compile Include="ECS\Components\Item.cs" />
     <Compile Include="ECS\Components\Npc.cs" />
     <Compile Include="ECS\Systems\Npc_System.cs" />
@@ -121,6 +121,8 @@
     <Compile Include="Graphics\Particle_World.cs" />
     <Compile Include="Graphics\Sky_Renderer.cs" />
     <Compile Include="Graphics\ViewportAdapter.cs" />
+    <Compile Include="Gui\Invatory_Container.cs" />
+    <Compile Include="Gui\Invatory_Manager.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IRectangle.cs" />
     <Compile Include="Interfaces\IRotatable.cs" />
@@ -659,7 +661,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Gui\" />
     <Folder Include="Physics\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

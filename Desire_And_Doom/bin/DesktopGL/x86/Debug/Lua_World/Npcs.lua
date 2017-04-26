@@ -83,6 +83,7 @@ return {
 			["Physics"]={},
 			["Npc"] = {},
 			["Ai"] = {"Function", npc_ai},
+			["Invatory"] = {3, 2},
 		}
 	},
 	["npc-2"] = {
