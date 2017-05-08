@@ -9,16 +9,125 @@ using Desire_And_Doom.Graphics;
 
 namespace Desire_And_Doom.ECS
 {
+    class Polygon
+    {
+        public Vector2 Position { get; set; }
+        public List<Vector2> Points { get; set; }
+    }
+
+    class Line
+    {
+      public Vector2 Start, End;
+    }
+
+    class Polygon_Collision_Result
+    {
+        public bool Will_Intersect { get; set; } = false;
+        public bool Intersect { get; set; } = false;
+        public Vector2 Minimum_Translation_Vector { get; set; } = Vector2.Zero;
+    }
 
     class Physics_Engine : System
     {
         private World world;
         private List<RectangleF> solids;
+        private List<Polygon> polygons;
         
         public Physics_Engine(World world) : base(Types.Body, Types.Physics)
         {
             this.world = world;
             this.solids = new List<RectangleF>();
+            this.polygons = new List<Polygon>();
+        }
+
+        public void Project_Polygon(Vector2 axis, Polygon polygon, ref float min, ref float max)
+        {
+            float dot_product = Vector2.Dot(axis, polygon.Points[0]);
+            min = dot_product;
+            max = dot_product;
+            foreach (var v in polygon.Points)
+            {
+                dot_product = Vector2.Dot(v, axis);
+                if (dot_product < min) min = dot_product;
+                else if (dot_product > max) max = dot_product;
+            }
+        }
+
+        public float Interval_Distance(float min_a, float max_a, float min_b, float max_b)
+        {
+            if (max_a < min_b) return min_a - max_a;
+            else return min_a - max_b;
+        }
+
+        public bool Line_Intersection(Vector2 a1, Vector2 a2, Vector2 b1, Vector2 b2)
+        {
+            Vector2 intersection = Vector2.Zero;
+            Vector2 b = Vector2.Subtract(a2, a1);
+            Vector2 d = Vector2.Subtract(b2, b1);
+            float b_dot_perp = b.X * d.Y - b.Y * d.X;
+            if (b_dot_perp == 0) return false;
+
+            Vector2 c = Vector2.Subtract(b1, a1);
+            float t = (c.X * d.Y - c.Y * d.X) / b_dot_perp;
+            if (t < 0 || t > 1) return false;
+
+            float u = (c.X * b.Y - c.Y * b.X) / b_dot_perp;
+            if (u < 0 || u > 1) return false;
+
+            intersection = a1 + Vector2.Multiply(b, t);
+            return true;
+        }
+
+        public bool Body_In_Polygon(Polygon poly, Body body)
+        {
+            Line left_wall = new Line
+            {
+                Start = body.Position,
+                End = new Vector2(body.X, body.Y + body.Height)
+            };
+
+            Line bottom_wall = new Line
+            {
+                Start = new Vector2(body.X, body.Y + body.Height),
+                End = new Vector2(body.X + body.Width, body.Y + body.Height)
+            };
+
+            Line right_wall = new Line
+            {
+                Start = new Vector2(body.X + body.Width, body.Y),
+                End = new Vector2(body.X + body.Width, body.Y + body.Height)
+            };
+
+            Line top_wall = new Line
+            {
+                Start = body.Position,
+                End = new Vector2(body.X + body.Width, body.Y)
+            };
+
+            for (int j = 0; j < poly.Points.Count; j += 2)
+            {
+                Vector2 start = poly.Points[j] + poly.Position;
+                int end_index = j + 1;
+                if (end_index > poly.Points.Count - 1)
+                    end_index = 0;
+                Vector2 end = poly.Points[end_index] + poly.Position;
+
+                // check intersections
+                if (Line_Intersection(left_wall.Start, left_wall.End, start, end) ||
+                    Line_Intersection(bottom_wall.Start, bottom_wall.End, start, end) ||
+                    Line_Intersection(right_wall.Start, right_wall.End, start, end) ||
+                    Line_Intersection(top_wall.Start, top_wall.End, start, end))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public Polygon Add_Polygon(Polygon p)
+        {
+            polygons.Add(p);
+            return p;
         }
 
         public RectangleF Add_Solid(RectangleF solid)
@@ -84,6 +193,13 @@ namespace Desire_And_Doom.ECS
                     if (o_body.Contains(x_body)) { x_body = body; }
                     if (o_body.Contains(y_body)) { y_body = body; }
                 }
+                
+                foreach(var poly in polygons)
+                {
+                    // get the lines of the rectangle
+                    if (Body_In_Polygon(poly, x_body)) { x_body = body; }
+                    if (Body_In_Polygon(poly, y_body)) { y_body = body; }
+                }
             }
             
             physics.Velocity *= physics.Friction;
@@ -122,6 +238,22 @@ namespace Desire_And_Doom.ECS
                 //batch.Draw(gui, new Rectangle((int)s.X, (int)s.Y, (int)s.Width, (int)s.Height), new Rectangle(24, 0, 24, 24), new Color(0, 0, 0, 10));
                 var proj = camera.World_To_Screen(new Vector2(s.X, s.Y));
                 Debug_Drawing.Draw_Line_Rect(batch, proj.X, proj.Y, s.Width * camera.Zoom, s.Height * camera.Zoom, Color.Red);
+            });
+            
+            polygons.ForEach(p =>
+            {
+                for (int i = 0; i < p.Points.Count; i += 2)
+                {
+                    var start = camera.World_To_Screen(p.Points[i] + p.Position);
+                    var other_index = i + 1;
+                    if (other_index > p.Points.Count - 1)
+                    {
+                        other_index = 0;
+                    }
+
+                    var end = camera.World_To_Screen(p.Points[other_index] + p.Position);
+                    Debug_Drawing.Draw_Line(batch, start, end, Color.Red);
+                }
             });
 
             var bodies = World_Ref.Get_All_With_Component(Types.Physics);

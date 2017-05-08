@@ -100,11 +100,29 @@ namespace Desire_And_Doom
                     if (obj.Type == "")
                     {
                         // Create a solid
+                        // check if its a polygon!
                         var physics_engine = (Physics_Engine)world.Get_System<Physics_Engine>();
                         if (physics_engine != null)
                         {
-                            var solid = physics_engine.Add_Solid(new RectangleF((float)obj.X, (float)obj.Y, (float)obj.Width, (float)obj.Height));
+                            if (obj.Points == null) { 
+                                var solid = physics_engine.Add_Solid(new RectangleF((float)obj.X, (float)obj.Y, (float)obj.Width, (float)obj.Height));
+                            }else
+                            {
+                                List<Vector2> points = new List<Vector2>();
+
+                                foreach (var p in obj.Points)
+                                    points.Add(new Vector2((float)p.X, (float)p.Y));
+                                var polygon = new Polygon
+                                {
+                                    Points = points,
+                                    Position = new Vector2((float)obj.X, (float)obj.Y)
+                                };
+
+                                var poly = physics_engine.Add_Polygon(polygon);
+                            }
                         }
+
+
                     }else if (obj.Type == "hull")
                     {
                         
