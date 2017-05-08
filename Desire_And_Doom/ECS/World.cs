@@ -142,25 +142,34 @@ namespace Desire_And_Doom.ECS
                             break;
                         }
                     case "Enemy": {
-                            List<string> drop_items = new List<string>();
-                            if ( component["drops"] is LuaTable drops )
+                        List<string> drop_items = new List<string>();
+                        if ( component["drops"] is LuaTable drops )
+                        {
+                            for (int i = 1; i < drops.Values.Count+1; i++ )
                             {
-                                for (int i = 1; i < drops.Values.Count+1; i++ )
-                                {
-                                    LuaTable dps = drops[i] as LuaTable;
-                                    string item_name = dps[1] as string;
-                                    int min = (int) (dps[2] as double?);
-                                    int max = (int) (dps[3] as double?);
+                                LuaTable dps = drops[i] as LuaTable;
+                                string item_name = dps[1] as string;
+                                int min = (int) (dps[2] as double?);
+                                int max = (int) (dps[3] as double?);
 
-                                    float ammout = min + (new Random().Next()) % max;
-                                    for ( int j = 0; j < ammout; j++ )
-                                        drop_items.Add(item_name);
+                                float ammout = min + (new Random().Next()) % max;
+                                for ( int j = 0; j < ammout; j++ )
+                                    drop_items.Add(item_name);
 
-                                }
                             }
-                            var enemy = (Enemy) entity.Add(new Enemy(drop_items));
-                            break;
+                        }
+                        var enemy = (Enemy) entity.Add(new Enemy(drop_items));
+                        break;
                     }
+                    case "Character":
+                        {
+                            var ch = (Character)entity.Add(new Character());
+
+                            if (component["name"] != null) ch.Name = component["name"] as string;
+                            if (component["age"]  != null) ch.Age  = (int)(component["age"] as double?);
+
+                            break;
+                        }
                     default:
                         Console.WriteLine("Unknown Component: " + key);
                         break;

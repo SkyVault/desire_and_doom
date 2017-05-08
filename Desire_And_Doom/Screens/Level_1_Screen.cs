@@ -21,20 +21,13 @@ namespace Desire_And_Doom.Screens
 
         public override void Load()
         {
-            Load_Map("Demo");
             lighting.AmbientColor = new Color(0.4f, 0.4f, 0.4f, 1.0f);
-
+            Load_Map("Demo_Practice");
+            
             camera.Zoom = Game1.SCALE;
 
             int x = -1;
             int y = -1;
-            world.Create_Entity(Assets.It.Get<LuaTable>("npc-1"), 100 + ++x * 16, 100 + ++y * 16);
-            world.Create_Entity(Assets.It.Get<LuaTable>("npc-2"), 100 + ++x * 16, 100 + ++y * 16);
-            world.Create_Entity(Assets.It.Get<LuaTable>("npc-3"), 100 + ++x * 16, 100 + ++y * 16);
-            world.Create_Entity(Assets.It.Get<LuaTable>("npc-4"), 100 + ++x * 16, 100 + ++y * 16);
-            world.Create_Entity(Assets.It.Get<LuaTable>("npc-5"), 100 + ++x * 16, 100 + ++y * 16);
-            world.Create_Entity(Assets.It.Get<LuaTable>("npc-6"), 100 + ++x * 16, 100 + ++y * 16);
-            world.Create_Entity(Assets.It.Get<LuaTable>("npc-7"), 100 + ++x * 16, 100 + ++y * 16);
         }
         public override void Update(GameTime time)
         {

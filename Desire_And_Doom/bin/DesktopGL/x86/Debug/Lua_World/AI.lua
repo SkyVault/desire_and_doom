@@ -125,8 +125,6 @@ return {
 				fn.Table["state"] = "idling"
 			end
 
-			print(fn.Table["state"])
-
 			handle_player_hit(entity, engine, 1, 100)
 			
 		end

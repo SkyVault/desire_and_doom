@@ -27,6 +27,7 @@ namespace Desire_And_Doom.ECS
             Timed_Destroy,
             Enemy,
             Multipart_Animation,
+            Character,
             Num_Of_Types,
         }
 

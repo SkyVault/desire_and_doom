@@ -61,6 +61,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ECS\Components\Character.cs" />
     <Compile Include="ECS\Components\Enemy.cs" />
     <Compile Include="ECS\Components\Entity_Particle_Emitter.cs" />
     <Compile Include="ECS\Components\Equipment.cs" />
@@ -667,7 +668,8 @@
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <PropertyGroup>
     <PostBuildEvent>
-xcopy /s /y "C:\Users\Dustin.Neumann\Documents\Visual Studio 2017\Projects\Desire_And_Doom\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"</PostBuildEvent>
+xcopy /s /y "C:\Users\Dustin.Neumann\Documents\Visual Studio 2017\Projects\Desire_And_Doom\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"
+xcopy /s /y "C:\Users\Dustin.Neumann\Source\Repos\desire_and_doom\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

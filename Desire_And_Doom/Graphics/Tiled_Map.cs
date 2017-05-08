@@ -44,6 +44,7 @@ namespace Desire_And_Doom
 
         public Tiled_Map(string name, Camera_2D _camera, World world, Screen level, Particle_World particle_world, Lua lua, PenumbraComponent lighting = null)
         {
+
             this.camera = _camera;
             var current = Directory.GetCurrentDirectory();
             if (!File.Exists(current + "/Content/Maps/" + name + ".tmx"))
@@ -96,13 +97,25 @@ namespace Desire_And_Doom
             {
                 foreach ( var obj in layer.Objects )
                 {
-                    if ( obj.Type == "" )
+                    if (obj.Type == "")
                     {
-                        var physics_engine = (Physics_Engine) world.Get_System<Physics_Engine>();
-                        if ( physics_engine != null )
+                        // Create a solid
+                        var physics_engine = (Physics_Engine)world.Get_System<Physics_Engine>();
+                        if (physics_engine != null)
                         {
-                            physics_engine.Add_Solid(new RectangleF((float) obj.X, (float) obj.Y, (float) obj.Width, (float) obj.Height));
+                            var solid = physics_engine.Add_Solid(new RectangleF((float)obj.X, (float)obj.Y, (float)obj.Width, (float)obj.Height));
                         }
+                    }else if (obj.Type == "hull")
+                    {
+                        
+                        var points = new Vector2[obj.Points.Count];
+                        int ptr = 0;
+                        foreach(var pnt in obj.Points)
+                        {
+                            points[ptr++] = new Vector2((float)(obj.X + pnt.X), (float)(obj.Y + pnt.Y));
+                        }
+                        lighting.Hulls.Add(new Hull(points));
+
                     } else if ( obj.Type == "Particle" )
                     {
                         Debug.Assert(obj.Properties.ContainsKey("Type"), "ERROR:: Particle object requires a Type property!");

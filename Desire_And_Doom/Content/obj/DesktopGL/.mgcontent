@@ -4,14 +4,13 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Dustin.Neumann/Documents/Visual Studio 2017/Projects/Desire_And_Doom/Desire_And_Doom/Content/font</File>
-    <File>C:/Users/Dustin.Neumann/Documents/Visual Studio 2017/Projects/Desire_And_Doom/Desire_And_Doom/Content/entities.png</File>
-    <File>C:/Users/Dustin.Neumann/Documents/Visual Studio 2017/Projects/Desire_And_Doom/Desire_And_Doom/Content/items.png</File>
-    <File>C:/Users/Dustin.Neumann/Documents/Visual Studio 2017/Projects/Desire_And_Doom/Desire_And_Doom/Content/Tiles_1.png</File>
-    <File>C:/Users/Dustin.Neumann/Documents/Visual Studio 2017/Projects/Desire_And_Doom/Desire_And_Doom/Content/gui.png</File>
-    <File>C:/Users/Dustin.Neumann/Documents/Visual Studio 2017/Projects/Desire_And_Doom/Desire_And_Doom/Content/Sky.png</File>
-    <File>C:/Users/Dustin.Neumann/Documents/Visual Studio 2017/Projects/Desire_And_Doom/Desire_And_Doom/Content/boss_1.png</File>
-    <File>C:/Users/Dustin.Neumann/Documents/Visual Studio 2017/Projects/Desire_And_Doom/Desire_And_Doom/Content/Charactors.png</File>
-    <File>C:/Users/Dustin.Neumann/Documents/Visual Studio 2017/Projects/Desire_And_Doom/Desire_And_Doom/Content/logo.png</File>
+    <File>C:/Users/Dustin.Neumann/Source/Repos/desire_and_doom/Desire_And_Doom/Content/entities.png</File>
+    <File>C:/Users/Dustin.Neumann/Source/Repos/desire_and_doom/Desire_And_Doom/Content/items.png</File>
+    <File>C:/Users/Dustin.Neumann/Source/Repos/desire_and_doom/Desire_And_Doom/Content/Tiles_1.png</File>
+    <File>C:/Users/Dustin.Neumann/Source/Repos/desire_and_doom/Desire_And_Doom/Content/gui.png</File>
+    <File>C:/Users/Dustin.Neumann/Source/Repos/desire_and_doom/Desire_And_Doom/Content/Sky.png</File>
+    <File>C:/Users/Dustin.Neumann/Source/Repos/desire_and_doom/Desire_And_Doom/Content/boss_1.png</File>
+    <File>C:/Users/Dustin.Neumann/Source/Repos/desire_and_doom/Desire_And_Doom/Content/Charactors.png</File>
+    <File>C:/Users/Dustin.Neumann/Source/Repos/desire_and_doom/Desire_And_Doom/Content/logo.png</File>
   </SourceFiles>
 </SourceFileCollection>

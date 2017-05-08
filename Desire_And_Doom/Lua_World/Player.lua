@@ -18,6 +18,11 @@
 			["Light"] = {},
 			["Equipment"] = {},
 			["Health"] = {3},
+
+			["Character"] = {
+				name	= "player",
+				age		= 34
+			}
 		},
 	}
 }
