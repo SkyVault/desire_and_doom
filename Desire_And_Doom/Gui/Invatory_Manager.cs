@@ -19,10 +19,23 @@ namespace Desire_And_Doom.Gui
         Point selector = Point.Zero;
 
         public bool Showing { get; set; } = false;
+        private bool ShowMenu { get; set; } = false;
+        private int menu_selector = 0;
+
+        public Dictionary<string, Action> MenuActions;
 
         public Invatory_Manager()
         {
             invatories = new List<Invatory>();
+
+            MenuActions = new Dictionary<string, Action>
+            {
+                {"Drop", ()=>{
+                    invatories.First().Drop_Item(selector.X, selector.Y);
+                }},
+                {"Move", ()=>{ Console.WriteLine("Moving!"); }},
+                {"Info", ()=>{ Console.WriteLine("Info!"); }},
+            };
         }
 
 
@@ -43,32 +56,78 @@ namespace Desire_And_Doom.Gui
 
             if ( Showing )
             {
-                if ( Input.It.Is_Key_Pressed(Keys.Left) ) selector += new Point(-1, 0);
-                if ( Input.It.Is_Key_Pressed(Keys.Right) ) selector += new Point(1, 0);
-                if ( Input.It.Is_Key_Pressed(Keys.Up) ) selector += new Point(0, -1);
-                if ( Input.It.Is_Key_Pressed(Keys.Down) ) selector += new Point(0, 1);
-            }
-
-            for (int i = 0; i < invatories.Count; i++ )
-            {
-                var inv = invatories[i];
-                inv.Offset = new Vector2(Game1.WIDTH / 2, 32);
-
-                // position the invatory correctly
-                if ( i > 0 )
+                if (Input.It.Is_Key_Pressed(Keys.Left))
                 {
-                    inv.Offset -= new Vector2(total_width + invatories[i - 1].W * Square_Size, 0);
+                    selector += new Point(-1, 0);
+                    ShowMenu = false;
                 }
+
+                if (Input.It.Is_Key_Pressed(Keys.Right))
+                {
+                    selector += new Point(1, 0);
+                    ShowMenu = false;
+                }
+
+                if ( !ShowMenu && Input.It.Is_Key_Pressed(Keys.Up) ) selector += new Point(0, -1);
+                if ( !ShowMenu && Input.It.Is_Key_Pressed(Keys.Down) ) selector += new Point(0, 1);
+
+                if (selector.X < 0)
+                {
+                    selector.X = invatories.First().W - 1;
+                    selector.Y--;
+                }
+                if (selector.X > invatories.First().W - 1)
+                {
+                    selector.Y++;
+                    selector.X = 0;
+                }
+
+                if (selector.Y < 0) selector.Y = invatories.First().H - 1;
+                if (selector.Y > invatories.First().H - 1) selector.Y = 0;
+
+                if (Input.It.Is_Key_Pressed(Keys.Z))
+                {
+                    if (ShowMenu)
+                    {
+                        MenuActions[MenuActions.ElementAt(menu_selector).Key]?.Invoke();
+                        menu_selector = 0;
+                    }
+
+                    ShowMenu = !ShowMenu;
+                }
+
+                if (ShowMenu)
+                {
+                    if (Input.It.Is_Key_Pressed(Keys.Up))
+                    {
+                        menu_selector--;
+                    }
+
+                    if (Input.It.Is_Key_Pressed(Keys.Down))
+                    {
+                        menu_selector++;
+                    }
+
+                    if (menu_selector < 0) menu_selector = MenuActions.Count - 1;
+                    if (menu_selector > MenuActions.Count - 1) menu_selector = 0;
+                }
+            }
+            else
+            {
+                ShowMenu = false;
             }
         }
 
         public void UIDraw(SpriteBatch batch)
         {
             if ( !Showing ) return;
-            foreach(var invatory in invatories )
+
+            int index = 0;
+            foreach (var invatory in invatories )
             {
                 var gui     = (Texture2D) Assets.It.Get<Texture2D>("gui");
-                var offset  = invatory.Offset;
+                var font    = (SpriteFont)Assets.It.Get<SpriteFont>("font");
+                var offset  = new Vector2(256, 64);
                 var size    = 48;
 
                 for ( int y = 0; y < invatory.H; y++ )
@@ -76,8 +135,86 @@ namespace Desire_And_Doom.Gui
                     {
                         var pos = new Vector2(x * 16, y * 16) + offset;
                         var region = new Rectangle(24, 0, 24, 24);
+                        
+                        //draw grid square
+                        batch.Draw(
+                            gui, 
+                            new Rectangle(
+                                (int) offset.X + size * x, 
+                                (int) offset.Y + size * y, 
+                                size, 
+                                size), 
+                            new Rectangle(24, 0, 24, 24), 
+                            new Color(0, 0, 0, 100), 
+                            0, 
+                            Vector2.Zero, 
+                            SpriteEffects.None, 
+                            0.3f);
 
-                        batch.Draw(gui, new Rectangle((int) offset.X + size * x, (int) offset.Y + size * y, size, size), new Rectangle(24, 0, 24, 24), new Color(0, 0, 0, 100));
+                        if (selector.X == x && selector.Y == y)
+                        {
+                            batch.Draw(
+                                gui, 
+                                new Rectangle(
+                                    (int)offset.X + size * x, 
+                                    (int)offset.Y + size * y, 
+                                    size, 
+                                    size), 
+                                new Rectangle(24, 0, 24, 24), 
+                                new Color(0, 0, 0, 100));
+
+                            if (this.ShowMenu)
+                            {
+                                var text_height = font.MeasureString("Hello").Y;
+
+                                batch.Draw(
+                                    gui, 
+                                    new Rectangle(
+                                        (int)offset.X + size * x + size, 
+                                        (int)offset.Y + size * y, 
+                                        size * 2, 
+                                        (int)text_height * (int)MenuActions.Count), 
+                                    new Rectangle(24, 0, 24, 24), 
+                                    new Color(0, 0.5f, 0.5f, 1f), 
+                                    0,
+                                    Vector2.Zero, 
+                                    SpriteEffects.None, 
+                                    0.98f);
+
+
+                                int text_y = 0;
+                                foreach (var action in MenuActions)
+                                {
+                                    if (text_y == menu_selector)
+                                    {
+                                        batch.Draw(
+                                        gui,
+                                        new Rectangle(
+                                            (int)offset.X + size * x + size,
+                                            (int)offset.Y + size * y + (int)(text_y * text_height),
+                                            size * 2,
+                                            (int)text_height),
+                                        new Rectangle(24, 0, 24, 24),
+                                        new Color(0, 0.0f, 0.0f, 0.5f),
+                                        0,
+                                        Vector2.Zero,
+                                        SpriteEffects.None,
+                                        0.99f);
+                                    }
+
+                                    batch.DrawString(
+                                        font,
+                                        action.Key, 
+                                        new Vector2(offset.X + size * x + size, offset.Y + size * y + (text_y++ * text_height)),
+                                        Color.White,
+                                        0,
+                                        Vector2.Zero,
+                                        1,
+                                        SpriteEffects.None,
+                                        1f);
+                                }
+                            }
+                        }
 
                         var item = invatory.Get(y, x);
 
@@ -95,11 +232,12 @@ namespace Desire_And_Doom.Gui
                                     Vector2.Zero,
                                     4,
                                     SpriteEffects.None,
-                                    1
+                                    0.5f
                                     );
                             }
                         }
                     }
+                index++;
             }
         }
     }

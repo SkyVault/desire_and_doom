@@ -22,7 +22,7 @@ namespace Desire_And_Doom.Screens
         public override void Load()
         {
             lighting.AmbientColor = new Color(0.4f, 0.4f, 0.4f, 1.0f);
-            Load_Map("Demo_Practice");
+            Load_Map("Demo");
             
             camera.Zoom = Game1.SCALE;
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="8" tileheight="8" nextobjectid="89">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="8" tileheight="8" nextobjectid="93">
  <properties>
   <property name="Ambiant" value="200 200 200"/>
   <property name="Sky" value="true"/>
@@ -442,6 +442,7 @@
     <property name="Region" value="160 64 48 48"/>
    </properties>
   </object>
+  <object id="89" x="166.667" y="258.667" width="46.6667" height="40" visible="0"/>
  </objectgroup>
  <objectgroup name="solids">
   <object id="2" x="88" y="48" width="8" height="24"/>
@@ -497,6 +498,7 @@
   <object id="87" x="512" y="168">
    <polygon points="0,0 -184,-184 32,-200"/>
   </object>
+  <object id="92" type="Grendle" x="172" y="229.5" width="21.5" height="20.5"/>
  </objectgroup>
  <objectgroup name="hulls">
   <object id="45" type="hull" x="112" y="144">

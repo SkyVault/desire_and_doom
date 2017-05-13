@@ -163,6 +163,8 @@ namespace Desire_And_Doom.ECS
                     var o_physics = (Physics)other.Get(Types.Physics);
                     var o_body = (Body)other.Get(Types.Body);
 
+                    if (o_physics.Handle_Collisions == false) continue;
+
                     if (o_physics.Physics_Type == Physics.PType.DYNAMIC || o_physics.Physics_Type == Physics.PType.STATIC)
                     {
                         bool blacklisted = physics.Contains_Blacklisted_Tag(other.Tags);

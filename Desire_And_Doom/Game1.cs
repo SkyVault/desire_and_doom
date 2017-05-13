@@ -125,6 +125,7 @@ namespace Desire_And_Doom
             world.Add_System<Particle_Emitter_System>(new Particle_Emitter_System());
             world.Add_System<Enemy_System>(new Enemy_System());
             world.Add_System<Multipart_Animation_System>(new Multipart_Animation_System());
+            world.Add_System<Item_System>(new Item_System());
             gui = new Monogui();
 
             var npc_system = (Npc_System)world.Add_System<Npc_System>(new Npc_System(this, graphics, invatory_manager));
@@ -240,7 +241,7 @@ namespace Desire_And_Doom
                 batch.End();
             }
             
-            batch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
+            batch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp);
             world.UIDraw(batch, camera);
             gui.Draw(batch);
             invatory_manager.UIDraw(batch);

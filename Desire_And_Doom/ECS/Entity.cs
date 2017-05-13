@@ -27,6 +27,8 @@ namespace Desire_And_Doom.ECS
         public int UUID { get; private set; } = uuid_generater++;
         public bool Remove { get; private set; }
 
+        public void Revive() { this.Remove = false; }
+
         public Entity()
         {
             components = new Dictionary<Types, Component>();

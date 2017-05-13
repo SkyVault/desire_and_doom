@@ -73,6 +73,7 @@
     <Compile Include="ECS\Components\World_Interaction.cs" />
     <Compile Include="ECS\Systems\Enemy_System.cs" />
     <Compile Include="ECS\Systems\Entity_Emitter_System.cs" />
+    <Compile Include="ECS\Systems\Item_System.cs" />
     <Compile Include="ECS\Systems\Light_Emitter_System.cs" />
     <Compile Include="ECS\Systems\Lua_Function_System.cs" />
     <Compile Include="ECS\Systems\Multipart_Animation_System.cs" />

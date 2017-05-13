@@ -34,6 +34,12 @@ namespace Desire_And_Doom.ECS
             return null;
         }
 
+        public Entity Add(Entity e)
+        {
+            entities.Add(e);
+            return e;
+        }
+
         public Entity Create_Entity(LuaTable table, float x = 0, float y = 0)
         {
             var entity = Create_Entity();
@@ -108,7 +114,7 @@ namespace Desire_And_Doom.ECS
                     case "Invatory": {
                             float w = (float)(component[1] as double?);
                             float h = (float)(component[2] as double?);
-                            entity.Add(new Invatory((int)w, (int)h));
+                            entity.Add(new Invatory(this, entity,(int)w, (int)h));
                             break;
                         }
                     case "Item": entity.Add(new Item());  break;

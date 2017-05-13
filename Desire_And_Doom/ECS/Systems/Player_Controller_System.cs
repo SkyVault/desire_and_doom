@@ -58,9 +58,16 @@ namespace Desire_And_Doom.ECS
             {
                 if (o.Has(Types.Item))
                 {
-                    var inv = (Invatory)entity.Get(Types.Invatory);
-                    inv.Add_Item(o);
-                    o.Destroy();
+                    var item = (Item)o.Get(Types.Item);
+                    if (item.Can_Collect)
+                    {
+                        var inv = (Invatory)entity.Get(Types.Invatory);
+                        if (inv.Has_Space())
+                        {
+                            inv.Add_Item(o);
+                            o.Destroy();
+                        }
+                    }
                 }
 
                 return false;
