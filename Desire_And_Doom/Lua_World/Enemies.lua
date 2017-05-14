@@ -88,7 +88,7 @@ return {
 			["Enemy"] = {
 				drops = {
 					{"Coin", 2, 5}, -- name, min, max
-					{"Orange", 10, 20}, -- name, min, max
+					{"Orange", 2, 5}, -- name, min, max
 				},
 			}
 		}
