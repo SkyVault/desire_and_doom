@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" nextobjectid="95">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" nextobjectid="99">
  <properties>
   <property name="Sky" type="bool" value="true"/>
  </properties>
@@ -951,7 +951,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Object Layer 1" visible="0">
+ <objectgroup name="Object Layer 1">
   <object id="2" x="468.5" y="504.5" width="54.5" height="51.5"/>
   <object id="3" x="360" y="256" width="392" height="16"/>
   <object id="8" x="560" y="272" width="192" height="40"/>
@@ -997,6 +997,18 @@
   <object id="91" x="1024" y="-1" width="16" height="1024"/>
   <object id="93" x="-8" y="-16" width="1040" height="16"/>
   <object id="94" x="0" y="1024" width="1024" height="16"/>
+  <object id="95" x="304" y="264">
+   <polyline points="0,0 48,40"/>
+  </object>
+  <object id="96" x="352" y="304">
+   <polyline points="0,0 48,-24"/>
+  </object>
+  <object id="97" x="400" y="280">
+   <polyline points="0,0 48,16"/>
+  </object>
+  <object id="98" x="448" y="296">
+   <polyline points="0,0 112,16"/>
+  </object>
  </objectgroup>
  <objectgroup name="Billboards">
   <object id="50" name="Lamp Post" type="Billboard" x="368" y="303.818" width="16" height="32">

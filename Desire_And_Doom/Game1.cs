@@ -82,6 +82,7 @@ namespace Desire_And_Doom
             this.IsMouseVisible = true;
 
             Content.RootDirectory = "Content";
+            Assets.It.Content = Content;
 
             lua = new Lua();
 

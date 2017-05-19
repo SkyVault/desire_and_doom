@@ -1,6 +1,7 @@
 ﻿using Desire_And_Doom.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 using NLua;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ namespace Desire_And_Doom
         private Dictionary<string, LuaTable>        entities;
         private Dictionary<string, LuaFunction>     lua_functions;
         private Dictionary<string, Animation>       animations;
+
+        public ContentManager Content;
 
         private Assets() {
             textures        = new Dictionary<string, Texture2D>();
@@ -44,6 +47,20 @@ namespace Desire_And_Doom
             else if (t.GetType() == typeof(Animation)) {
                 animations.Add(id, t as Animation);
             }
+        }
+
+        public Texture2D Load_Texture(string name, string id)
+        {
+            var texture = Content.Load<Texture2D>(name);
+            textures.Add(id, texture);
+            return texture;
+        }
+
+        public bool Has(string id, Type T)
+        {
+            if (T == typeof(Texture2D))
+                return textures.ContainsKey(id);
+            return false;
         }
 
         public void Remove(string id, object T)

@@ -29,6 +29,8 @@ namespace Desire_And_Doom.Screens
             camera = _camera;
             manager = _manager;
             penumbra = _penumbra;
+
+            //new OKore_Parser();
         }
 
         public override void Load()

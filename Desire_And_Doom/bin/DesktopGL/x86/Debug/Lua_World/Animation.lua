@@ -54,10 +54,8 @@
 	},
 	-- TODO: implement explicit frame creation, with seperate speeds and offsets
 	frames = {
-		["grendle-attack"] = {
-		--  {x, y, w, h, ox, oy}
-			{0, 323, 64, 64, 0, 0},
+		["player-smoke"] = {
 --			{}
-		}
+		},
 	}
 }

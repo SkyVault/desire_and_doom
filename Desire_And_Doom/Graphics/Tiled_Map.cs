@@ -64,7 +64,18 @@ namespace Desire_And_Doom
 
             map         = new TmxMap(Directory.GetCurrentDirectory() + "/Content/Maps/" + name + ".tmx");
             quads       = Assets.It.Get_Quads("quads");
-            texture     = Assets.It.Get<Texture2D>(map.Tilesets[0].Name);
+
+            // load a texture
+            var tileset_name = map.Tilesets[0].Name;
+            if (Assets.It.Has(tileset_name, typeof(Texture2D)))
+            {
+                texture = Assets.It.Get<Texture2D>(map.Tilesets[0].Name);
+            }
+            else
+            {
+                texture = Assets.It.Load_Texture(tileset_name, tileset_name);
+            }
+
             billboards  = new List<Billboard>();
 
             if ( map.Properties.ContainsKey("Sky") )

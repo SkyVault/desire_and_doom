@@ -161,6 +161,7 @@
     <Compile Include="Utils\MouseEventArgs.cs" />
     <Compile Include="Utils\MouseListener.cs" />
     <Compile Include="Utils\MouseListenerSettings.cs" />
+    <Compile Include="Utils\OKore_Parser.cs" />
     <Compile Include="Utils\RectangleF.cs" />
     <Compile Include="Utils\Tasker.cs" />
     <Compile Include="Utils\Timers.cs" />
@@ -603,6 +604,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\Charactors.xnb" />
+    <None Include="Content\dungeon_tiles.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\entities.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
