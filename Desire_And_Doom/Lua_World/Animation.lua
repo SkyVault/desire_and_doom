@@ -13,8 +13,8 @@
 		["player-idle"]				= {0, 69, 16, 26, 1},
 		["player-run"]				= {34, 69, 18, 26, 8},
 		["player-attack"]			= {37, 121, 32, 26, 4},
-		["player-claymore-run"]		= {0, 146, 36, 26, 8,	left_offset_x = 10, right_offset_x = -4},
-		["player-claymore-idle"]	= {0, 146, 36, 26, 1,	left_offset_x = 10},
+		["player-claymore-run"]		= {0, 146, 36, 26, 8,	left_offset_x = 10, right_offset_x = -8},
+		["player-claymore-idle"]	= {0, 146, 36, 26, 1,	left_offset_x = 10, right_offset_x = -8},
 		["player-claymore-attack"]	= {128, 0, 64, 36, 6,	right_offset_x = 15, right_offset_y = 10, left_offset_x = -3, left_offset_y = 10, speed = 0.08},
 		--
 		["grendle-run"]				= {0, 400, 64, 64, 6},
@@ -51,6 +51,8 @@
 
 		["npc-7-idle"] = {0, 224 + 26 * 5, 16, 26, 1},
 		["npc-7-walk"] = {0, 224 + 26 * 5, 16, 26, 9},
+
+		["chest-open"] = {0, 0, 32, 32, 5, offset_y = 6},
 	},
 	-- TODO: implement explicit frame creation, with seperate speeds and offsets
 	frames = {

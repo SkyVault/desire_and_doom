@@ -167,6 +167,7 @@ namespace Desire_And_Doom
             Assets.It.Add_Table("Lua_World/items.lua");
             Assets.It.Add_Table("Lua_World/Player.lua");
             Assets.It.Add_Table("Lua_World/Enemies.lua");
+            Assets.It.Add_Table("Lua_World/Entities.lua");
             Assets.It.Add_Table("Lua_World/Npcs.lua");
             Assets.It.Add_Table("Lua_World/Behaviors/Enemy_Ai.lua");
             Assets.It.Add_Table("Lua_World/Dialog.lua");

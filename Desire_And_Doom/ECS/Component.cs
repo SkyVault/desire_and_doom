@@ -28,6 +28,7 @@ namespace Desire_And_Doom.ECS
             Enemy,
             Multipart_Animation,
             Character,
+            Spawner,
             Num_Of_Types,
         }
 

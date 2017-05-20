@@ -18,8 +18,7 @@ namespace Desire_And_Doom.ECS
         private List<Entity> entities;
         private Dictionary<Type, System> systems;
         private PenumbraComponent lighting;
-        private GameTime time_ref;
-
+        
         public World(PenumbraComponent lighting)
         {
             entities = new List<Entity>();
@@ -147,6 +146,14 @@ namespace Desire_And_Doom.ECS
                             entity.Add(new Timed_Destroy(time));
                             break;
                         }
+
+                    case "World_Interaction":
+                        {
+                            // TODO: implement
+                            var world_interaction = new World_Interaction(component[1] as LuaFunction);
+                            entity.Add(world_interaction);
+                            break;
+                        }
                     case "Enemy": {
                         List<string> drop_items = new List<string>();
                         if ( component["drops"] is LuaTable drops )
@@ -167,6 +174,31 @@ namespace Desire_And_Doom.ECS
                         var enemy = (Enemy) entity.Add(new Enemy(drop_items));
                         break;
                     }
+                    case "Spawner":
+                        {
+                            var entities = new List<string>();
+                            if (component["entities"] is LuaTable ents)
+                            {
+                                for (int i = 1; i < ents.Values.Count + 1; i++)
+                                {
+                                    LuaTable dps = ents[i] as LuaTable;
+                                    string item_name = dps[1] as string;
+                                    int min = (int)(dps[2] as double?);
+                                    int max = (int)(dps[3] as double?);
+
+                                    float ammout = min + (new Random().Next()) % max;
+                                    for (int j = 0; j < ammout; j++)
+                                        entities.Add(item_name);
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Spawner requires a entities table!");
+                            }
+
+                            entity.Add(new Spawner(entities, this));
+                            break;
+                        }
                     case "Character":
                         {
                             var ch = (Character)entity.Add(new Character());

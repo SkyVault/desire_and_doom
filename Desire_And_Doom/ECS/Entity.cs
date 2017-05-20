@@ -64,5 +64,19 @@ namespace Desire_And_Doom.ECS
                 return (components[id]);
             return null;
         }
+
+        public Component Get(string id)
+        {
+            bool worked = Enum.TryParse(id, out Types component_type);
+            if (worked)
+            {
+                return this.Get(component_type);
+            }
+            else
+            {
+                Console.WriteLine("Unknown component: " + id);
+            }
+            return null;
+        }
     }
 }

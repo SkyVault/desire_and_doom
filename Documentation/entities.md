@@ -9,3 +9,10 @@
 7. Shulk
 8. npc-1 .. npc-7
 
+
+# Components
+
+Spawner: 
+
+* entities table 
+  * {entity name, min, max}

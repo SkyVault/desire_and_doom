@@ -26,3 +26,5 @@ C:\Users\Dustin.Neumann\Source\Repos\desire_and_doom\Desire_Tiles\bin\Windows\x8
 C:\Users\Dustin.Neumann\Source\Repos\desire_and_doom\Desire_Tiles\obj\x86\Debug\Desire_Tiles.csprojResolveAssemblyReference.cache
 C:\Users\Dustin.Neumann\Source\Repos\desire_and_doom\Desire_Tiles\obj\x86\Debug\Desire_Tiles.exe
 C:\Users\Dustin.Neumann\Source\Repos\desire_and_doom\Desire_Tiles\obj\x86\Debug\Desire_Tiles.pdb
+C:\Users\Dustin.Neumann\Source\Repos\desire_and_doom\Desire_Tiles\bin\Windows\x86\Debug\Desire_Tiles.exe.CodeAnalysisLog.xml
+C:\Users\Dustin.Neumann\Source\Repos\desire_and_doom\Desire_Tiles\bin\Windows\x86\Debug\Desire_Tiles.exe.lastcodeanalysissucceeded

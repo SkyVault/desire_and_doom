@@ -99,6 +99,7 @@ return {
 
 		engine:Face_Move_Dir(entity)
 		
+		-- initialize the table if it is nil
 		if fn.Table == nil then 
 			fn.Table = {}
 		end

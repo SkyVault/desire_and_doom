@@ -178,7 +178,14 @@ namespace Desire_And_Doom
 
         public T Get <T>(string id){
             if (typeof(T) == typeof(Texture2D))
-                return (T)(textures[id] as object);
+            {
+                if (textures.ContainsKey(id))
+                   return (T)(textures[id] as object);
+                else
+                {
+                    return (T)(this.Load_Texture(id, id) as object);
+                }
+            }
             else if (typeof(T) == typeof(SpriteFont))
                 return (T)(fonts[id] as object);
             else if (typeof(T) == typeof(LuaTable))

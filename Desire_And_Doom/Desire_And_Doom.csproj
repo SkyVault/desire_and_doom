@@ -69,6 +69,7 @@
     <Compile Include="ECS\Components\Light_Emitter.cs" />
     <Compile Include="ECS\Components\Lua_Function.cs" />
     <Compile Include="ECS\Components\Multipart_Animation.cs" />
+    <Compile Include="ECS\Components\Spawner.cs" />
     <Compile Include="ECS\Components\Timed_Destroy.cs" />
     <Compile Include="ECS\Components\World_Interaction.cs" />
     <Compile Include="ECS\Systems\Enemy_System.cs" />
@@ -604,6 +605,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\Charactors.xnb" />
+    <None Include="Content\Chest.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\dungeon_tiles.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -649,6 +653,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Lua_World\Enemies.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lua_World\Entities.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Lua_World\Items.lua">

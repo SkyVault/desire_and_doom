@@ -152,6 +152,16 @@ namespace Desire_And_Doom.ECS
             var y_body = new Body(new Vector2(body.X, body.Y + physics.Vel_Y * dt), body.Size);
             y_body.Z = x_body.Z = body.Z;
 
+            void handle_interaction(Entity other)
+            {
+                if (other.Has(Types.World_Interaction) == false) return;
+                var o_interaction = (World_Interaction)other.Get(Types.World_Interaction);
+                if (o_interaction.UType == World_Interaction.Update_Type.LAMBDA)
+                    o_interaction?.Update(other, entity);
+                else
+                    o_interaction?.Lua_Update.Call(other, entity);
+            }
+
             if (physics.Other != null) physics.Other = null;
             if (!entity.Has(Types.Item) && !entity.Has(Types.World_Interaction))
             {
@@ -169,8 +179,15 @@ namespace Desire_And_Doom.ECS
                     {
                         bool blacklisted = physics.Contains_Blacklisted_Tag(other.Tags);
                         bool coll = false;
-                        if (o_body.Contains(x_body) && !blacklisted) { x_body = body; coll = true; }
-                        if (o_body.Contains(y_body) && !blacklisted) { y_body = body; coll = true; }
+                        
+                        if (o_body.Contains(x_body) && !blacklisted) {
+                            handle_interaction(other);
+                            x_body = body; coll = true;
+                        }
+                        if (o_body.Contains(y_body) && !blacklisted) {
+                            handle_interaction(other);
+                            y_body = body; coll = true;
+                        }
 
                         if (coll && !blacklisted)
                         {
@@ -183,7 +200,10 @@ namespace Desire_And_Doom.ECS
                         if (o_body.Contains(body))
                         {
                             var o_interaction = (World_Interaction)other.Get(Types.World_Interaction);
-                            o_interaction?.Update(other, entity);
+                            if (o_interaction.UType == World_Interaction.Update_Type.LAMBDA)
+                                o_interaction?.Update(other, entity);
+                            else
+                                o_interaction?.Lua_Update.Call(other, entity);
                         }
                     }
                 }
