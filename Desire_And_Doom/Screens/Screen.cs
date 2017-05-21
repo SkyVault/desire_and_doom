@@ -19,6 +19,7 @@ namespace Desire_And_Doom.Screens
         public virtual void Load() { }
         public virtual void Update(GameTime time) { }
         public virtual void Draw(SpriteBatch batch) { }
+        public virtual void UIDraw(SpriteBatch batch) { }
         public virtual void FilteredDraw(SpriteBatch batch) { }
         public virtual void Destroy() { }
     }

@@ -100,6 +100,11 @@ namespace Desire_And_Doom.Screens
             active?.Draw(batch);
         }
 
+        public void UIDraw(SpriteBatch batch)
+        {
+            active?.UIDraw(batch);
+        }
+
         public void FilteredDraw(SpriteBatch batch)
         {
             active?.FilteredDraw(batch);

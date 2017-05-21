@@ -18,7 +18,7 @@ namespace Desire_And_Doom
         public float Zoom { get => camera.Zoom; set => camera.Zoom = value; }
         public float Rotation { get; set; }
 
-        public Vector2 Position { get => camera.Position; }
+        public Vector2 Position { get => camera.Position; set { camera.Position = value; } }
         public Vector2 Origin { get => camera.Origin; set { camera.Origin = value; } }
 
         public float X { get { return Position.X; } }

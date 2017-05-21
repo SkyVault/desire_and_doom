@@ -174,7 +174,7 @@ namespace Desire_And_Doom
             Assets.It.Add_Table("Lua_World/Behaviors/Enemy_Ai.lua");
             Assets.It.Add_Table("Lua_World/Dialog.lua");
 
-            screen_manager.Register(new Level_1_Screen(world, camera, penumbra, particle_world, physics_engine, lua));
+            screen_manager.Register(new Level_1_Screen(screen_manager, world, camera, penumbra, particle_world, physics_engine, lua));
             screen_manager.Register(new Boss_Room_1(world, camera, penumbra, particle_world, physics_engine, Content, lua));
             screen_manager.Register(new Menu_Screen(screen_manager, penumbra, camera));
             screen_manager.Register(new Intro_Logos_Screen(screen_manager, camera, penumbra));
@@ -191,8 +191,8 @@ namespace Desire_And_Doom
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            //    Exit();
 
             if (SHOULD_QUIT) Quit();
             
@@ -263,6 +263,11 @@ namespace Desire_And_Doom
                     float frameRate = 1f / (float) gameTime.ElapsedGameTime.TotalSeconds;
                     batch.DrawString(Assets.It.Get<SpriteFont>("font"), frameRate.ToString(), new Vector2(10, 10), Color.BurlyWood);
                 }
+            batch.End();
+
+            // filtered ui draw
+            batch.Begin(SpriteSortMode.FrontToBack);
+                screen_manager.UIDraw(batch);
             batch.End();
 
             //UserInterface.Draw(batch);

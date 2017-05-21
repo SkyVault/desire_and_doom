@@ -55,6 +55,7 @@ namespace Desire_And_Doom.Screens
         public override void Load()
         {
             camera.Zoom = 4;
+            camera.Position = Vector2.Zero;
             penumbra.AmbientColor = new Color(1f, 1f, 1f, 1f);
 
             pre_origin = camera.Origin;
@@ -79,9 +80,13 @@ namespace Desire_And_Doom.Screens
             }
         }
 
-        public override void FilteredDraw(SpriteBatch batch)
+        public override void Draw(SpriteBatch batch)
         {
             sky.Draw(batch);
+        }
+
+        public override void FilteredDraw(SpriteBatch batch)
+        {
             int border_size_y = 20;
             int border_size_x = 100;
 
