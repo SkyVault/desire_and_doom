@@ -169,6 +169,30 @@ namespace Desire_And_Doom
 
                 }
             }
+            if (data["frames"] is LuaTable frames)
+            {
+                foreach(var key in frames.Keys)
+                {
+                    LuaTable animation_frames = frames[key] as LuaTable;
+                    List<Animation_Frame> aframes = new List<Animation_Frame>();
+
+                    foreach(LuaTable frame in animation_frames.Values)
+                    {
+                        int x = (int)(frame[1] as double?);
+                        int y = (int)(frame[2] as double?);
+                        int w = (int)(frame[3] as double?);
+                        int h = (int)(frame[4] as double?);
+
+                        var _aframe = new Animation_Frame(
+                            new Vector2(x, y), 
+                            new Vector2(w, h));
+                        aframes.Add(_aframe);
+                    }
+
+                    Animation animation = new Animation(aframes, key as string);
+                    animations.Add(key as string, animation);
+                }
+            }
         }
 
         public void Generate_Quads(string id,int imgsize, int twidth, int theight)

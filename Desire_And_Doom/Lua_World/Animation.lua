@@ -56,8 +56,23 @@
 	},
 	-- TODO: implement explicit frame creation, with seperate speeds and offsets
 	frames = {
+		-- x, y, w, h, speed?, x_offset? y_offset?, left_offset_x? left_offset_y? right_offset_x? right_offset_y?
 		["player-smoke"] = {
---			{}
+			{0,   406, 16, 26},
+			{16,  406, 16, 26},
+			{32,  406, 16, 26},
+			{48,  406, 16, 26},
+			{64,  406, 16, 26},
+			{80,  406, 34, 34},
+			{114, 406, 34, 34},
+			{148, 406, 34, 34},
+			{182, 406, 34, 34},
+			{216, 406, 34, 34},
+			{250, 406, 34, 34},
+			{284, 406, 34, 34},
+			{318, 406, 34, 34},
+			{352, 406, 34, 34},
+			{386, 406, 34, 34},
 		},
 	}
 }

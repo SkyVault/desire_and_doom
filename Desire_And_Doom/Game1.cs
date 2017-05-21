@@ -40,7 +40,7 @@ namespace Desire_And_Doom
         public static int HEIGHT    = 700;
 
         // TEMP
-        private bool skip_intro_animation = true;
+        private bool skip_intro_animation = false;
 
         public static int Map_Height_Pixels = 0;
         public static bool DEBUG = false;

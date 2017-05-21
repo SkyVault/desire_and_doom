@@ -12,7 +12,15 @@ namespace Desire_And_Doom.ECS
     class Animated_Sprite : Sprite
     {
         public Dictionary<string, Animation> Animations { get; private set; }
-        public string Current_Animation_ID { get; set; } = "";
+
+        public string Animation_ID { get; set; } = "";
+
+        public string Current_Animation_ID { get => Animation_ID;
+            set {
+                if (!Force_Animation)
+                    Animation_ID = value;
+            } }
+
         public int Current_Frame { get; set; } = 0;
         public bool Animation_End { get; set; } = false;
 
@@ -23,6 +31,14 @@ namespace Desire_And_Doom.ECS
         //public Color Current_Color { get; set; }
 
         public bool Playing { get; set; } = true;
+
+        public bool Force_Animation { get; set; } = false;
+        public void Force_Play_Animation(string id)
+        {
+            Current_Animation_ID = id;
+            Force_Animation = true;
+            Current_Frame = 0;
+        }
 
         public Animated_Sprite(Texture2D _texture, string start_animation) : base(_texture, new Rectangle())
         {

@@ -188,12 +188,11 @@ namespace Desire_And_Doom.ECS
                 }
             }
 
-            // Open the invatory
-            if ( Input.It.Is_Key_Pressed(Keys.I) )
+            if (Input.It.Is_Key_Pressed(Keys.C))
             {
-                //Draw the invatory
+                sprite.Force_Play_Animation("player-smoke");
             }
-                
+        
 
             if (player.Can_Move)
             {

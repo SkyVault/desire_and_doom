@@ -35,7 +35,7 @@ namespace Desire_And_Doom.Screens
             penumbra = _penumbra;
 
             //new OKore_Parser();
-            sky = new Sky_Renderer(Assets.It.Get<Texture2D>("sky_1"));
+            sky = new Sky_Renderer(Assets.It.Get<Texture2D>("sky_1"), true);
             rect = Assets.It.Get<Texture2D>("gui-rect");
             font = Assets.It.Get<SpriteFont>("gfont");
 
@@ -54,7 +54,7 @@ namespace Desire_And_Doom.Screens
 
         public override void Load()
         {
-            camera.Zoom = 4;
+            camera.Zoom = 3;
             camera.Position = Vector2.Zero;
             penumbra.AmbientColor = new Color(1f, 1f, 1f, 1f);
 
