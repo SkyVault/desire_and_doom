@@ -8,21 +8,25 @@ using Nez.UI;
 using Microsoft.Xna.Framework;
 using Desire_And_Doom.Utils;
 using Penumbra;
+using Desire_And_Doom.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Desire_And_Doom.Screens
 {
     class Menu_Screen : Screen
     {
         Screen_Manager manager;
-        Tasker tasker;
-
-        Vector2 logo_position;
+        
         PenumbraComponent penumbra;
         Camera_2D camera;
 
-        Vector2 target;
+        Sky_Renderer sky;
+        Texture2D rect;
+        Vector2 pre_origin;
+        Named_Action_List actions;
+        SpriteFont font;
 
-        float time_scale = 50;
+        int selector = 0;
 
         public Menu_Screen(Screen_Manager _manager, PenumbraComponent _penumbra, Camera_2D _camera) : base("Menu")
         {
@@ -31,78 +35,116 @@ namespace Desire_And_Doom.Screens
             penumbra = _penumbra;
 
             //new OKore_Parser();
+            sky = new Sky_Renderer(Assets.It.Get<Texture2D>("sky_1"));
+            rect = Assets.It.Get<Texture2D>("gui-rect");
+            font = Assets.It.Get<SpriteFont>("gfont");
+
+            actions = new Named_Action_List(new Dictionary<string, Action> {
+                {"Start", ()=>{
+                    _manager.Goto_Screen("Level 1", true);
+                } },
+                {"Settings", ()=>{
+
+                } },
+                {"Exit",()=>{
+                    Game1.SHOULD_QUIT = true;
+                } }
+            });
         }
 
         public override void Load()
         {
-            camera.Zoom = 1;
+            camera.Zoom = 4;
             penumbra.AmbientColor = new Color(1f, 1f, 1f, 1f);
-            logo_position = new Vector2(Game1.WIDTH / 2 - 128, Game1.HEIGHT / 2 - 128);
-            target = logo_position;
-            tasker = new Tasker(
-                (time) => {
-                    Timers.It.New_Timer(() => {
-                        tasker.Next();
-                        return true; }, 1);
-                    tasker.Next();
-                    return true;
-                },
-                (time) => {return true;},
-                (time) => {
-                    time_scale = 20;
-                    target.Y = Game1.HEIGHT / 2 + 32;
-                    if ( Vector2.Distance(logo_position, target) < 20 ) {
-                        tasker.Next();
-                        time_scale = 20;
-                    }
-                    return true;
-                },
-                (time) => {
-                    time_scale -= (float) time.ElapsedGameTime.TotalSeconds * 10;
-                    if ( time_scale <= 0 ) time_scale = 1;
-                    target.Y = -500;
-                    if (Vector2.Distance(logo_position, target) < 100)
-                        tasker.Next();
-                    return true;
-                },
-                (time) => {
-                    manager.Goto_Screen("Level 1", true);
-                    tasker.Next();
-                    return true;
-                }
-                );
+
+            pre_origin = camera.Origin;
+            camera.Origin = new Vector2(0, 0);
         }
 
         public override void Update(GameTime time)
         {
+            sky.Update(time);
 
-            float dx = target.X - logo_position.X;
-            float dy = target.Y - logo_position.Y;
+            if (Input.It.Is_Key_Pressed(Keys.Down))
+                selector++;
+            if (Input.It.Is_Key_Pressed(Keys.Up))
+                selector--;
 
-            logo_position.X += dx / time_scale;
-            logo_position.Y += dy / time_scale;
+            if (selector >= actions.Names.Length) selector = 0;
+            if (selector < 0) selector = actions.Names.Length - 1;
 
-            base.Update(time);
-            tasker?.Update(time);
+            if (Input.It.Is_Key_Pressed(Keys.Enter))
+            {
+                actions.Call(selector);
+            }
         }
 
-        public override void Draw(SpriteBatch batch)
+        public override void FilteredDraw(SpriteBatch batch)
         {
+            sky.Draw(batch);
+            int border_size_y = 20;
+            int border_size_x = 100;
+
+            var names = actions.Names;
+            int index = 0;
+            foreach(var name in names)
+            {
+                float scale = 0.3f;
+                var size = font.MeasureString(name) * scale;
+                float y_margin = 16f;
+                float x = ((Game1.WIDTH / camera.Zoom) / 2) - size.X / 2;
+                float y = ((Game1.HEIGHT / camera.Zoom) / 2) - size.Y / 2 - ((size.Y + y_margin) * names.Length / 2) + (index++ * (size.Y + y_margin) + 16);
+
+                batch.DrawString(
+                    font,
+                    name,
+                    new Vector2(x, y),
+                    (selector == index - 1) ? Color.Black : Color.White,
+                    0f,
+                    Vector2.Zero,
+                    scale,
+                    SpriteEffects.None,
+                    1f
+                    );
+
+                if (selector == index - 1)
+                {
+                    batch.Draw(
+                    rect,
+                    new Rectangle(
+                        (int)(((Game1.WIDTH/camera.Zoom) / 2) - 75 / 2),
+                        (int)(y),
+                        (int)(75),
+                        (int)(size.Y * 1.2f)),
+                    new Rectangle(0, 0, 512, 512),
+                    Color.Orange,
+                    0f,
+                    Vector2.Zero,
+                    SpriteEffects.None,
+                    0.8f
+                    );
+                }
+            }
+
             batch.Draw(
-                Assets.It.Get<Texture2D>("Logo"), 
-                new Rectangle((int)logo_position.X, (int)logo_position.Y, 256, 256),
-                new Rectangle(0, 0, 591, 573),
-                Color.White,
+                rect,
+                new Rectangle(
+                    (int)(border_size_x), 
+                    border_size_y, 
+                    (int)(Game1.WIDTH / camera.Zoom) - border_size_x * 2, 
+                    (int)(Game1.HEIGHT / camera.Zoom) - border_size_y * 2),
+                new Rectangle(0, 0, 512, 512),
+                new Color(0, 0, 0, 0.8f),
                 0f,
                 Vector2.Zero,
                 SpriteEffects.None,
-                1   
+                0.5f
                 );
         }
 
         public override void Destroy()
         {
-
+            camera.Origin = pre_origin;
             base.Destroy();
         }
     }

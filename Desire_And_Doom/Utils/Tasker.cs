@@ -9,11 +9,11 @@ namespace Desire_And_Doom.Utils
 {
     class Tasker
     {
-        List<Func<GameTime,bool>> tasks;
+        List<Action<GameTime>> tasks;
         int current_task = 0;
         public bool Done { get; set; }
 
-        public Tasker(params Func<GameTime,bool>[] tasks){
+        public Tasker(params Action<GameTime>[] tasks){
             this.tasks = tasks.ToList();
         }
 
@@ -26,6 +26,7 @@ namespace Desire_And_Doom.Utils
 
         public void Update(GameTime time)
         {
+            if (tasks.Count == 0) return;
             if (!Done)
                 tasks[current_task]?.Invoke(time);
         }

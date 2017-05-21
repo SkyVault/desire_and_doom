@@ -60,7 +60,16 @@ namespace Desire_And_Doom.Graphics
             for (int i = skytiles.Count - 1; i >= 0; i--)
             {
                 var pos = skytiles[i];
-                batch.Draw(image, new Vector2(pos.X, pos.Y), new Rectangle(0, 0, image.Width, image.Height), new Color(1, 1, 1, 0.5f), 0, Vector2.Zero, scales[i], SpriteEffects.None, 0.01f);
+                batch.Draw(
+                    image, 
+                    new Vector2(pos.X, pos.Y), 
+                    new Rectangle(0, 0, image.Width, image.Height), 
+                    new Color(1, 1, 1, 0.5f), 
+                    0, 
+                    Vector2.Zero, 
+                    scales[i], 
+                    SpriteEffects.None, 
+                    0.01f);
             }
         }
     }

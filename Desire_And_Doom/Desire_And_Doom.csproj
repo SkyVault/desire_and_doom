@@ -126,12 +126,15 @@
     <Compile Include="Graphics\ViewportAdapter.cs" />
     <Compile Include="Gui\Invatory_Container.cs" />
     <Compile Include="Gui\Invatory_Manager.cs" />
+    <Compile Include="Gui\Pause_Menu.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IRectangle.cs" />
     <Compile Include="Interfaces\IRotatable.cs" />
     <Compile Include="Items\Equipable.cs" />
     <Compile Include="Screens\Boss_Room_1.cs" />
     <Compile Include="Screens\Game_Screen.cs" />
+    <Compile Include="Screens\Intro_Logos_Screen.cs" />
+    <Compile Include="Utils\Named_Action_List.cs" />
     <Compile Include="Utils\Debug_Console.cs" />
     <Compile Include="Utils\GamePadEventArgs.cs" />
     <Compile Include="Utils\GamePadListener.cs" />
@@ -157,6 +160,7 @@
     <Compile Include="Utils\KeyboardListener.cs" />
     <Compile Include="Utils\KeyboardListenerSettings.cs" />
     <Compile Include="Utils\KeyboardModifiers.cs" />
+    <Compile Include="Utils\Math2.cs" />
     <Compile Include="Utils\Messanger.cs" />
     <Compile Include="Utils\MouseButton.cs" />
     <Compile Include="Utils\MouseEventArgs.cs" />
@@ -623,6 +627,7 @@
     <None Include="Content\GeonBit.UI\themes\lowres\fonts\Bold.spritefont" />
     <None Include="Content\GeonBit.UI\themes\lowres\fonts\Italic.spritefont" />
     <None Include="Content\GeonBit.UI\themes\lowres\fonts\Regular.spritefont" />
+    <None Include="Content\GFont.xnb" />
     <None Include="Content\gui.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -631,6 +636,9 @@
     </None>
     <None Include="Content\logo.xnb" />
     <None Include="Content\Sky.xnb" />
+    <None Include="Content\SquareLogo_1024px.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\tiles.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

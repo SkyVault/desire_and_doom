@@ -110,3 +110,5 @@ C:\Users\Dustin.Neumann\Source\Repos\desire_and_doom\Desire_And_Doom\bin\Desktop
 C:\Users\Dustin.Neumann\Source\Repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\Chest.xnb
 C:\Users\Dustin.Neumann\Source\Repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Lua_World\Entities.lua
 C:\Users\Dustin.Neumann\Source\Repos\desire_and_doom\Desire_And_Doom\obj\x86\Debug\Desire_And_Doom.csprojResolveAssemblyReference.cache
+C:\Users\Dustin.Neumann\Source\Repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\SquareLogo_1024px.xnb
+C:\Users\Dustin.Neumann\Source\Repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\GFont.xnb

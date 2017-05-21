@@ -40,7 +40,7 @@ namespace Desire_And_Doom
         public static int HEIGHT    = 700;
 
         // TEMP
-        private bool skip_intro_animation = true;
+        private bool skip_intro_animation = false;
 
         public static int Map_Height_Pixels = 0;
         public static bool DEBUG = false;
@@ -161,8 +161,10 @@ namespace Desire_And_Doom
             Assets.It.Add("sky_1",          Content.Load<Texture2D>("sky"));
             Assets.It.Add("Boss_Texture",   Content.Load<Texture2D>("boss_1"));
             Assets.It.Add("Charactors",     Content.Load<Texture2D>("Charactors"));
-            Assets.It.Add("Logo",           Content.Load<Texture2D>("logo"));
             Assets.It.Add("font",           Content.Load<SpriteFont>("font"));
+            Assets.It.Add("gfont", Content.Load<SpriteFont>("GFont"));
+
+            Assets.It.Generate_Rectangle(GraphicsDevice, "gui-rect", 512, 512);
 
             Assets.It.Add_Table("Lua_World/items.lua");
             Assets.It.Add_Table("Lua_World/Player.lua");
@@ -175,9 +177,10 @@ namespace Desire_And_Doom
             screen_manager.Register(new Level_1_Screen(world, camera, penumbra, particle_world, physics_engine, lua));
             screen_manager.Register(new Boss_Room_1(world, camera, penumbra, particle_world, physics_engine, Content, lua));
             screen_manager.Register(new Menu_Screen(screen_manager, penumbra, camera));
+            screen_manager.Register(new Intro_Logos_Screen(screen_manager, camera, penumbra));
 
             if ( skip_intro_animation == false )
-                screen_manager.Goto_Screen("Menu");
+                screen_manager.Goto_Screen("Logo");
             else
                 screen_manager.Goto_Screen("Level 1");
         }
@@ -219,18 +222,24 @@ namespace Desire_And_Doom
 
             GraphicsDevice.Clear(new Color(105, 205, 241, 255));
 
+
             // main draw
             batch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, DepthStencilState.DepthRead, null, null, camera.View_Matrix);
+                world.Draw(batch);
+                screen_manager.Draw(batch);
 
-            world.Draw(batch);
-            screen_manager.Draw(batch);
-            batch.Draw(scene, Vector2.Zero, Color.White);
+                //batch.Draw(scene, Vector2.Zero, Color.White);
 
-            particle_world.Draw(batch);
+                particle_world.Draw(batch);
+                batch.End();
+
+                batch.Begin(SpriteSortMode.FrontToBack, BlendState.Additive, SamplerState.PointClamp, DepthStencilState.DepthRead, null, null, camera.View_Matrix);
+                particle_world.Additive_Draw(batch);
             batch.End();
 
-            batch.Begin(SpriteSortMode.FrontToBack, BlendState.Additive, SamplerState.PointClamp, DepthStencilState.DepthRead, null, null, camera.View_Matrix);
-            particle_world.Additive_Draw(batch);
+            // filtereds
+            batch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.AnisotropicClamp, DepthStencilState.DepthRead, null, null, camera.View_Matrix);
+                screen_manager.FilteredDraw(batch);
             batch.End();
 
             penumbra.Draw(gameTime);
@@ -244,17 +253,16 @@ namespace Desire_And_Doom
             }
             
             batch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp);
-            world.UIDraw(batch, camera);
-            gui.Draw(batch);
-            invatory_manager.UIDraw(batch);
-            console.Draw(batch);
-
-            if ( DEBUG )
-            {
-                float frameRate = 1f / (float) gameTime.ElapsedGameTime.TotalSeconds;
-                batch.DrawString(Assets.It.Get<SpriteFont>("font"), frameRate.ToString(), new Vector2(10, 10), Color.BurlyWood);
-            }
-
+                world.UIDraw(batch, camera);
+                gui.Draw(batch);
+                invatory_manager.UIDraw(batch);
+                console.Draw(batch);
+            
+                if ( DEBUG )
+                {
+                    float frameRate = 1f / (float) gameTime.ElapsedGameTime.TotalSeconds;
+                    batch.DrawString(Assets.It.Get<SpriteFont>("font"), frameRate.ToString(), new Vector2(10, 10), Color.BurlyWood);
+                }
             batch.End();
 
             //UserInterface.Draw(batch);

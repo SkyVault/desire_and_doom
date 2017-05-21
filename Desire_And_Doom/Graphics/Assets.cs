@@ -49,6 +49,19 @@ namespace Desire_And_Doom
             }
         }
 
+        public Texture2D Generate_Rectangle(GraphicsDevice device, string name, int width, int height)
+        {
+            Texture2D rect = new Texture2D(device, width, height);
+
+            Color[] data = new Color[width * height];
+            for (int i = 0; i < data.Length; ++i) data[i] = Color.White;
+            rect.SetData(data);
+
+            textures.Add(name, rect);
+            
+            return rect;
+        }
+
         public Texture2D Load_Texture(string name, string id)
         {
             var texture = Content.Load<Texture2D>(name);

@@ -19,7 +19,7 @@ namespace Desire_And_Doom
         public float Rotation { get; set; }
 
         public Vector2 Position { get => camera.Position; }
-        public Vector2 Origin { get => camera.Origin; }
+        public Vector2 Origin { get => camera.Origin; set { camera.Origin = value; } }
 
         public float X { get { return Position.X; } }
         public float Y { get { return Position.Y; } }

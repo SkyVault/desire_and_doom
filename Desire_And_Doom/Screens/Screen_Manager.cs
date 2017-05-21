@@ -45,7 +45,6 @@ namespace Desire_And_Doom.Screens
                         // set fader
                         fade_timer = total_time;
                         fade_task.Next();
-                        return true;
                     },
                     (time) => {
                         // fade to black
@@ -56,7 +55,6 @@ namespace Desire_And_Doom.Screens
                         else {
                             fade_task.Next();
                         }
-                        return true;
                     },
                     (time) => {
                         // change screen while in black
@@ -66,7 +64,6 @@ namespace Desire_And_Doom.Screens
 
                         fade_timer = 0f;
                         fade_task.Next();
-                        return true;
                     },
                     (time) => {
                         // fade to white
@@ -79,7 +76,6 @@ namespace Desire_And_Doom.Screens
                         {
                             fade_task.Next();
                         }
-                        return true;
                     }
                     );
             }else
@@ -94,20 +90,27 @@ namespace Desire_And_Doom.Screens
         {
             fade_task?.Update(time);
             active?.Update(time);
+
+            // prevent the transparency from failing
+            if (transparency > 1) transparency = 1;
         }
 
         public void Draw(SpriteBatch batch)
         {
             active?.Draw(batch);
+        }
 
+        public void FilteredDraw(SpriteBatch batch)
+        {
+            active?.FilteredDraw(batch);
             batch.Draw(
-                Assets.It.Get<Texture2D>("gui"), 
-                new Rectangle(0, 0, Game1.WIDTH, Game1.HEIGHT), 
-                new Rectangle(24, 0, 24, 24), 
-                new Color(0f,0f,0f, transparency), 
-                0f, 
-                Vector2.Zero, 
-                SpriteEffects.None, 
+                Assets.It.Get<Texture2D>("gui-rect"),
+                new Rectangle(0, 0, (int)(Game1.WIDTH * 1.2f), (int)(Game1.HEIGHT * 1.2f)),
+                new Rectangle(0, 0, 512, 512),
+                new Color(0f, 0f, 0f, transparency),
+                0f,
+                Vector2.Zero,
+                SpriteEffects.None,
                 1);
         }
     }
