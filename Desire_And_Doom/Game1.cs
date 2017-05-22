@@ -40,7 +40,7 @@ namespace Desire_And_Doom
         public static int HEIGHT    = 700;
 
         // TEMP
-        private bool skip_intro_animation = false;
+        private bool skip_intro_animation = true;
 
         public static int Map_Height_Pixels = 0;
         public static bool DEBUG = false;
@@ -127,6 +127,8 @@ namespace Desire_And_Doom
             world.Add_System<Enemy_System>(new Enemy_System());
             world.Add_System<Multipart_Animation_System>(new Multipart_Animation_System());
             world.Add_System<Item_System>(new Item_System());
+            world.Add_System<Health_System>(new Health_System());
+
             gui = new Monogui();
 
             var npc_system = (Npc_System)world.Add_System<Npc_System>(new Npc_System(this, graphics, invatory_manager));

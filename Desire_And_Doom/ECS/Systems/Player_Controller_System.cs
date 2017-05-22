@@ -56,6 +56,13 @@ namespace Desire_And_Doom.ECS
             physics.Blacklisted_Collision_Tags.Add("Player-Hit");
             physics.Callback = (self, o) =>
             {
+
+                if (o.Has_Tag("Enemy"))
+                {
+                    var health = (Health)self.Get(Types.Health);
+                    health.Hurt(1, true);
+                }
+
                 if (o.Has(Types.Item))
                 {
                     var item = (Item)o.Get(Types.Item);
@@ -296,6 +303,25 @@ namespace Desire_And_Doom.ECS
 
         public override void Draw(SpriteBatch batch, Entity entity)
         {
+            var gui     = Assets.It.Get<Texture2D>("gui");
+            var health  = (Health)entity.Get(Types.Health);
+            Vector2 health_pos = camera.Screen_To_World(new Vector2(16, 16));
+
+            for (int i = 0; i < health.Ammount; i++)
+            {
+                if (i > 0) health_pos += new Vector2(20, 0);
+                batch.Draw(
+                    gui,
+                    new Vector2(health_pos.X, health_pos.Y),
+                    new Rectangle(0, 24, 16, 16),
+                    Color.White,
+                    0f,
+                    Vector2.Zero,
+                    1f,
+                    SpriteEffects.None,
+                    1f
+                    );
+            }
         }
 
         public override void UIDraw(SpriteBatch batch, Camera_2D camera, Entity entity)
@@ -304,6 +330,8 @@ namespace Desire_And_Doom.ECS
             if ( !show_overlay_gui ) return;
 
             var gui = Assets.It.Get<Texture2D>("gui");
+
+
 
             int y_offset = 32;
 
