@@ -24,7 +24,6 @@ namespace Desire_And_Doom.ECS.Components
             {
                 if (Shield_Timer <= 0)
                 {
-                    Console.WriteLine("Health");
                     Shield_Timer = Max_Shield_Timer;
                     Ammount -= dammage;
                 }
