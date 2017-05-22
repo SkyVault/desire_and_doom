@@ -44,7 +44,10 @@ namespace Desire_And_Doom.ECS
             }
 
             if (animation.Current_Frame == current_animation.Frames.Count - 1)
+            {
+                animation.Force_Animation = false;
                 animation.Animation_End = true;
+            }
             else
                 animation.Animation_End = false;
 

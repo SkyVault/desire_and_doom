@@ -20,7 +20,7 @@ namespace Desire_And_Doom.Screens
 
         public Level_1_Screen(Screen_Manager screen_manager, World _world, Camera_2D _camera, PenumbraComponent _lighting, Particle_World _particle_world, Physics_Engine _physics_engine, Lua lua) : base(_world, _camera, _lighting, _particle_world, _physics_engine, lua, "Level 1")
         {
-            sky = new Sky_Renderer(Assets.It.Get<Texture2D>("sky_1"));
+            sky = new Sky_Renderer(Assets.It.Get<Texture2D>("sky_1"), true);
             world = _world;
             pause_menu = new Pause_Menu(screen_manager, camera);
         }

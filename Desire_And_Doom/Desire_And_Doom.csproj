@@ -74,6 +74,7 @@
     <Compile Include="ECS\Components\World_Interaction.cs" />
     <Compile Include="ECS\Systems\Enemy_System.cs" />
     <Compile Include="ECS\Systems\Entity_Emitter_System.cs" />
+    <Compile Include="ECS\Systems\Health_System.cs" />
     <Compile Include="ECS\Systems\Item_System.cs" />
     <Compile Include="ECS\Systems\Light_Emitter_System.cs" />
     <Compile Include="ECS\Systems\Lua_Function_System.cs" />
@@ -605,6 +606,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Content\Background_2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\boss_1.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

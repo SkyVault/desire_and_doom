@@ -11,6 +11,9 @@ namespace Desire_And_Doom.Graphics
     class Sky_Renderer
     {
         Texture2D image;
+        Texture2D BG_Image;
+
+        bool show_bg = false;
 
         const int num_skytiles_wide = 10;
         const int num_skytiles_high = 20;
@@ -19,12 +22,17 @@ namespace Desire_And_Doom.Graphics
         List<float> scales;
         List<float> speeds;
 
-        public Sky_Renderer(Texture2D image)
+        public Sky_Renderer(Texture2D image, bool bg_image = false)
         {
             this.image = image;
             skytiles = new List<Vector2>();
             scales = new List<float>();
             speeds = new List<float>();
+
+            show_bg = bg_image;
+
+            if (show_bg)
+                BG_Image = Assets.It.Get<Texture2D>("Background_2");
 
             var rnd = new Random();
             for (int i = 0; i < num_skytiles_high; i++)
@@ -70,6 +78,20 @@ namespace Desire_And_Doom.Graphics
                     scales[i], 
                     SpriteEffects.None, 
                     0.01f);
+            }
+
+            if (show_bg)
+            {
+                batch.Draw(
+                    BG_Image,
+                    new Rectangle(0, 0, BG_Image.Width, BG_Image.Height),
+                    new Rectangle(0, 0, BG_Image.Width, BG_Image.Height),
+                    Color.White,
+                    0,
+                    Vector2.Zero,
+                    SpriteEffects.None,
+                    0.03f
+                    );
             }
         }
     }

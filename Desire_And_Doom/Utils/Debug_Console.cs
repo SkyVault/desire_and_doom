@@ -137,35 +137,20 @@ namespace Desire_And_Doom.Utils
         {
             if (state != State.CLOSED)
             {
-                var image = Assets.It.Get<Texture2D>("gui");
+                var image = Assets.It.Get<Texture2D>("gui-rect");
 
                 var height      = Game1.HEIGHT * (state == State.HALF ? 0.7f : 0.15f);
                 var font        = Assets.It.Get<SpriteFont>("font");
                 var str_height  = (int)font.MeasureString(" ").Y;
                 var str_width   = (int)font.MeasureString(">").X;
 
-                batch.Draw(image, new Rectangle(0, 0, Game1.WIDTH, (int)height), new Rectangle(24, 0, 24, 24), new Color(10, 10, 10, 150));
-                batch.Draw(image, new Rectangle(0, (int)height - str_height, Game1.WIDTH, str_height), new Rectangle(24, 0, 24, 24), new Color(0, 100, 100, 50));
+                batch.Draw(
+                    image, 
+                    new Rectangle(0, 0, Game1.WIDTH, (int)height), 
+                    new Rectangle(0, 0, 512, 512), 
+                    new Color(10, 10, 10, 150));
+                
 
-                batch.DrawString(font, ">", new Vector2(str_width, (int)height - str_height), Color.White);
-                if (text.Length > 0)
-                {
-                    batch.DrawString(font, text, new Vector2(str_width * 2, (int)height - str_height), Color.White);
-                }
-
-                var cx = (float)str_width * 2;
-                if (text.Length > 0)
-                {
-                    var txt = text.Substring(0, (int)cursor.X);
-                    cx += font.MeasureString(txt).X;
-                }
-
-                for(int i = 0; i < history.Count; i++)
-                {
-                    batch.DrawString(font, history[history.Count - 1 - i], new Vector2(str_width * 2, (int)height - ((i + 2) * str_height)), Color.White);
-                }
-
-                batch.Draw(image, new Vector2(cx, (int)height - str_height + 2), new Rectangle(24, 0, 4, 24), Color.White);
             }
         }
     }

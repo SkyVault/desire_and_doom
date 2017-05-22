@@ -67,7 +67,7 @@ namespace Desire_And_Doom.Gui
 
         public void Draw(SpriteBatch batch)
         {
-            var scale = 1.5f;
+            var scale = 1f;
 
             // draw options
             var names = actions.Names;
