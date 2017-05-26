@@ -70,6 +70,10 @@ namespace Desire_And_Doom.ECS.Systems
             return false;
         }
 
+        public bool Entity_Within(string tag, Body b, float dist){
+            return Entity_Within(tag, b.X, b.Y, dist);
+        }
+
         public Entity Get_With_Tag(string tag)
         {
             return World_Ref.Find_With_Tag(tag);

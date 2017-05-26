@@ -43,6 +43,19 @@ namespace Desire_And_Doom.ECS
             return components.ContainsKey(name);
         }
 
+        public bool Has(string name){
+            bool worked = Enum.TryParse(name, out Types component_type);
+            if (worked)
+            {
+                return this.Has(component_type);
+            }
+            else
+            {
+                Console.WriteLine("Unknown component: " + name);
+            }
+            return false;
+        }
+
         public List<Component> Get_Components_List() {
             return components.Values.ToList();
         }

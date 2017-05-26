@@ -37,6 +37,10 @@ namespace Desire_And_Doom.ECS.Components
                 Console.WriteLine($"WARNING:: Component doesnt contain the animation {animation_id}");
             }
 
+            if (Playing_Animation) {
+                if (animation_id == Current_Animation_ID) return;   
+            }
+
             Animation_Finished = false;
             Playing_Animation = true;
             Current_Animation_ID = animation_id;
