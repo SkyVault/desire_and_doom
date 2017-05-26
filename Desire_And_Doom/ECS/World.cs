@@ -104,6 +104,20 @@ namespace Desire_And_Doom.ECS
                                 ));
                             break;
                         }
+                    case "Advanced_Animation": {
+                        string image = component[1] as string;
+                        var animation = new List<string>();
+                        for (int i = 2; i < component.Values.Count + 1; i++){
+                            var t = component[i] as LuaTable;
+                            animation.Add(t[1] as string);
+                        }
+
+                        entity.Add(new Advanced_Animation_Component(
+                            Assets.It.Get<Texture2D>(image),
+                            animation
+                        ));
+                        break;
+                    }
                     case "Player":
                         entity.Add(new Player());
                         break;

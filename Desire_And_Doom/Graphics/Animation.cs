@@ -15,6 +15,8 @@ namespace Desire_And_Doom.Graphics
         {
             FORWARD,
             BACKWARD,
+            ONCE_FORWARD,
+            ONCE_BACKWARD,
             BOUNCE
         };
 

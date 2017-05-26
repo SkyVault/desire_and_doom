@@ -73,6 +73,7 @@
     <Compile Include="ECS\Components\Spawner.cs" />
     <Compile Include="ECS\Components\Timed_Destroy.cs" />
     <Compile Include="ECS\Components\World_Interaction.cs" />
+    <Compile Include="ECS\Systems\Advanced_Animation_Rendering_System.cs" />
     <Compile Include="ECS\Systems\Enemy_System.cs" />
     <Compile Include="ECS\Systems\Entity_Emitter_System.cs" />
     <Compile Include="ECS\Systems\Health_System.cs" />

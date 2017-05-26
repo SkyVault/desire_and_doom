@@ -9,7 +9,7 @@ end
 function Grendle_AI(entity, engine)
     local mx_dist = 100
     local body      = entity:Get "Body"
-    local anim      = entity:Get "Animation"
+    local anim      = entity:Get "Advanced_Animation"
     local physics   = entity:Get "Physics"
     local fn        = entity:Get "Lua_Function"
 
@@ -18,21 +18,27 @@ function Grendle_AI(entity, engine)
         fn.Table["eventer"] = Eventing.new {
             function (self, dt)
                 if engine:Entity_Within("Player", body.X, body.Y, mx_dist) then
-                    anim.Current_Animation_ID = "grendle-awake"
-                    if anim.Animation_End then
+                
+                    anim:Request_Animation_Playback "grendle-awake"  
+                    if (anim.Animation_Finished) then 
                         self:next()
                     end
+                
                 end
             end,
 
-            function (self, dt)
-                anim.Current_Animation_ID = "grendle-idle"
-                print "now attack"
-            end
+            function(self, dt)
+                 anim:Stop()
+
+                 engine:Track(entity, engine:Get_With_Tag "Player", 4)
+            end,    
         }
 
     end)
 
+    -- face the current moving direction
+    engine:Face_Move_Dir(entity)
+    
     if fn.Table["eventer"] then
         fn.Table["eventer"]:update(engine:Get_DT())
     end

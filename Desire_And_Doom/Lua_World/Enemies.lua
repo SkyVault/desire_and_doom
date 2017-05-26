@@ -60,7 +60,7 @@ return {
 		tags = {"Enemy"},
 		components = {
 			["Body"] = {12, 6},
-			["Animation"] = {"entities", {"grendle-idle", 0.1},{"grendle-awake", 0.1}, {"grendle-run", 0.1}, {"grendle-attack", 0.02}},
+			["Advanced_Animation"] = {"entities", {"grendle-idle", 0.1},{"grendle-awake", 0.1}, {"grendle-run", 0.1}, {"grendle-attack", 0.02}},
 			["Physics"] = {},
 			["Ai"] = {"Function", Grendle_AI},
 			["Light"] = {},

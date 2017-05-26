@@ -102,7 +102,7 @@ namespace Desire_And_Doom.ECS
                 0,
                 Vector2.Zero,
                 Vector2.One,
-                (animation.Scale.X > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally),
+                side,
                 animation.Layer + animation.Layer_Offset
                 );
         }

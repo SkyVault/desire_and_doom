@@ -36,8 +36,10 @@ namespace Desire_And_Doom
         public static void Request_Pause()  => Game_State = State.PAUSED;
         public static void Request_Resume() => Game_State = State.PLAYING;
         
-        public static int WIDTH     = 1280;
-        public static int HEIGHT    = 700;
+        // public static int WIDTH     = 1280;
+        // public static int HEIGHT    = 700;
+        public static int WIDTH     = 800;
+        public static int HEIGHT    = 480;
 
         // TEMP
         private bool skip_intro_animation = true;
@@ -128,6 +130,7 @@ namespace Desire_And_Doom
             world.Add_System<Multipart_Animation_System>(new Multipart_Animation_System());
             world.Add_System<Item_System>(new Item_System());
             world.Add_System<Health_System>(new Health_System());
+            world.Add_System<Advanced_Animation_Rendering_System>(new Advanced_Animation_Rendering_System());
 
             gui = new Monogui();
 
