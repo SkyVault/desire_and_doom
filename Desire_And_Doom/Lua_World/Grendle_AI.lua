@@ -54,7 +54,7 @@ function Grendle_AI(entity, engine)
                         anim:Force_Animation_Playback "grendle-run"
                     end
                 end
-            end,    
+            end,        
         }
 
     end)
