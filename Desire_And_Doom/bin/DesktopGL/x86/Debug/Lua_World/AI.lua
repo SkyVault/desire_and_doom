@@ -1,4 +1,5 @@
-﻿local function handle_player_hit(entity, engine, dammage, power)
+﻿local 
+function handle_player_hit(entity, engine, dammage, power)
 	local physics = engine:Get_Component(entity, "Physics")
 	local body = engine:Get_Component(entity, "Body")
 	if physics and physics.Other then
@@ -28,6 +29,21 @@
 
 			end
 		end
+end
+
+function Init_Entity(entity, callback)
+	local fn = entity:Get "Lua_Function"
+	if not fn then return end
+
+	if fn.Table == null then
+		fn.Table = {__initialized = false}
+	end
+	assert(callback)
+
+	if fn.Table.__initialized == false then
+		callback()
+		fn.Table.__initialized = true
+	end
 end
 
 return {
@@ -104,30 +120,30 @@ return {
 			fn.Table = {}
 		end
 
-		if body and anim and physics then
-			local player = engine:Get_Player()
-
-			if physics.Current_Speed < 0.2 then
-				anim.Current_Animation_ID = "grendle-idle"
-			else
-				anim.Current_Animation_ID = "grendle-run"
-			end
-
-			if (engine:Entity_Within("Player", body.X, body.Y, 150)) then
-				if engine:Entity_Within("Player", body.X, body.Y, 75) then
-					-- do attack
-					anim.Current_Animation_ID = "grendle-attack"
-					fn.Table["state"] = "attacking"
-				else
-					fn.Table["state"] = "tracking"
-					engine:Track(entity, engine:Get_With_Tag "Player", 4)
-				end
-			else
-				fn.Table["state"] = "idling"
-			end
-
-			handle_player_hit(entity, engine, 1, 100)
-			
-		end
+		--if body and anim and physics then
+		--	local player = engine:Get_Player()
+		--
+		--	if physics.Current_Speed < 0.2 then
+		--		anim.Current_Animation_ID = "grendle-idle"
+		--	else
+		--		anim.Current_Animation_ID = "grendle-run"
+		--	end
+		--
+		--	if (engine:Entity_Within("Player", body.X, body.Y, 150)) then
+		--		if engine:Entity_Within("Player", body.X, body.Y, 75) then
+		--			-- do attack
+		--			anim.Current_Animation_ID = "grendle-attack"
+		--			fn.Table["state"] = "attacking"
+		--		else
+		--			fn.Table["state"] = "tracking"
+		--			engine:Track(entity, engine:Get_With_Tag "Player", 4)
+		--		end
+		--	else
+		--		fn.Table["state"] = "idling"
+		--	end
+		--
+		--	handle_player_hit(entity, engine, 1, 100)
+		--	
+		--end
 	end
 }

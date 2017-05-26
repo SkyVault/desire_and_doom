@@ -1,4 +1,5 @@
 ﻿local AI = require "Lua_World/AI"
+require "Lua_World/Grendle_AI"
 
 return {
 	["Zombie"] = {
@@ -59,9 +60,9 @@ return {
 		tags = {"Enemy"},
 		components = {
 			["Body"] = {12, 6},
-			["Animation"] = {"entities", {"grendle-idle", 0.1}, {"grendle-run", 0.1}, {"grendle-attack", 0.02}},
+			["Animation"] = {"entities", {"grendle-idle", 0.1},{"grendle-awake", 0.1}, {"grendle-run", 0.1}, {"grendle-attack", 0.02}},
 			["Physics"] = {},
-			["Ai"] = {"Function", AI.Grendle},
+			["Ai"] = {"Function", Grendle_AI},
 			["Light"] = {},
 			["Health"] = {10}
 		}

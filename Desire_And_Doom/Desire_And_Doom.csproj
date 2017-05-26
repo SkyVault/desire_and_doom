@@ -61,6 +61,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ECS\Components\Advanced_Animation_Component.cs" />
     <Compile Include="ECS\Components\Character.cs" />
     <Compile Include="ECS\Components\Enemy.cs" />
     <Compile Include="ECS\Components\Entity_Particle_Emitter.cs" />
@@ -668,6 +669,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Lua_World\Entities.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lua_World\Grendle_AI.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Lua_World\Items.lua">

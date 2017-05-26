@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="8" tileheight="8" backgroundcolor="#55ffff" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="8" tileheight="8" backgroundcolor="#55ffff" nextobjectid="4">
+ <tileset firstgid="1" name="dungeon_tiles" tilewidth="8" tileheight="8" tilecount="4096" columns="64">
+  <image source="../../../../../../Content/dungeon_tiles.png" width="512" height="512"/>
+  <terraintypes>
+   <terrain name="Gras" tile="-1"/>
+  </terraintypes>
+  <tile id="256" terrain="0,0,0,0"/>
+  <tile id="320" terrain="0,0,0,0"/>
+  <tile id="321" terrain="0,,,"/>
+ </tileset>
  <layer name="Floor" width="64" height="64">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20MH6AAAAAAAAAAAAAAAAAAAACAtwFAAAAB
+   eJzt2MEVwiAUBEDoQDvT/pvRBnyR8MIE2H/ZMzt7opRr71FLedbzOfu9vm941/M5y/U6z76LXudZdjHa+W67GO2sd6E99R60p9qDdtM70G56B9or/sZfO+kdaCe9A+0T//jHf7y/dtE70C56B9oj/vGP/3h/7aBTO+jU/evU/evU/evU/evU/evU/evU/evU/evU/evU/evU/evU/evU/evU/evc9R8g/z/5/4t//OO/1w6OTrso9/jHP/7eR/uvuoPW007KPf7xX2kHvafdlPuv055Xex+d9hzt/e+t5tx6uzi33mrOrXd35w/vg4nP
   </data>
  </layer>
+ <objectgroup name="Entities">
+  <object id="2" type="Player" x="104" y="136" width="24" height="24"/>
+  <object id="3" type="Grendle" x="272" y="128" width="40" height="40"/>
+ </objectgroup>
 </map>

@@ -104,30 +104,30 @@ return {
 			fn.Table = {}
 		end
 
-		if body and anim and physics then
-			local player = engine:Get_Player()
-
-			if physics.Current_Speed < 0.2 then
-				anim.Current_Animation_ID = "grendle-idle"
-			else
-				anim.Current_Animation_ID = "grendle-run"
-			end
-
-			if (engine:Entity_Within("Player", body.X, body.Y, 150)) then
-				if engine:Entity_Within("Player", body.X, body.Y, 75) then
-					-- do attack
-					anim.Current_Animation_ID = "grendle-attack"
-					fn.Table["state"] = "attacking"
-				else
-					fn.Table["state"] = "tracking"
-					engine:Track(entity, engine:Get_With_Tag "Player", 4)
-				end
-			else
-				fn.Table["state"] = "idling"
-			end
-
-			handle_player_hit(entity, engine, 1, 100)
-			
-		end
+		--if body and anim and physics then
+		--	local player = engine:Get_Player()
+		--
+		--	if physics.Current_Speed < 0.2 then
+		--		anim.Current_Animation_ID = "grendle-idle"
+		--	else
+		--		anim.Current_Animation_ID = "grendle-run"
+		--	end
+		--
+		--	if (engine:Entity_Within("Player", body.X, body.Y, 150)) then
+		--		if engine:Entity_Within("Player", body.X, body.Y, 75) then
+		--			-- do attack
+		--			anim.Current_Animation_ID = "grendle-attack"
+		--			fn.Table["state"] = "attacking"
+		--		else
+		--			fn.Table["state"] = "tracking"
+		--			engine:Track(entity, engine:Get_With_Tag "Player", 4)
+		--		end
+		--	else
+		--		fn.Table["state"] = "idling"
+		--	end
+		--
+		--	handle_player_hit(entity, engine, 1, 100)
+		--	
+		--end
 	end
 }

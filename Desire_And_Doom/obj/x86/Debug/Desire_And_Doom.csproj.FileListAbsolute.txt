@@ -113,3 +113,4 @@ C:\Users\Dustin.Neumann\Source\Repos\desire_and_doom\Desire_And_Doom\obj\x86\Deb
 C:\Users\Dustin.Neumann\Source\Repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\SquareLogo_1024px.xnb
 C:\Users\Dustin.Neumann\Source\Repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\GFont.xnb
 C:\Users\Dustin.Neumann\Source\Repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\Background_2.xnb
+C:\Users\Dustin.Neumann\Source\Repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Lua_World\Grendle_AI.lua
