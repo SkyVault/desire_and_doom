@@ -64,6 +64,7 @@ namespace Desire_And_Doom
         RenderTarget2D      scene;
         Physics_Engine      physics_engine;
         Invatory_Manager    invatory_manager;
+        Renderer3D          renderer_3d;
 
         public Game1()
         {
@@ -91,6 +92,7 @@ namespace Desire_And_Doom
             // initialize penumbra lighting
             penumbra    = new PenumbraComponent(this);
             console     = new Debug_Console(this, lua);
+            renderer_3d = new Renderer3D(GraphicsDevice, Content);
 
             Components.Add(console);
             Components.Add(penumbra);
@@ -274,6 +276,9 @@ namespace Desire_And_Doom
             batch.Begin(SpriteSortMode.FrontToBack);
                 screen_manager.UIDraw(batch);
             batch.End();
+
+            if (Input.It.Is_Key_Down(Keys.O))
+                renderer_3d.Draw();
 
             //UserInterface.Draw(batch);
 

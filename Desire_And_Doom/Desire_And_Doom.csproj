@@ -125,6 +125,7 @@
     <Compile Include="Graphics\Particle_Systems\Fire_Fly_Particle.cs" />
     <Compile Include="Graphics\Particle_Systems\Fire_Particle.cs" />
     <Compile Include="Graphics\Particle_World.cs" />
+    <Compile Include="Graphics\Renderer3D.cs" />
     <Compile Include="Graphics\Sky_Renderer.cs" />
     <Compile Include="Graphics\ViewportAdapter.cs" />
     <Compile Include="Gui\Invatory_Container.cs" />
@@ -635,6 +636,9 @@
     <None Include="Content\GeonBit.UI\themes\lowres\fonts\Regular.spritefont" />
     <None Include="Content\GFont.xnb" />
     <None Include="Content\gui.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\ico.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\items.xnb">
