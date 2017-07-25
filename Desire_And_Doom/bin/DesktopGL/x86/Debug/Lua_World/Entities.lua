@@ -15,7 +15,6 @@ return {
 			},
 
 			["Ai"] = {"Function", function(self, engine)
-
 				local anim = self:Get "Animation"
 				if entity_tables[self.UUID] == nil then
 					entity_tables[self.UUID] = {

@@ -68,6 +68,11 @@ namespace Desire_And_Doom
 
         public Game1()
         {
+            var device_width    = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            var device_height   = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            WIDTH = (int)(device_width * 0.8f);
+            HEIGHT = (int)(device_height * 0.8f);
+
             graphics = new GraphicsDeviceManager(this) {
                 PreferredBackBufferWidth = WIDTH,
                 PreferredBackBufferHeight = HEIGHT,
@@ -76,8 +81,10 @@ namespace Desire_And_Doom
 
             var width   = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             var height  = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+
             Window.AllowUserResizing    = true;
             Window.AllowAltF4           = true;
+
             Window.Position = new Point(width / 2 - WIDTH / 2, 0);
             //Window.Position = new Point(0, 0);
             graphics.ApplyChanges();

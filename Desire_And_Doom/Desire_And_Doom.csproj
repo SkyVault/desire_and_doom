@@ -138,6 +138,7 @@
     <Compile Include="Screens\Boss_Room_1.cs" />
     <Compile Include="Screens\Game_Screen.cs" />
     <Compile Include="Screens\Intro_Logos_Screen.cs" />
+    <Compile Include="Utils\Kore_Parser.cs" />
     <Compile Include="Utils\Named_Action_List.cs" />
     <Compile Include="Utils\Debug_Console.cs" />
     <Compile Include="Utils\GamePadEventArgs.cs" />
@@ -170,7 +171,6 @@
     <Compile Include="Utils\MouseEventArgs.cs" />
     <Compile Include="Utils\MouseListener.cs" />
     <Compile Include="Utils\MouseListenerSettings.cs" />
-    <Compile Include="Utils\OKore_Parser.cs" />
     <Compile Include="Utils\RectangleF.cs" />
     <Compile Include="Utils\Tasker.cs" />
     <Compile Include="Utils\Timers.cs" />
@@ -701,8 +701,7 @@
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <PropertyGroup>
     <PostBuildEvent>
-xcopy /s /y "C:\Users\Dustin.Neumann\Documents\Visual Studio 2017\Projects\Desire_And_Doom\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"
-xcopy /s /y "C:\Users\Dustin.Neumann\Source\Repos\desire_and_doom\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"</PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

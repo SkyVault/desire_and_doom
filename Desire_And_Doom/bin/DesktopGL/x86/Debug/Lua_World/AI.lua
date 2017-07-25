@@ -1,5 +1,4 @@
-﻿local 
-function handle_player_hit(entity, engine, dammage, power)
+﻿local function handle_player_hit(entity, engine, dammage, power)
 	local physics = engine:Get_Component(entity, "Physics")
 	local body = engine:Get_Component(entity, "Body")
 	if physics and physics.Other then
@@ -29,59 +28,6 @@ function handle_player_hit(entity, engine, dammage, power)
 
 			end
 		end
-end
-
-function Init_Entity(entity, callback)
-	local fn = entity:Get "Lua_Function"
-	if not fn then return end
-
-	if fn.Table == null then
-		fn.Table = {__initialized = false}
-	end
-	assert(callback)
-
-	if fn.Table.__initialized == false then
-		callback()
-		fn.Table.__initialized = true
-	end
-end
-
-function Get_The_Correct_Component(entity, list)
-	local sprite = nil
-	for i = 1, #list do
-		local l = list[i]
-		if entity:Has(l) then
-			return entity:Get(l) 
-		end
-	end
-	return sprite
-end
-
---   var sprite = (Animated_Sprite)e.Get(Types.Animation);
---   var physics = (Physics) e.Get(Types.Physics);
---   if (sprite != null && physics != null)
---   {
---       if ( physics.Velocity.X > 0 )
---           sprite.Scale = new Vector2(1, sprite.Scale.Y);
---       else
---           sprite.Scale = new Vector2(-1, sprite.Scale.Y);
---   }
-function Face_Move_Dir(entity, engine)
-	local sprite = Get_The_Correct_Component(entity, {
-		"Advanced_Animation",
-		"Animated_Sprite",
-		"Sprite",
-	})
-	if not sprite then return end
-
-	local physics = entity:Get "Physics"
-	if not physics then return end
-
-	if physics.Velocity.X > 0 then
-		sprite.Scale = engine:Vec2(1, sprite.Scale.Y)
-	else
-		sprite.Scale = engine:Vec2(-1, sprite.Scale.Y)
-	end
 end
 
 return {
