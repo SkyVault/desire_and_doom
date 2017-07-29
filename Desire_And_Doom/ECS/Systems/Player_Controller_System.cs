@@ -18,7 +18,7 @@ namespace Desire_And_Doom.ECS
 {
     class Player_Controller_System : System
     {
-        Camera_2D camera;
+        GameCamera camera;
         Particle_World particle_world;
 
         Invatory_Container invatory_container;
@@ -27,7 +27,7 @@ namespace Desire_And_Doom.ECS
         bool show_overlay_gui = false;
         const float dash_speed = 500;
 
-        public Player_Controller_System(Camera_2D _camera, Particle_World particle_world, Invatory_Manager invatory_manager) : base(Types.Body, Types.Player, Types.Physics)
+        public Player_Controller_System(GameCamera _camera, Particle_World particle_world, Invatory_Manager invatory_manager) : base(Types.Body, Types.Player, Types.Physics)
         {
             this.invatory_manager = invatory_manager;
             this.camera = _camera;
@@ -324,7 +324,7 @@ namespace Desire_And_Doom.ECS
             }
         }
 
-        public override void UIDraw(SpriteBatch batch, Camera_2D camera, Entity entity)
+        public override void UIDraw(SpriteBatch batch, GameCamera camera, Entity entity)
         {
             base.UIDraw(batch, camera, entity);
             if ( !show_overlay_gui ) return;

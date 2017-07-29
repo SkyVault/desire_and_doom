@@ -48,7 +48,7 @@ namespace Desire_And_Doom
         private static GraphicsDeviceManager graphics;
         SpriteBatch batch;
         
-        Camera_2D           camera;
+        GameCamera           camera;
         World               world;
         Monogui             gui;
         Screen_Manager      screen_manager;
@@ -60,7 +60,7 @@ namespace Desire_And_Doom
         Physics_Engine      physics_engine;
         Invatory_Manager    invatory_manager;
         Renderer3D          renderer_3d;
-
+        
         public static int ScreenWidth { get => graphics.PreferredBackBufferWidth; }
         public static int ScreenHeight { get => graphics.PreferredBackBufferHeight; }
         public static (int, int) ScreenSize { get => (ScreenWidth, ScreenHeight); }
@@ -113,7 +113,7 @@ namespace Desire_And_Doom
             Assets.It.Load_Animations_From_Lua("Lua_World/Animation.lua");
             
             //var frames = Assets.It.Get_Quads("player-attack");
-            camera = new Camera_2D(GraphicsDevice, true);
+            camera = new GameCamera(GraphicsDevice, true);
             screen_manager = new Screen_Manager();
 
             camera.Zoom = SCALE;

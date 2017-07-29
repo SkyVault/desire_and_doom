@@ -6,19 +6,19 @@ using Desire_And_Doom.Interfaces;
 
 namespace Desire_And_Doom.Graphics
 {
-    class Camera2D : IMovable, IRotatable
+    class Camera : IMovable, IRotatable
     {
         private readonly ViewportAdapter _viewportAdapter;
         private float _maximumZoom = float.MaxValue;
         private float _minimumZoom;
         private float _zoom;
 
-        public Camera2D(GraphicsDevice graphicsDevice)
+        public Camera(GraphicsDevice graphicsDevice)
             : this(new Default_Viewport_Adapter(graphicsDevice))
         {
         }
 
-        public Camera2D(ViewportAdapter viewportAdapter)
+        public Camera(ViewportAdapter viewportAdapter)
         {
             _viewportAdapter = viewportAdapter;
 

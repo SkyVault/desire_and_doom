@@ -36,7 +36,7 @@ namespace Desire_And_Doom.ECS
         public virtual void Update(GameTime time, Entity entity) { }
         public virtual void Constant_Update(GameTime time, Entity entity) { }
         public virtual void Draw(SpriteBatch batch, Entity entity) { }
-        public virtual void UIDraw(SpriteBatch batch, Camera_2D camera, Entity entity) { }
+        public virtual void UIDraw(SpriteBatch batch, GameCamera camera, Entity entity) { }
         public virtual void Destroy(Entity entity) { }
     }
 }

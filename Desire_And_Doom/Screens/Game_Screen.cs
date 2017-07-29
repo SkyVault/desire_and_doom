@@ -15,7 +15,7 @@ namespace Desire_And_Doom.Screens
     class Game_Screen : Screen
     {
         protected World                 world;
-        protected Camera_2D             camera;
+        protected GameCamera             camera;
         protected PenumbraComponent     lighting;
         protected Particle_World        particle_world;
         protected Physics_Engine        physics_engine;
@@ -24,7 +24,7 @@ namespace Desire_And_Doom.Screens
 
         bool can_change = true;
 
-        public Game_Screen(World _world, Camera_2D _camera, PenumbraComponent _lighting, Particle_World _particle_world, Physics_Engine _physics_engine,Lua _lua, string _id) : base(_id)
+        public Game_Screen(World _world, GameCamera _camera, PenumbraComponent _lighting, Particle_World _particle_world, Physics_Engine _physics_engine,Lua _lua, string _id) : base(_id)
         {
             world           = _world;
             camera          = _camera;

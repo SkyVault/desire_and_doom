@@ -15,9 +15,9 @@ namespace Desire_And_Doom.ECS.Systems
     {
         Lua lua;
         GameTime time;
-        Camera_2D camera;
+        GameCamera camera;
 
-        public Lua_Function_System(Lua lua, Camera_2D _camera) : base(Types.Lua_Function)
+        public Lua_Function_System(Lua lua, GameCamera _camera) : base(Types.Lua_Function)
         {
             this.lua = lua;
             camera = _camera;
@@ -33,7 +33,7 @@ namespace Desire_And_Doom.ECS.Systems
             return null;
         }
 
-        public Camera_2D Get_Camera() => camera;
+        public GameCamera Get_Camera() => camera;
 
         public Entity Spawn(LuaTable e, float x, float y)
         {

@@ -94,7 +94,7 @@ namespace Desire_And_Doom
             }
         }
         
-        public void Draw(SpriteBatch batch, Camera_2D camera)
+        public void Draw(SpriteBatch batch, GameCamera camera)
         {
             if (animating)
             {

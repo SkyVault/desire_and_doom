@@ -244,7 +244,7 @@ namespace Desire_And_Doom.ECS
         //    Draw_Solids(batch, camera);
         //}
 
-        public override void UIDraw(SpriteBatch batch, Camera_2D camera, Entity entity)
+        public override void UIDraw(SpriteBatch batch, GameCamera camera, Entity entity)
         {
             base.UIDraw(batch, camera, entity);
 
@@ -253,7 +253,7 @@ namespace Desire_And_Doom.ECS
             Draw_Solids(batch, camera);
         }
 
-        public void Draw_Solids(SpriteBatch batch, Camera_2D camera)
+        public void Draw_Solids(SpriteBatch batch, GameCamera camera)
         {
             var gui = (Texture2D) Assets.It.Get<Texture2D>("gui");
             solids.ForEach(s => {

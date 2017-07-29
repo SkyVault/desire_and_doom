@@ -88,8 +88,8 @@
     <Compile Include="Graphics\Animation.cs" />
     <Compile Include="Graphics\Animation_Frame.cs" />
     <Compile Include="Graphics\Assets.cs" />
-    <Compile Include="Graphics\Camera2D.cs" />
-    <Compile Include="Graphics\Camera_2D.cs" />
+    <Compile Include="Graphics\Camera.cs" />
+    <Compile Include="Graphics\GameCamera.cs" />
     <Compile Include="Graphics\Debug_Drawing.cs" />
     <Compile Include="Graphics\Default_Viewport_Adapter.cs" />
     <Compile Include="Graphics\Dialog_Box.cs" />

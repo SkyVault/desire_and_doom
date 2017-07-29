@@ -13,7 +13,7 @@ namespace Desire_And_Doom.Gui
 {
     class Pause_Menu
     {
-        Camera_2D camera;
+        GameCamera camera;
         
         Texture2D rect;
         Vector2 pre_origin;
@@ -22,7 +22,7 @@ namespace Desire_And_Doom.Gui
 
         int selector = 0;
 
-        public Pause_Menu(Screen_Manager screen_manager, Camera_2D _camera)
+        public Pause_Menu(Screen_Manager screen_manager, GameCamera _camera)
         {
             camera = _camera;
 

@@ -297,7 +297,7 @@ namespace Desire_And_Doom.ECS
             }
         }
 
-        public void UIDraw(SpriteBatch batch, Camera_2D camera)
+        public void UIDraw(SpriteBatch batch, GameCamera camera)
         {
             foreach (var entity in entities)
             {

@@ -20,7 +20,7 @@ namespace Desire_And_Doom.Screens
 
         public Boss_Room_1(
             World               _world, 
-            Camera_2D           _camera, 
+            GameCamera           _camera, 
             PenumbraComponent   _lighting, 
             Particle_World      _particle_world, 
             Physics_Engine      _physics_engine, 

@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 namespace Desire_And_Doom
 {
 
-    class Camera_2D
+    class GameCamera
     {
-        private readonly Camera2D camera;
+        private readonly Camera camera;
 
         public float Zoom { get => camera.Zoom; set => camera.Zoom = value; }
         public float Rotation { get; set; }
@@ -29,11 +29,11 @@ namespace Desire_And_Doom
         private float shake_timer = 0;
         private float shake_intensity = 10;
 
-        public Camera_2D(GraphicsDevice device, bool _scrollable = false)
+        public GameCamera(GraphicsDevice device, bool _scrollable = false)
         { 
             Rotation = 0;
             
-            camera = new Camera2D(device);
+            camera = new Camera(device);
         }
 
         public void Update(GameTime time)
@@ -56,15 +56,11 @@ namespace Desire_And_Doom
                 can_move = true;
                 return;
             }
+            
+            var dx = (X - (body.X + body.Width / 2)     + (DesireAndDoom.ScreenWidth) / 2);
+            var dy = (Y - (body.Y + body.Height / 2)    + (DesireAndDoom.ScreenHeight) / 2);
 
-            var dx = (X - (body.X + body.Width / 2) + DesireAndDoom.ScreenWidth / 2);
-            var dy = (Y - (body.Y + body.Height / 2) + DesireAndDoom.ScreenHeight / 2);
-
-            camera.Move(new Vector2(-dx * smoothing,-dy * smoothing));
-
-
-            //camera.Position = new Vector2((float)Math.Floor(camera.Position.X), (float)Math.Floor(camera.Position.Y));
-            //Console.WriteLine(bounds.X);
+            camera.Move(new Vector2(-dx * smoothing, -dy * smoothing));
         }
 
         public void Shake(float intensity, float time)
@@ -89,7 +85,7 @@ namespace Desire_And_Doom
             camera.Move(by);
         }
 
-        public Camera2D Get_Controller() => camera;
+        public Camera Get_Controller() => camera;
 
         public Vector2 Get_Camera_Position_In_Worldspace()
         {

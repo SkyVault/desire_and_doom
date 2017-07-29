@@ -18,7 +18,7 @@ namespace Desire_And_Doom.Screens
         Screen_Manager manager;
         
         PenumbraComponent penumbra;
-        Camera_2D camera;
+        GameCamera camera;
 
         Sky_Renderer sky;
         Texture2D rect;
@@ -28,7 +28,7 @@ namespace Desire_And_Doom.Screens
 
         int selector = 0;
 
-        public Menu_Screen(Screen_Manager _manager, PenumbraComponent _penumbra, Camera_2D _camera) : base("Menu")
+        public Menu_Screen(Screen_Manager _manager, PenumbraComponent _penumbra, GameCamera _camera) : base("Menu")
         {
             camera = _camera;
             manager = _manager;
@@ -88,8 +88,7 @@ namespace Desire_And_Doom.Screens
         public override void FilteredDraw(SpriteBatch batch)
         {
             int border_size_y = 20;
-            int border_size_x = 100;
-
+            
             var names = actions.Names;
             int index = 0;
             foreach(var name in names)
@@ -117,9 +116,9 @@ namespace Desire_And_Doom.Screens
                     batch.Draw(
                     rect,
                     new Rectangle(
-                        (int)(((DesireAndDoom.ScreenWidth/camera.Zoom) / 2) - 75 / 2),
+                        (int)(((DesireAndDoom.ScreenWidth / camera.Zoom) / 2) / 2),
                         (int)(y),
-                        (int)(75),
+                        (int)((DesireAndDoom.ScreenWidth / camera.Zoom) / 2),
                         (int)(size.Y * 1.2f)),
                     new Rectangle(0, 0, 512, 512),
                     Color.Orange,
@@ -134,9 +133,9 @@ namespace Desire_And_Doom.Screens
             batch.Draw(
                 rect,
                 new Rectangle(
-                    (int)(border_size_x), 
-                    border_size_y, 
-                    (int)(DesireAndDoom.ScreenWidth / camera.Zoom) - border_size_x * 2, 
+                    (int)(((DesireAndDoom.ScreenWidth / camera.Zoom) / 2) - (DesireAndDoom.ScreenWidth / camera.Zoom) / 4), 
+                    border_size_y,
+                    (int)((DesireAndDoom.ScreenWidth / camera.Zoom) / 2), 
                     (int)(DesireAndDoom.ScreenHeight / camera.Zoom) - border_size_y * 2),
                 new Rectangle(0, 0, 512, 512),
                 new Color(0, 0, 0, 0.8f),

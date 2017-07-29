@@ -32,7 +32,7 @@ namespace Desire_And_Doom
         private TmxMap              map;
         private Texture2D           texture;
         private List<Rectangle>     quads;
-        private Camera_2D           camera;
+        private GameCamera           camera;
         private List<Billboard>     billboards;
 
         public Func<string, float, float, bool> Change_Scene_Callback;
@@ -42,7 +42,7 @@ namespace Desire_And_Doom
         private float timer = 0;
         private int frame = 0;
 
-        public Tiled_Map(string name, Camera_2D _camera, World world, Screen level, Particle_World particle_world, Lua lua, PenumbraComponent lighting = null)
+        public Tiled_Map(string name, GameCamera _camera, World world, Screen level, Particle_World particle_world, Lua lua, PenumbraComponent lighting = null)
         {
 
             this.camera = _camera;

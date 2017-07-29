@@ -117,7 +117,7 @@ namespace Desire_And_Doom.ECS
             }
         }
 
-        public override void UIDraw(SpriteBatch batch, Camera_2D camera,Entity entity)
+        public override void UIDraw(SpriteBatch batch, GameCamera camera,Entity entity)
         {
             base.UIDraw(batch, camera,entity);
             var npc = (Npc) entity.Get(Types.Npc);

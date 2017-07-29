@@ -28,7 +28,7 @@ namespace Desire_And_Doom.Screens
 
         Screen_Manager screen_manager;
 
-        public Intro_Logos_Screen(Screen_Manager _manager, Camera_2D _camera, PenumbraComponent _penumbra) : base("Logo")
+        public Intro_Logos_Screen(Screen_Manager _manager, GameCamera _camera, PenumbraComponent _penumbra) : base("Logo")
         {
             _camera.Zoom = 1;
             _penumbra.AmbientColor = Color.White;
