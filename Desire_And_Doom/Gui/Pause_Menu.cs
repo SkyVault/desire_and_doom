@@ -72,13 +72,15 @@ namespace Desire_And_Doom.Gui
             // draw options
             var names = actions.Names;
             int index = 0;
+            var box_width = DesireAndDoom.ScreenWidth / 3;
+            
             foreach (var name in names)
             {
                 var size = font.MeasureString(name) * scale;
                 float margin = 16;
-                float x = DesireAndDoom.WIDTH / 2 - size.X / 2;
+                float x = DesireAndDoom.ScreenWidth / 2 - (size.X / 2);
                 float y = DesireAndDoom.ScreenHeight / 2 - (size.Y + margin) / 2 - ((size.Y + margin) * names.Length / 2) + (index * (size.Y + margin)) + size.Y / 2;
-
+                
                 batch.DrawString(
                     font,
                     name,
@@ -86,7 +88,7 @@ namespace Desire_And_Doom.Gui
                     (selector == index) ? Color.Black : Color.White,
                     0f,
                     Vector2.Zero,
-                    scale,
+                    1,
                     SpriteEffects.None,
                     1f
                     );
@@ -96,9 +98,9 @@ namespace Desire_And_Doom.Gui
                     batch.Draw(
                     rect,
                     new Rectangle(
-                        (int)((DesireAndDoom.WIDTH / 2) - DesireAndDoom.WIDTH / 8),
+                        (int)(DesireAndDoom.ScreenWidth / 2 - (box_width / 2)),
                         (int)(y + size.Y * 0.1f),
-                        (int)(DesireAndDoom.WIDTH / 4),
+                        box_width,
                         (int)(size.Y * 0.9f)),
                     new Rectangle(0, 0, 512, 512),
                     Color.Orange,
@@ -116,9 +118,9 @@ namespace Desire_And_Doom.Gui
             batch.Draw(
                 rect,
                 new Rectangle(
-                    (int)(DesireAndDoom.WIDTH / 2 - (128 * 1.5f)),
+                    (int)(DesireAndDoom.ScreenWidth / 2 - (box_width / 2)),
                     DesireAndDoom.ScreenHeight / 2 - DesireAndDoom.ScreenHeight / 3,
-                    128 * 3,
+                    box_width,
                     (int)(DesireAndDoom.ScreenHeight / 1.5f)
                     ),
                 new Rectangle(0, 0, 512, 512),

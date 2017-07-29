@@ -97,8 +97,8 @@ namespace Desire_And_Doom.Screens
                 float scale = 0.3f;
                 var size = font.MeasureString(name) * scale;
                 float y_margin = 16f;
-                float x = ((DesireAndDoom.WIDTH / camera.Zoom) / 2) - size.X / 2;
-                float y = ((DesireAndDoom.HEIGHT / camera.Zoom) / 2) - size.Y / 2 - ((size.Y + y_margin) * names.Length / 2) + (index++ * (size.Y + y_margin) + 16);
+                float x = ((DesireAndDoom.ScreenWidth / camera.Zoom) / 2) - size.X / 2;
+                float y = ((DesireAndDoom.ScreenHeight / camera.Zoom) / 2) - size.Y / 2 - ((size.Y + y_margin) * names.Length / 2) + (index++ * (size.Y + y_margin) + 16);
 
                 batch.DrawString(
                     font,
@@ -117,7 +117,7 @@ namespace Desire_And_Doom.Screens
                     batch.Draw(
                     rect,
                     new Rectangle(
-                        (int)(((DesireAndDoom.WIDTH/camera.Zoom) / 2) - 75 / 2),
+                        (int)(((DesireAndDoom.ScreenWidth/camera.Zoom) / 2) - 75 / 2),
                         (int)(y),
                         (int)(75),
                         (int)(size.Y * 1.2f)),
@@ -136,8 +136,8 @@ namespace Desire_And_Doom.Screens
                 new Rectangle(
                     (int)(border_size_x), 
                     border_size_y, 
-                    (int)(DesireAndDoom.WIDTH / camera.Zoom) - border_size_x * 2, 
-                    (int)(DesireAndDoom.HEIGHT / camera.Zoom) - border_size_y * 2),
+                    (int)(DesireAndDoom.ScreenWidth / camera.Zoom) - border_size_x * 2, 
+                    (int)(DesireAndDoom.ScreenHeight / camera.Zoom) - border_size_y * 2),
                 new Rectangle(0, 0, 512, 512),
                 new Color(0, 0, 0, 0.8f),
                 0f,

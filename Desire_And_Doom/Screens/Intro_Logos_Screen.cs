@@ -23,8 +23,8 @@ namespace Desire_And_Doom.Screens
         float SkyLogoAlpha = 0;
         float MonoLogoAlpha = 0;
 
-        float SkyLogoY = DesireAndDoom.HEIGHT;
-        float MonoLogoY = DesireAndDoom.HEIGHT;
+        float SkyLogoY = DesireAndDoom.ScreenHeight;
+        float MonoLogoY = DesireAndDoom.ScreenHeight;
 
         Screen_Manager screen_manager;
 
@@ -36,8 +36,8 @@ namespace Desire_And_Doom.Screens
             screen_manager = _manager;
 
             Logo_Position = new Vector2(
-                DesireAndDoom.WIDTH / 2,
-                DesireAndDoom.HEIGHT / 2
+                DesireAndDoom.ScreenWidth / 2,
+                DesireAndDoom.ScreenHeight / 2
             );
             SkyLogoY += Logo_Size;
             MonoLogoY += Logo_Size;
@@ -53,8 +53,8 @@ namespace Desire_And_Doom.Screens
             tasker = new Tasker(
                 (time) =>
                 {
-                    SkyLogoY = Math2.Lerp(SkyLogoY, DesireAndDoom.HEIGHT / 2 - Logo_Size / 2, 0.08f);
-                    if (SkyLogoY < DesireAndDoom.HEIGHT / 2 - (Logo_Size / 2) + 1)
+                    SkyLogoY = Math2.Lerp(SkyLogoY, DesireAndDoom.ScreenHeight / 2 - Logo_Size / 2, 0.08f);
+                    if (SkyLogoY < DesireAndDoom.ScreenHeight / 2 - (Logo_Size / 2) + 1)
                         tasker.Next();
                 },
                 (time) =>
@@ -65,8 +65,8 @@ namespace Desire_And_Doom.Screens
                 },
                 (time) =>
                 {
-                    MonoLogoY = Math2.Lerp(MonoLogoY, DesireAndDoom.HEIGHT / 2 - Logo_Size / 2, 0.08f);
-                    if (MonoLogoY < DesireAndDoom.HEIGHT / 2 - (Logo_Size / 2) + 1)
+                    MonoLogoY = Math2.Lerp(MonoLogoY, DesireAndDoom.ScreenHeight / 2 - Logo_Size / 2, 0.08f);
+                    if (MonoLogoY < DesireAndDoom.ScreenHeight / 2 - (Logo_Size / 2) + 1)
                         tasker.Next();
                 },
                 (time) =>

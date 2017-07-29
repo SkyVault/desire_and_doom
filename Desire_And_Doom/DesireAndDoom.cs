@@ -36,11 +36,6 @@ namespace Desire_And_Doom
         public static void Request_Pause()  => Game_State = State.PAUSED;
         public static void Request_Resume() => Game_State = State.PLAYING;
         
-        // public static int WIDTH     = 1280;
-        // public static int HEIGHT    = 700;
-        public static int WIDTH     = 800;
-        public static int HEIGHT    = 480;
-
         // TEMP
         private bool skip_intro_animation = true;
 
@@ -78,9 +73,7 @@ namespace Desire_And_Doom
         {
             var device_width    = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             var device_height   = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-            WIDTH = (int)(device_width * 0.8f);
-            HEIGHT = (int)(device_height * 0.8f);
-
+            
             graphics = new GraphicsDeviceManager(this) {
                 PreferredBackBufferWidth    = (int)(device_width * 0.8f),
                 PreferredBackBufferHeight   = (int)(device_height * 0.8f),
@@ -93,7 +86,7 @@ namespace Desire_And_Doom
             Window.AllowUserResizing    = true;
             Window.AllowAltF4           = true;
 
-            Window.Position = new Point(width / 2 - WIDTH / 2, 0);
+            Window.Position = new Point(width / 2 - ScreenWidth / 2, 0);
             //Window.Position = new Point(0, 0);
             graphics.ApplyChanges();
 
@@ -162,7 +155,7 @@ namespace Desire_And_Doom
 
             keyboard_listener.KeyTyped += console.Key_Typed;
             
-            scene = new RenderTarget2D(graphics.GraphicsDevice, WIDTH, HEIGHT, false, SurfaceFormat.Color, DepthFormat.None, 2, RenderTargetUsage.DiscardContents);
+            scene = new RenderTarget2D(graphics.GraphicsDevice, ScreenWidth, ScreenHeight, false, SurfaceFormat.Color, DepthFormat.None, 2, RenderTargetUsage.DiscardContents);
 
             base.Initialize();
         }

@@ -57,8 +57,8 @@ namespace Desire_And_Doom
                 return;
             }
 
-            var dx = (X - (body.X + body.Width / 2) + DesireAndDoom.WIDTH / 2);
-            var dy = (Y - (body.Y + body.Height / 2) + DesireAndDoom.HEIGHT / 2);
+            var dx = (X - (body.X + body.Width / 2) + DesireAndDoom.ScreenWidth / 2);
+            var dy = (Y - (body.Y + body.Height / 2) + DesireAndDoom.ScreenHeight / 2);
 
             camera.Move(new Vector2(-dx * smoothing,-dy * smoothing));
 
@@ -80,7 +80,7 @@ namespace Desire_And_Doom
 
         public Vector2 Left
         {
-            get => camera.Position + new Vector2(DesireAndDoom.WIDTH / 2, DesireAndDoom.HEIGHT / 2) - new Vector2(DesireAndDoom.WIDTH / 2 / Zoom, DesireAndDoom.HEIGHT / 2 / Zoom);
+            get => camera.Position + new Vector2(DesireAndDoom.ScreenWidth / 2, DesireAndDoom.ScreenHeight / 2) - new Vector2(DesireAndDoom.ScreenWidth / 2 / Zoom, DesireAndDoom.ScreenHeight / 2 / Zoom);
         }
 
         public void Move(Vector2 by)

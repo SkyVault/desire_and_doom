@@ -52,7 +52,7 @@ namespace Desire_And_Doom.Graphics
 
                     effect.View = Matrix.CreateLookAt(c_pos, look, up);
 
-                    float aspect = DesireAndDoom.WIDTH / DesireAndDoom.HEIGHT;
+                    float aspect = DesireAndDoom.ScreenWidth / DesireAndDoom.ScreenHeight;
                     float fov = (float)Math.PI / 4; // 45 deg
 
                     float near = 0.001f;
