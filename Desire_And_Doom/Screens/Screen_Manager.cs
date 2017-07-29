@@ -110,7 +110,7 @@ namespace Desire_And_Doom.Screens
             active?.FilteredDraw(batch);
             batch.Draw(
                 Assets.It.Get<Texture2D>("gui-rect"),
-                new Rectangle(0, 0, (int)(Game1.WIDTH * 1.2f), (int)(Game1.HEIGHT * 1.2f)),
+                new Rectangle(0, 0, (int)(DesireAndDoom.WIDTH * 1.2f), (int)(DesireAndDoom.HEIGHT * 1.2f)),
                 new Rectangle(0, 0, 512, 512),
                 new Color(0f, 0f, 0f, transparency),
                 0f,

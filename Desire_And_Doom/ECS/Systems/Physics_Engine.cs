@@ -248,7 +248,7 @@ namespace Desire_And_Doom.ECS
         {
             base.UIDraw(batch, camera, entity);
 
-            if ( !Game1.DEBUG ) return;
+            if ( !DesireAndDoom.DEBUG ) return;
 
             Draw_Solids(batch, camera);
         }

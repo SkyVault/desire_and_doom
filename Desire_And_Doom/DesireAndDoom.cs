@@ -17,7 +17,7 @@ using Desire_And_Doom.Gui;
 
 namespace Desire_And_Doom
 {
-    public class Game1 : Game
+    public class DesireAndDoom : Game
     {
         public enum State
         {
@@ -28,9 +28,9 @@ namespace Desire_And_Doom
         public static State Game_State { get; set;  } = State.PLAYING;
         public static void Toggle_Pause()
         {
-            if ( Game1.Game_State == Game1.State.PLAYING )
-                Game1.Game_State = Game1.State.PAUSED;
-            else Game1.Game_State = Game1.State.PLAYING;
+            if ( DesireAndDoom.Game_State == DesireAndDoom.State.PLAYING )
+                DesireAndDoom.Game_State = DesireAndDoom.State.PAUSED;
+            else DesireAndDoom.Game_State = DesireAndDoom.State.PLAYING;
         }
 
         public static void Request_Pause()  => Game_State = State.PAUSED;
@@ -50,7 +50,7 @@ namespace Desire_And_Doom
         public static bool SHOULD_QUIT = false;
         public static readonly float SCALE = 3f;
 
-        GraphicsDeviceManager graphics;
+        private static GraphicsDeviceManager graphics;
         SpriteBatch batch;
         
         Camera_2D           camera;
@@ -66,7 +66,15 @@ namespace Desire_And_Doom
         Invatory_Manager    invatory_manager;
         Renderer3D          renderer_3d;
 
-        public Game1()
+        public static int ScreenWidth { get => graphics.PreferredBackBufferWidth; }
+        public static int ScreenHeight { get => graphics.PreferredBackBufferHeight; }
+        public static (int, int) ScreenSize { get => (ScreenWidth, ScreenHeight); }
+
+        public static int MonitorWidth { get => GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width; }
+        public static int MonitorHeight { get => GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height; }
+        public static (int, int) MonitorSize { get => (MonitorWidth, MonitorHeight); }
+
+        public DesireAndDoom()
         {
             var device_width    = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             var device_height   = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
@@ -74,8 +82,8 @@ namespace Desire_And_Doom
             HEIGHT = (int)(device_height * 0.8f);
 
             graphics = new GraphicsDeviceManager(this) {
-                PreferredBackBufferWidth = WIDTH,
-                PreferredBackBufferHeight = HEIGHT,
+                PreferredBackBufferWidth    = (int)(device_width * 0.8f),
+                PreferredBackBufferHeight   = (int)(device_height * 0.8f),
                 SynchronizeWithVerticalRetrace = true
             };
 

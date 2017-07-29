@@ -31,13 +31,13 @@ namespace Desire_And_Doom.Gui
 
             actions = new Named_Action_List(new Dictionary<string, Action> {
                 {"Resume", ()=>{
-                    Game1.Toggle_Pause();
+                    DesireAndDoom.Toggle_Pause();
                 } },
                 {"Settings", ()=>{
 
                 } },
                 {"Exit",()=>{
-                    Game1.Toggle_Pause();
+                    DesireAndDoom.Toggle_Pause();
                     screen_manager.Goto_Screen("Menu", true);
                 } }
             });
@@ -76,8 +76,8 @@ namespace Desire_And_Doom.Gui
             {
                 var size = font.MeasureString(name) * scale;
                 float margin = 16;
-                float x = Game1.WIDTH / 2 - size.X / 2;
-                float y = Game1.HEIGHT / 2 - (size.Y + margin) / 2 - ((size.Y + margin) * names.Length / 2) + (index * (size.Y + margin)) + size.Y / 2;
+                float x = DesireAndDoom.WIDTH / 2 - size.X / 2;
+                float y = DesireAndDoom.ScreenHeight / 2 - (size.Y + margin) / 2 - ((size.Y + margin) * names.Length / 2) + (index * (size.Y + margin)) + size.Y / 2;
 
                 batch.DrawString(
                     font,
@@ -96,9 +96,9 @@ namespace Desire_And_Doom.Gui
                     batch.Draw(
                     rect,
                     new Rectangle(
-                        (int)((Game1.WIDTH / 2) - Game1.WIDTH / 8),
+                        (int)((DesireAndDoom.WIDTH / 2) - DesireAndDoom.WIDTH / 8),
                         (int)(y + size.Y * 0.1f),
-                        (int)(Game1.WIDTH / 4),
+                        (int)(DesireAndDoom.WIDTH / 4),
                         (int)(size.Y * 0.9f)),
                     new Rectangle(0, 0, 512, 512),
                     Color.Orange,
@@ -116,10 +116,10 @@ namespace Desire_And_Doom.Gui
             batch.Draw(
                 rect,
                 new Rectangle(
-                    (int)(Game1.WIDTH / 2 - (128 * 1.5f)),
-                    Game1.HEIGHT / 2 - Game1.HEIGHT / 3,
+                    (int)(DesireAndDoom.WIDTH / 2 - (128 * 1.5f)),
+                    DesireAndDoom.ScreenHeight / 2 - DesireAndDoom.ScreenHeight / 3,
                     128 * 3,
-                    (int)(Game1.HEIGHT / 1.5f)
+                    (int)(DesireAndDoom.ScreenHeight / 1.5f)
                     ),
                 new Rectangle(0, 0, 512, 512),
                 new Color(0, 0, 0, 0.8f),

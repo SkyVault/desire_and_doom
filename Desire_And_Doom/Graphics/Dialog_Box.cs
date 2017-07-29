@@ -57,11 +57,11 @@ namespace Desire_And_Doom
             Text        = text;
             words       = Compile_To_Words(text);
 
-            Width = (Game1.WIDTH / (int)(8 * Scale));
+            Width = (DesireAndDoom.WIDTH / (int)(8 * Scale));
 
             Position = new Vector2(
                 0,
-                Game1.HEIGHT - (Height * 8) * Scale
+                DesireAndDoom.HEIGHT - (Height * 8) * Scale
                 ); 
 
             if (animating)

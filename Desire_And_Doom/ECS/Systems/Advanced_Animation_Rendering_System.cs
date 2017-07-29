@@ -54,7 +54,7 @@ namespace Desire_And_Doom.ECS.Systems
             var body = (Body)entity.Get(Types.Body);
 
             // calculate the entities depth rendering layer
-            animation.Layer = 0.3f + (body.Y / Game1.Map_Height_Pixels) * 0.1f;
+            animation.Layer = 0.3f + (body.Y / DesireAndDoom.Map_Height_Pixels) * 0.1f;
             var current_animation = animation.Get_Current_Animation();
 
             var frame = animation.Get_Current_Frame();

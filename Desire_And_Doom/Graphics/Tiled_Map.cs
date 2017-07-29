@@ -95,7 +95,7 @@ namespace Desire_And_Doom
                 lighting.AmbientColor = color;
             }
             
-            Game1.Map_Height_Pixels = map.Height * map.TileHeight;
+            DesireAndDoom.Map_Height_Pixels = map.Height * map.TileHeight;
 
             for (int i = map.Layers.Count - 1; i >= 0; i--)
             {
@@ -252,15 +252,15 @@ namespace Desire_And_Doom
 
 
             if (camera_pos.X < 0)
-                controller.Position = new Vector2(-Game1.WIDTH / camera.Zoom, camera.Y);
+                controller.Position = new Vector2(-DesireAndDoom.WIDTH / camera.Zoom, camera.Y);
             if (camera_pos.Y < 0)
-                controller.Position = new Vector2(camera.X, -Game1.HEIGHT / camera.Zoom);
+                controller.Position = new Vector2(camera.X, -DesireAndDoom.HEIGHT / camera.Zoom);
 
-            var camera_bottom_right = camera.Left + new Vector2(Game1.WIDTH / camera.Zoom, Game1.HEIGHT / camera.Zoom);
+            var camera_bottom_right = camera.Left + new Vector2(DesireAndDoom.WIDTH / camera.Zoom, DesireAndDoom.HEIGHT / camera.Zoom);
             if (camera_bottom_right.X > map.Width * map.TileWidth)
-                controller.Position = new Vector2((map.Width * map.TileWidth) - (Game1.WIDTH / camera.Zoom) * 2, camera.Y);
+                controller.Position = new Vector2((map.Width * map.TileWidth) - (DesireAndDoom.WIDTH / camera.Zoom) * 2, camera.Y);
             if (camera_bottom_right.Y > map.Height * map.TileHeight)
-                controller.Position = new Vector2(camera.X, (map.Height * map.TileHeight) - (Game1.HEIGHT / camera.Zoom) * 2);
+                controller.Position = new Vector2(camera.X, (map.Height * map.TileHeight) - (DesireAndDoom.HEIGHT / camera.Zoom) * 2);
 
             timer += (float)time.ElapsedGameTime.TotalSeconds * 2;
             frame = (int) timer;
@@ -281,8 +281,8 @@ namespace Desire_And_Doom
 
                 int cx = (int)(camera_position.X / 8);
                 int cy = (int)(camera_position.Y / 8);
-                int cw = (int)((Game1.WIDTH  / camera.Zoom) / 8);
-                int ch = (int)((Game1.HEIGHT / camera.Zoom) / 8);
+                int cw = (int)((DesireAndDoom.WIDTH  / camera.Zoom) / 8);
+                int ch = (int)((DesireAndDoom.HEIGHT / camera.Zoom) / 8);
 
                 if (cx < 0) cx = 0;
                 if (cy < 0) cy = 0;
@@ -338,7 +338,7 @@ namespace Desire_And_Doom
             foreach (var billboard in billboards)
             {
                 var y = billboard.Position.Y + (billboard.Region.Height * 0.8f);
-                var layer = 0.3f + (y / Game1.Map_Height_Pixels) * 0.1f;
+                var layer = 0.3f + (y / DesireAndDoom.Map_Height_Pixels) * 0.1f;
                 batch.Draw(texture, billboard.Position, billboard.Region, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, layer);
             }
         }

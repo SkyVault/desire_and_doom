@@ -52,7 +52,7 @@ namespace Desire_And_Doom
                                 image,
                                 Cart_To_Iso( 
                                     new Vector2(
-                                        x * map.TileWidth / 2 + Game1.WIDTH / 2, 
+                                        x * map.TileWidth / 2 + DesireAndDoom.WIDTH / 2, 
                                         y * map.TileHeight)), 
                                 quads[layer.Tiles[x + y * map.Width].Gid - 1], 
                                 new Color (brightness, brightness, brightness)

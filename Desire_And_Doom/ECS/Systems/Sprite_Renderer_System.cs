@@ -23,7 +23,7 @@ namespace Desire_And_Doom.ECS
 
             //animation.Layer = 0.3f + (body.Y / Game1.Map_Height_Pixels) * 0.1f;
 
-            sprite.Layer = 0.3f + (body.Y / Game1.Map_Height_Pixels) * 0.1f;
+            sprite.Layer = 0.3f + (body.Y / DesireAndDoom.Map_Height_Pixels) * 0.1f;
 
             batch.Draw(
                 sprite.Texture, 

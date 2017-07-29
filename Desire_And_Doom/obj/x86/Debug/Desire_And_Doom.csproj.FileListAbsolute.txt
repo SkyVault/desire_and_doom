@@ -171,3 +171,4 @@ C:\Users\dusti\Source\Repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\De
 C:\Users\dusti\Source\Repos\desire_and_doom\Desire_And_Doom\obj\x86\Debug\Desire_And_Doom.csprojResolveAssemblyReference.cache
 C:\Users\dusti\Source\Repos\desire_and_doom\Desire_And_Doom\obj\x86\Debug\Desire_And_Doom.exe
 C:\Users\dusti\Source\Repos\desire_and_doom\Desire_And_Doom\obj\x86\Debug\Desire_And_Doom.pdb
+C:\Users\dusti\Source\Repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\System.ValueTuple.dll

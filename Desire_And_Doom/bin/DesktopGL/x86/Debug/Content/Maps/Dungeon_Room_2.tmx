@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="68" height="96" tilewidth="8" tileheight="8" backgroundcolor="#55ffff" nextobjectid="60">
+<map version="1.0" tiledversion="2017.07.17" orientation="orthogonal" renderorder="right-down" width="68" height="96" tilewidth="8" tileheight="8" backgroundcolor="#55ffff" nextobjectid="60">
  <properties>
   <property name="Sky" value="true"/>
  </properties>
@@ -62,7 +62,6 @@
  </layer>
  <objectgroup name="Entities">
   <object id="2" type="Player" x="120" y="152" width="24" height="24"/>
-  <object id="3" type="Grendle" x="288" y="144" width="40" height="40"/>
  </objectgroup>
  <objectgroup name="Solids">
   <object id="6" x="208" y="8" width="128" height="8"/>

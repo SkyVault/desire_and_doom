@@ -14,7 +14,7 @@ namespace Desire_And_Doom.Screens
     class Level_1_Screen : Game_Screen
     {
         Sky_Renderer sky;
-        World world;
+        //World world;
 
         Pause_Menu pause_menu;
 
@@ -30,9 +30,9 @@ namespace Desire_And_Doom.Screens
             lighting.AmbientColor = new Color(0.4f, 0.4f, 0.4f, 1.0f);
             Load_Map("Dungeon_Room_2");
             
-            camera.Zoom = Game1.SCALE;
-            if (Game1.Game_State == Game1.State.PAUSED)
-                Game1.Toggle_Pause();
+            camera.Zoom = DesireAndDoom.SCALE;
+            if (DesireAndDoom.Game_State == DesireAndDoom.State.PAUSED)
+                DesireAndDoom.Toggle_Pause();
         }
 
         //override 
@@ -47,7 +47,7 @@ namespace Desire_And_Doom.Screens
             if (Input.It.Is_Key_Pressed(Keys.Escape))
             {
                 pause_menu.Reset();
-                Game1.Toggle_Pause();
+                DesireAndDoom.Toggle_Pause();
             }
 
             
@@ -64,7 +64,7 @@ namespace Desire_And_Doom.Screens
         {
             base.UIDraw(batch);
 
-            if (Game1.Game_State == Game1.State.PAUSED)
+            if (DesireAndDoom.Game_State == DesireAndDoom.State.PAUSED)
                 pause_menu.Draw(batch);
         }
     }

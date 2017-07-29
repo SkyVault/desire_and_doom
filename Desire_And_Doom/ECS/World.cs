@@ -279,7 +279,7 @@ namespace Desire_And_Doom.ECS
                     if (system.Has_All_Types(entity)) {
                         if ( !entity.Loaded )
                             system.Load(entity);
-                        if (Game1.Game_State == Game1.State.PLAYING)
+                        if (DesireAndDoom.Game_State == DesireAndDoom.State.PLAYING)
                             system.Update(time, entity);
                         system.Constant_Update(time, entity);
                     }

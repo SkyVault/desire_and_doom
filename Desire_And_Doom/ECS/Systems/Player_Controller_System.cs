@@ -284,7 +284,7 @@ namespace Desire_And_Doom.ECS
 
             if ( Input.It.Is_Key_Down(Keys.LeftControl) && Input.It.Is_Key_Pressed(Keys.P) )
             {
-                Game1.Toggle_Pause();
+                DesireAndDoom.Toggle_Pause();
             }
             
             // toggle the gui and invatory screen
@@ -294,7 +294,7 @@ namespace Desire_And_Doom.ECS
                 show_overlay_gui = !show_overlay_gui;
                 invatory_manager.Showing = show_overlay_gui;
 
-                Game1.Toggle_Pause();
+                DesireAndDoom.Toggle_Pause();
             }
 
             //if (Game1.Game_State == Game1.State.PAUSED && invatory.Draw)

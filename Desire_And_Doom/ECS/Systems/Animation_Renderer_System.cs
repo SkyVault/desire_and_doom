@@ -72,7 +72,7 @@ namespace Desire_And_Doom.ECS
             var animation = (Animated_Sprite)entity.Get(Types.Animation);
             var body = (Body)entity.Get(Types.Body);
             
-            animation.Layer = 0.3f + (body.Y / Game1.Map_Height_Pixels) * 0.1f;
+            animation.Layer = 0.3f + (body.Y / DesireAndDoom.Map_Height_Pixels) * 0.1f;
 
             Animation current_animation = animation.Animations[animation.Current_Animation_ID];
             if (animation.Current_Frame > current_animation.Frames.Count - 1)

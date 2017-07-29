@@ -13,7 +13,7 @@ namespace Desire_And_Doom
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
+            using (var game = new DesireAndDoom())
                 game.Run();
         }
     }
