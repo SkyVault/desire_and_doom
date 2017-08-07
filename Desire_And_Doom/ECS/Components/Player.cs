@@ -17,11 +17,13 @@ namespace Desire_And_Doom
             RUNNING,
             ATTACKING,
             DASHING,
+            IN_INVATORY,
             NUM_ACTION_STATES
         }
 
         public float Dash_Timer = 0;
-        public float Max_Dash_Time = 0.3f;
+        public float Max_Dash_Time { get => 1f; }
+        public float Attack_Walk_Speed_Multiplyer { get => 0.25f; }
 
         public Action_State State { get; set; } = Action_State.IDLE;
 

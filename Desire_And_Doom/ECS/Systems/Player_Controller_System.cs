@@ -156,8 +156,11 @@ namespace Desire_And_Doom.ECS
                 player_run_anim = equipment.Left_Hand.Run_Animation_ID;
             }
 
-            if (player.Can_Move && player.State != Player.Action_State.DASHING)
+            if (player.Can_Move && player.State != Player.Action_State.DASHING && player.State != Player.Action_State.IN_INVATORY)
             {
+                var mult = (player.State == Player.Action_State.ATTACKING) ? player.Attack_Walk_Speed_Multiplyer : 1;
+                var speed = 10 * mult;
+                
                 if (Input.It.Is_Key_Down(Keys.Space))
                 {
                     body.Z = 1;
@@ -168,7 +171,7 @@ namespace Desire_And_Doom.ECS
                 {
                     if (player.State != Player.Action_State.ATTACKING)
                         sprite.Current_Animation_ID = player_run_anim;
-                    physics.Apply_Force(10, Physics.Deg_To_Rad(180));
+                    physics.Apply_Force(speed, Physics.Deg_To_Rad(180));
                     sprite.Scale = new Vector2(-1, sprite.Scale.Y);
                 }
 
@@ -176,13 +179,13 @@ namespace Desire_And_Doom.ECS
                 {
                     if (player.State != Player.Action_State.ATTACKING)
                         sprite.Current_Animation_ID = player_run_anim;
-                    physics.Apply_Force(10, Physics.Deg_To_Rad(0));
+                    physics.Apply_Force(speed, Physics.Deg_To_Rad(0));
                     sprite.Scale = new Vector2(1, sprite.Scale.Y);
                 }
 
                 if (Input.It.Is_Key_Down(Keys.Up) || y_axis > 0)
                 {
-                    physics.Apply_Force(10, Physics.Deg_To_Rad(270));
+                    physics.Apply_Force(speed * 0.8f, Physics.Deg_To_Rad(270));
                     if (player.State != Player.Action_State.ATTACKING)
                         sprite.Current_Animation_ID = player_run_anim;
                 }
@@ -191,7 +194,7 @@ namespace Desire_And_Doom.ECS
                 {
                     if (player.State != Player.Action_State.ATTACKING)
                         sprite.Current_Animation_ID = player_run_anim;
-                    physics.Apply_Force(10, Physics.Deg_To_Rad(90));
+                    physics.Apply_Force(speed * 0.8f, Physics.Deg_To_Rad(90));
                 }
             }
 
@@ -281,20 +284,28 @@ namespace Desire_And_Doom.ECS
         public override void Constant_Update(GameTime time, Entity entity)
         {
             base.Constant_Update(time, entity);
+            var player = (Player)entity.Get(Types.Player);
 
             if ( Input.It.Is_Key_Down(Keys.LeftControl) && Input.It.Is_Key_Pressed(Keys.P) )
             {
                 DesireAndDoom.Toggle_Pause();
             }
             
-            // toggle the gui and invatory screen
+            // Toggle the gui and invatory screen
             var invatory = (Invatory) entity.Get(Types.Invatory);
             if ( Input.It.Is_Key_Pressed(Keys.Q) )
             {
                 show_overlay_gui = !show_overlay_gui;
                 invatory_manager.Showing = show_overlay_gui;
 
-                DesireAndDoom.Toggle_Pause();
+                
+
+                if (show_overlay_gui)
+                    player.State = Player.Action_State.IN_INVATORY;
+                else
+                    player.State = Player.Action_State.IDLE;
+
+                //DesireAndDoom.Toggle_Pause();
             }
 
             //if (Game1.Game_State == Game1.State.PAUSED && invatory.Draw)
