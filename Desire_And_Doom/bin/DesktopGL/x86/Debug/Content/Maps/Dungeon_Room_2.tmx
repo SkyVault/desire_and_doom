@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.07.17" orientation="orthogonal" renderorder="right-down" width="68" height="96" tilewidth="8" tileheight="8" backgroundcolor="#55ffff" nextobjectid="60">
+<map version="1.0" tiledversion="2017.07.17" orientation="orthogonal" renderorder="right-down" width="68" height="96" tilewidth="8" tileheight="8" backgroundcolor="#55ffff" nextobjectid="66">
  <properties>
   <property name="Sky" value="true"/>
  </properties>
  <tileset firstgid="1" name="dungeon_tiles" tilewidth="8" tileheight="8" tilecount="4096" columns="64">
   <image source="../../../../../../Content/dungeon_tiles.png" width="512" height="512"/>
   <terraintypes>
-   <terrain name="Gras" tile="-1"/>
+   <terrain name="Grass" tile="0"/>
   </terraintypes>
   <tile id="256" terrain="0,0,0,0"/>
-  <tile id="320" terrain="0,0,0,0"/>
-  <tile id="321" terrain="0,,,"/>
+  <tile id="260" terrain="0,0,,"/>
+  <tile id="321" terrain="0,0,0,"/>
+  <tile id="330" terrain="0,0,,0"/>
+  <tile id="448" terrain="0,,0,"/>
+  <tile id="451" terrain=",,,0"/>
+  <tile id="452" terrain=",,0,"/>
+  <tile id="459" terrain=",0,,0"/>
+  <tile id="515" terrain=",0,,"/>
+  <tile id="516" terrain="0,,,"/>
+  <tile id="897" terrain="0,,0,0"/>
+  <tile id="906" terrain=",0,0,0"/>
+  <tile id="963" terrain=",,0,0"/>
  </tileset>
  <layer name="Floor" width="68" height="96">
   <properties>
@@ -33,7 +43,7 @@
    <property name="layer" value="0.215"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt3MGNwyAQRuFsC9nOks5SWiragxPJ/0g2RgzLwLzv5BMS1hOWLOB2A8a6/7SP8eswRhQPh7k8J3wfHh3UityNRwe1InUzooeSkb2M6KHkP3uJ2ENJz14i9lDSo5cZu7A8O5mxC8ujkxW6sFo6WaELq6UT+lD0sVmxC6umkxW7sGo6oQ9FH5sMXVhnnWTowjrrhD4UfSj6UPSxydiFte8kYxfWvhP6oA+LPhR9KPpQ9KHoQ9GHog9FH4o+FH0o+lD0ofZ9vD7PGTvh/5ji/6miD0Ufij7UWR+ZvjPfLt4X5pqhE/Z/KPZ/qJo+Vl5HatYNa8VO2H+q2H+qWvpYaR1pWTesFTrxPAczcyeeXVgzdtLzPN3LjB2xF/v96NHFkYi9jDyPG6GXkT2UZD+fbdlevnre7xCph6uy3u9w5KibGjN2AAAAAAAAAAAAAACAlz/lYCWE
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAxmAAAB
   </data>
  </layer>
  <layer name="Forground_Ground" width="68" height="96">
@@ -49,7 +59,7 @@
    <property name="layer" value="0.22"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmutSwjAQRtum4BXeSaWicnkqRRzQd0JBcUCfyV2a0LTTYL3N2M13ZjLIgD/2kE3SzQYBAADIZxQFQSMMglAPEARJmHqBk4wn8jDHPNmiaH7E1hwJ4WZDosqd+OpnRfGu4WPLEeXMcSFv7mnOPJTMGx/okYt+wccbuXj31MeEXEy1jzI3LXrf9mxv5n2mEWV/71HcHZWutQN6P4z8myc2XR1z2driow+DyZ8WOWjDxwbOnwE5GGKObHDljK9O7D3HrLHGj6/Y+4/tx1c6FH+ifdjnFZ+d2BSfi0HeiXRuac0c07hT7u/06LO+kutjpFIPXDN7odcljVcaC0e8E/psqn1c07gR5uVZpR6YKnWQFX13rX2wQ5e3ulI276XmwneBj93ncx/32F0OuC6yT+PAEycuD80wPa9zXeSCxqUn91llLtjDuSPmRPD5g4n13W5T54Z5hnNh1hrJ8N0uz4duhd99LjxfvnLO9OHu15wzx/r5pQw+0yuV35OlYuJb6ucX+wxu+gHMs410F0xxb5nReNQxu/oBpJOLl+KPCvsHO2kK9rHrPOrabxPh+WLqxSbOma6lf/Y/Un3Y9WK7lg7ybgAAAAAAAAAAAAAA+O/cqKz3y3WHVCfiH9bmFirr/SreIdUVdqIojvgXYrHvkOrMGdf4w7Tmv+k/CfOvVe87yu6Q6g73G5i+A/Paq/ibn5CLU2E+XNh5ZfetmJ6uwwo9LNLY5pXVt2J6uq4ErBsAAAAAAAAAAAAAAAAAAAAAAADAX/EBGohAmg==
+   eJztmoly0zAQhm3LDjDQvhMQU5i0fSd6UabHO5W4UKbHM7GLtYniSj6SOJbt/5vZqdMcln/vJclBAAAAw+ciCoIkDIJQGwiCNMx1gSZL5qRDBj9ZoMg/YsNHQmjzn1TZNRmrPo90vU/QY8F7ipkPhbi5IZ+5tfhN23A+u+9Y/xlpcVjQ45m0eNmxHso4X5eaXJEW11oPmzZ79Hq/5dqcWWL0RLVzrjpwnUmi5fEbGs9U5bn2iF4fR+36iavOdR07woEehy23tOUjLk0y5Y8uEj97NJ79HeQRlyYh/T+K2jtvE3iMRzSm4xZ9JNN+kFlyOM+1Ek+0YFwxsw1NRAdX33NH9smTWBHMmiM5VvTZBFtNeeUbHvmFiVl/TH3qwP5lxoMrLnyOkSJTGluqx2f2K3U0sfU0ZeZjjFRRrAN1Pp/U1INt0mEvti5xAx8xvyOxMKvQxJeeg/lB9+eS7GfJfZrRe4dqs7xaqknHPceFynXg3PeH/j6Q/S3pDa/ovWutxxnZeYUuZ2qZV/k3y2qtD/n0t8p1YFz3zOSRPvukr6dqnl7VZyw08EAHweb32+i5yvo53/uMItvQo6re3nmUN23UuZ9NdCr2K33To0wDXhd5S/ZujTorvxFr41wx8TxWnP2RHjevi3wl+xY238+Snn8a5sZ7Yl966Bt8Da5xpxv2H74j/eNEx0aVL0uuGTLixwc17nvWIF76SJ0+UxjD3q/0mZd6/mKDe3qlVmvyUJHre9DzF7MHl+cBZG4zdC0YW6/0S1+z63mAoVM152ZNJgPWY515VjrweJHeUa6T42RasWYnsTNEzPVicy0drGoDAAAAAADGw5yfE4nyNYZTle9vnvdwn39TTsN8XY7XmGJeZ6LjuX5m5t6jZwt3haxJsw5FuyG7Dceliexn2vR4JnvRx2PSJHboIcZxNLY5N2uiZC9TreqRjDCPMJ9lL7OgR+T5Pm/bmLXmY9i/5w23SbHefCc7GbEexXpj7nmMlZXcOuK8YSK5FQAAAAAAAAAAAAAAAAAAAAAAAAAAgK75ByVNZp0=
   </data>
  </layer>
  <layer name="Grass" width="68" height="96">
@@ -57,11 +67,16 @@
    <property name="layer" value="0.23"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmttSwjAQhpsG9MLTM+mAXqC+E3i6UHgnBPUC5JncnTY0rUIPSZoU/29mR9uxHfZ3T90SRQD450IkZsqzjKIXaX4f39jQY0nXf5IWX2QfFrT1QVMdqlzXRU1c6sGwJo8UL08yyaX/QlGfYeq7oHNLzh+Z5JKKmUf6+dTB+KnKX/HSi6OoH+fPsT5HMqk1XcwnRZO8GpAWw3j/33RVE1v9uAjHyyTguuLK730IiqG4JI584UWPtKa4ZJdfPvxlBhX8dVlLQtOjCiHnjaKon0s9L0mLK+ixxWYdMf2cIeWRjTpySHowrMkkoM/jmzlp8Q49tjStJaHFuU2axMgh6zFGDclxyHrU2f+MqG7cynZqatX8sp2Hu/Y/DzK/T+Td/CvZm2xnfm9Tj4VIdDghn07J5nFeF+4hC5nfJ/JufkW2lsn8bosQ6qyMk50ha8C+n5Gdi+T//p6eY5vS8SzOjotmo46EoAejYoP9uiO7F1keKH+/6feNdjyl2JjJ7NjHbOZCP44LybUx9XVKNhO7n2O3+tA1G5nFjo89gG099LhQxjshfg/BO/fJHv/0azh2bO4BfOXNKM7igk1/71C2c2eEVnPHJfrVwZceS2En/03rqS3/Te6z1HuJ+P1Oqg6mevrWQ8WF6iWmvVKIduupzXxa0X3WhdnBtFeKPf3IBTb1+KuniB1zehW285jFeqpoo66qnlKcp5rmjJpbXTzntqHHazqf5+apdAarGyP63Nr13WFPn8XJNg3yJpdzHXhPVQZr0uNeS3ZEdlyz7+rPMV14T1WFAfk0JLsmu2mSL2neuainXUKf9fuG85wpvvZnRdR3rYae62goelT5rhUAoRLK/jEUoAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5fwAOUZmzw==
+   eJztmk1S4zAQhS0phAUzw5kYEljAzJ0IP7OA5E5AYBZAzkR32YolQxLbkizZeV9VF3EKh9Kj+3VLcZYBEJ9jkYcrdyrL/in3z4mNDz2WdP8rafGf4sWDtjFoq0Od+/qoSUg9GNbkhvLlVuW1tC9U9ZkWaxf03pLrR+W1pHPmhn7e9jB/6vJdvoxklh1I+z3WZ6xyr+ljPWna1NWEtJjK7b+TiiZN89VXP67C+TJL2FdCrXsbgnJI7sijWETRo/CUfWJSY72peEkqpFw3mmr9hKynE9Lidwd6zClXFy3rs0s9uvKRD/obqx75FXzkK6zJDLqseSQtnhz0uBblzHk3AF1dveRZlHuk1wHowbjkiJLlfnKceA+vy5WDh5zKcj95Bj2Sp8l++oJ841K5e6pPfM9dm85/rpV9nshn8/cUDyqt+d2HHtrjj2hNPygepa0L95BnZZ8n8tn8G8W7yuf3IaE9njXgtf+k+CXy//tT8R7HnK4XsryuxpB8ROcGr+sPxV9R1oFe7we9XhnXer+lr2P4SIh9GueFYm8s1jqnWIjN+9i1PsV+S+dODB/xrYeZFzr4TIi/h+AZabZlfeY9nDtdnQOE5EKWecFhfu+w68ydEYbnXu3QrwkxzkOZpfBT/65+6mv9Lp+zNHuJ+PqdVBNc9Yyth84L3Utce6UQ3fqpz3p6o895r8wOrr1SbOlHIfCpx3c9RWyY0+uwnsc8+qmmC1/VPaU6T7WtGT23hphPu9DjvpjPrXmqmMGa5og5t6a0z23DyJzFKVYt6saquYT2uW1hTUbcaynGFIcN+665jxnCfMpMaE1TijOK8zb1UtRdCD/tE+asf+A4z7lS13dD+7M+G59G9tFU9KjzrBUAqRLr3CBVoAcAAADzWSFgPysE7GeFgP2sEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADYLz4BdvVz3g==
   </data>
  </layer>
  <objectgroup name="Entities">
-  <object id="2" type="Player" x="120" y="152" width="24" height="24"/>
+  <object id="2" type="Bird" x="259" y="220" width="5.66667" height="6"/>
+  <object id="61" type="Player" x="122.333" y="149.333" width="24" height="24"/>
+  <object id="62" type="Bird" x="249.167" y="234.667" width="5.66667" height="6"/>
+  <object id="63" type="Bird" x="269.5" y="249.333" width="5.66667" height="6"/>
+  <object id="64" type="Bird" x="286.5" y="239.667" width="5.66667" height="6"/>
+  <object id="65" type="Bird" x="283.167" y="224.667" width="5.66667" height="6"/>
  </objectgroup>
  <objectgroup name="Solids">
   <object id="6" x="208" y="8" width="128" height="8"/>
