@@ -55,6 +55,7 @@
 
 		["chest-open"] = {0, 0, 32, 32, 5, offset_y = 6},
 	},
+
 	-- TODO: implement explicit frame creation, with seperate speeds and offsets
 	frames = {
 		-- x, y, w, h, speed?, x_offset? y_offset?, left_offset_x? left_offset_y? right_offset_x? right_offset_y?

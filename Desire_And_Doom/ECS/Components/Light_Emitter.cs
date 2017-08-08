@@ -19,7 +19,9 @@ namespace Desire_And_Doom.ECS
             {
                 Scale = new Vector2(scale),
                 Color = Color.AliceBlue,
-                Intensity = 0.5f
+                Intensity = 0.5f,
+                Radius = 0.2f,
+                ShadowType = ShadowType.Occluded
             };
             lighting.Lights.Add(Light);
         }

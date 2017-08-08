@@ -257,7 +257,10 @@ namespace Desire_And_Doom
                 screen_manager.FilteredDraw(batch);
             batch.End();
 
-            penumbra.Draw(gameTime);
+            try
+            {
+                penumbra.Draw(gameTime);
+            } catch (Exception e) { }
 
             // gui
             if (DEBUG)

@@ -11,6 +11,14 @@ using System.Threading.Tasks;
 
 namespace Desire_And_Doom
 {
+    class LuaTableAsset
+    {
+        string Path { get; set; } = "";
+        bool Hotload { get; set; }
+        long LastTime { get; set; } = 0;
+        LuaTable Table { get; set; }
+    }
+
     class Assets
     {
         private static Assets it;
@@ -22,21 +30,23 @@ namespace Desire_And_Doom
         private Dictionary<string, LuaTable>        entities;
         private Dictionary<string, LuaFunction>     lua_functions;
         private Dictionary<string, Animation>       animations;
+        private Dictionary<string, LuaTableAsset>   reloadable_lua_tables;
 
         public ContentManager Content;
 
         private Assets() {
-            textures        = new Dictionary<string, Texture2D>();
-            entities        = new Dictionary<string, LuaTable>();
-            fonts           = new Dictionary<string, SpriteFont>();
-            quads           = new Dictionary<string, List<Rectangle>>();
-            lua_functions   = new Dictionary<string, LuaFunction>();
-            animations      = new Dictionary<string, Animation>();
+            textures                = new Dictionary<string, Texture2D>();
+            entities                = new Dictionary<string, LuaTable>();
+            fonts                   = new Dictionary<string, SpriteFont>();
+            quads                   = new Dictionary<string, List<Rectangle>>();
+            lua_functions           = new Dictionary<string, LuaFunction>();
+            animations              = new Dictionary<string, Animation>();
+            reloadable_lua_tables   = new Dictionary<string, LuaTableAsset>();
 
             lua = new Lua();
         }
 
-        public void Add(string id, object t)
+        public void Add(string id, object t, bool hotreload = false)
         {
             if (t.GetType() == typeof(Texture2D))
                 textures.Add(id, t as Texture2D);
@@ -86,7 +96,7 @@ namespace Desire_And_Doom
             }
         }
 
-        public void Add_Table(string file)
+        public void Add_Table(string file, bool hotload = false)
         {
             var table = lua.DoFile(file)[0] as LuaTable;
             foreach(string ent in table.Keys)
