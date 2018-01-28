@@ -85,9 +85,10 @@ namespace Desire_And_Doom
 
             Window.AllowUserResizing    = true;
             Window.AllowAltF4           = true;
+            Window.ClientSizeChanged += Window_CLientSizeChanged;
 
             Window.Position = new Point(width / 2 - ScreenWidth / 2, 0);
-            //Window.Position = new Point(0, 0);
+
             graphics.ApplyChanges();
 
             this.IsMouseVisible = true;
@@ -104,6 +105,18 @@ namespace Desire_And_Doom
 
             Components.Add(console);
             Components.Add(penumbra);
+        }
+
+        void Window_CLientSizeChanged(object sender, EventArgs args)
+        {
+            // Handle window resizing
+            var device_width    = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            var device_height   = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+
+            graphics.PreferredBackBufferWidth = device_width;
+            graphics.PreferredBackBufferHeight = device_height;
+
+            graphics.ApplyChanges();
         }
 
         protected override void Initialize()
@@ -238,7 +251,6 @@ namespace Desire_And_Doom
 
             GraphicsDevice.Clear(new Color(105, 205, 241, 255));
 
-
             // main draw
             batch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, DepthStencilState.DepthRead, null, null, camera.View_Matrix);
                 world.Draw(batch);
@@ -261,7 +273,7 @@ namespace Desire_And_Doom
             try
             {
                 penumbra.Draw(gameTime);
-            } catch (Exception e) { }
+            } catch (Exception) { }
 
             // gui
             if (DEBUG)
