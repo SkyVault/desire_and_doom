@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" nextobjectid="27">
+ <tileset firstgid="1" name="tiles_main" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
+  <image source="../../../../../../Content/tiles_main.png" width="512" height="512"/>
+  <terraintypes>
+   <terrain name="grass" tile="-1"/>
+   <terrain name="dirt" tile="-1"/>
+  </terraintypes>
+  <tile id="32" terrain="0,0,0,1"/>
+  <tile id="33" terrain="0,0,1,1"/>
+  <tile id="34" terrain="0,0,1,0"/>
+  <tile id="35" terrain="1,1,1,0"/>
+  <tile id="36" terrain="1,1,0,0"/>
+  <tile id="37" terrain="1,1,0,1"/>
+  <tile id="64" terrain="0,1,0,1"/>
+  <tile id="65" terrain="1,1,1,1"/>
+  <tile id="66" terrain="1,0,1,0"/>
+  <tile id="67" terrain="1,0,1,0"/>
+  <tile id="68" terrain="0,0,0,0"/>
+  <tile id="69" terrain="0,1,0,1"/>
+  <tile id="96" terrain="0,1,0,0"/>
+  <tile id="97" terrain="1,1,0,0"/>
+  <tile id="98" terrain="1,0,0,0"/>
+  <tile id="99" terrain="1,0,1,1"/>
+  <tile id="100" terrain="0,0,1,1"/>
+  <tile id="101" terrain="0,1,1,1"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="64" height="64">
+  <properties>
+   <property name="layer" type="float" value="0.15"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3YXW7CMBBGUW+FAN1HKXQfaZXufwl1pIw0GBfZHttxxX04grfMp/H/zTl3AwAAAABgZwdv8o4D1NIr77JlXv14F+9jgNpqZNK/OmeYVzt53w1qmhpnlpyxTKms2XUdk3usqVV2S2bJ/WXILrmf1XEaLPtaz3lj7XlKDdcds0t/hTVzSQ218sv6lpO99npWMvYse4pkzs1dq8815p0l/3vGd1rmFp+Z2a3jPyW/dQ1v2Xtr/+etp+EaprXObem9Nf8oSnvfag3ujd6/Zu9fOfsqZ9zXOlePZKT9N4Xcx1aLs7/nyP77NnCvdeZwrta6e8yu/h3Kkndxae8e/2n/0XedKfL/rx4/E/Y/9k6j6e/1fgstPWPknD9yvlH73aJ3/tgeLPP47OJ3Cv2/9xyf3f29Jlxzc3KPsh+V4tyV3+89xmwrer+NzdE95ykAAAAAAAAAAOIXIeyS+QBAAAA=
+  </data>
+ </layer>
+ <layer name="Tile Layer 2" width="64" height="64">
+  <properties>
+   <property name="layer" type="float" value="0.18"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAIC3AYbSVKsAQAAA
+  </data>
+ </layer>
+ <layer name="forground" width="64" height="64">
+  <properties>
+   <property name="layer" value="0.2"/>
+   <property name="sort" value="true"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OwQmAQBAEwctGjeQ0EjX/BG5/JjAsCFXQ/x4DAD5btYc6mt8TZnWGuprfE+7qCfU2vwMAAAAAAAAAAAAAAADA3y2pTtixAEAAAA==
+  </data>
+ </layer>
+ <layer name="Tile Layer 4" width="64" height="64">
+  <properties>
+   <property name="layer" type="float" value="0.21"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3PsRFAQBRFURkqQSWoBP034IU7IondwDkzd+aH/3Ud8FafhjS2fqSicvOU5rQ0/aiucvOatrQ3/aiucrP99tv/r/1HOtP1uAEAAAAAAAAAAAAAAAD4zg00exHGAEAAAA==
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1"/>
+</map>

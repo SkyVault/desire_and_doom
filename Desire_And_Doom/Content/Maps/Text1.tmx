@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" nextobjectid="119">
+ <properties>
+  <property name="Sky" value="true"/>
+ </properties>
+ <tileset firstgid="1" name="Tiles_1" tilewidth="8" tileheight="8" tilecount="4096" columns="64">
+  <image source="../../../../../../Content/Tiles_1.png" width="512" height="512"/>
+  <tile id="108">
+   <properties>
+    <property name="Door" value="Demo 144 255"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4097" name="gui" tilewidth="1" tileheight="1" tilecount="0" columns="0"/>
+ <layer name="Back" width="128" height="128">
+  <properties>
+   <property name="layer" type="float" value="0.15"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   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
+  </data>
+ </layer>
+ <layer name="Stairs" width="128" height="128">
+  <properties>
+   <property name="layer" type="float" value="0.25"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3X506TYRiA4Zb/Gvfeg6GCMk7DvfdWUFzAKegJ4N4LlCFLT0FPwL23oEzHAXg3oUlj1La02rS9r+ROf3xJ86Xv+zyBQECSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmZ6GgwEDgWTPVbKFXuBr0D2W6od2BETiAwkkbl/Jv30v8TugP34jj/pZz5MlpOK7Lw/OdSLuVRPhXQPJpPC6iQimghLaJiKqFSKkvB+0YTz/yH5n4YDY/4zLY9sJv20F4qpwraR/upkg7QQTpEh+kIVVE11aTgfaOJdf7Dc7+YlkR8ZtseqKN6ukE3qYEaqYma6Ra1UCu1UTt10G26k4L3TYbfzX227oGP9Ik6qYs+0xfqph7qpT7qpwH6St/oO/1Iwfsm6k9zP9Q9MJZdM47G0wSaSJNoMk0JJv58Kk2j6TSDZtIsmk1zkvD9cymX8iifCmgezacFVEhFtJAWUTGVUCmVpdn/WrHMfbx7YDW/wRpaS+toPW2gjbQpmPjzzbSFttI22k47aCftSsL376Y9tJfKqYL20X6qpAN0kA7RYTpCVVRNNWl0/rHOfbx74AS/wUk6RafpDJ2lc3Q+mPjzC3SRLtFlukJX6RpdT8L311E93aCb1ECN1ETNdItaqJXaqJ066DbdSaPzH80ZjhnC/EfbAw/5DR7RY3pCT+kZPacXwcSfv6RX9Jre0Ft6R+/pQxK+/yN9ok7qos/0hbqph3qpj/ppgL7SN/pOP9Lo/FdydqsiznN4kveA0kN4DyyJcfZD1dL9wR54B9JaeA/EOvu1gx333DNKeA/8TW3E7Dv3mSW0B6LdAXd+Zou8A7/eA3d+dgj/PfDrLnDus0v4Hjj32c25lyRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiQNxU9j2XQMAAABAA==
+  </data>
+ </layer>
+ <layer name="Trees" width="128" height="128">
+  <properties>
+   <property name="layer" type="float" value="0.2"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3c+U4aQQDH8dkFbL3okViPtwFLVUB7JJ5vA5geXj2SVtu3WfCv3m3S82n6I9FkswFTXXZnYb6f5BcTIrOT/FhmB3GNAQAAAAAAAAAAAAAAAICrq3rG1JS6Z3smsGFPve8rB2f9X1OuW50RriJ8HvfqcFop9njee/3+B+XjWf9LynKiM0USwudxrw5XlTUL80I6oucxRl+/9/QkcF2QPWm+p5+vKWXfmEXlrp/SgZEZDXXeVFrKLv07J1DnbaWjnNK/8yq2J+Cghq7vm0pL2bV8rU//6QvUeVvpKKcW+6+Ewr4gPZ7WXV/JKXmLa/B593xe6Kbw+d9V8tkbuqQSCXtD94T7Z2842g6Vo8hj4f65DkiHrf3fJ+Vz5LHoNQCSZ2v/N61jFSPHo//0ZW3/R//ZMaPXwx1lVplT5pWFmK+RfmOGu58cwNwR37p62VA2lS1lW9mJ2X+/MdnvZ89r9fBGOVZOlLfKu5jd9BuT/X72/FAPP5Vfym/lj/I3Zjf9xkxqvz9V0LWmUiwMbkxXzOS0ViuzypwyryzksjfmRerqfVVZo/9LW1cvG8qmsqVsKzsxu7rMmOPKRLzDmQP1fqgc0f/QWVGqticBq/ie8PAZ5P6dvwMMn5rtCWCksSa4jTUBALKruweYsj0JWNPdA9RtTwJAprAuuI11AUAX6wAAAAAAAAAAAACAtI0XjJlQJvkfUietqPeqUqN/Jz1T73vKPv0DAC4QvedQoJ9tpcP64YToPYe8MWN8JTdmd15IR/SeQyX1XlYW6d9JDfXeVFr076RAvbeVDv0DAAAAwFALctrfJXgPcyTjXt6YJWU5H28cT8/3Y46B9D1WZ0+UpzG7K+n5ZfoHAAAAAAD/4UbBmJvKLeU23xV1zn11/kB5qDyif+c8V+cvlJfKK/p3zhd1/lX5pnynfwAAAAAAAAAAAAAAAAAAAAAAAGCk/AOoP4uBAAABAA==
+  </data>
+ </layer>
+ <layer name="ignore_tiles" width="128" height="128">
+  <properties>
+   <property name="ignore" value=""/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3YS07DMBAAUDddFFrBtfgdDDb0WrCBMzGbrojtNG1cRX5PmtXEUaSxnBmnBAAAAAAAAAAAAAAAAP99Rhxv/RHczE/E74TndkNKd8PSX0NrD5uUHjf1556i9s/qvwpLnOnvUfsP9V+FqWf6Ob6i9t/qvwpTz/Rz7Lbx/99e951c31ifpnfrx1ifpnfrx6lPu4/YRxwGvVtPTn3aS8RrxNugd+vJWJ+mdwMAAErcGfbNnWHf3Bn2zZ1h39wZAnAps2Tf5s6StX2Ty7deR9ncWbK2b3L51usomztL1vZNLt96HWVzZ8navsnlW69jGbV9k8u3XgcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACU/QHJFqqLAAABAA==
+  </data>
+ </layer>
+ <layer name="Tree tops" width="128" height="128">
+  <properties>
+   <property name="layer" type="float" value="0.9"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   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
+  </data>
+ </layer>
+ <layer name="tree tops 2" width="128" height="128">
+  <properties>
+   <property name="layer" type="float" value="0.95"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3RMQoAIAwEwfz/ZUJ8lG0aK0HBzMD2BxcBAAAAAAAAAAAAAAAAAAAAAAAAAAAAcGaUsjRfjuIa//eWm/zfg/8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgPwsURt8vAAABAA==
+  </data>
+ </layer>
+ <layer name="LightPosts" width="128" height="128">
+  <properties>
+   <property name="layer" type="float" value="0.96"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQEAAACAkP6v7ggKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAauuOl9cAAAEA
+  </data>
+ </layer>
+ <objectgroup name="objects" visible="0">
+  <object id="2" name="Bird" type="Bird" x="448" y="440" width="8" height="8"/>
+  <object id="3" name="Bird" type="Bird" x="464" y="448" width="8" height="8"/>
+  <object id="4" name="Bird" type="Bird" x="464" y="432" width="8" height="8"/>
+  <object id="5" name="Bird" type="Bird" x="453.75" y="427" width="8" height="8"/>
+  <object id="8" name="Bird" type="Bird" x="488" y="448" width="8" height="8"/>
+  <object id="9" name="Wolf" type="Wolf" x="240" y="328" width="8" height="8"/>
+  <object id="11" name="Zombie" type="Zombie" x="272" y="288" width="8" height="8"/>
+  <object id="19" x="480" y="382" width="208" height="32"/>
+  <object id="23" x="720" y="384" width="144" height="32"/>
+  <object id="24" name="Mech" type="Mech" x="648" y="88" width="24" height="32"/>
+  <object id="26" x="344" y="0" width="168" height="160"/>
+  <object id="30" x="400" y="160" width="112" height="56"/>
+  <object id="31" x="456" y="216" width="56" height="136"/>
+  <object id="32" x="504" y="352" width="32" height="32"/>
+  <object id="60" type="Player" x="120" y="256" width="8" height="8"/>
+ </objectgroup>
+ <objectgroup name="billboards" visible="0">
+  <object id="64" x="323.909" y="238.98" width="7.125" height="5.03125"/>
+  <object id="65" name="Lamp Post" type="Billboard" x="319.378" y="209.136" width="16" height="32">
+   <properties>
+    <property name="Region" value="48 64 16 36"/>
+   </properties>
+  </object>
+  <object id="86" name="Lamp Post" type="Billboard" x="183.347" y="249.14" width="16" height="32">
+   <properties>
+    <property name="Region" value="48 64 16 36"/>
+   </properties>
+  </object>
+  <object id="87" x="187.878" y="278.984" width="7.125" height="5.03125"/>
+  <object id="88" name="Lamp Post" type="Billboard" x="143.391" y="249.171" width="16" height="32">
+   <properties>
+    <property name="Region" value="48 64 16 36"/>
+   </properties>
+  </object>
+  <object id="89" x="147.922" y="279.015" width="7.125" height="5.03125"/>
+  <object id="90" name="Lamp Post" type="Billboard" x="287.313" y="329" width="16" height="32">
+   <properties>
+    <property name="Region" value="48 64 16 36"/>
+   </properties>
+  </object>
+  <object id="91" x="291.844" y="358.844" width="7.125" height="5.03125"/>
+  <object id="92" name="Lamp Post" type="Billboard" x="439.375" y="385.187" width="16" height="32">
+   <properties>
+    <property name="Region" value="48 64 16 36"/>
+   </properties>
+  </object>
+  <object id="93" x="443.906" y="415.031" width="7.125" height="5.03125"/>
+  <object id="94" name="Lamp Post" type="Billboard" x="551.375" y="393.187" width="16" height="32">
+   <properties>
+    <property name="Region" value="48 64 16 36"/>
+   </properties>
+  </object>
+  <object id="95" x="555.906" y="423.031" width="7.125" height="5.03125"/>
+  <object id="96" name="Lamp Post" type="Billboard" x="615.375" y="393.187" width="16" height="32">
+   <properties>
+    <property name="Region" value="48 64 16 36"/>
+   </properties>
+  </object>
+  <object id="97" x="619.906" y="423.031" width="7.125" height="5.03125"/>
+  <object id="98" name="Lamp Post" type="Billboard" x="663.25" y="393.062" width="16" height="32">
+   <properties>
+    <property name="Region" value="48 64 16 36"/>
+   </properties>
+  </object>
+  <object id="99" x="667.781" y="422.906" width="7.125" height="5.03125"/>
+  <object id="100" name="Lamp Post" type="Billboard" x="727.375" y="393.187" width="16" height="32">
+   <properties>
+    <property name="Region" value="48 64 16 36"/>
+   </properties>
+  </object>
+  <object id="101" x="731.906" y="423.031" width="7.125" height="5.03125"/>
+  <object id="102" name="Lamp Post" type="Billboard" x="775.375" y="393.062" width="16" height="32">
+   <properties>
+    <property name="Region" value="48 64 16 36"/>
+   </properties>
+  </object>
+  <object id="103" x="779.906" y="422.906" width="7.125" height="5.03125"/>
+  <object id="104" name="Lamp Post" type="Billboard" x="839.25" y="393.062" width="16" height="32">
+   <properties>
+    <property name="Region" value="48 64 16 36"/>
+   </properties>
+  </object>
+  <object id="105" x="843.781" y="422.906" width="7.125" height="5.03125"/>
+  <object id="110" x="159.511" y="276.807" width="24.25" height="3.25"/>
+  <object id="111" name="Bench" type="Billboard" x="159.636" y="264.182" width="24.125" height="16">
+   <properties>
+    <property name="Region" value="64 64 24 16"/>
+   </properties>
+  </object>
+  <object id="112" name="Tree" type="Billboard" x="152" y="224" width="16" height="24">
+   <properties>
+    <property name="Region" value="96 16 16 24"/>
+   </properties>
+  </object>
+  <object id="114" x="152" y="242.841" width="16.1818" height="4.90909"/>
+  <object id="115" name="Tree" type="Billboard" x="239.659" y="200.5" width="16" height="24">
+   <properties>
+    <property name="Region" value="96 16 16 24"/>
+   </properties>
+  </object>
+  <object id="116" x="239.659" y="219.591" width="16.1818" height="4.90909"/>
+ </objectgroup>
+ <objectgroup name="Doors" visible="0">
+  <object id="58" x="864" y="352" width="128" height="64"/>
+  <object id="59" type="Door" x="952" y="392" width="16" height="32.6667">
+   <properties>
+    <property name="Door" value="Demo 144 255"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Particles">
+  <object id="117" name="Fire_Fly" type="Particle" x="0" y="0" width="16" height="16">
+   <properties>
+    <property name="Type" value="Fire_Fly"/>
+   </properties>
+  </object>
+  <object id="118" type="Door" x="982" y="-48" width="8" height="1024">
+   <properties>
+    <property name="Door" value="Demo 32 470"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="lighting" visible="0">
+  <object id="43" type="PointLight" x="287" y="329.333" width="16" height="16"/>
+  <object id="44" type="PointLight" x="319" y="210.333" width="16" height="16"/>
+  <object id="45" type="PointLight" x="183" y="249" width="16" height="16"/>
+  <object id="46" type="PointLight" x="143.667" y="250" width="16" height="16"/>
+  <object id="48" type="PointLight" x="440" y="384" width="16" height="16">
+   <properties>
+    <property name="Scale" type="float" value="400"/>
+   </properties>
+  </object>
+  <object id="51" type="PointLight" x="550.667" y="393.333" width="16" height="16">
+   <properties>
+    <property name="Color" value="0 100 255"/>
+   </properties>
+  </object>
+  <object id="53" type="PointLight" x="614.667" y="393" width="16" height="16">
+   <properties>
+    <property name="Color" value="0 100 255"/>
+   </properties>
+  </object>
+  <object id="54" type="PointLight" x="663.333" y="392" width="16" height="16">
+   <properties>
+    <property name="Color" value="0 100 255"/>
+   </properties>
+  </object>
+  <object id="55" type="PointLight" x="726.333" y="392" width="16" height="16">
+   <properties>
+    <property name="Color" value="0 100 255"/>
+   </properties>
+  </object>
+  <object id="56" type="PointLight" x="775.333" y="394" width="16" height="16">
+   <properties>
+    <property name="Color" value="0 100 255"/>
+   </properties>
+  </object>
+  <object id="57" type="PointLight" x="839.333" y="393" width="16" height="16">
+   <properties>
+    <property name="Color" value="0 100 255"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

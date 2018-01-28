@@ -4,19 +4,19 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/desire/desire_and_doom/Desire_And_Doom/Content/entities.png</File>
-    <File>C:/desire/desire_and_doom/Desire_And_Doom/Content/items.png</File>
-    <File>C:/desire/desire_and_doom/Desire_And_Doom/Content/Tiles_1.png</File>
-    <File>C:/desire/desire_and_doom/Desire_And_Doom/Content/gui.png</File>
-    <File>C:/desire/desire_and_doom/Desire_And_Doom/Content/Sky.png</File>
-    <File>C:/desire/desire_and_doom/Desire_And_Doom/Content/boss_1.png</File>
-    <File>C:/desire/desire_and_doom/Desire_And_Doom/Content/Charactors.png</File>
-    <File>C:/desire/desire_and_doom/Desire_And_Doom/Content/logo.png</File>
-    <File>C:/desire/desire_and_doom/Desire_And_Doom/Content/dungeon_tiles.png</File>
-    <File>C:/desire/desire_and_doom/Desire_And_Doom/Content/Chest.png</File>
-    <File>C:/desire/desire_and_doom/Desire_And_Doom/Content/SquareLogo_1024px.png</File>
-    <File>C:/desire/desire_and_doom/Desire_And_Doom/Content/GFont.spritefont</File>
-    <File>C:/desire/desire_and_doom/Desire_And_Doom/Content/Background_2.png</File>
-    <File>C:/desire/desire_and_doom/Desire_And_Doom/Content/Models/ico.obj</File>
+    <File>C:/Users/Dustin/Source/Repos/desire_and_doom/Desire_And_Doom/Content/entities.png</File>
+    <File>C:/Users/Dustin/Source/Repos/desire_and_doom/Desire_And_Doom/Content/items.png</File>
+    <File>C:/Users/Dustin/Source/Repos/desire_and_doom/Desire_And_Doom/Content/Tiles_1.png</File>
+    <File>C:/Users/Dustin/Source/Repos/desire_and_doom/Desire_And_Doom/Content/gui.png</File>
+    <File>C:/Users/Dustin/Source/Repos/desire_and_doom/Desire_And_Doom/Content/Sky.png</File>
+    <File>C:/Users/Dustin/Source/Repos/desire_and_doom/Desire_And_Doom/Content/boss_1.png</File>
+    <File>C:/Users/Dustin/Source/Repos/desire_and_doom/Desire_And_Doom/Content/Charactors.png</File>
+    <File>C:/Users/Dustin/Source/Repos/desire_and_doom/Desire_And_Doom/Content/logo.png</File>
+    <File>C:/Users/Dustin/Source/Repos/desire_and_doom/Desire_And_Doom/Content/dungeon_tiles.png</File>
+    <File>C:/Users/Dustin/Source/Repos/desire_and_doom/Desire_And_Doom/Content/Chest.png</File>
+    <File>C:/Users/Dustin/Source/Repos/desire_and_doom/Desire_And_Doom/Content/SquareLogo_1024px.png</File>
+    <File>C:/Users/Dustin/Source/Repos/desire_and_doom/Desire_And_Doom/Content/GFont.spritefont</File>
+    <File>C:/Users/Dustin/Source/Repos/desire_and_doom/Desire_And_Doom/Content/Background_2.png</File>
+    <File>C:/Users/Dustin/Source/Repos/desire_and_doom/Desire_And_Doom/Content/Models/ico.obj</File>
   </SourceFiles>
 </SourceFileCollection>

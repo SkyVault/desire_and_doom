@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Desire_And_Doom
 {
@@ -98,6 +99,12 @@ namespace Desire_And_Doom
 
         public void Add_Table(string file, bool hotload = false)
         {
+            if (File.Exists(file) == false)
+            {
+                Console.WriteLine($"[WARNING]:: Cannot find lua file: {file}");
+                return;
+            }
+
             var table = lua.DoFile(file)[0] as LuaTable;
             foreach(string ent in table.Keys)
             {

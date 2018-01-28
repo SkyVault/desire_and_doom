@@ -110,7 +110,7 @@ namespace Desire_And_Doom
         {
             Assets.It.Generate_Quads("quads", 512, 8, 8);
 
-            Assets.It.Load_Animations_From_Lua("Lua_World/Animation.lua");
+            Assets.It.Load_Animations_From_Lua("Content/Lua/Animation.lua");
             
             //var frames = Assets.It.Get_Quads("player-attack");
             camera = new GameCamera(GraphicsDevice, true);
@@ -181,13 +181,14 @@ namespace Desire_And_Doom
 
             Assets.It.Generate_Rectangle(GraphicsDevice, "gui-rect", 512, 512);
 
-            Assets.It.Add_Table("Lua_World/items.lua");
-            Assets.It.Add_Table("Lua_World/Player.lua");
-            Assets.It.Add_Table("Lua_World/Enemies.lua");
-            Assets.It.Add_Table("Lua_World/Entities.lua");
-            Assets.It.Add_Table("Lua_World/Npcs.lua");
-            Assets.It.Add_Table("Lua_World/Behaviors/Enemy_Ai.lua");
-            Assets.It.Add_Table("Lua_World/Dialog.lua");
+            // TODO(Dustin): Move this to the content pipeline
+            Assets.It.Add_Table("Content/Lua/items.lua");
+            Assets.It.Add_Table("Content/Lua/Player.lua");
+            Assets.It.Add_Table("Content/Lua/Enemies.lua");
+            Assets.It.Add_Table("Content/Lua/Entities.lua");
+            Assets.It.Add_Table("Content/Lua/Npcs.lua");
+            Assets.It.Add_Table("Content/Lua/Behaviors/Enemy_Ai.lua");
+            Assets.It.Add_Table("Content/Lua/Dialog.lua");
 
             screen_manager.Register(new Level_1_Screen(screen_manager, world, camera, penumbra, particle_world, physics_engine, lua));
             screen_manager.Register(new Boss_Room_1(world, camera, penumbra, particle_world, physics_engine, Content, lua));

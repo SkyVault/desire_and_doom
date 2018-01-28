@@ -20,7 +20,7 @@ namespace Desire_And_Doom.ECS.Systems
             var body = (Body)(entity.Get(Component.Types.Body));
             var light = (Light_Emitter)(entity.Get(Component.Types.Light_Emitter));
 
-            light.Light.Position = body.Position + light.Offset;
+            light.Light.Position = body.Center + light.Offset;
         }
     }
 }

@@ -203,7 +203,7 @@ namespace Desire_And_Doom.ECS
                 sprite.Force_Play_Animation("player-smoke");
             }
         
-
+            // Controll
             if (player.Can_Move)
             {
                 if (Input.It.Is_Key_Pressed(Keys.LeftShift) == true || dash == true)

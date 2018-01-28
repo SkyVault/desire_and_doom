@@ -12,6 +12,8 @@ namespace Desire_And_Doom.ECS
         public Vector2 Position { get; set; }
         public Vector2 Size { get; set; }
 
+        public Vector2 Center { get => Position + Size / 2; }
+
         public float X { get { return Position.X; } set { Position = new Vector2(value, Position.Y); } }
         public float Y { get { return Position.Y; } set { Position = new Vector2(Position.X, value); } }
         public float Z { get; set; } = 0;
