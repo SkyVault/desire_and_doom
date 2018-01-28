@@ -1,5 +1,5 @@
-﻿require "Content/Lua/AI"
-require "Content/Lua/Utilities"
+﻿assert(require "Content/Lua/AI")
+assert(require "Content/Lua/Utilities")
 
 local 
 function Load_Grendle(entity, engine)
@@ -15,7 +15,7 @@ function Grendle_AI(entity, engine)
     local fn                = entity:Get "Lua_Function"
     
     -- face the current moving direction
-    Face_Move_Dir(entity, engine)
+    engine:Face_Move_Dir(entity)
 
     Init_Entity(entity, function()
         fn.Table.Attack_Timer = 0

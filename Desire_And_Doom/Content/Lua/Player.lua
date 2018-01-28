@@ -1,6 +1,8 @@
 ﻿return {
 	["Player"] = {
 		tags = {"Player"},
+		persistant = true,
+		
 		components = {
 			["Body"] = {10, 5},
 			["Physics"] = {},

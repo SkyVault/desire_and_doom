@@ -14,6 +14,7 @@ namespace Desire_And_Doom.ECS.Components
         public LuaFunction Lua_Update               { get; set; }
 
         public bool Constant_Update { get; set; } = false;
+        public bool Is_Sensor { get; set; } = false;
 
         public enum Update_Type
         {

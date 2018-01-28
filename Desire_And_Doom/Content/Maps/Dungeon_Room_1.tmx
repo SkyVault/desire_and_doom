@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="8" tileheight="8" backgroundcolor="#55aaff" nextobjectid="26">
+<map version="1.0" tiledversion="2017.09.13" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="8" tileheight="8" infinite="0" backgroundcolor="#55aaff" nextobjectid="26">
  <properties>
   <property name="Sky" value="true"/>
  </properties>
  <tileset firstgid="1" name="dungeon_tiles" tilewidth="8" tileheight="8" tilecount="4096" columns="64">
-  <image source="../../../../../../Content/dungeon_tiles.png" width="512" height="512"/>
+  <image source="../dungeon_tiles.png" width="512" height="512"/>
  </tileset>
  <layer name="Base" width="64" height="64">
   <properties>
@@ -31,14 +31,12 @@
   </data>
  </layer>
  <objectgroup name="Entities">
-  <object id="3" name="Player" type="Player" x="96" y="128" width="16" height="16"/>
   <object id="22" name="Chest" type="Chest" x="144" y="120" width="16" height="16"/>
   <object id="24" type="Door" x="320" y="136" width="16" height="48">
    <properties>
     <property name="Door" value="123123 123123 132"/>
    </properties>
   </object>
-  <object id="25" type="Grendle" x="192" y="120" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Solids">
   <object id="10" x="128" y="152" width="88" height="80"/>

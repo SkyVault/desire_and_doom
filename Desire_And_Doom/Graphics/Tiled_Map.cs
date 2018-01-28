@@ -32,7 +32,7 @@ namespace Desire_And_Doom
         private TmxMap              map;
         private Texture2D           texture;
         private List<Rectangle>     quads;
-        private GameCamera           camera;
+        private GameCamera          camera;
         private List<Billboard>     billboards;
 
         public Func<string, float, float, bool> Change_Scene_Callback;
@@ -183,8 +183,14 @@ namespace Desire_And_Doom
                         Debug.Assert(obj.Properties.ContainsKey("Door"), "Door object requires the property: Door, for example: Door 100 563");
 
                         var str = obj.Properties["Door"];
-                        var toks = str.Split(' ');
 
+                        var is_sensor = false;
+                        if (obj.Properties.ContainsKey("is_sensor"))
+                        {
+                            is_sensor = bool.Parse(obj.Properties["is_sensor"]);
+                        }
+
+                        var toks = str.Split(' ');
                         var door = world.Create_Entity();
                         door.Add(new Body(new Vector2((float) obj.X, (float) obj.Y), new Vector2((float) obj.Width, (float) obj.Height)));
                         door.Add(new Physics(Vector2.Zero, Physics.PType.WORLD_INTERACTION));
@@ -194,13 +200,20 @@ namespace Desire_And_Doom
                                 var _wi = (World_Interaction) self.Get(Component.Types.World_Interaction);
                                 if ( other.Has(Component.Types.Player) )
                                 {
-                                    if ( Input.It.Is_Key_Pressed(Keys.Z) || GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed )
+                                    if (!_wi.Is_Sensor && Input.It.Is_Key_Pressed(Keys.Z) || GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed)
+                                    {
+                                        Change_Scene_Callback?.Invoke(_wi.ID, _wi.X, _wi.Y);
+
+                                    // Check if the door just requires the player to walk into the zone
+                                    } else if (_wi.Is_Sensor)
                                     {
                                         Change_Scene_Callback?.Invoke(_wi.ID, _wi.X, _wi.Y);
                                     }
                                 }
                                 return true;
                             }));
+
+                        wi.Is_Sensor = is_sensor;
                         wi.ID = toks[0];
                         wi.X = float.Parse(toks[1]);
                         wi.Y = float.Parse(toks[2]);

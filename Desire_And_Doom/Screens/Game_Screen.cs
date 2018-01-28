@@ -44,6 +44,16 @@ namespace Desire_And_Doom.Screens
             particle_world.Destroy();
         }
 
+        public void DestroyAllButPersistant()
+        {
+            base.Destroy();
+            physics_engine.Clear_Solids();
+            world.Destroy_All(true);
+            lighting.Lights.Clear();
+            Map?.Destroy();
+            particle_world.Destroy();
+        }
+
         public override void Update(GameTime time)
         {
             base.Update(time);
@@ -62,7 +72,7 @@ namespace Desire_And_Doom.Screens
             if (!can_change) return false;
             can_change = false;
 
-            Destroy();
+            DestroyAllButPersistant();
 
             Map = new Tiled_Map(id, camera, world, this, particle_world, lua, lighting) {
                 Change_Scene_Callback = Load_Map

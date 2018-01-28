@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objecttypes>
+ <objecttype name="light" color="#ffff00">
+  <property name="Blue" type="int" default="255"/>
+  <property name="Green" type="int" default="255"/>
+  <property name="Red" type="int" default="255"/>
+  <property name="color" type="color" default="#ffffffff"/>
+  <property name="intensity" type="float" default="1"/>
+  <property name="scale" type="float" default="5000"/>
+ </objecttype>
+ <objecttype name="bill" color="#0500a4">
+  <property name="rh" type="int" default="32"/>
+  <property name="rw" type="int" default="32"/>
+  <property name="rx" type="int" default="0"/>
+  <property name="ry" type="int" default="0"/>
+ </objecttype>
+ <objecttype name="door" color="#ff0000">
+  <property name="location" type="string" default=""/>
+  <property name="tx" type="float" default="-1"/>
+  <property name="ty" type="float" default="-1"/>
+  <property name="type" type="string" default=""/>
+ </objecttype>
+ <objecttype name="save" color="#00ff7f"/>
+ <objecttype name="zombie_walker" color="#aaff00"/>
+ <objecttype name="zombie_enemy" color="#00aa00"/>
+ <objecttype name="hazard" color="#ff0000"/>
+ <objecttype name="Player" color="#55ffff"/>
+</objecttypes>

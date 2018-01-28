@@ -16,6 +16,8 @@ namespace Desire_And_Doom.ECS
         private static int uuid_generater = 0;
 
         public bool Loaded { get; set; } = false;
+        public bool Persistant { get; set; } = false;
+
         public List<string> Tags { get; set; }
         public Func<Entity, bool> Update { get; set; }
 

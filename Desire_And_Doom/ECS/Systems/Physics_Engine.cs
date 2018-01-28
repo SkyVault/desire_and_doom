@@ -139,6 +139,7 @@ namespace Desire_And_Doom.ECS
         public void Clear_Solids()
         {
             solids.Clear();
+            polygons.Clear();
         }
 
         public override void Update(GameTime time, Entity entity)

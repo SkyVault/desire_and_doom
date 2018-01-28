@@ -49,6 +49,11 @@ namespace Desire_And_Doom.ECS
                 foreach (var t in tags.Values)
                     entity.Tags.Add(t as string);
 
+            if (table["persistant"] is bool)
+            {
+                entity.Persistant = (bool)(table["persistant"] as bool?);
+            }
+
             // TODO: refactor all of this into a seperate entity assembler class
             foreach (var key in components.Keys)
             {
@@ -309,9 +314,18 @@ namespace Desire_And_Doom.ECS
             timing = 0;
         }
 
-        public void Destroy_All()
+        public void Destroy_All(bool keep_persistant = false)
         {
-            entities.Clear();
+            if (!keep_persistant) entities.Clear();
+            else
+            {
+                for (var i = entities.Count - 1; i >= 0; i--)
+                {
+                    var ent = entities[i];
+                    if (ent.Persistant == false)
+                        entities.Remove(ent);
+                }
+            }
         }
         
     }
