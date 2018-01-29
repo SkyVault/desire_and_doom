@@ -22,6 +22,8 @@ namespace Desire_And_Doom.Gui
 
         int selector = 0;
 
+        bool showing = false;
+
         public Pause_Menu(Screen_Manager screen_manager, GameCamera _camera)
         {
             camera = _camera;
@@ -31,13 +33,15 @@ namespace Desire_And_Doom.Gui
 
             actions = new Named_Action_List(new Dictionary<string, Action> {
                 {"Resume", ()=>{
-                    DesireAndDoom.Toggle_Pause();
+                    DesireAndDoom.Request_Resume();
+                    showing = false;
                 } },
                 {"Settings", ()=>{
 
                 } },
                 {"Exit",()=>{
-                    DesireAndDoom.Toggle_Pause();
+                    //DesireAndDoom.Request_Resume();
+                    showing = false;
                     screen_manager.Goto_Screen("Menu", true);
                 } }
             });
@@ -50,6 +54,16 @@ namespace Desire_And_Doom.Gui
 
         public void Update(GameTime time)
         {
+
+            if (Input.It.Is_Key_Pressed(Keys.Escape))
+            {
+                Reset();
+
+                DesireAndDoom.Toggle_Pause();
+                showing = DesireAndDoom.Game_State == DesireAndDoom.State.PAUSED;
+            }
+
+            if (!showing) return;
 
             if (Input.It.Is_Key_Pressed(Keys.Down))
                 selector++;
@@ -67,6 +81,9 @@ namespace Desire_And_Doom.Gui
 
         public void Draw(SpriteBatch batch)
         {
+
+            if (!showing) return;
+
             var scale = 1f;
 
             // draw options

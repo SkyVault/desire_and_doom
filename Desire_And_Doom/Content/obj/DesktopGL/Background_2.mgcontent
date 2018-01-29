@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Dustin/Source/Repos/desire_and_doom/Desire_And_Doom/Content/Background_2.png</SourceFile>
+  <SourceFile>C:/Users/Dustin/source/repos/desire_and_doom/Desire_And_Doom/Content/Background_2.png</SourceFile>
   <SourceTime>2018-01-28T11:48:40.2630491-08:00</SourceTime>
-  <DestFile>C:/Users/Dustin/Source/Repos/desire_and_doom/Desire_And_Doom/Content/bin/DesktopGL/Background_2.xnb</DestFile>
-  <DestTime>2018-01-28T11:53:47.05183-08:00</DestTime>
+  <DestFile>C:/Users/Dustin/source/repos/desire_and_doom/Desire_And_Doom/Content/bin/DesktopGL/Background_2.xnb</DestFile>
+  <DestTime>2018-01-28T15:50:05.6494815-08:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T07:05:36-08:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

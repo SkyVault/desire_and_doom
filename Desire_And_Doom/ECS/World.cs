@@ -277,8 +277,10 @@ namespace Desire_And_Doom.ECS
                     entities.Remove(entity);
                     continue;
                 }
-
-                entity.Update?.Invoke(entity);
+                
+                // Update the entity if the game is not paused
+                if (DesireAndDoom.Game_State == DesireAndDoom.State.PLAYING)
+                    entity.Update?.Invoke(entity);
 
                 foreach (var system in systems.Values)
                     if (system.Has_All_Types(entity)) {

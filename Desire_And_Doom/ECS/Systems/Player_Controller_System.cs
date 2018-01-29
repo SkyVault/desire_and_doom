@@ -138,7 +138,8 @@ namespace Desire_And_Doom.ECS
             // check if a dialog box opened up
             //if (Messanger.It.Top() == "Dialog_Open")    player.Can_Move = false;
             //if (Messanger.It.Top() == "Dialog_Closed")  player.Can_Move = true;
-            if (Debug_Console.Open) player.Can_Move = false;
+            //if (Debug_Console.Open) player.Can_Move = false;
+            //else player.Can_Move = true;
 
             // get input 
             var state = GamePad.GetState(PlayerIndex.One);

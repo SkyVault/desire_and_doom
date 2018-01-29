@@ -4,14 +4,15 @@ FIXES:
 -- flags hit box is off center
 -- players claymore facing right hitbox is off center
 -- Check out the whole Game1.Map_Height_Pixels thing, seems super fishy
+-- Move entities out from each other if they collide, see birds?
 
 ADDITIONS
--- Create a pausing system
 
 -- Equipment
 	-- Weapon equipment should have a function that when the attack button is pressed, it gets called  -- DONE
 	-- Weapon should also have specific strings for idle and attack animations, the player should then -- DONE
-	be using whichever animation that the current weapon suggests									   -- DONE
+be using whichever animation that the current weapon suggests
 	-- Weapons should also be attached to the equipment component									   -- DONE
-
 	
+DONE
+-- Create a pausing system -- DONE

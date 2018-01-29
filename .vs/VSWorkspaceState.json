@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Desire_And_Doom",
+    "\\Desire_And_Doom\\ECS",
+    "\\Desire_And_Doom\\ECS\\Components",
+    "\\Desire_And_Doom\\Graphics"
   ],
   "SelectedNode": "\\Desire_And_Doom.sln",
   "PreviewInSolutionExplorer": false

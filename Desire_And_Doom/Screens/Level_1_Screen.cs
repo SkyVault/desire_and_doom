@@ -14,8 +14,8 @@ namespace Desire_And_Doom.Screens
     class Level_1_Screen : Game_Screen
     {
         Sky_Renderer sky;
-        //World world;
-
+        
+        // NOTE(Dustin): Maybe we need to extract this out somewhere else?
         Pause_Menu pause_menu;
 
         public Level_1_Screen(Screen_Manager screen_manager, World _world, GameCamera _camera, PenumbraComponent _lighting, Particle_World _particle_world, Physics_Engine _physics_engine, Lua lua) : base(_world, _camera, _lighting, _particle_world, _physics_engine, lua, "Level 1")
@@ -29,28 +29,17 @@ namespace Desire_And_Doom.Screens
         {
             lighting.AmbientColor = new Color(0.4f, 0.4f, 0.4f, 1.0f);
             Load_Map("Dungeon_Room_2");
-            
-            camera.Zoom = DesireAndDoom.SCALE;
-            if (DesireAndDoom.Game_State == DesireAndDoom.State.PAUSED)
-                DesireAndDoom.Toggle_Pause();
-        }
 
-        //override 
+            camera.Zoom = DesireAndDoom.SCALE;
+            DesireAndDoom.Request_Resume(); // Make sure the game is unpaused
+        }
 
         public override void Update(GameTime time)
         {
             sky.Update(time);
             base.Update(time);
-
-            pause_menu.Update(time);
-
-            if (Input.It.Is_Key_Pressed(Keys.Escape))
-            {
-                pause_menu.Reset();
-                DesireAndDoom.Toggle_Pause();
-            }
-
             
+            pause_menu.Update(time);
         }
 
         public override void Draw(SpriteBatch batch)
@@ -64,8 +53,7 @@ namespace Desire_And_Doom.Screens
         {
             base.UIDraw(batch);
 
-            if (DesireAndDoom.Game_State == DesireAndDoom.State.PAUSED)
-                pause_menu.Draw(batch);
+            pause_menu.Draw(batch);
         }
     }
 }

@@ -124,9 +124,12 @@ namespace Desire_And_Doom.Utils
                 if (state != State.CLOSED)
                 {
                     Open = true;
+                    DesireAndDoom.Request_Pause();
                 }
                 else {
+                    //DesireAndDoom.Request_Resume();
                     Open = false;
+                    DesireAndDoom.Request_Resume();
                 }
             }
 
@@ -149,8 +152,6 @@ namespace Desire_And_Doom.Utils
                     new Rectangle(0, 0, DesireAndDoom.ScreenWidth, (int)height), 
                     new Rectangle(0, 0, 512, 512), 
                     new Color(10, 10, 10, 150));
-                
-
             }
         }
     }
