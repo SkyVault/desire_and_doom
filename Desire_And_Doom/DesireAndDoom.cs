@@ -43,6 +43,7 @@ namespace Desire_And_Doom
 
         public static bool SHOULD_QUIT = false;
         public static readonly float SCALE = 3f;
+        public static readonly float GRAPHICS_SCALING = 4f;
 
         private static GraphicsDeviceManager graphics;
         SpriteBatch batch;

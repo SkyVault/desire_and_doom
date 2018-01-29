@@ -1,8 +1,7 @@
 ﻿FIXES:
--- flags hit box is off center
 -- players claymore facing right hitbox is off center
--- Check out the whole Game1.Map_Height_Pixels thing, seems super fishy
 -- Move entities out from each other if they collide, see birds?
+-- Scale the whole game to prevent the OpenGL / DirectX oversampling :(
 
 ADDITIONS
 
@@ -14,3 +13,5 @@ be using whichever animation that the current weapon suggests
 	
 DONE
 -- Create a pausing system -- DONE
+-- Check out the whole Game1.Map_Height_Pixels thing, seems super fishy -- DONE
+-- flags hit box is off center -- DONE

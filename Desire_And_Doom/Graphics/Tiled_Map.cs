@@ -337,15 +337,8 @@ namespace Desire_And_Doom
                                 
                             }
 
-                            if ( !contains )
-                            {
-                                //var other = new Rectangle(x * map.TileWidth, y * map.TileHeight, map.TileWidth + 1, map.TileHeight + 1);
-                                //batch.Draw(texture, other, quads[gid - 1], Color.White, 0, Vector2.Zero, SpriteEffects.None, render_layer - 0.01f);
-                            }
-
                             var location = new Rectangle(x * map.TileWidth, y * map.TileHeight, map.TileWidth, map.TileHeight);
                             batch.Draw(texture, location, quads[gid - 1], Color.White, 0, Vector2.Zero, SpriteEffects.None, render_layer);
-
                         }
                     }
             }
