@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using NLua;
+using Desire_And_Doom.ECS.Systems;
 
 namespace Desire_And_Doom.Screens
 {
@@ -77,6 +78,12 @@ namespace Desire_And_Doom.Screens
             Map = new Tiled_Map(id, camera, world, this, particle_world, lua, lighting) {
                 Change_Scene_Callback = Load_Map
             };
+
+            // TODO(Dustin): Need to find a less shitty way of doing this...
+            ((Animation_Renderer_System)world.Get_System<Animation_Renderer_System>())?.Give_Tile_Map(Map);
+            ((Sprite_Renderer_System)world.Get_System<Sprite_Renderer_System>())?.Give_Tile_Map(Map);
+            ((Advanced_Animation_Rendering_System)world.Get_System<Advanced_Animation_Rendering_System>())?.Give_Tile_Map(Map);
+            ((Multipart_Animation_System)world.Get_System<Multipart_Animation_System>())?.Give_Tile_Map(Map);
 
             if (x != -1 && y != -1)
             {

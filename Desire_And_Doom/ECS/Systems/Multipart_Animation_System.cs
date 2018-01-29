@@ -10,13 +10,19 @@ using Desire_And_Doom.ECS.Components;
 
 namespace Desire_And_Doom.ECS.Systems
 {
-    class Multipart_Animation_System : System
+
+    class Multipart_Animation_System : Sprite_Renderer_System
     {
+
         Animation_Renderer_System animation_system;
 
-        public Multipart_Animation_System() : base(Types.Multipart_Animation, Types.Body)
+        public Multipart_Animation_System() : base()
         {
             animation_system = new Animation_Renderer_System();
+
+            types.Clear();
+            types.Add(Types.Multipart_Animation);
+            types.Add(Types.Body);
         }
 
         public override void Update(GameTime time, Entity entity)
@@ -41,6 +47,7 @@ namespace Desire_And_Doom.ECS.Systems
 
             var multipart_animation = (Multipart_Animation) entity.Get(Types.Multipart_Animation);
             var body = (Body) entity.Get(Types.Body);
+
             foreach ( Animated_Sprite animation in multipart_animation.Animation_Components.Values )
             {
                 var tmp = new Entity();

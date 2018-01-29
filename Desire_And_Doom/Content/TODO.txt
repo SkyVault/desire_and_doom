@@ -1,6 +1,4 @@
-﻿
-
-FIXES:
+﻿FIXES:
 -- flags hit box is off center
 -- players claymore facing right hitbox is off center
 -- Check out the whole Game1.Map_Height_Pixels thing, seems super fishy

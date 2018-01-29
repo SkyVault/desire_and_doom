@@ -11,8 +11,22 @@ namespace Desire_And_Doom.ECS
 {
     class Sprite_Renderer_System : System
     {
+
+        private Tiled_Map tile_map_reference = null;
+
+        public void Give_Tile_Map(Tiled_Map _tilemap)
+        {
+            this.tile_map_reference = _tilemap;
+        }
+
         public Sprite_Renderer_System() : base(Types.Body, Types.Sprite)
         {
+        }
+
+        protected float Get_Layer(Body body)
+        {
+            if (tile_map_reference == null) return 0.3f;
+            return 0.3f + (body.Y / tile_map_reference.Map_Height_In_Pixels) * 0.1f;
         }
 
         public override void Draw(SpriteBatch batch, Entity entity)
@@ -23,7 +37,7 @@ namespace Desire_And_Doom.ECS
 
             //animation.Layer = 0.3f + (body.Y / Game1.Map_Height_Pixels) * 0.1f;
 
-            sprite.Layer = 0.3f + (body.Y / DesireAndDoom.Map_Height_Pixels) * 0.1f;
+            sprite.Layer = Get_Layer(body);
 
             batch.Draw(
                 sprite.Texture, 

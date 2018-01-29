@@ -16,7 +16,6 @@ namespace Desire_And_Doom.Gui
         GameCamera camera;
         
         Texture2D rect;
-        Vector2 pre_origin;
         Named_Action_List actions;
         SpriteFont font;
 

@@ -12,7 +12,7 @@ namespace Desire_And_Doom.ECS
 {
     abstract class System
     {
-        List<Types> types;
+        protected List<Types> types;
         public World World_Ref;
 
         public System(params Types[] _types)

@@ -10,12 +10,15 @@ using static Desire_And_Doom.ECS.Component;
 
 namespace Desire_And_Doom.ECS.Systems
 {
-    class Advanced_Animation_Rendering_System: System
+    class Advanced_Animation_Rendering_System: Sprite_Renderer_System
     {
-        public Advanced_Animation_Rendering_System()
-        :base(Types.Advanced_Animation, Types.Body)
-        {
 
+        public Advanced_Animation_Rendering_System()
+        :base()
+        {
+            types.Clear();
+            types.Add(Types.Advanced_Animation);
+            types.Add(Types.Body);
         }
 
         public override void Update(GameTime time, Entity entity){
@@ -54,7 +57,7 @@ namespace Desire_And_Doom.ECS.Systems
             var body = (Body)entity.Get(Types.Body);
 
             // calculate the entities depth rendering layer
-            animation.Layer = 0.3f + (body.Y / DesireAndDoom.Map_Height_Pixels) * 0.1f;
+            animation.Layer = Get_Layer(body);
             var current_animation = animation.Get_Current_Animation();
 
             var frame = animation.Get_Current_Frame();

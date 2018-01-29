@@ -39,7 +39,6 @@ namespace Desire_And_Doom
         // TEMP
         private bool skip_intro_animation = true;
 
-        public static int Map_Height_Pixels = 0;
         public static bool DEBUG = false;
 
         public static bool SHOULD_QUIT = false;

@@ -39,6 +39,8 @@ namespace Desire_And_Doom
 
         public bool Has_Sky { get; private set; } = false;
 
+        public int Map_Height_In_Pixels { get; private set; } = 0;
+
         private float timer = 0;
         private int frame = 0;
 
@@ -95,7 +97,7 @@ namespace Desire_And_Doom
                 lighting.AmbientColor = color;
             }
             
-            DesireAndDoom.Map_Height_Pixels = map.Height * map.TileHeight;
+            Map_Height_In_Pixels = map.Height * map.TileHeight;
 
             for (int i = map.Layers.Count - 1; i >= 0; i--)
             {
@@ -351,7 +353,7 @@ namespace Desire_And_Doom
             foreach (var billboard in billboards)
             {
                 var y = billboard.Position.Y + (billboard.Region.Height * 0.8f);
-                var layer = 0.3f + (y / DesireAndDoom.Map_Height_Pixels) * 0.1f;
+                var layer = 0.3f + (y / Map_Height_In_Pixels) * 0.1f;
                 batch.Draw(texture, billboard.Position, billboard.Region, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, layer);
             }
         }

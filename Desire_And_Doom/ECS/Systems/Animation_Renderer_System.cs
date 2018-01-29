@@ -10,10 +10,13 @@ using Desire_And_Doom.Graphics;
 
 namespace Desire_And_Doom.ECS
 {
-    class Animation_Renderer_System : System
+    class Animation_Renderer_System : Sprite_Renderer_System
     {
-        public Animation_Renderer_System() : base(Types.Body, Types.Animation)
+        public Animation_Renderer_System() : base()
         {
+            types.Clear();
+            types.Add(Types.Body);
+            types.Add(Types.Animation);
         }
 
         public override void Update(GameTime time, Entity entity)
@@ -71,8 +74,9 @@ namespace Desire_And_Doom.ECS
         {
             var animation = (Animated_Sprite)entity.Get(Types.Animation);
             var body = (Body)entity.Get(Types.Body);
-            
-            animation.Layer = 0.3f + (body.Y / DesireAndDoom.Map_Height_Pixels) * 0.1f;
+
+            // TODO(Dustin): Lets not look at this global that may or may not change if we forget to update it.
+            animation.Layer = Get_Layer(body);
 
             Animation current_animation = animation.Animations[animation.Current_Animation_ID];
             if (animation.Current_Frame > current_animation.Frames.Count - 1)
