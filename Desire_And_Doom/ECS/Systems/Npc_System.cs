@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 using Desire_And_Doom.Gui;
 using static Desire_And_Doom.ECS.Component;
+using Microsoft.Xna.Framework.Input;
 
 namespace Desire_And_Doom.ECS
 {
@@ -48,7 +49,10 @@ namespace Desire_And_Doom.ECS
                 if ( Vector2.Distance(body.Position, pbody.Position) < 25 )
                 {
                     physics.Velocity = Vector2.Zero;
-                    if ( Input.It.Is_Key_Pressed(Microsoft.Xna.Framework.Input.Keys.Z) && timer <= 0 )
+
+                    var action_button = Input.It.Is_Key_Pressed(Microsoft.Xna.Framework.Input.Keys.Z) || 
+                                        Input.It.Is_Gamepad_Button_Pressed(Buttons.A);
+                    if (action_button && timer <= 0 )
                     {
                         dialog.Show_Portait = true;
                         dialog.Image = anim.Texture;
