@@ -29,10 +29,12 @@ namespace Desire_And_Doom.ECS
         public float Vel_Y { get { return Velocity.Y; } set { Velocity = new Vector2(Velocity.X, value); } }
 
         public float Density  { get; set; } = 0.01f;
-        public float Friction { get; set; } = 0.90f;
+        public float Friction { get; set; } = 0.005f;
         
         public float Direction { get; set; } = 0f;
         public float Current_Speed { get; set; } = 0f;
+
+        public bool Flying { get; set; } = false;
 
         public static float Deg_To_Rad(float deg) {
             return (float)Math.PI * deg / 180;

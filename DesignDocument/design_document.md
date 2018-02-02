@@ -3,8 +3,11 @@
 
 ## Plot
 
-
 ## Environments
+### Pirate Island
+### Witch Hunt
+### Forest Moster
+
 ## Items
 ## Entities
 ## Art and Music design

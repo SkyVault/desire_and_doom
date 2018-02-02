@@ -169,7 +169,6 @@ namespace Desire_And_Doom.ECS
                 var bodies = world.Get_All_With_Component(Types.Physics);
                 foreach (var other in bodies)
                 {
-
                     if (other.UUID == entity.UUID) continue;
                     var o_physics = (Physics)other.Get(Types.Physics);
                     var o_body = (Body)other.Get(Types.Body);
@@ -209,23 +208,26 @@ namespace Desire_And_Doom.ECS
                     }
                 }
 
-                foreach(var solid in solids)
+                if (!physics.Flying)
                 {
-                    var o_body = new Body(solid.Location, solid.Size);
+                    foreach (var solid in solids)
+                    {
+                        var o_body = new Body(solid.Location, solid.Size);
 
-                    if (o_body.Contains(x_body)) { x_body = body; }
-                    if (o_body.Contains(y_body)) { y_body = body; }
-                }
-                
-                foreach(var poly in polygons)
-                {
-                    // get the lines of the rectangle
-                    if (Body_In_Polygon(poly, x_body)) { x_body = body; }
-                    if (Body_In_Polygon(poly, y_body)) { y_body = body; }
+                        if (o_body.Contains(x_body)) { x_body = body; }
+                        if (o_body.Contains(y_body)) { y_body = body; }
+                    }
+
+                    foreach (var poly in polygons)
+                    {
+                        // get the lines of the rectangle
+                        if (Body_In_Polygon(poly, x_body)) { x_body = body; }
+                        if (Body_In_Polygon(poly, y_body)) { y_body = body; }
+                    }
                 }
             }
-            
-            physics.Velocity *= physics.Friction;
+
+            physics.Velocity *= (float)Math.Pow(physics.Friction, time.ElapsedGameTime.TotalSeconds);
 
             physics.Direction = (float)Math.Atan2(body.Y - (body.Y + physics.Vel_Y * dt),body.X - (body.X + physics.Vel_X * dt)) + Physics.Deg_To_Rad(180);
 

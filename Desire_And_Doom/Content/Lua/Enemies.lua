@@ -31,7 +31,7 @@ return {
 			["Animation"] =
 				{"entities", {"bird-fly", 0.1}, {"bird-idle", 0.1}},
 			["Physics"] = {},
-			["Ai"] = {"Table", "Bird_Ai"},
+			["Ai"] = {"Function", AI.Bird},
 		}
 	},
 

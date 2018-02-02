@@ -105,11 +105,14 @@ namespace Desire_And_Doom
                 return;
             }
 
-            var table = lua.DoFile(file)[0] as LuaTable;
-            foreach(string ent in table.Keys)
+            try
             {
-                entities.Add(ent, table[ent] as LuaTable);
-            }
+                var table = lua.DoFile(file)[0] as LuaTable;
+                foreach(string ent in table.Keys)
+                {
+                    entities.Add(ent, table[ent] as LuaTable);
+                }
+            } catch (Exception e) { Console.WriteLine(e.Message); }
         }
         
         public Animation Generate_Animation(string id,Vector2 start_pos, Vector2 frame_size, int num_frames)

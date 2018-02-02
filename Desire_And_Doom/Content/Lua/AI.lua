@@ -129,5 +129,31 @@ return {
 		--	handle_player_hit(entity, engine, 1, 100)
 		--	
 		--end
-	end
+	end,
+
+	----------------------------------------------------- GRENDLE AI ------------------------------------------------------------
+	--																														   --
+	-----------------------------------------------------------------------------------------------------------------------------
+	Bird = function(entity, engine)
+		local mx_dist	= 60
+		local body		= engine:Get_Component(entity, "Body")
+		local anim		= engine:Get_Component(entity, "Animation")
+		local physics	= engine:Get_Component(entity, "Physics")
+		local fn		= engine:Get_Component(entity, "Lua_Function")
+
+		if fn.Table == nil then fn.Table = {}; end
+
+		if not fn.Table.is_flying then
+			anim.Current_Animation_ID = "bird-idle"
+			if (engine:Entity_Within("Player", body.X, body.Y, mx_dist)) then
+				fn.Table.is_flying = true
+			end
+		else
+			anim.Current_Animation_ID = "bird-fly"
+			physics.Flying = true
+
+			physics.Vel_X =  75 * 0.5
+			physics.Vel_Y = -60 * 0.5
+		end
+	end,
 }
