@@ -15,10 +15,17 @@ namespace Desire_And_Doom
         public bool reset = false;
     }
 
+    class Button_State { 
+        public bool current = false, last = false;
+        public Buttons key = 0;
+        public bool reset = false;
+    }
+
     class Input
     {
         private static Input it;
         private Dictionary<Keys, Key_State> states;
+        private Dictionary<Buttons, Button_State> button_states;
         private ButtonState left_current = ButtonState.Released, left_last = ButtonState.Released;
 
         private Vector2 mouse_drag = Vector2.Zero;
@@ -27,6 +34,7 @@ namespace Desire_And_Doom
 
         private Input() {
             states = new Dictionary<Keys, Key_State>();
+            button_states = new Dictionary<Buttons, Button_State>();
         }
 
         public void Update(GameTime time)
@@ -36,6 +44,10 @@ namespace Desire_And_Doom
                 if (key.reset)
                     key.last = key.current;
             }
+
+            foreach (var button in button_states.Values)
+                if (button.reset)
+                    button.last = button.current;
 
             left_last = left_current;
         }
@@ -63,6 +75,36 @@ namespace Desire_And_Doom
             }
             left_last = left_current;
             return clicked;
+        }
+
+        // Game pads
+        public bool Is_Gamepad_Button_Down(Buttons button) =>
+            (GamePad.GetState(PlayerIndex.One).IsButtonDown(button));
+
+        public bool Is_Gamepad_Button_Up(Buttons button) =>
+            !Is_Gamepad_Button_Down(button);
+
+        public bool Is_Gamepad_Button_Pressed(Buttons key)
+        {
+            if (button_states.ContainsKey(key) == false)
+            {
+                var key_state = new Button_State() {
+                    key = key, current = Is_Gamepad_Button_Down(key)
+                };
+                button_states.Add(key, key_state);
+                return false;
+            }else
+            {
+                var key_state = button_states[key];
+                key_state.current = Is_Gamepad_Button_Down(key);
+                if (key_state.current && !key_state.last)
+                {
+                    button_states[key].reset = true;
+                    return true;
+                }else {
+                    return false;
+                }
+            }
         }
 
         public bool Is_Key_Down(Keys key) {

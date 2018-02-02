@@ -145,13 +145,15 @@ namespace Desire_And_Doom.Utils
                 var height      = DesireAndDoom.ScreenHeight * (state == State.HALF ? 0.7f : 0.15f);
                 var font        = Assets.It.Get<SpriteFont>("font");
                 var str_height  = (int)font.MeasureString(" ").Y;
-                var str_width   = (int)font.MeasureString(">").X;
+                var str_width   = (int)font.MeasureString("> ").X;
 
                 batch.Draw(
                     image, 
                     new Rectangle(0, 0, DesireAndDoom.ScreenWidth, (int)height), 
                     new Rectangle(0, 0, 512, 512), 
                     new Color(10, 10, 10, 150));
+
+
             }
         }
     }

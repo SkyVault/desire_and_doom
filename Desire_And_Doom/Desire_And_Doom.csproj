@@ -139,6 +139,7 @@
     <Compile Include="Screens\Boss_Room_1.cs" />
     <Compile Include="Screens\Game_Screen.cs" />
     <Compile Include="Screens\Intro_Logos_Screen.cs" />
+    <Compile Include="Utils\Constants.cs" />
     <Compile Include="Utils\Kore_Parser.cs" />
     <Compile Include="Utils\Named_Action_List.cs" />
     <Compile Include="Utils\Debug_Console.cs" />
@@ -699,6 +700,9 @@
     <None Include="Content\Maps\DustysDive.tmx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Content\Maps\Maze.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\Maps\sky_test.tmx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -728,7 +732,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Physics\" />
+    <None Include="Content\Maps\DungeonTileset.tsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

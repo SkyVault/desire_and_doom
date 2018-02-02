@@ -30,6 +30,9 @@ namespace Desire_And_Doom.Screens
             lighting.AmbientColor = new Color(0.4f, 0.4f, 0.4f, 1.0f);
             Load_Map("Dungeon_Room_2");
 
+            var ai_system = (AI_System)world.Get_System<AI_System>();
+            ai_system.Give_Map(Map);
+
             camera.Zoom = DesireAndDoom.SCALE;
             DesireAndDoom.Request_Resume(); // Make sure the game is unpaused
         }

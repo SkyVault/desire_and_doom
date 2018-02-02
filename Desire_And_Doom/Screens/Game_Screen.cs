@@ -75,7 +75,7 @@ namespace Desire_And_Doom.Screens
 
             DestroyAllButPersistant();
 
-            Map = new Tiled_Map(id, camera, world, this, particle_world, lua, lighting) {
+            Map = new Tiled_Map(id, camera, world, this, particle_world, lua, lighting, true) {
                 Change_Scene_Callback = Load_Map
             };
 

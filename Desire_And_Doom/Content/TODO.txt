@@ -1,17 +1,32 @@
 ﻿FIXES:
--- players claymore facing right hitbox is off center
 -- Move entities out from each other if they collide, see birds?
 -- Scale the whole game to prevent the OpenGL / DirectX oversampling :(
 
+IMPROVEMENTS
+-- All of the menus in the game use different code to controll the interface
+-- Remove that shitty table based ai system, implemented in AI_System
+-- Fix the dialog system
+-- Make the invatory system controller work
+
 ADDITIONS
 
+-- A* Path finding, implementing it in the AI_System class, already started
+
+-- Input manager
+	-- Input manager should eventually read from a keybindings menu and set the keys to that
+	-- Input manager should handle joysticks and GamePad buttons.
+
+-- Debug Console
+	-- Make it render text and allow editing, modal vim based?
+
 -- Equipment
-	-- Weapon equipment should have a function that when the attack button is pressed, it gets called  -- DONE
-	-- Weapon should also have specific strings for idle and attack animations, the player should then -- DONE
-be using whichever animation that the current weapon suggests
-	-- Weapons should also be attached to the equipment component									   -- DONE
 	
 DONE
 -- Create a pausing system -- DONE
 -- Check out the whole Game1.Map_Height_Pixels thing, seems super fishy -- DONE
 -- flags hit box is off center -- DONE
+-- players claymore facing right hitbox is off center -- DONE
+-- Weapon equipment should have a function that when the attack button is pressed, it gets called  -- DONE
+-- Weapon should also have specific strings for idle and attack animations, the player should then -- DONE
+be using whichever animation that the current weapon suggests
+-- Weapons should also be attached to the equipment component									   -- DONE

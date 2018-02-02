@@ -295,3 +295,5 @@ C:\Users\Dustin\Source\Repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\D
 C:\Users\Dustin\Source\Repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\Lua\Player.lua
 C:\Users\Dustin\Source\Repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\Lua\Utilities.lua
 C:\Users\Dustin\Source\Repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\Lua\Behaviors\Enemy_Ai.lua
+C:\Users\Dustin\source\repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\Maps\Maze.tmx
+C:\Users\Dustin\source\repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\Maps\DungeonTileset.tsx

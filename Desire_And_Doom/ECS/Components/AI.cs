@@ -16,6 +16,14 @@ namespace Desire_And_Doom.ECS
 
         public List<bool> Flags { get; set; }
 
+        public bool TargetEntity_AStar { get; set; } = false;
+        public Entity Target;
+
+        public AI(Entity target) : base(Types.AI)
+        {
+            Target = target;
+        }
+
         public AI(LuaTable behavior) : base(Types.AI)
         {
             Behavior = behavior;

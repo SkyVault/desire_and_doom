@@ -46,7 +46,7 @@ namespace Desire_And_Doom.Screens
                 {"Settings", ()=>{
 
                 } },
-                {"Exit",()=>{
+                {"Exit", ()=>{
                     DesireAndDoom.SHOULD_QUIT = true;
                 } }
             });
@@ -66,15 +66,15 @@ namespace Desire_And_Doom.Screens
         {
             sky.Update(time);
 
-            if (Input.It.Is_Key_Pressed(Keys.Down))
+            if (Input.It.Is_Key_Pressed(Keys.Down) || Input.It.Is_Gamepad_Button_Pressed(Buttons.DPadDown))
                 selector++;
-            if (Input.It.Is_Key_Pressed(Keys.Up))
+            if (Input.It.Is_Key_Pressed(Keys.Up) || Input.It.Is_Gamepad_Button_Pressed(Buttons.DPadUp))
                 selector--;
 
             if (selector >= actions.Names.Length) selector = 0;
             if (selector < 0) selector = actions.Names.Length - 1;
 
-            if (Input.It.Is_Key_Pressed(Keys.Enter))
+            if (Input.It.Is_Key_Pressed(Keys.Enter) || Input.It.Is_Gamepad_Button_Pressed(Buttons.A))
             {
                 actions.Call(selector);
             }

@@ -48,7 +48,7 @@ namespace Desire_And_Doom
         private static GraphicsDeviceManager graphics;
         SpriteBatch batch;
         
-        GameCamera           camera;
+        GameCamera          camera;
         World               world;
         Monogui             gui;
         Screen_Manager      screen_manager;

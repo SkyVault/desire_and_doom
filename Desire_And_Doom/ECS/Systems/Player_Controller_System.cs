@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using static Desire_And_Doom.ECS.Component;
-using Desire_And_Doom.Utils;
 using Desire_And_Doom.ECS.Components;
-using Desire_And_Doom.Items;
 using Desire_And_Doom.Graphics;
-using Desire_And_Doom.Graphics.Particle_Systems;
 using Desire_And_Doom.Gui;
 
 namespace Desire_And_Doom.ECS
@@ -224,7 +216,7 @@ namespace Desire_And_Doom.ECS
                     player.State = Player.Action_State.RUNNING;
                 }
 
-                if (Input.It.Is_Key_Down(Keys.X) && player.State != Player.Action_State.ATTACKING)
+                if ((Input.It.Is_Key_Down(Keys.X) || GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.X)) && player.State != Player.Action_State.ATTACKING)
                 {
                     if ( equipment.Left_Hand != null )
                     {
@@ -299,8 +291,6 @@ namespace Desire_And_Doom.ECS
                 show_overlay_gui = !show_overlay_gui;
                 invatory_manager.Showing = show_overlay_gui;
 
-                
-
                 if (show_overlay_gui)
                     player.State = Player.Action_State.IN_INVATORY;
                 else
@@ -317,14 +307,19 @@ namespace Desire_And_Doom.ECS
         {
             var gui     = Assets.It.Get<Texture2D>("gui");
             var health  = (Health)entity.Get(Types.Health);
-            Vector2 health_pos = camera.Screen_To_World(new Vector2(16, 16));
 
-            for (int i = 0; i < health.Ammount; i++)
+            var margin = 4;
+            Vector2 health_pos = camera.Screen_To_World(new Vector2(
+                DesireAndDoom.ScreenWidth - (16 * health.Amount * DesireAndDoom.SCALE) - (margin * health.Amount * DesireAndDoom.SCALE), 
+                16
+                ));
+
+            for (int i = 0; i < health.Amount; i++)
             {
-                if (i > 0) health_pos += new Vector2(20, 0);
+                if (i > 0) health_pos += new Vector2(16 + margin, 0);
                 batch.Draw(
                     gui,
-                    new Vector2(health_pos.X, health_pos.Y),
+                    health_pos,
                     new Rectangle(0, 24, 16, 16),
                     Color.White,
                     0f,

@@ -11,10 +11,13 @@ namespace Desire_And_Doom.ECS
 {
     class AI_System : System
     {
+        private Tiled_Map tiled_map;
+
         public AI_System() : base(Types.AI, Types.Body, Types.Physics)
         {
         }
 
+        public void Give_Map(Tiled_Map map) => this.tiled_map = map;
         public void Do_Block(LuaTable table, Entity e, AI ai, Body body, Physics physics)
         {
             int i = 2;
@@ -201,10 +204,18 @@ namespace Desire_And_Doom.ECS
             var body = (Body)entity.Get(Types.Body);
             var physics = (Physics)entity.Get(Types.Physics);
 
-            var behavior = ai.Behavior;
+            if (ai.TargetEntity_AStar == false)
+            {
+                var behavior = ai.Behavior;
 
-            Do_Block(behavior, entity, ai, body, physics);
-            ai.Timer += (float)time.ElapsedGameTime.TotalSeconds;
+                Do_Block(behavior, entity, ai, body, physics);
+                ai.Timer += (float)time.ElapsedGameTime.TotalSeconds;
+            } else
+            {
+                // A Star baby!                
+
+
+            }
             //Console.WriteLine(ai.Timer);
         }
     }

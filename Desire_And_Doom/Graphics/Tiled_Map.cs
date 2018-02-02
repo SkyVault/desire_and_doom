@@ -44,7 +44,9 @@ namespace Desire_And_Doom
         private float timer = 0;
         private int frame = 0;
 
-        public Tiled_Map(string name, GameCamera _camera, World world, Screen level, Particle_World particle_world, Lua lua, PenumbraComponent lighting = null)
+        private bool[,] astar_collision_map;
+
+        public Tiled_Map(string name, GameCamera _camera, World world, Screen level, Particle_World particle_world, Lua lua, PenumbraComponent lighting = null, bool create_astar_collision_map = false)
         {
 
             this.camera = _camera;
@@ -68,7 +70,7 @@ namespace Desire_And_Doom
             quads       = Assets.It.Get_Quads("quads");
 
             // load a texture
-            var tileset_name = map.Tilesets[0].Name;
+            var tileset_name = Path.GetFileName(map.Tilesets[0].Image.Source).Split('.').First();
             if (Assets.It.Has(tileset_name, typeof(Texture2D)))
             {
                 texture = Assets.It.Get<Texture2D>(map.Tilesets[0].Name);
@@ -106,6 +108,7 @@ namespace Desire_And_Doom
                     map.Layers.RemoveAt(i);
             }
 
+            var solids = new List<RectangleF>();
             foreach(var layer in map.ObjectGroups)
             {
                 foreach ( var obj in layer.Objects )
@@ -117,8 +120,10 @@ namespace Desire_And_Doom
                         var physics_engine = (Physics_Engine)world.Get_System<Physics_Engine>();
                         if (physics_engine != null)
                         {
-                            if (obj.Points == null) { 
-                                var solid = physics_engine.Add_Solid(new RectangleF((float)obj.X, (float)obj.Y, (float)obj.Width, (float)obj.Height));
+                            if (obj.Points == null) {
+                                var rect = new RectangleF((float)obj.X, (float)obj.Y, (float)obj.Width, (float)obj.Height);
+                                var solid = physics_engine.Add_Solid(rect);
+                                solids.Add(rect);
                             }else
                             {
                                 List<Vector2> points = new List<Vector2>();
@@ -253,6 +258,29 @@ namespace Desire_And_Doom
                     }
                 }
             }
+
+            // creating the ai map
+            if (create_astar_collision_map)
+            {
+                astar_collision_map = new bool[map.Height, map.Width];
+                
+                foreach (var obj in solids)
+                {
+                    int x = (int)Math.Floor(obj.X / map.TileWidth);
+                    int y = (int)Math.Floor(obj.Y / map.TileHeight);
+                    int w = (int)Math.Floor(obj.Width / map.TileWidth);
+                    int h = (int)Math.Floor(obj.Height / map.TileHeight);
+
+                    for (int yy = y; yy < y + h; yy++) {
+                        for (int xx = x; xx < x + w; xx++)
+                        {
+                            if (xx < 0 || xx > map.Width) continue;
+                            if (yy < 0 || yy > map.Height) continue;
+                            astar_collision_map[yy, xx] = true;
+                        }
+                    }
+                }
+            }
         }
 
         public void Destroy()
@@ -319,7 +347,7 @@ namespace Desire_And_Doom
                             int gid = tile.Gid;
                             bool contains = false;
                             foreach(var t in tileset.Tiles )
-                                if (t.Id+1 == gid )
+                                if (t.Id + 1 == gid )
                                 {
                                     contains = true; break;
                                 }
@@ -342,6 +370,27 @@ namespace Desire_And_Doom
                         }
                     }
             }
+
+            //if (astar_collision_map != null)
+            //{
+            //    for (int y = 0; y < map.Height; y++)
+            //    {
+            //        for (int x = 0; x < map.Width; x++)
+            //        {
+            //            if (!astar_collision_map[y, x]) continue;
+            //            batch.Draw(
+            //                texture,
+            //                new Rectangle(x * map.TileWidth, y * map.TileHeight, map.TileWidth, map.TileHeight),
+            //                new Rectangle(0, 0, 8, 8),
+            //                Color.Black,
+            //                0f,
+            //                Vector2.Zero,
+            //                SpriteEffects.None,
+            //                1f
+            //                );
+            //        }
+            //    }
+            //}
 
             foreach (var billboard in billboards)
             {

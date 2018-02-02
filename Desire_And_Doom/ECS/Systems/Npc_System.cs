@@ -40,10 +40,11 @@ namespace Desire_And_Doom.ECS
             var player = World_Ref.Find_With_Tag("Player");
 
             var dialog = npc.Dialog;
-
             if ( player != null )
             {
                 var pbody = (Body) (player.Get(Component.Types.Body));
+    
+                //NOTE(Dustin): Distance @hardcoded
                 if ( Vector2.Distance(body.Position, pbody.Position) < 25 )
                 {
                     physics.Velocity = Vector2.Zero;
@@ -61,8 +62,6 @@ namespace Desire_And_Doom.ECS
                         }
 
                         dialog.Animate_Toggle("#White Hello I am an #Cyan Npc! #White What can I #Yellow do #White for you?");
-
-                        DesireAndDoom.Toggle_Pause();
 
                         var invatory = (Invatory) entity.Get(Component.Types.Invatory);
                         if (invatory != null )
@@ -89,6 +88,19 @@ namespace Desire_And_Doom.ECS
                 }
 
                 dialog.Update(time);
+            } else
+            {
+                if (dialog.Showing())
+                {
+                    dialog.Stop();
+                    var invatory = (Invatory) entity.Get(Component.Types.Invatory);
+                    if (invatory != null )
+                    {
+                        // Clean up the invatory
+                        invatory_manager.Showing = false;
+                        invatory_manager.Remove(invatory);
+                    }
+                }
             }
         }
 

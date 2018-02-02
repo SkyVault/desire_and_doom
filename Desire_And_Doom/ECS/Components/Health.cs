@@ -8,15 +8,15 @@ namespace Desire_And_Doom.ECS.Components
 {
     class Health : Component
     {
-        public int Ammount { get; set; } = 3;
-        public bool Should_Die { get => Ammount <= 0; }
+        public int Amount { get; set; } = 3;
+        public bool Should_Die { get => Amount <= 0; }
 
         public float Shield_Timer{ get; set; } = 0;
         public float Max_Shield_Timer { get; set; } = 1f;
 
         public Health(int total) : base(Types.Health)
         {
-            Ammount = total;
+            Amount = total;
         }
 
         public void Hurt(int dammage, bool shield = false) {
@@ -25,12 +25,12 @@ namespace Desire_And_Doom.ECS.Components
                 if (Shield_Timer <= 0)
                 {
                     Shield_Timer = Max_Shield_Timer;
-                    Ammount -= dammage;
+                    Amount -= dammage;
                 }
             }else
-                Ammount -= dammage;
+                Amount -= dammage;
         }
 
-        public void Heal(int health)  => Ammount += health;
+        public void Heal(int health)  => Amount += health;
     }
 }
