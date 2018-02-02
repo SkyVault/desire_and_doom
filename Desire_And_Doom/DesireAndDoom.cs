@@ -192,13 +192,13 @@ namespace Desire_And_Doom
             Assets.It.Add("Charactors",     Content.Load<Texture2D>("Charactors"));
             Assets.It.Add("font",           Content.Load<SpriteFont>("font"));
             Assets.It.Add("gfont",          Content.Load<SpriteFont>("GFont"));
-            Assets.It.Add("dialog_font",          Content.Load<SpriteFont>("DialogFont"));
+            Assets.It.Add("dialog_font",    Content.Load<SpriteFont>("DialogFont"));
 
             Assets.It.Generate_Rectangle(GraphicsDevice, "gui-rect", 512, 512);
 
             // TODO(Dustin): Move this to the content pipeline
             Assets.It.Add_Table("Content/Lua/items.lua");
-            Assets.It.Add_Table("Content/Lua/Player.lua");
+            Assets.It.Add_Table("Content/Lua/Player.lua", true);
             Assets.It.Add_Table("Content/Lua/Enemies.lua");
             Assets.It.Add_Table("Content/Lua/Entities.lua");
             Assets.It.Add_Table("Content/Lua/Npcs.lua");
@@ -234,6 +234,8 @@ namespace Desire_And_Doom
             world.Update(gameTime);
             screen_manager.Update(gameTime);
             invatory_manager.Update(gameTime);
+
+            Assets.It.Update(gameTime);
             //UserInterface.Update(gameTime);
 
             if (Input.It.Is_Key_Pressed(Keys.P)) DEBUG = !DEBUG;

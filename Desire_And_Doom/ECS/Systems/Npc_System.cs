@@ -44,6 +44,7 @@ namespace Desire_And_Doom.ECS
             if ( player != null )
             {
                 var pbody = (Body) (player.Get(Component.Types.Body));
+                var pphys = (Physics) (player.Get(Component.Types.Physics));
     
                 //NOTE(Dustin): Distance @hardcoded
                 if ( Vector2.Distance(body.Position, pbody.Position) < 25 )
@@ -52,6 +53,7 @@ namespace Desire_And_Doom.ECS
 
                     var action_button = Input.It.Is_Key_Pressed(Microsoft.Xna.Framework.Input.Keys.Z) || 
                                         Input.It.Is_Gamepad_Button_Pressed(Buttons.A);
+
                     if (action_button && timer <= 0 )
                     {
                         dialog.Show_Portait = true;

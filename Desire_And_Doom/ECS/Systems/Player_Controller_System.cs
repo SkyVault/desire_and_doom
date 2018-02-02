@@ -12,7 +12,6 @@ namespace Desire_And_Doom.ECS
     {
         GameCamera camera;
         Particle_World particle_world;
-
         Invatory_Container invatory_container;
         Invatory_Manager invatory_manager;
 

@@ -36,7 +36,7 @@ namespace Desire_And_Doom.Screens
 
             var song = Song.FromUri("Bloom", new Uri("Content/Audio/Bloom.mp3", UriKind.Relative));
 
-            MediaPlayer.Play(song);
+            //MediaPlayer.Play(song);
             MediaPlayer.IsRepeating = true;
 
             camera.Zoom = DesireAndDoom.SCALE;

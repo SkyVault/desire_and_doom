@@ -14,10 +14,10 @@ namespace Desire_And_Doom
 {
     class LuaTableAsset
     {
-        string Path { get; set; } = "";
-        bool Hotload { get; set; }
-        long LastTime { get; set; } = 0;
-        LuaTable Table { get; set; }
+        public string Path { get; set; } = "";
+        public bool Hotload { get; set; }
+        public DateTime LastTime { get; set; }
+        public LuaTable Table { get; set; }
     }
 
     class Assets
@@ -28,21 +28,21 @@ namespace Desire_And_Doom
         private Dictionary<string, List<Rectangle>> quads;
         private Dictionary<string, SpriteFont>      fonts;
         private Dictionary<string, Texture2D>       textures;
-        private Dictionary<string, LuaTable>        entities;
+        //private Dictionary<string, LuaTable>        entities;
         private Dictionary<string, LuaFunction>     lua_functions;
         private Dictionary<string, Animation>       animations;
-        private Dictionary<string, LuaTableAsset>   reloadable_lua_tables;
+        private Dictionary<string, LuaTableAsset>   lua_tables;
 
         public ContentManager Content;
 
         private Assets() {
             textures                = new Dictionary<string, Texture2D>();
-            entities                = new Dictionary<string, LuaTable>();
+            //entities                = new Dictionary<string, LuaTable>();
             fonts                   = new Dictionary<string, SpriteFont>();
             quads                   = new Dictionary<string, List<Rectangle>>();
             lua_functions           = new Dictionary<string, LuaFunction>();
             animations              = new Dictionary<string, Animation>();
-            reloadable_lua_tables   = new Dictionary<string, LuaTableAsset>();
+            lua_tables   = new Dictionary<string, LuaTableAsset>();
 
             lua = new Lua();
         }
@@ -110,7 +110,12 @@ namespace Desire_And_Doom
                 var table = lua.DoFile(file)[0] as LuaTable;
                 foreach(string ent in table.Keys)
                 {
-                    entities.Add(ent, table[ent] as LuaTable);
+                    lua_tables.Add(ent, new LuaTableAsset {
+                            Path = file,
+                            Hotload = hotload,
+                            Table = table[ent] as LuaTable,
+                            LastTime = File.GetLastAccessTime(file) 
+                        });
                 }
             } catch (Exception e) { Console.WriteLine(e.Message); }
         }
@@ -246,7 +251,7 @@ namespace Desire_And_Doom
             else if (typeof(T) == typeof(SpriteFont))
                 return (T)(fonts[id] as object);
             else if (typeof(T) == typeof(LuaTable))
-                return (T)(object)(entities[id]);
+                return (T)(object)(lua_tables[id].Table);
             else if (typeof(T) == typeof(Animation))
                 return (T)(object)(animations[id]);
             return default(T);
@@ -255,6 +260,31 @@ namespace Desire_And_Doom
         public static Assets It
         {
             get { if (it == null) it = new Assets(); return it; }
+        }
+            
+        private float hotload_timer = 0f;
+        public void Update(GameTime time)
+        {
+            hotload_timer += (float)time.ElapsedGameTime.TotalSeconds;
+            if (hotload_timer < 0.25f) return;
+            hotload_timer = 0f;
+
+
+            foreach(var table_asset in lua_tables)
+            {
+                if (table_asset.Value.Hotload)
+                {
+                    var writetime = File.GetLastAccessTime(table_asset.Value.Path);
+                    Console.WriteLine(writetime);
+                    if (writetime != table_asset.Value.LastTime)
+                    {
+                        Console.WriteLine($"[ASSETS]::[HOTLOADER]:: Reloaded Table: {table_asset.Value.Path}");
+                        var table = lua.DoFile(table_asset.Value.Path)[0] as LuaTable;
+                        table_asset.Value.Table = table;
+                        table_asset.Value.LastTime = writetime;
+                    }
+                }
+            }
         }
     }
 }
