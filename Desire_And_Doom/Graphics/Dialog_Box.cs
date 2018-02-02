@@ -35,10 +35,23 @@ namespace Desire_And_Doom
 
         public float Speed { get; set; } = 0.9f;
 
-        private Color color = new Color(0, 150, 255, 100);
+        private Color color = new Color(50, 50, 50, 100);
         private List<Dialog_Word> words;
 
         private Vector2 position_offset { get; set; }
+
+        private List<Rectangle> button_animation_frames = new List<Rectangle>
+        {
+            new Rectangle(51 + 17 * 0, 7, 17, 17),
+            new Rectangle(51 + 17 * 1, 7, 17, 17),
+            new Rectangle(51 + 17 * 2, 7, 17, 17),
+            new Rectangle(51 + 17 * 1, 7, 17, 17),
+        };
+        private int button_animation_frame = 0;
+        private float button_animation_speed = 0.125f;
+        private float button_animation_time = 0f;
+
+        private float button_size = 48;
 
         public Dialog_Box()
         {
@@ -91,6 +104,15 @@ namespace Desire_And_Doom
             if ( animating )
             {
                 position_offset *= Speed;
+
+                button_animation_time += (float)time.ElapsedGameTime.TotalSeconds;
+                if (button_animation_time > button_animation_speed)
+                {
+                    button_animation_time = 0;
+
+                    button_animation_frame++;
+                    button_animation_frame %= button_animation_frames.Count;
+                }
             }
         }
         
@@ -99,11 +121,12 @@ namespace Desire_And_Doom
             if (animating)
             {
                 var image = Assets.It.Get<Texture2D>("gui");
-                var font = Assets.It.Get<SpriteFont>("font");
+                var font = Assets.It.Get<SpriteFont>("dialog_font");
 
                 var pos = new Vector2(10, 10);
 
                 var pre_width = Width;
+                var text_scale = 1f;
 
                 //move and shrink the dialog box to fit the portait
                 if ( Show_Portait )
@@ -164,8 +187,8 @@ namespace Desire_And_Doom
                         }
                         else
                         {
-                            batch.DrawString(font, token, new Vector2(x, y) + position_offset, color, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
-                            x += (font.MeasureString(token).X + font.MeasureString(" ").X);
+                            batch.DrawString(font, token, new Vector2(x, y) + position_offset, color, 0f, Vector2.Zero, text_scale, SpriteEffects.None, 1f);
+                            x += (font.MeasureString(token).X + font.MeasureString(" ").X) * text_scale; 
                         }
 
                         if ( token.Contains("\n")) {
@@ -175,6 +198,24 @@ namespace Desire_And_Doom
 
                     }
                 }
+
+                // Draw the button
+                var frame = button_animation_frames[button_animation_frame];
+                var gui = Assets.It.Get<Texture2D>("gui");
+                batch.Draw(gui,
+                    new Rectangle(
+                        DesireAndDoom.ScreenWidth - 128,
+                        DesireAndDoom.ScreenHeight - 64 + (int)position_offset.Y,
+                        (int)button_size,
+                        (int)button_size
+                        ),
+                    frame,
+                    Color.White,
+                    0.0f,
+                    Vector2.Zero,
+                    SpriteEffects.None,
+                    1f
+                    );
 
                 if ( Show_Portait )
                 {

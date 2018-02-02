@@ -190,7 +190,8 @@ namespace Desire_And_Doom
             Assets.It.Add("Boss_Texture",   Content.Load<Texture2D>("boss_1"));
             Assets.It.Add("Charactors",     Content.Load<Texture2D>("Charactors"));
             Assets.It.Add("font",           Content.Load<SpriteFont>("font"));
-            Assets.It.Add("gfont", Content.Load<SpriteFont>("GFont"));
+            Assets.It.Add("gfont",          Content.Load<SpriteFont>("GFont"));
+            Assets.It.Add("dialog_font",          Content.Load<SpriteFont>("DialogFont"));
 
             Assets.It.Generate_Rectangle(GraphicsDevice, "gui-rect", 512, 512);
 
