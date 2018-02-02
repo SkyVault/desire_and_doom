@@ -190,3 +190,9 @@
 /processorParam:TextureFormat=Compressed
 /build:DialogFont.spritefont
 
+#begin Audio/Bloom.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Bloom.wav
+

@@ -8,6 +8,7 @@ using NLua;
 using System;
 using Microsoft.Xna.Framework.Input;
 using Desire_And_Doom.Gui;
+using Microsoft.Xna.Framework.Media;
 
 namespace Desire_And_Doom.Screens
 {
@@ -33,8 +34,19 @@ namespace Desire_And_Doom.Screens
             var ai_system = (AI_System)world.Get_System<AI_System>();
             ai_system.Give_Map(Map);
 
+            var song = Song.FromUri("Bloom", new Uri("Content/Audio/Bloom.mp3", UriKind.Relative));
+
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
+
             camera.Zoom = DesireAndDoom.SCALE;
             DesireAndDoom.Request_Resume(); // Make sure the game is unpaused
+        }
+
+        public override void Destroy()
+        {
+            MediaPlayer.Stop();
+            base.Destroy();
         }
 
         public override void Update(GameTime time)

@@ -219,6 +219,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
+    <Content Include="Content\Audio\Bloom.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\Bloom.wav" />
     <Content Include="Content\GeonBit.UI\themes\hd\effects\disabled.fx" />
     <Content Include="Content\GeonBit.UI\themes\hd\effects\silhouette.fx" />
     <Content Include="Content\GeonBit.UI\themes\hd\styles\Button-Default.xml" />
@@ -614,6 +618,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Content\Audio\Bloom.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\Background_2.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
