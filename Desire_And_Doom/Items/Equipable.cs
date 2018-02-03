@@ -36,5 +36,7 @@ namespace Desire_And_Doom.Items
         public Weapon() : base(Equipment_Type.WEAPON)
         {
         }
+
+        
     }
 }

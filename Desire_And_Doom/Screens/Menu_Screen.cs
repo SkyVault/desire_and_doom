@@ -159,6 +159,7 @@ namespace Desire_And_Doom.Screens
         public override void Destroy()
         {
             camera.Origin = pre_origin;
+            called = false; 
             base.Destroy();
         }
     }
