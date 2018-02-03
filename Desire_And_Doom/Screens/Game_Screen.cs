@@ -111,7 +111,6 @@ namespace Desire_And_Doom.Screens
                         var body = (Body)player.Get(Component.Types.Body);
                         body.X = x;
                         body.Y = y;
-                        Console.WriteLine("Es Aqui");
                     }
                 }
             }

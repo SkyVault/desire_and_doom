@@ -37,7 +37,7 @@ function Load_Ai(entity, engine)
 	opening_events = Eventing.new {
 		function(self, dt)
 			if engine:Entity_Within("Player", body.X, body.Y, 100) then
-				self:delay_next("eyes-delay", 1, dt)
+				self:delayed_next(1);
 			end
 		end,
 
@@ -46,7 +46,7 @@ function Load_Ai(entity, engine)
 				eyes.Playing = true
 				if eyes.Animation_End then
 					eyes.Playing = false
-					self:delay_next("eyes-open", 1.5, dt)
+					self:delayed_next(2);
 				end
 			end
 		end,
@@ -55,7 +55,7 @@ function Load_Ai(entity, engine)
 			mouth.Playing = true
 			if mouth.Animation_End then
 				mouth.Playing = false
-				self:delay_next("mouth-open", 0.2, dt)
+				self:delayed_next(0.5);
 			end
 		end,
 
@@ -70,8 +70,6 @@ function Load_Ai(entity, engine)
 			end
 
 			mtimer = mtimer + dt
-			-- print "hello"
-			-- physics.Vel_X = math.cos(mtimer)
 			body.X = body.X + math.cos(mtimer) * 2
 			body.Y = body.Y + math.sin(mtimer *  4)
 
@@ -80,16 +78,15 @@ function Load_Ai(entity, engine)
 			if player then
 				local p_body = engine:Get_Component(player, "Body")
 
-				local dy = (p_body.Y - 80) - body.Y
+				local dy = (p_body.Y - 40) - body.Y
 				local dx = (p_body.X) - body.X 
 				
 				body.X = body.X + dx * 0.008
 				body.Y = body.Y + dy * 0.01
 			end
 
-			if (health.Ammount < 6) then
-				-- self:goto_fn(1)
-				-- next wave thingy
+			if (health.Amount < 6) then
+				entity:Destroy()
 			end
 
 			-- self:next()

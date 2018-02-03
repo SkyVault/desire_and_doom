@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.09.13" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" infinite="0" nextobjectid="99">
+<map version="1.0" tiledversion="2017.09.13" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" infinite="0" nextobjectid="100">
  <properties>
   <property name="Sky" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" name="Tiles_1" tilewidth="8" tileheight="8" tilecount="4096" columns="64">
   <image source="../Tiles_1.png" width="512" height="512"/>
  </tileset>
+ <templategroup firsttid="1" source="../../../../BeyondAge/BeyondAge/Content/data/templates.tgx"/>
  <layer name="Ground" width="128" height="128">
   <properties>
    <property name="layer" value="0.2"/>
@@ -1067,7 +1068,7 @@
    </properties>
   </object>
   <object id="70" x="640" y="425.083" width="32" height="5.25"/>
-  <object id="71" name="Large Rock" type="Billboard" x="418" y="622" width="48" height="48">
+  <object id="71" tid="2" x="418" y="622">
    <properties>
     <property name="Region" value="160 64 48 48"/>
    </properties>
