@@ -297,7 +297,7 @@ namespace Desire_And_Doom.ECS
             
             // Toggle the gui and invatory screen
             var invatory = (Invatory) entity.Get(Types.Invatory);
-            if ( Input.It.Is_Key_Pressed(Keys.Q) )
+            if ( Input.It.Is_Key_Pressed(Keys.Q) || Input.It.Is_Gamepad_Button_Pressed(Buttons.Y))
             {
                 show_overlay_gui = !show_overlay_gui;
                 invatory_manager.Showing = show_overlay_gui;

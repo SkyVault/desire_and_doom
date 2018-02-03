@@ -48,7 +48,7 @@ namespace Desire_And_Doom.Screens
             SkyLogoY += Logo_Size;
             MonoLogoY += Logo_Size;
 
-            Background = _content.Load<Texture2D>("Logo_background");
+            Background = Assets.It.Get<Texture2D>("Background");
         }
 
         public override void Load()
@@ -107,6 +107,11 @@ namespace Desire_And_Doom.Screens
             if (Input.It.Is_Key_Pressed(Microsoft.Xna.Framework.Input.Keys.Enter))
                 screen_manager.Goto_Screen("Menu");
 
+            if (Input.It.Is_Gamepad_Button_Pressed(Microsoft.Xna.Framework.Input.Buttons.A))
+            {
+                tasker.Next();
+            }
+
             tasker.Update(time);
         }
 
@@ -147,7 +152,6 @@ namespace Desire_And_Doom.Screens
             Assets.It.Remove("Mono", typeof(Texture2D));
             SkyVaultLogo.Dispose();
             MonoGameLogo.Dispose();
-            Background.Dispose();
         }
     }
 }

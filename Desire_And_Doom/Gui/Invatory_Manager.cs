@@ -56,20 +56,25 @@ namespace Desire_And_Doom.Gui
 
             if ( Showing )
             {
-                if (Input.It.Is_Key_Pressed(Keys.Left))
+                var left = Input.It.Is_Key_Pressed(Keys.Left) || Input.It.Is_Gamepad_Button_Pressed(Buttons.LeftThumbstickLeft);
+                var right = Input.It.Is_Key_Pressed(Keys.Right) || Input.It.Is_Gamepad_Button_Pressed(Buttons.LeftThumbstickRight);
+                var down = Input.It.Is_Key_Pressed(Keys.Down) || Input.It.Is_Gamepad_Button_Pressed(Buttons.LeftThumbstickDown);
+                var up = Input.It.Is_Key_Pressed(Keys.Up) || Input.It.Is_Gamepad_Button_Pressed(Buttons.LeftThumbstickUp);
+
+                if (left)
                 {
                     selector += new Point(-1, 0);
                     ShowMenu = false;
                 }
 
-                if (Input.It.Is_Key_Pressed(Keys.Right))
+                if (right)
                 {
                     selector += new Point(1, 0);
                     ShowMenu = false;
                 }
 
-                if ( !ShowMenu && Input.It.Is_Key_Pressed(Keys.Up) ) selector += new Point(0, -1);
-                if ( !ShowMenu && Input.It.Is_Key_Pressed(Keys.Down) ) selector += new Point(0, 1);
+                if ( !ShowMenu && up) selector += new Point(0, -1);
+                if ( !ShowMenu && down) selector += new Point(0, 1);
 
                 if (selector.X < 0)
                 {

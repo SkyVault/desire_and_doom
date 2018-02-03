@@ -70,9 +70,12 @@ namespace Desire_And_Doom.Gui
 
             if (!showing) return;
 
-            if (Input.It.Is_Key_Pressed(Keys.Down) || Input.It.Is_Gamepad_Button_Pressed(Buttons.DPadDown))
+            var down = Input.It.Is_Key_Pressed(Keys.Down) || Input.It.Is_Gamepad_Button_Pressed(Buttons.DPadDown) || Input.It.Is_Gamepad_Button_Pressed(Buttons.LeftThumbstickDown);
+            var up = Input.It.Is_Key_Pressed(Keys.Up) || Input.It.Is_Gamepad_Button_Pressed(Buttons.DPadUp) || Input.It.Is_Gamepad_Button_Pressed(Buttons.LeftThumbstickUp);
+
+            if (down)
                 selector++;
-            if (Input.It.Is_Key_Pressed(Keys.Up) || Input.It.Is_Gamepad_Button_Pressed(Buttons.DPadUp))
+            if (up)
                 selector--;
 
             if (selector >= actions.Names.Length) selector = 0;

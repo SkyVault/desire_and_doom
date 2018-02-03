@@ -27,6 +27,7 @@ namespace Desire_And_Doom.Screens
         SpriteFont font;
 
         int selector = 0;
+        bool called = false;
 
         public Menu_Screen(Screen_Manager _manager, PenumbraComponent _penumbra, GameCamera _camera) : base("Menu")
         {
@@ -65,9 +66,12 @@ namespace Desire_And_Doom.Screens
         {
             sky.Update(time);
 
-            if (Input.It.Is_Key_Pressed(Keys.Down) || Input.It.Is_Gamepad_Button_Pressed(Buttons.DPadDown))
+            var down = Input.It.Is_Key_Pressed(Keys.Down) || Input.It.Is_Gamepad_Button_Pressed(Buttons.DPadDown) || Input.It.Is_Gamepad_Button_Pressed(Buttons.LeftThumbstickDown);
+            var up = Input.It.Is_Key_Pressed(Keys.Up) || Input.It.Is_Gamepad_Button_Pressed(Buttons.DPadUp) || Input.It.Is_Gamepad_Button_Pressed(Buttons.LeftThumbstickUp);
+
+            if (down)
                 selector++;
-            if (Input.It.Is_Key_Pressed(Keys.Up) || Input.It.Is_Gamepad_Button_Pressed(Buttons.DPadUp))
+            if (up)
                 selector--;
 
             if (selector >= actions.Names.Length) selector = 0;
@@ -75,17 +79,24 @@ namespace Desire_And_Doom.Screens
 
             if (Input.It.Is_Key_Pressed(Keys.Enter) || Input.It.Is_Gamepad_Button_Pressed(Buttons.A))
             {
-                actions.Call(selector);
+                if (!called) actions.Call(selector);
+                called = true;
             }
         }
 
         public override void Draw(SpriteBatch batch)
         {
             sky.Draw(batch);
+            batch.Draw(
+                Assets.It.Get<Texture2D>("Background"),
+                new Rectangle(0, 0, DesireAndDoom.ScreenWidth, DesireAndDoom.ScreenHeight),
+                Color.White
+                );
         }
 
         public override void FilteredDraw(SpriteBatch batch)
         {
+
             int border_size_y = 20;
             
             var names = actions.Names;

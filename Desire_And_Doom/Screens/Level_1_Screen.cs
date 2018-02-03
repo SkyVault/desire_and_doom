@@ -64,6 +64,12 @@ namespace Desire_And_Doom.Screens
             base.Draw(batch);
             if (this.Map.Has_Sky)
                 sky.Draw(batch);
+
+            batch.Draw(
+                Assets.It.Get<Texture2D>("Background"),
+                new Rectangle(0, 0, DesireAndDoom.ScreenWidth, DesireAndDoom.ScreenHeight),
+                Color.White
+                );
         }
 
         public override void UIDraw(SpriteBatch batch)
