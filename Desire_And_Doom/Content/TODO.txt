@@ -3,6 +3,7 @@
 -- Scale the whole game to prevent the OpenGL / DirectX oversampling :(
 
 IMPROVEMENTS
+-- Dont hardcode the combo frame
 -- Improve the particle system to suck less
 -- Create a button mapping system
 -- All of the menus in the game use different code to controll the interface

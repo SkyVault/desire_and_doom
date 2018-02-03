@@ -250,10 +250,12 @@ namespace Desire_And_Doom.ECS
                             {
                                 player.State = Player.Action_State.IDLE;
                                 player.Combo_Counter = 0;
-                            } else
-                            {
-                                Create_Sword_Hitbox(physics, body);
                             }
+                        }
+
+                        if (sprite.Current_Frame == 10 - 1)
+                        {
+                            Create_Sword_Hitbox(physics, body);
                         }
 
                         if (sprite.Animation_End) {
