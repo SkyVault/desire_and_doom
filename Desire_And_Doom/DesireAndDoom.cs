@@ -38,7 +38,7 @@ namespace Desire_And_Doom
         public static void Request_Resume() => Game_State = State.PLAYING;
         
         // TEMP
-        private bool skip_intro_animation = false;
+        private bool skip_intro_animation = true;
 
         public static bool DEBUG = false;
 

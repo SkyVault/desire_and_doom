@@ -81,7 +81,7 @@ namespace Desire_And_Doom.ECS
                 equipment.Left_Hand = new Items.Equipable(Items.Equipable.Equipment_Type.WEAPON) {
                     Run_Animation_ID = "player-claymore-run",
                     Idle_Animation_ID = "player-claymore-idle",
-                    Use_Animation_ID = "player-claymore-attack-2",
+                    Use_Animation_ID = "player-claymore-attack-1",
                     ID = "Claymore"
                 };
             }
@@ -261,7 +261,7 @@ namespace Desire_And_Doom.ECS
                     equipment.Left_Hand = new Items.Equipable(Items.Equipable.Equipment_Type.WEAPON) {
                         Run_Animation_ID = "player-claymore-run",
                         Idle_Animation_ID = "player-claymore-idle",
-                        Use_Animation_ID = "player-claymore-attack-2",
+                        Use_Animation_ID = "player-claymore-attack-1",
                         ID = "Claymore"
                     };
                 }
