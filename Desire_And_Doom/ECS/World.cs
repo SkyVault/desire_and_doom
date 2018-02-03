@@ -285,6 +285,9 @@ namespace Desire_And_Doom.ECS
         {
             timing = DateTime.Now.Millisecond;
             for(int i = entities.Count - 1; i >= 0; i--) {
+
+                if (i > entities.Count - 1) continue;
+
                 var entity = entities[i];
                 if (entity.Remove) {
                     foreach ( var system in systems.Values )

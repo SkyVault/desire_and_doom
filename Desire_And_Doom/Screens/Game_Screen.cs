@@ -22,10 +22,11 @@ namespace Desire_And_Doom.Screens
         protected Physics_Engine        physics_engine;
         protected Lua lua;
         public Tiled_Map                Map { get; private set; }
+        private GraphicsDevice device;
 
         bool can_change = true;
 
-        public Game_Screen(World _world, GameCamera _camera, PenumbraComponent _lighting, Particle_World _particle_world, Physics_Engine _physics_engine,Lua _lua, string _id) : base(_id)
+        public Game_Screen(World _world, GameCamera _camera, PenumbraComponent _lighting, Particle_World _particle_world, Physics_Engine _physics_engine,Lua _lua, GraphicsDevice _device, string _id) : base(_id)
         {
             world           = _world;
             camera          = _camera;
@@ -33,6 +34,7 @@ namespace Desire_And_Doom.Screens
             particle_world  = _particle_world;
             physics_engine  = _physics_engine;
             lua             = _lua;
+            device          = _device;
         }
 
         public override void Destroy()
@@ -77,6 +79,12 @@ namespace Desire_And_Doom.Screens
             if (!can_change) can_change = true;
         }
 
+        public override void PreDraw(SpriteBatch batch)
+        {
+            base.PreDraw(batch);
+            Map.PreDraw(batch);
+        }
+
         public override void Draw(SpriteBatch batch)
         {
             base.Draw(batch);
@@ -90,7 +98,7 @@ namespace Desire_And_Doom.Screens
 
             DestroyAllButPersistant();
 
-            Map = new Tiled_Map(id, camera, world, this, particle_world, lua, lighting, true) {
+            Map = new Tiled_Map(id, camera, world, this, particle_world, lua, device, lighting, true) {
                 Change_Scene_Callback = Load_Map
             };
 

@@ -35,6 +35,7 @@ namespace Desire_And_Doom
         private GameCamera          camera;
         private List<Billboard>     billboards;
         private PenumbraComponent   lighting;
+        private GraphicsDevice      device;
 
         public Func<string, float, float, bool> Change_Scene_Callback;
 
@@ -47,9 +48,11 @@ namespace Desire_And_Doom
 
         private bool[,] astar_collision_map;
 
-        public Tiled_Map(string name, GameCamera _camera, World world, Screen level, Particle_World particle_world, Lua lua, PenumbraComponent lighting = null, bool create_astar_collision_map = false)
-        {
+        private List<RenderTarget2D> layer_render_targets = new List<RenderTarget2D>();
 
+        public Tiled_Map(string name, GameCamera _camera, World world, Screen level, Particle_World particle_world, Lua lua, GraphicsDevice device, PenumbraComponent lighting = null, bool create_astar_collision_map = false)
+        {
+            this.device = device;
             this.camera = _camera;
             this.lighting = lighting;
 
@@ -104,6 +107,18 @@ namespace Desire_And_Doom
             }
             
             Map_Height_In_Pixels = map.Height * map.TileHeight;
+
+            foreach (var layer in map.Layers)
+            {
+                layer_render_targets.Add(new RenderTarget2D(
+                    device,
+                    map.Width * map.TileWidth,
+                    map.Height * map.TileHeight,
+                    false,
+                    device.PresentationParameters.BackBufferFormat,
+                    DepthFormat.Depth24
+                    ));
+            }
 
             for (int i = map.Layers.Count - 1; i >= 0; i--)
             {
@@ -299,6 +314,9 @@ namespace Desire_And_Doom
         {
             billboards.Clear();
 
+            foreach(var target in layer_render_targets) { target.Dispose(); }
+            layer_render_targets.Clear();
+
             if (lighting != null)
                 lighting.Hulls.Clear();
         }
@@ -324,22 +342,30 @@ namespace Desire_And_Doom
             frame = (int) timer;
         }
 
-        public void Draw(SpriteBatch batch)
+        public void PreDraw(SpriteBatch batch)
         {
             Vector2 camera_position = camera.Left;
-            
+            int i = 0;
             foreach (var layer in map.Layers)
             {
-                var render_layer = 0.0f;
-                if (layer.Properties.ContainsKey("layer"))
-                    render_layer = float.Parse(layer.Properties["layer"]);
+                var render_target = layer_render_targets[i++];
+
+                device.SetRenderTarget(render_target);
+                //device.DepthStencilState = new DepthStencilState() { DepthBufferEnable = true };
+                device.Clear(Color.Transparent);
+                                
+                batch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, DepthStencilState.DepthRead, null, null);
+
+                //var render_layer = 0.0f;
+                //if (layer.Properties.ContainsKey("layer"))
+                //    render_layer = float.Parse(layer.Properties["layer"]);
                 var sort = false;
                 if (layer.Properties.ContainsKey("sort"))
                     sort = bool.Parse(layer.Properties["sort"]);
 
                 int cx = (int)(camera_position.X / 8);
                 int cy = (int)(camera_position.Y / 8);
-                int cw = (int)((DesireAndDoom.ScreenWidth  / camera.Zoom) / 8);
+                int cw = (int)((DesireAndDoom.ScreenWidth / camera.Zoom) / 8);
                 int ch = (int)((DesireAndDoom.ScreenHeight / camera.Zoom) / 8);
 
                 if (cx < 0) cx = 0;
@@ -347,8 +373,10 @@ namespace Desire_And_Doom
 
                 for (int y = cy; y < cy + ch + 2; y++)
                     for (int x = cx; x < cx + cw + 2; x++)
+                    //    for (int y = 0; y < map.Height; y++)
+                    //for (int x = 0; x < map.Width; x++)
                     {
-                        if (x > map.Width - 1)  continue;
+                        if (x > map.Width - 1) continue;
                         if (y > map.Height - 1) continue;
 
                         var tileset = map.Tilesets[0];
@@ -388,10 +416,83 @@ namespace Desire_And_Doom
                                 );
 
                             if (gid - 1 > quads.Count) continue;
-                            batch.Draw(texture, location, quads[gid - 1], Color.White, 0, Vector2.Zero, SpriteEffects.None, render_layer);
+                            batch.Draw(texture, location, quads[gid - 1], Color.White, 0, Vector2.Zero, SpriteEffects.None, 1f);
                         }
+
                     }
+
+                batch.End();
+                device.SetRenderTarget(null);
             }
+        }
+
+        public void Draw(SpriteBatch batch)
+        {
+            //Vector2 camera_position = camera.Left; 
+            //foreach (var layer in map.Layers)
+            //{
+            //    var render_layer = 0.0f;
+            //    if (layer.Properties.ContainsKey("layer"))
+            //        render_layer = float.Parse(layer.Properties["layer"]);
+            //    var sort = false;
+            //    if (layer.Properties.ContainsKey("sort"))
+            //        sort = bool.Parse(layer.Properties["sort"]);
+
+            //    int cx = (int)(camera_position.X / 8);
+            //    int cy = (int)(camera_position.Y / 8);
+            //    int cw = (int)((DesireAndDoom.ScreenWidth  / camera.Zoom) / 8);
+            //    int ch = (int)((DesireAndDoom.ScreenHeight / camera.Zoom) / 8);
+
+            //    if (cx < 0) cx = 0;
+            //    if (cy < 0) cy = 0;
+
+            //    for (int y = cy; y < cy + ch + 2; y++)
+            //        for (int x = cx; x < cx + cw + 2; x++)
+            //        {
+            //            if (x > map.Width - 1)  continue;
+            //            if (y > map.Height - 1) continue;
+
+            //            var tileset = map.Tilesets[0];
+
+            //            var tile = layer.Tiles[x + y * map.Width];
+            //            if ( tile.Gid != 0 )
+            //            {
+            //                // TODO: this animation system is very slow, try to find a way
+            //                // to refactor this, one idea is to create your own data structure
+            //                // like a Dictionary, that contains all of the keys and animations
+            //                int gid = tile.Gid;
+            //                bool contains = false;
+            //                foreach(var t in tileset.Tiles )
+            //                    if (t.Id + 1 == gid )
+            //                    {
+            //                        contains = true; break;
+            //                    }
+
+            //                if (contains)
+            //                {
+            //                    var anim_tile = tileset.Tiles[0];
+            //                    if ( anim_tile.AnimationFrames.Count != 0 )
+            //                    {
+            //                        var aframe = anim_tile.AnimationFrames[
+            //                            (frame % anim_tile.AnimationFrames.Count)
+            //                            ];
+            //                        gid = aframe.Id + 1;
+            //                    }
+
+            //                }
+
+            //                var location = new Rectangle(
+            //                    (int)(x * map.TileWidth), 
+            //                    (int)(y * map.TileHeight), 
+            //                    (int)(map.TileWidth), 
+            //                    (int)(map.TileHeight)
+            //                    );
+
+            //                if (gid - 1 > quads.Count) continue;
+            //                batch.Draw(texture, location, quads[gid - 1], Color.White, 0, Vector2.Zero, SpriteEffects.None, render_layer);
+            //            }
+            //        }
+            //}
 
             //if (astar_collision_map != null)
             //{
@@ -413,6 +514,18 @@ namespace Desire_And_Doom
             //        }
             //    }
             //}
+
+            int i = 0;
+            foreach(var layer in map.Layers)
+            {
+                var target = layer_render_targets[i++];
+                var render_layer = 0.0f;
+                if (layer.Properties.ContainsKey("layer"))
+                    render_layer = float.Parse(layer.Properties["layer"]);
+
+                //if (i != 2) continue;
+                batch.Draw(texture: target, destinationRectangle: new Rectangle(0, 0, map.Width * map.TileWidth, map.Height * map.TileHeight), color: Color.White, layerDepth: render_layer);
+            }
 
             foreach (var billboard in billboards)
             {

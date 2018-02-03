@@ -19,7 +19,7 @@ namespace Desire_And_Doom.Screens
         // NOTE(Dustin): Maybe we need to extract this out somewhere else?
         Pause_Menu pause_menu;
 
-        public Level_1_Screen(Screen_Manager screen_manager, World _world, GameCamera _camera, PenumbraComponent _lighting, Particle_World _particle_world, Physics_Engine _physics_engine, Lua lua) : base(_world, _camera, _lighting, _particle_world, _physics_engine, lua, "Level 1")
+        public Level_1_Screen(Screen_Manager screen_manager, World _world, GameCamera _camera, PenumbraComponent _lighting, Particle_World _particle_world, Physics_Engine _physics_engine, Lua lua, GraphicsDevice device) : base(_world, _camera, _lighting, _particle_world, _physics_engine, lua, device,"Level 1")
         {
             sky = new Sky_Renderer(Assets.It.Get<Texture2D>("sky_1"), false);
             world = _world;
@@ -29,9 +29,9 @@ namespace Desire_And_Doom.Screens
         public override void Load()
         {
             lighting.AmbientColor = new Color(0.6f, 0.6f, 0.6f, 1.0f);
-            //Load_Map("Dungeon_Room_2");
+            Load_Map("Dungeon_Room_2");
             //Load_Map("Demo");
-            Load_Map("Dungeon_Floor_1");
+            //Load_Map("Dungeon_Floor_1");
 
             var ai_system = (AI_System)world.Get_System<AI_System>();
             ai_system.Give_Map(Map);

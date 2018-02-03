@@ -95,6 +95,11 @@ namespace Desire_And_Doom.Screens
             if (transparency > 1) transparency = 1;
         }
 
+        public void PreDraw(SpriteBatch batch)
+        {
+            active?.PreDraw(batch);
+        }
+
         public void Draw(SpriteBatch batch)
         {
             active?.Draw(batch);

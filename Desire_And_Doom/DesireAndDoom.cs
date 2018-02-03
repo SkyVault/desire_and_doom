@@ -205,8 +205,8 @@ namespace Desire_And_Doom
             Assets.It.Add_Table("Content/Lua/Behaviors/Enemy_Ai.lua");
             Assets.It.Add_Table("Content/Lua/Dialog.lua");
 
-            screen_manager.Register(new Level_1_Screen(screen_manager, world, camera, penumbra, particle_world, physics_engine, lua));
-            screen_manager.Register(new Boss_Room_1(world, camera, penumbra, particle_world, physics_engine, Content, lua));
+            screen_manager.Register(new Level_1_Screen(screen_manager, world, camera, penumbra, particle_world, physics_engine, lua, GraphicsDevice));
+            screen_manager.Register(new Boss_Room_1(world, camera, penumbra, particle_world, physics_engine, Content, lua, GraphicsDevice));
             screen_manager.Register(new Menu_Screen(screen_manager, penumbra, camera));
             screen_manager.Register(new Intro_Logos_Screen(screen_manager, camera, penumbra));
 
@@ -250,10 +250,13 @@ namespace Desire_And_Doom
 
         protected override void Draw(GameTime gameTime)
         {
+            screen_manager.PreDraw(batch);
+
+            GraphicsDevice.SetRenderTarget(null);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
             penumbra.BeginDraw();
             penumbra.Transform = camera.View_Matrix;
-
-            GraphicsDevice.Clear(new Color(105, 205, 241, 255));
 
             // main draw
             batch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, DepthStencilState.DepthRead, null, null, camera.View_Matrix);

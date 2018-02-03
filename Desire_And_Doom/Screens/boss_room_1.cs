@@ -25,8 +25,9 @@ namespace Desire_And_Doom.Screens
             Particle_World      _particle_world, 
             Physics_Engine      _physics_engine, 
             ContentManager      _content,
-            Lua                 _lua) 
-            : base(_world, _camera, _lighting, _particle_world, _physics_engine, _lua,"Boss Room 1")
+            Lua                 _lua,
+            GraphicsDevice      _device) 
+            : base(_world, _camera, _lighting, _particle_world, _physics_engine, _lua, _device, "Boss Room 1")
         {
             this.content    = _content;
         }
