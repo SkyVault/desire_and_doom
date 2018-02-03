@@ -5,13 +5,21 @@ using static Desire_And_Doom.ECS.Component;
 using Desire_And_Doom.ECS.Components;
 using Desire_And_Doom.Graphics;
 using Desire_And_Doom.Gui;
-using Desire_And_Doom.Graphics.Particle_Systems;
 using Desire_And_Doom.Screens;
+using Desire_And_Doom.Items;
 
 namespace Desire_And_Doom.ECS
 {
     class Player_Controller_System : System
     {
+        private readonly Equipable Claymore = new Equipable(Equipable.Equipment_Type.WEAPON) {
+            Run_Animation_ID = "player-claymore-run",
+            Idle_Animation_ID = "player-claymore-idle",
+            Use_Animation_ID = "player-claymore-attack-1",
+            ID = "Claymore"
+        };
+
+
         GameCamera camera;
         Particle_World particle_world;
         Invatory_Container invatory_container;
@@ -78,12 +86,7 @@ namespace Desire_And_Doom.ECS
             var equipment = (Equipment) entity.Get(Types.Equipment);
             if ( equipment != null )
             {
-                equipment.Left_Hand = new Items.Equipable(Items.Equipable.Equipment_Type.WEAPON) {
-                    Run_Animation_ID = "player-claymore-run",
-                    Idle_Animation_ID = "player-claymore-idle",
-                    Use_Animation_ID = "player-claymore-attack-1",
-                    ID = "Claymore"
-                };
+                equipment.Left_Hand = Claymore;
             }
         }
 
@@ -145,6 +148,7 @@ namespace Desire_And_Doom.ECS
             {
                 if ( player.State != Player.Action_State.ATTACKING )
                     sprite.Current_Animation_ID = equipment.Left_Hand.Idle_Animation_ID;
+
                 player_run_anim = equipment.Left_Hand.Run_Animation_ID;
             }
 
@@ -220,11 +224,14 @@ namespace Desire_And_Doom.ECS
                     player.State = Player.Action_State.RUNNING;
                 }
 
-                if ((Input.It.Is_Key_Down(Keys.X) || GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.X)) && player.State != Player.Action_State.ATTACKING)
+                var _attack = Input.It.Is_Key_Pressed(Keys.X) || Input.It.Is_Gamepad_Button_Pressed(Buttons.X);
+                if (_attack) player.Combo_Counter++;
+
+                if (_attack && player.State != Player.Action_State.ATTACKING)
                 {
+                    player.Combo_Counter = 0;
                     if ( equipment.Left_Hand != null )
                     {
-                        sprite.Current_Animation_ID = "player-attack";
                         sprite.Current_Animation_ID = equipment.Left_Hand.Use_Animation_ID;
                         sprite.Current_Frame = 0;
                         player.State = Player.Action_State.ATTACKING;
@@ -237,7 +244,20 @@ namespace Desire_And_Doom.ECS
                 {
                     if (player.State == Player.Action_State.ATTACKING)
                     {
+                        if (sprite.Current_Frame == 6 - 1 )
+                        {
+                            if (player.Combo_Counter == 0)
+                            {
+                                player.State = Player.Action_State.IDLE;
+                                player.Combo_Counter = 0;
+                            } else
+                            {
+                                Create_Sword_Hitbox(physics, body);
+                            }
+                        }
+
                         if (sprite.Animation_End) {
+                            player.Combo_Counter = 0;
                             player.State = Player.Action_State.IDLE;
                         }
                     }
@@ -258,12 +278,7 @@ namespace Desire_And_Doom.ECS
                     equipment.Left_Hand = null;
                 else {
                     // TODO: Clean this up so that i dont hard code the player equipment
-                    equipment.Left_Hand = new Items.Equipable(Items.Equipable.Equipment_Type.WEAPON) {
-                        Run_Animation_ID = "player-claymore-run",
-                        Idle_Animation_ID = "player-claymore-idle",
-                        Use_Animation_ID = "player-claymore-attack-1",
-                        ID = "Claymore"
-                    };
+                    equipment.Left_Hand = Claymore;
                 }
             }
 
@@ -348,8 +363,6 @@ namespace Desire_And_Doom.ECS
             if ( !show_overlay_gui ) return;
 
             var gui = Assets.It.Get<Texture2D>("gui");
-
-
 
             int y_offset = 32;
 

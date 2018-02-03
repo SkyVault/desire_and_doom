@@ -25,18 +25,11 @@ namespace Desire_And_Doom.Items
         public string Idle_Animation_ID     { get; set; } = "";
         public string ID                    { get; set; } = "";
 
+        public List<string> Use_Combo { get; set; } = new List<string>();
+
         public Equipable(Equipment_Type _type)
         {
             Type = _type;
         }
-    }
-
-    class Weapon : Equipable
-    {
-        public Weapon() : base(Equipment_Type.WEAPON)
-        {
-        }
-
-        
     }
 }

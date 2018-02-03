@@ -19,5 +19,10 @@ namespace Desire_And_Doom.ECS.Components
         public Equipment() : base(Types.Equipment)
         {
         }
+
+        public static implicit operator Equipment(Equipable v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

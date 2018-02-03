@@ -21,6 +21,7 @@ namespace Desire_And_Doom
             NUM_ACTION_STATES
         }
 
+        public int Combo_Counter = 0;
         public float Dash_Timer = 0;
         public float Max_Dash_Time { get => 1f; }
         public float Attack_Walk_Speed_Multiplyer { get => 0.25f; }
