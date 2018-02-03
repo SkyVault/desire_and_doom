@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="96" height="96" tilewidth="8" tileheight="8" nextobjectid="52">
+<map version="1.0" tiledversion="2017.09.13" orientation="orthogonal" renderorder="right-down" width="96" height="96" tilewidth="8" tileheight="8" infinite="0" nextobjectid="52">
  <properties>
   <property name="Ambiant" value="250 250 250"/>
   <property name="Sky" value="true"/>
   <property name="Water" value="true"/>
  </properties>
  <tileset firstgid="1" name="Tiles_1" tilewidth="8" tileheight="8" tilecount="4096" columns="64">
-  <image source="../../../../../../Content/Tiles_1.png" width="512" height="512"/>
+  <image source="../Tiles_1.png" width="512" height="512"/>
   <tile id="3894">
    <animation>
     <frame tileid="3766" duration="100"/>
@@ -14,7 +14,7 @@
    </animation>
   </tile>
  </tileset>
- <layer name="ground" width="96" height="96">
+ <layer name="Ground" width="96" height="96">
   <properties>
    <property name="layer" value="0.1"/>
   </properties>

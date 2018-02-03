@@ -36,6 +36,7 @@ namespace Desire_And_Doom.ECS
             var body = (Body)entity.Get(Types.Body);
 
             //animation.Layer = 0.3f + (body.Y / Game1.Map_Height_Pixels) * 0.1f;
+            if (body == null || sprite == null) return;
 
             sprite.Layer = Get_Layer(body);
 

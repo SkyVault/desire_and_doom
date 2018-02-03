@@ -29,7 +29,8 @@ namespace Desire_And_Doom.Screens
         public override void Load()
         {
             lighting.AmbientColor = new Color(0.4f, 0.4f, 0.4f, 1.0f);
-            Load_Map("Dungeon_Room_2");
+            //Load_Map("Dungeon_Room_2");
+            Load_Map("Demo");
 
             var ai_system = (AI_System)world.Get_System<AI_System>();
             ai_system.Give_Map(Map);

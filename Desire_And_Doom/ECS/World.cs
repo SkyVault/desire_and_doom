@@ -253,6 +253,11 @@ namespace Desire_And_Doom.ECS
         {
             return systems[typeof(T)];
         }
+        
+        public void Remove_System<T>()
+        {
+            systems.Remove(typeof(T));
+        }
 
         public List<Entity> Get_All_With_Component(Component.Types T)
         {
@@ -314,6 +319,11 @@ namespace Desire_And_Doom.ECS
             }
 
             timing = 0;
+        }
+
+        public List<Entity> Get_All_Persistant()
+        {
+            return entities.FindAll(e => e.Persistant == true);
         }
 
         public void Destroy_All(bool keep_persistant = false)

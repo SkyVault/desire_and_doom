@@ -201,9 +201,16 @@ namespace Desire_And_Doom.ECS
                         {
                             var o_interaction = (World_Interaction)other.Get(Types.World_Interaction);
                             if (o_interaction.UType == World_Interaction.Update_Type.LAMBDA)
+                            {
                                 o_interaction?.Update(other, entity);
+                                var nbody = (Body)entity.Get(Component.Types.Body);
+                                x_body.X = nbody.X;
+                                y_body.Y = nbody.Y;
+                            }
                             else
+                            {
                                 o_interaction?.Lua_Update.Call(other, entity);
+                            }
                         }
                     }
                 }
@@ -228,9 +235,7 @@ namespace Desire_And_Doom.ECS
             }
 
             physics.Velocity *= (float)Math.Pow(physics.Friction, time.ElapsedGameTime.TotalSeconds);
-
             physics.Direction = (float)Math.Atan2(body.Y - (body.Y + physics.Vel_Y * dt),body.X - (body.X + physics.Vel_X * dt)) + Physics.Deg_To_Rad(180);
-
             physics.Current_Speed = Vector2.Distance(body.Position,body.Position + physics.Velocity * dt);
 
             body.X = x_body.X;

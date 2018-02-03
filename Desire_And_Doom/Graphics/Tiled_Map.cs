@@ -34,6 +34,7 @@ namespace Desire_And_Doom
         private List<Rectangle>     quads;
         private GameCamera          camera;
         private List<Billboard>     billboards;
+        private PenumbraComponent   lighting;
 
         public Func<string, float, float, bool> Change_Scene_Callback;
 
@@ -50,6 +51,8 @@ namespace Desire_And_Doom
         {
 
             this.camera = _camera;
+            this.lighting = lighting;
+
             var current = Directory.GetCurrentDirectory();
             if (!File.Exists(current + "/Content/Maps/" + name + ".tmx"))
             {
@@ -249,6 +252,14 @@ namespace Desire_And_Doom
                             Intensity = 1f
                         });
                     }
+                    else if (obj.Type.ToLower() == "player")
+                    {
+                        if (world.Get_All_With_Component(Component.Types.Player).Count == 0) 
+                            world.Create_Entity(
+                                Assets.It.Get<LuaTable>(obj.Type),
+                                (float) obj.X, (float) obj.Y
+                                );
+                    }
                     else
                     {
                         world.Create_Entity(
@@ -274,8 +285,8 @@ namespace Desire_And_Doom
                     for (int yy = y; yy < y + h; yy++) {
                         for (int xx = x; xx < x + w; xx++)
                         {
-                            if (xx < 0 || xx > map.Width) continue;
-                            if (yy < 0 || yy > map.Height) continue;
+                            if (xx < 0 || xx > map.Width  - 1) continue;
+                            if (yy < 0 || yy > map.Height - 1) continue;
                             astar_collision_map[yy, xx] = true;
                         }
                     }
@@ -286,6 +297,9 @@ namespace Desire_And_Doom
         public void Destroy()
         {
             billboards.Clear();
+
+            if (lighting != null)
+                lighting.Hulls.Clear();
         }
 
         public void Update(GameTime time)

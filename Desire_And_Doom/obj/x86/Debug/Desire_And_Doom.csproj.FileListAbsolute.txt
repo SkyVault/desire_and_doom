@@ -301,3 +301,4 @@ C:\Users\Dustin\source\repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\D
 C:\Users\Dustin\source\repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\Audio\Bloom.xnb
 C:\Users\Dustin\source\repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\Audio\Bloom.ogg
 C:\Users\Dustin\source\repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\Audio\Bloom.mp3
+C:\Users\Dustin\source\repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\Lua\Boss_1_Ai.lua

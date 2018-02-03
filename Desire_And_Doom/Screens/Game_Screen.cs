@@ -49,8 +49,23 @@ namespace Desire_And_Doom.Screens
         {
             base.Destroy();
             physics_engine.Clear_Solids();
+
+            var persistant = world.Get_All_Persistant();
             world.Destroy_All(true);
+
             lighting.Lights.Clear();
+
+            //world.
+
+            foreach (var ent in persistant)
+            {
+                if (ent.Has(Component.Types.Light_Emitter))
+                {
+                    var light = (Light_Emitter)ent.Get(Component.Types.Light_Emitter);
+                    lighting.Lights.Add(light.Light);
+                }
+            }
+
             Map?.Destroy();
             particle_world.Destroy();
         }
@@ -96,6 +111,7 @@ namespace Desire_And_Doom.Screens
                         var body = (Body)player.Get(Component.Types.Body);
                         body.X = x;
                         body.Y = y;
+                        Console.WriteLine("Es Aqui");
                     }
                 }
             }

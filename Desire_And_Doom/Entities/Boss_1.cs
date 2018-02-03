@@ -87,7 +87,7 @@ namespace Desire_And_Doom.Entities
 
             entity.Add(new Health(BOSS_HEALTH));
 
-            entity.Add(new Lua_Function(lua.DoFile("COntent/Lua/Boss_1_Ai.lua")[0] as LuaFunction, "Content/Lua/Boss_1_Ai.lua"));
+            entity.Add(new Lua_Function(lua.DoFile("Content/Lua/Boss_1_Ai.lua")[0] as LuaFunction, "Content/Lua/Boss_1_Ai.lua"));
 
             return entity;
         }

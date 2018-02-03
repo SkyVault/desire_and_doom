@@ -269,13 +269,11 @@ namespace Desire_And_Doom
             if (hotload_timer < 0.25f) return;
             hotload_timer = 0f;
 
-
             foreach(var table_asset in lua_tables)
             {
                 if (table_asset.Value.Hotload)
                 {
                     var writetime = File.GetLastAccessTime(table_asset.Value.Path);
-                    Console.WriteLine(writetime);
                     if (writetime != table_asset.Value.LastTime)
                     {
                         Console.WriteLine($"[ASSETS]::[HOTLOADER]:: Reloaded Table: {table_asset.Value.Path}");

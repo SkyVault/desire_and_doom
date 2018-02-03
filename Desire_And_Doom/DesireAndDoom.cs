@@ -260,8 +260,6 @@ namespace Desire_And_Doom
                 world.Draw(batch);
                 screen_manager.Draw(batch);
 
-                //batch.Draw(scene, Vector2.Zero, Color.White);
-
                 particle_world.Draw(batch);
                 batch.End();
 

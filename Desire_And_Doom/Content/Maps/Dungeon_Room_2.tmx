@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.09.13" orientation="orthogonal" renderorder="right-down" width="68" height="96" tilewidth="8" tileheight="8" infinite="0" backgroundcolor="#55ffff" nextobjectid="90">
+<map version="1.0" tiledversion="2017.09.13" orientation="orthogonal" renderorder="right-down" width="68" height="96" tilewidth="8" tileheight="8" infinite="0" backgroundcolor="#55ffff" nextobjectid="91">
  <properties>
   <property name="Sky" value="true"/>
  </properties>
@@ -75,12 +75,11 @@
    <property name="layer" value="0.23"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztm89O20AQxr27phzKnxNVX6c0gQOlN1BfhxDggIjUSiBeB5qWA00kkEA8TmdiO1kbkzjetdeLv580smRlR9nPM7PjtR0EALhnU0RmyqkKgjNl7sc1NvQY0vi/pMUd2R8L2rqgrA5FxvmoSZV6MKxJn+LlREW51Bay+nTjuQs6N+T8UVEuJTHTp+OJh/FTlLx4CWUQrMj0Odbng4pqjY/5lFAmrzqkRVfO/42vmthaj7NwvPQaXFeqmvc8BMWQXBBHrnCiR1xT2kSnwHx9rSVV0eS8ScjmT5X59IW02IYeU9pYR4qAOvIa1qQHXabckBa30GMKaslrECNpjhzWkJ+07v+S5Y/vjQea06Msf7TJHuoGAEagN3PHtYX6dUk+rjJ+eM9Y0blvMuqvLsgG4u37WP4N24jGjFU8Rta/D/BiQY8n8vGs+flI/39NzubIxntC/ByC99x7c+anjxnJ+vcBPofmPrbIxyfNz56cxQWb/txh0Z47I8TseLRAP9v8sKDHAfk41PwMtWts0ndP9Ki5T722oMcl+biK/bAW62QbObGxLKZ6luHFgh5P5OM5nMXFPtl3C9d2EmMe7KvmcU///Z9I10PTayvmrEdNJ29NEQbPaZPxVdTTOp4zJWvKBa2pA6XNp2TOcO8xkNXU0zr0OJfRM/1UPxX3YMvGSNJ7jKX/+0KhljMjsnGJvEnlnKf1VIc1CXmt5X1QstUl191JbMV552s9zdKhOXXJdsh2y+RLnHd196dNQ+/1Vwz7OVOK1t2q63PyrlXXcR1tih5F3rUCoKm4eI+qyUAPAAAAx+L9f0+xDL+F/99T2ETJ/G9P2spXifshAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgLbyH//TbWY=
+   eJztm9tO20AQhr27plxw6FWrvk4hgQsOd636OoTTBUokkIJ4HWgKF5BIrQTicToT28namMTxrrNe/H/SyJKVHWV/z8yO13YQAOCezyIyU85UEJwrcz+usaHHgMbfkxYPZH8saOuCsjoUGeejJlXqwbAmJxQvpyrKpaaQ1acdz13QuQHnj4pyKYmZEzqeehg/RcmLl1AGwYpMn2N9Pqmo1viYTwll8qpFWrTl7N/4qomt9TgLx0unxnWlqnnPQlAMyTlx5AonesQ1pUm0CszX11pSFXXOm4Rs/lSZT99Jiy3oMaGJdaQIqCNvYU060GXCLWlxBz0moJa8BTGS5shhDbmkdf9Klj9+NP7SnP7J8keb7KFuAGAEejN33FioX33ycZ3xw3vGis7ty6i/6pL1xPv3sfwbtiGNGal4jFz+PsCrBT2eyceL5meN/v+6nM6RjfeE+DkE77l3ZsxPHzOUy98H+Baa+/hCPr5qfvbkNC7Y9OcO8/bcGSGmx6M5+tnmlwU9fpCPn5qfgXaNTfrusR5L7lNvLOjRJx/XsR/WYoNsMyc2FsVUzzK8WtDjmXy8hNO4OCA7tHBtxzHmwb5qHo/0359Euh6aXlsxYz2qO3lrijB4TpuMX3Y9tUWypnRpTe0pbT4lc4Z7j550e99vwoWMnumn+qm4B1s0RpLeYyT93xcKtZwZko1K5E0q5zytpzqsSchrLe+Dkq0uuO6OYyvOO1/raZYWzalNtkO2WyZf4rzztZ7aQu/1Vwz7OVOKPo+s+r2I5F2rtuM6Whc9irxrBUBdcfEeVZ2BHgAAAI7Fx/+eYhF+C/+/p7CJkvnfnjSVbYn7IQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAICm8h9Ddm0m
   </data>
  </layer>
  <objectgroup name="Entities">
   <object id="2" type="Bird" x="259" y="220" width="5.66667" height="6"/>
-  <object id="61" name="Player" type="Player" x="275.833" y="320.833" width="24" height="24"/>
   <object id="62" type="Bird" x="249.167" y="234.667" width="5.66667" height="6"/>
   <object id="63" type="Bird" x="269.5" y="249.333" width="5.66667" height="6"/>
   <object id="64" type="Bird" x="286.5" y="239.667" width="5.66667" height="6"/>
@@ -92,10 +91,11 @@
  <objectgroup name="Doors">
   <object id="84" type="Door" x="208" y="512.5" width="128" height="23.5">
    <properties>
-    <property name="Door" value="Dungeon_Room_1 100 400"/>
+    <property name="Door" value="Demo 234 244"/>
     <property name="is_sensor" type="bool" value="true"/>
    </properties>
   </object>
+  <object id="90" type="Player" x="263" y="328.5" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Solids">
   <object id="6" x="208" y="8" width="128" height="8"/>

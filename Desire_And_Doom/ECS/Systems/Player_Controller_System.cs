@@ -126,12 +126,6 @@ namespace Desire_And_Doom.ECS
             if (player.State != Player.Action_State.ATTACKING)
                 sprite.Current_Animation_ID = "player-idle";
 
-            // check if a dialog box opened up
-            //if (Messanger.It.Top() == "Dialog_Open")    player.Can_Move = false;
-            //if (Messanger.It.Top() == "Dialog_Closed")  player.Can_Move = true;
-            //if (Debug_Console.Open) player.Can_Move = false;
-            //else player.Can_Move = true;
-
             // get input 
             var state = GamePad.GetState(PlayerIndex.One);
             var x_axis = state.ThumbSticks.Left.X;
@@ -146,6 +140,11 @@ namespace Desire_And_Doom.ECS
                 if ( player.State != Player.Action_State.ATTACKING )
                     sprite.Current_Animation_ID = equipment.Left_Hand.Idle_Animation_ID;
                 player_run_anim = equipment.Left_Hand.Run_Animation_ID;
+            }
+
+            if (Input.It.Is_Key_Pressed(Keys.P))
+            {
+                global::System.Console.WriteLine($"Player Pos: {body.X} {body.Y}.");
             }
 
             if (player.Can_Move && player.State != Player.Action_State.DASHING && player.State != Player.Action_State.IN_INVATORY)

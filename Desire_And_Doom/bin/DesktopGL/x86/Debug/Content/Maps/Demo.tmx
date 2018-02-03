@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" nextobjectid="99">
+<map version="1.0" tiledversion="2017.09.13" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" infinite="0" nextobjectid="99">
  <properties>
   <property name="Sky" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" name="Tiles_1" tilewidth="8" tileheight="8" tilecount="4096" columns="64">
-  <image source="../../../../../../Content/Tiles_1.png" width="512" height="512"/>
+  <image source="../Tiles_1.png" width="512" height="512"/>
  </tileset>
  <layer name="Ground" width="128" height="128">
   <properties>
@@ -1096,7 +1096,7 @@
   </object>
   <object id="84" type="Door" x="226" y="199.333" width="16" height="35">
    <properties>
-    <property name="Door" value="DemoArena 410 758"/>
+    <property name="Door" value="Dungeon_Room_2 272 490"/>
    </properties>
   </object>
   <object id="88" type="Door" x="0" y="0" width="8" height="1024">
