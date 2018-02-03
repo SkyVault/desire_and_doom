@@ -55,7 +55,7 @@
    <property name="layer" value="0.21"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztl0FuwzAMBOm8TE9Tf6an9RBRQBkToiW5NaoZYC890ORms25EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AqpajeSnN+dq3Yjy/ndpWo3ijh3H1W74dydjrd2w7s7H2/thnd3Od5Kssd7JlXp3R+83sqyx3smV+ndlq+qInu8Z0qV3m1pf9/lPVPv7PmhfZtkbY+kSS3fo97Z80P7NsvaHsmTWr5HvbPnh/ZtkbU9Uia1fI96Z7c/tG9X98gxqdV71Dt7ftzVI23eoKafL+e9EfVjdY+0eYOafr6c90bUD9sjSeZy0uYNahTdW++wvRH1w/ZIlsmcvCY1SK7yeiPqh+2RIj9zonoayahUeb1x1Y/2/TU5UT2NbNT2dnrjqh/td6/JiSrJ3+bFPr8Ytb2d3rjqR/vda3LylLx8PN/up3s7vXHVDy8n0byoZvHmfjzf7tfJxagfNifRvKhmcec6eYjmYtQPm5NoXlRpUu5cJw/RXMz6Yf8v6OWll5uo3LlOHqK5mPXjal56uYnKnTuYh7v86OWll5uo3LmDebjLj15eermJypu7au+7/PB+f3ifb1Te3Kf7cTU3Ud2932/74X2+Uf03P54u/MAP/MAP/MAP/MAP/MCPJwk/8AM/8AM/8AM/8AM/8ONJwo9zP74BMF+BLQ==
+   eJztl0FywyAMReWcjKPRm3G0LiKYqWINMuDWU96b+ZsusHj5kRsRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuELS7EaS83tnzW5kOb930exGEefeh2Y3nHun453d8O6dj3d2w7t3Od5Jssd7Jmm+NB+83smyx3smazwf9e9F9njPFE3PxzbvGb1nz0fdt0nW7pE0meVz6D17Puq+zbJ2j+TJLJ9D79ndH/qeKbJ2j5TJLJ9D79ndH/qeWb5HjsmsnkPv2fNx1x5p5w1m+vlyvjeiPlbvkXbeYKafL+d7I+rD7pEkcz1p5w1mlDp3vYfdG1Efdo9kmezJazKDZI23N6I+7B4p8rMnNU8jmRSNtzeu+mjfX9OTmqeRTdrczt646qP97jU9qUnyt32xzy8mbW5nb1z10X73mp48pS8fz7fz1bmdvXHVh9eTaF9qZvHO/Xi+na/Ti1EftifRvtTM4p7r9CHai1EftifRvtSkybjnOn2I9mLWh/2/oNeXXm+icc91+hDtxayPq33p9SYa99zBPtzlo9eXXm+icc8d7MNdPnp96fUmGu/cVXPf5cP7/eF9vtF45z7dx9XeRHP3fL/tw/t8o/lvPp4efOADH/jABz7wgQ984ONJwQc+8IEPfOADH/jABz6eFHyc+/gGvuKBqw==
   </data>
  </layer>
  <layer name="Nubs" width="68" height="112">
@@ -63,7 +63,7 @@
    <property name="layer" value="0.215"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt2LEJACAMRcHsv5yOZGthEwwK4W6AVI9fJAIAAAAA4J1ZcGMU3OCvig7oQw/s9MCJLoAsuwFk2Q0AuONvDwAAAAAAAAAAAAAAAAAAAAAA0NsCk8UHTw==
+   eJzt2LEJACAMBMDsv5yOZGthEwgK8W6Ar54PJAIAAAAA4J5ZkDEKMnirogf0oQ/s9IETvQCy7AaQZTcAqPTjXfG3BwAAAAAAAAAAAAAAAAAAAAAA6G0B2JgIHw==
   </data>
  </layer>
  <layer name="Forground_Ground" width="68" height="112">
@@ -98,7 +98,7 @@
    eJzt1NeRwgAMAFFCFz6CDVRFcoCqSCa4KnIq5LYK+268O/P+JX2o0TAzMzMzMzMz+zsF+EEHXfTQR4gIAwwxqmi+shtjgilmmCNGghQZFlhWNF/ZrbDGBlvskGOPA444oahovrI744IrbrjjgSdeeOODb0XzlV3Q5H+ggy566CNEhAGGGDWrnrScxuw5wRQzzBEjQYoMCyxrco8Ve66xwRY75NjjgCNOKGpyjzN7XnDFDXc88MQLb3zwrck9ghb/Ax100UMfISIMMMSoVfWk5TRmzwmmmGGOGAlSZFhgWZN7rNhzjQ222CHHHgcccUJRk3uc2fOCK26444EnXnjjg29N7hG0+R/ooIse+ggRYYAhRu2qJy2nMXtOMMUMc8RIkCLDAsua3GPFnmtssMUOOfY44IgTiprcw8zMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzP5vv/SLTqM=
   </data>
  </layer>
- <objectgroup name="Entities">
+ <objectgroup name="Entities" visible="0">
   <object id="2" type="Bird" x="259" y="348" width="5.66667" height="6"/>
   <object id="62" type="Bird" x="249.167" y="362.667" width="5.66667" height="6"/>
   <object id="63" type="Bird" x="269.5" y="377.333" width="5.66667" height="6"/>
@@ -116,13 +116,13 @@
  <objectgroup name="Doors">
   <object id="84" type="Door" x="208" y="640.5" width="128" height="23.5">
    <properties>
-    <property name="Door" value="Demo 234 244"/>
+    <property name="Door" value="Dungeon_Floor_1 528 725"/>
     <property name="is_sensor" type="bool" value="true"/>
    </properties>
   </object>
   <object id="90" type="Player" x="263" y="456.5" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="Billboards">
+ <objectgroup name="Billboards" visible="0">
   <object id="93" name="Column" type="Billboard" x="112" y="320" width="16" height="48">
    <properties>
     <property name="Region" value="152 0 16 48"/>
@@ -184,7 +184,7 @@
   <object id="112" x="81.1818" y="353.727" width="14" height="14"/>
   <object id="113" x="48.6364" y="354.091" width="14" height="14"/>
  </objectgroup>
- <objectgroup name="Solids">
+ <objectgroup name="Solids" visible="0">
   <object id="6" x="208" y="136" width="128" height="8"/>
   <object id="9" x="336" y="144" width="48" height="16"/>
   <object id="10" x="384" y="160" width="32" height="16"/>

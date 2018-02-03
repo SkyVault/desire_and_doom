@@ -3,6 +3,7 @@
 -- Scale the whole game to prevent the OpenGL / DirectX oversampling :(
 
 IMPROVEMENTS
+-- Improve the particle system to suck less
 -- Create a button mapping system
 -- All of the menus in the game use different code to controll the interface
 -- Remove that shitty table based ai system, implemented in AI_System

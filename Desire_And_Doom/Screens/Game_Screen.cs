@@ -109,8 +109,12 @@ namespace Desire_And_Doom.Screens
                     if (player != null)
                     {
                         var body = (Body)player.Get(Component.Types.Body);
+                        var physics = (Physics)player.Get(Component.Types.Physics);
+
                         body.X = x;
                         body.Y = y;
+
+                        physics.Velocity = Vector2.Zero;
                     }
                 }
             }

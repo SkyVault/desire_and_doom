@@ -1098,7 +1098,8 @@
   </object>
   <object id="84" type="Door" x="226" y="199.333" width="16" height="35">
    <properties>
-    <property name="Door" value="Dungeon_Room_2 272 490"/>
+    <property name="Door" value="Dungeon_Floor_1 520 406"/>
+    <property name="is_sensor" type="bool" value="true"/>
    </properties>
   </object>
   <object id="88" type="Door" x="0" y="0" width="8" height="1024">
