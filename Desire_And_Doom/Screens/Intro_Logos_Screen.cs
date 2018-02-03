@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 
 namespace Desire_And_Doom.Screens
 {
@@ -16,19 +17,23 @@ namespace Desire_And_Doom.Screens
 
         Texture2D SkyVaultLogo;
         Texture2D MonoGameLogo;
+        Texture2D Background;
 
         Vector2 Logo_Position;
         int Logo_Size = 320;
 
-        float SkyLogoAlpha = 0;
-        float MonoLogoAlpha = 0;
+        float SkyLogoAlpha = 1f;
+        float MonoLogoAlpha = 1f;
 
         float SkyLogoY = DesireAndDoom.ScreenHeight;
         float MonoLogoY = DesireAndDoom.ScreenHeight;
 
+        Color sky_color = Color.White;
+        Color mono_color = Color.Black;
+
         Screen_Manager screen_manager;
 
-        public Intro_Logos_Screen(Screen_Manager _manager, GameCamera _camera, PenumbraComponent _penumbra) : base("Logo")
+        public Intro_Logos_Screen(Screen_Manager _manager, GameCamera _camera, PenumbraComponent _penumbra, ContentManager _content) : base("Logo")
         {
             _camera.Zoom = 1;
             _penumbra.AmbientColor = Color.White;
@@ -39,8 +44,11 @@ namespace Desire_And_Doom.Screens
                 DesireAndDoom.ScreenWidth / 2,
                 DesireAndDoom.ScreenHeight / 2
             );
+
             SkyLogoY += Logo_Size;
             MonoLogoY += Logo_Size;
+
+            Background = _content.Load<Texture2D>("Logo_background");
         }
 
         public override void Load()
@@ -59,9 +67,12 @@ namespace Desire_And_Doom.Screens
                 },
                 (time) =>
                 {
-                    SkyLogoY = Math2.Lerp(SkyLogoY, -Logo_Size * 1.2f, 0.08f);
-                    if (SkyLogoY < -(Logo_Size * 1.2f) + 1)
+                    sky_color = Math2.Lerp(sky_color, Color.Transparent, 0.02f);
+                    if (Vector4.Distance(sky_color.ToVector4(), Color.Transparent.ToVector4()) < 0.1f)
+                    {
                         tasker.Next();
+                        sky_color = Color.Transparent;
+                    }
                 },
                 (time) =>
                 {
@@ -71,9 +82,12 @@ namespace Desire_And_Doom.Screens
                 },
                 (time) =>
                 {
-                    MonoLogoY = Math2.Lerp(MonoLogoY, -Logo_Size * 2, 0.08f);
-                    if (MonoLogoY < -(Logo_Size * 2) + 1)
+                    mono_color = Math2.Lerp(mono_color, Color.Transparent, 0.02f);
+                    if (Vector4.Distance(mono_color.ToVector4(), Color.Transparent.ToVector4()) < 0.1f)
+                    {
                         tasker.Next();
+                        mono_color = Color.Transparent;
+                    }
                 },
                 (time) =>
                 {
@@ -96,13 +110,19 @@ namespace Desire_And_Doom.Screens
         public override void Draw(SpriteBatch batch)
         {
             batch.Draw(
+                Background,
+                new Rectangle(0, 0, DesireAndDoom.ScreenWidth, DesireAndDoom.ScreenHeight),
+                Color.White
+                );
+
+            batch.Draw(
                 MonoGameLogo,
                 new Rectangle(
                     (int)Logo_Position.X - Logo_Size / 2,
                     (int)MonoLogoY,
                     Logo_Size,
                     Logo_Size),
-                Color.White
+                mono_color
                 );
 
             batch.Draw(
@@ -112,7 +132,7 @@ namespace Desire_And_Doom.Screens
                     (int)SkyLogoY,
                     Logo_Size,
                     Logo_Size),
-                Color.White
+                sky_color
                 );
         }
 
@@ -124,6 +144,7 @@ namespace Desire_And_Doom.Screens
             Assets.It.Remove("Mono", typeof(Texture2D));
             SkyVaultLogo.Dispose();
             MonoGameLogo.Dispose();
+            Background.Dispose();
         }
     }
 }

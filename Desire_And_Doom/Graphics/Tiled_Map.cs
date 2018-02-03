@@ -351,7 +351,7 @@ namespace Desire_And_Doom
                 var render_target = layer_render_targets[i++];
 
                 device.SetRenderTarget(render_target);
-                //device.DepthStencilState = new DepthStencilState() { DepthBufferEnable = true };
+                device.DepthStencilState = new DepthStencilState() { DepthBufferEnable = true };
                 device.Clear(Color.Transparent);
                                 
                 batch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, DepthStencilState.DepthRead, null, null);

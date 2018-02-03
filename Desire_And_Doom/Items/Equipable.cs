@@ -30,4 +30,11 @@ namespace Desire_And_Doom.Items
             Type = _type;
         }
     }
+
+    class Weapon : Equipable
+    {
+        public Weapon() : base(Equipment_Type.WEAPON)
+        {
+        }
+    }
 }

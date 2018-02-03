@@ -38,7 +38,7 @@ namespace Desire_And_Doom
         public static void Request_Resume() => Game_State = State.PLAYING;
         
         // TEMP
-        private bool skip_intro_animation = true;
+        private bool skip_intro_animation = false;
 
         public static bool DEBUG = false;
 
@@ -139,7 +139,7 @@ namespace Desire_And_Doom
             //UserInterface.Initialize(Content, BuiltinThemes.hd);
 
             world.Add_System<Sprite_Renderer_System>(new Sprite_Renderer_System());
-            world.Add_System<Player_Controller_System>(new Player_Controller_System(camera, particle_world, invatory_manager));
+            world.Add_System<Player_Controller_System>(new Player_Controller_System(camera, particle_world, invatory_manager, screen_manager));
             world.Add_System<Animation_Renderer_System>(new Animation_Renderer_System());
             physics_engine = (Physics_Engine)world.Add_System<Physics_Engine>(new Physics_Engine(world));
             
@@ -208,9 +208,9 @@ namespace Desire_And_Doom
             screen_manager.Register(new Level_1_Screen(screen_manager, world, camera, penumbra, particle_world, physics_engine, lua, GraphicsDevice));
             screen_manager.Register(new Boss_Room_1(world, camera, penumbra, particle_world, physics_engine, Content, lua, GraphicsDevice));
             screen_manager.Register(new Menu_Screen(screen_manager, penumbra, camera));
-            screen_manager.Register(new Intro_Logos_Screen(screen_manager, camera, penumbra));
+            screen_manager.Register(new Intro_Logos_Screen(screen_manager, camera, penumbra, Content));
 
-            if ( skip_intro_animation == false )
+            if (skip_intro_animation == false)
                 screen_manager.Goto_Screen("Logo");
             else
                 screen_manager.Goto_Screen("Level 1");
@@ -259,14 +259,14 @@ namespace Desire_And_Doom
             penumbra.Transform = camera.View_Matrix;
 
             // main draw
-            batch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, DepthStencilState.DepthRead, null, null, camera.View_Matrix);
+            batch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.DepthRead, null, null, camera.View_Matrix);
                 world.Draw(batch);
                 screen_manager.Draw(batch);
 
                 particle_world.Draw(batch);
-                batch.End();
+            batch.End();
 
-                batch.Begin(SpriteSortMode.FrontToBack, BlendState.Additive, SamplerState.PointClamp, DepthStencilState.DepthRead, null, null, camera.View_Matrix);
+            batch.Begin(SpriteSortMode.FrontToBack, BlendState.Additive, SamplerState.PointClamp, DepthStencilState.DepthRead, null, null, camera.View_Matrix);
                 particle_world.Additive_Draw(batch);
             batch.End();
 

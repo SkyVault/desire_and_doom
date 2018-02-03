@@ -57,7 +57,6 @@ namespace Desire_And_Doom.Screens
             camera.Zoom = 3;
             camera.Position = Vector2.Zero;
             penumbra.AmbientColor = new Color(1f, 1f, 1f, 1f);
-
             pre_origin = camera.Origin;
             camera.Origin = new Vector2(0, 0);
         }

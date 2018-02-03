@@ -6,6 +6,7 @@ using Desire_And_Doom.ECS.Components;
 using Desire_And_Doom.Graphics;
 using Desire_And_Doom.Gui;
 using Desire_And_Doom.Graphics.Particle_Systems;
+using Desire_And_Doom.Screens;
 
 namespace Desire_And_Doom.ECS
 {
@@ -15,12 +16,14 @@ namespace Desire_And_Doom.ECS
         Particle_World particle_world;
         Invatory_Container invatory_container;
         Invatory_Manager invatory_manager;
+        Screen_Manager screen_manager;
 
         bool show_overlay_gui = false;
         const float dash_speed = 500;
 
-        public Player_Controller_System(GameCamera _camera, Particle_World particle_world, Invatory_Manager invatory_manager) : base(Types.Body, Types.Player, Types.Physics)
+        public Player_Controller_System(GameCamera _camera, Particle_World particle_world, Invatory_Manager invatory_manager, Screen_Manager screen) : base(Types.Body, Types.Player, Types.Physics)
         {
+            this.screen_manager = screen;
             this.invatory_manager = invatory_manager;
             this.camera = _camera;
             this.particle_world = particle_world;
@@ -126,6 +129,8 @@ namespace Desire_And_Doom.ECS
             // default the animation state to be the idle animation
             if (player.State != Player.Action_State.ATTACKING)
                 sprite.Current_Animation_ID = "player-idle";
+
+            //sprite.Color = new Color(1f, 1f, 1f, 0.2f);
 
             // get input 
             var state = GamePad.GetState(PlayerIndex.One);
@@ -239,6 +244,13 @@ namespace Desire_And_Doom.ECS
                 }
             }
             player.Dash_Timer -= (float)time.ElapsedGameTime.TotalSeconds;
+
+            if (entity.Get(Component.Types.Health) is Health health){
+                if (health.Amount <= 0)
+                {
+                    screen_manager.Goto_Screen("Menu", false);
+                }
+            }
 
             // (TEMP): toggle the equipment
             if ( Input.It.Is_Key_Pressed(Keys.E) ) {
