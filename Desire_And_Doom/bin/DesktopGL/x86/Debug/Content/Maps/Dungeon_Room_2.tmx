@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.09.13" orientation="orthogonal" renderorder="right-down" width="68" height="96" tilewidth="8" tileheight="8" infinite="0" backgroundcolor="#55ffff" nextobjectid="93">
+<map version="1.0" tiledversion="2017.09.13" orientation="orthogonal" renderorder="right-down" width="68" height="96" tilewidth="8" tileheight="8" infinite="0" backgroundcolor="#55ffff" nextobjectid="154">
  <properties>
   <property name="Sky" value="true"/>
  </properties>
@@ -22,7 +22,19 @@
   <tile id="906" terrain=",0,0,0"/>
   <tile id="963" terrain=",,0,0"/>
  </tileset>
- <templategroup firsttid="1" source="../../../../BeyondAge/BeyondAge/Content/data/templates.tgx"/>
+ <tileset firstgid="4097" source="DungeonTileset.tsx"/>
+ <tileset firstgid="8193" name="Tiles_1" tilewidth="8" tileheight="8" tilecount="4096" columns="64">
+  <image source="../Tiles_1.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="12289" name="Tiles_1" tilewidth="8" tileheight="8" tilecount="4096" columns="64">
+  <image source="../Tiles_1.png" width="512" height="512"/>
+  <tile id="3894">
+   <animation>
+    <frame tileid="3766" duration="100"/>
+    <frame tileid="3894" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
  <layer name="Floor" width="68" height="96">
   <properties>
    <property name="layer" value="0.2"/>
@@ -76,7 +88,7 @@
    <property name="layer" value="0.23"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztm9tO20AQhr27plxw6FWrvk4hgQsOd636OoTTBUokkIJ4HWgKF5BIrQTicToT28namMTxrrNe/H/SyJKVHWV/z8yO13YQAOCezyIyU85UEJwrcz+usaHHgMbfkxYPZH8saOuCsjoUGeejJlXqwbAmJxQvpyrKpaaQ1acdz13QuQHnj4pyKYmZEzqeehg/RcmLl1AGwYpMn2N9Pqmo1viYTwll8qpFWrTl7N/4qomt9TgLx0unxnWlqnnPQlAMyTlx5AonesQ1pUm0CszX11pSFXXOm4Rs/lSZT99Jiy3oMaGJdaQIqCNvYU060GXCLWlxBz0moJa8BTGS5shhDbmkdf9Klj9+NP7SnP7J8keb7KFuAGAEejN33FioX33ycZ3xw3vGis7ty6i/6pL1xPv3sfwbtiGNGal4jFz+PsCrBT2eyceL5meN/v+6nM6RjfeE+DkE77l3ZsxPHzOUy98H+Baa+/hCPr5qfvbkNC7Y9OcO8/bcGSGmx6M5+tnmlwU9fpCPn5qfgXaNTfrusR5L7lNvLOjRJx/XsR/WYoNsMyc2FsVUzzK8WtDjmXy8hNO4OCA7tHBtxzHmwb5qHo/0359Euh6aXlsxYz2qO3lrijB4TpuMX3Y9tUWypnRpTe0pbT4lc4Z7j550e99vwoWMnumn+qm4B1s0RpLeYyT93xcKtZwZko1K5E0q5zytpzqsSchrLe+Dkq0uuO6OYyvOO1/raZYWzalNtkO2WyZf4rzztZ7aQu/1Vwz7OVOKPo+s+r2I5F2rtuM6Whc9irxrBUBdcfEeVZ2BHgAAAI7Fx/+eYhF+C/+/p7CJkvnfnjSVbYn7IQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAICm8h9Ddm0m
+   eJztm9tO20AQhu21AYmeRBOgr9M2gQva3nF4HUJCL1AitRKH16Ek9KJNpFbi8Dj9N/Ymm2ASx7u24/r/pJGDgyfe3zOzB9uOQ0j+vHEDM+XUc5yvnrmfvLGhRxfH30KLn7CeBW3zIKkOcY4roiZp6iGRmjQRLy0vyKWyMK1PPWy7i31dmT9ekEsqZprYtgoYP3GJihdfOM6KmNwn9Vn1glpTxHxSJMmrGrSoi9n/U1RNbPXH08h4aSxxXUmr3bNwEUNiThzlRS56hDWlTNRitLeotSQtljlvFNP5k2Y+vYcWH6jHiDLWkTiwjjxFatKgLiOuocUP6jGCteQpjJEAfwPz4tCyriHbFcd5B/uGfv+7SL7dhI+tip1zqkGHemhZo/T4gzb9Fcm3NvXYy7FuKD1MsalHnlCPSYZ6WIjPtPXIqq4eog1HFvTYh5+DZ/Q4wf4mrAU7rUzu07+L+txFTe1lWFcv8ZtXFvQ4h5+LKT3kmrEH3zeyXbAe7LYSzGPVPv27qM/XMPdtdusAD/i9Rwt63MHPvabHC5z/SxGMM5XJNSF5H0KuuTdmtE8/pi+yXQfYrqJ++OZ+NuFnqzr+ew/n/0nTQ7/vMG/NXeK64+3xHP1scog2HFnQYx9+DjQ9uto1Nhl3D/XIcK57iTZcWdDjHH4uQj2kFq9gryNiY1FM9VyUB7Th0YIed/BzXx3HxWfYFwvXdhhjBVhXjeIXzv23O1kPTa+t9FGEddUoovoU1+A+rTo+y3pqE9WntNGndjytPQlzpg1fHZFtPbXJmQju6fehxSDUow3rJIgRNfYYCLOca2Js28ph3UDH13KmDxskyJuJnDOop1mP959DauLLvlaug8LWFux3h7EV5p1JPW1Diw7sbAnm3jW0qQ7bge0myZcw70zqaX8jiJEio4/1VwzHcxIf88H1hJrEvR+Z9nMR6lmres79yrLoEedZK0LSZBU1ZS3lulIkdqDFLvUghBCSkBP3/3+fYhFu3OK/T2ETT0S/e1JWPgrOhwghhBBCCCGEEEIIIYQQQgghhBBCCCGEEELKyj8vT5FJ
   </data>
  </layer>
  <objectgroup name="Entities">
@@ -89,7 +101,7 @@
   <object id="88" name="Npc-3" type="npc-3" x="384" y="368" width="24" height="24"/>
   <object id="89" name="Npc-4" type="npc-4" x="336" y="360" width="24" height="24"/>
  </objectgroup>
- <objectgroup name="Doors">
+ <objectgroup name="Doors" visible="0">
   <object id="84" type="Door" x="208" y="512.5" width="128" height="23.5">
    <properties>
     <property name="Door" value="Demo 234 244"/>
@@ -102,9 +114,70 @@
     <property name="Boss_Number" value="1"/>
    </properties>
   </object>
-  <object id="92" tid="2" x="189.5" y="298.5"/>
  </objectgroup>
- <objectgroup name="Solids">
+ <objectgroup name="Billboards" visible="0">
+  <object id="93" name="Column" type="Billboard" x="112" y="192" width="16" height="48">
+   <properties>
+    <property name="Region" value="152 0 16 48"/>
+   </properties>
+  </object>
+  <object id="95" name="Column" type="Billboard" x="80" y="192" width="16" height="48">
+   <properties>
+    <property name="Region" value="152 0 16 48"/>
+   </properties>
+  </object>
+  <object id="96" name="Column" type="Billboard" x="48" y="192" width="16" height="48">
+   <properties>
+    <property name="Region" value="152 0 16 48"/>
+   </properties>
+  </object>
+  <object id="97" name="Column" type="Billboard" x="144" y="192" width="16" height="48">
+   <properties>
+    <property name="Region" value="152 0 16 48"/>
+   </properties>
+  </object>
+  <object id="98" name="Column" type="Billboard" x="176" y="192" width="16" height="48">
+   <properties>
+    <property name="Region" value="152 0 16 48"/>
+   </properties>
+  </object>
+  <object id="99" name="Column" type="Billboard" x="352" y="192" width="16" height="48">
+   <properties>
+    <property name="Region" value="152 0 16 48"/>
+   </properties>
+  </object>
+  <object id="100" name="Column" type="Billboard" x="384" y="192" width="16" height="48">
+   <properties>
+    <property name="Region" value="152 0 16 48"/>
+   </properties>
+  </object>
+  <object id="101" name="Column" type="Billboard" x="416" y="192" width="16" height="48">
+   <properties>
+    <property name="Region" value="152 0 16 48"/>
+   </properties>
+  </object>
+  <object id="102" name="Column" type="Billboard" x="448" y="192" width="16" height="48">
+   <properties>
+    <property name="Region" value="152 0 16 48"/>
+   </properties>
+  </object>
+  <object id="103" name="Column" type="Billboard" x="480" y="192" width="16" height="48">
+   <properties>
+    <property name="Region" value="152 0 16 48"/>
+   </properties>
+  </object>
+  <object id="104" x="385" y="226" width="14" height="14"/>
+  <object id="105" x="352.818" y="225.727" width="14" height="14"/>
+  <object id="106" x="417.545" y="226.273" width="14" height="14"/>
+  <object id="107" x="449.182" y="225.909" width="14" height="14"/>
+  <object id="108" x="481.727" y="225.727" width="14" height="14"/>
+  <object id="109" x="177.182" y="225.909" width="14" height="14"/>
+  <object id="110" x="145" y="226.273" width="14" height="14"/>
+  <object id="111" x="112.636" y="226.091" width="14" height="14"/>
+  <object id="112" x="81.1818" y="225.727" width="14" height="14"/>
+  <object id="113" x="48.6364" y="226.091" width="14" height="14"/>
+ </objectgroup>
+ <objectgroup name="Solids" visible="0">
   <object id="6" x="208" y="8" width="128" height="8"/>
   <object id="9" x="336" y="16" width="48" height="16"/>
   <object id="10" x="384" y="32" width="32" height="16"/>
@@ -184,5 +257,15 @@
   <object id="83" type="hull" x="512" y="176">
    <polyline points="0,0 0,-16 -16,-16 -16,-48 -32,-48 -32,-80 -48,-80 -48,-96 -64,-96 -64,-112 -96,-112 -96,-128 -128,-128 -128,-144 -176,-144 -176,-160 -304,-160 -304,-144 -352,-144 -352,-128 -384,-128 -384,-112 -416,-112 -416,-96 -432,-96 -432,-80 -448,-80 -448,-48 -464,-48 -464,-16 -480,-16 -480,32 -496,32 -484,-150.667 -180.667,-246 58,-51.3333 16,32 0,32 0,0"/>
   </object>
+  <object id="144" type="hull" x="385.485" y="226.333" width="14" height="14"/>
+  <object id="145" type="hull" x="145.485" y="226.606" width="14" height="14"/>
+  <object id="146" type="hull" x="113.121" y="226.424" width="14" height="14"/>
+  <object id="147" type="hull" x="482.212" y="226.06" width="14" height="14"/>
+  <object id="148" type="hull" x="418.03" y="226.606" width="14" height="14"/>
+  <object id="149" type="hull" x="81.6668" y="226.06" width="14" height="14"/>
+  <object id="150" type="hull" x="353.303" y="226.06" width="14" height="14"/>
+  <object id="151" type="hull" x="49.1214" y="226.424" width="14" height="14"/>
+  <object id="152" type="hull" x="177.667" y="226.242" width="14" height="14"/>
+  <object id="153" type="hull" x="449.667" y="226.242" width="14" height="14"/>
  </objectgroup>
 </map>

@@ -380,6 +380,7 @@ namespace Desire_And_Doom
                             }
 
                             var location = new Rectangle(x * map.TileWidth, y * map.TileHeight, map.TileWidth, map.TileHeight);
+                            if (gid - 1 > quads.Count) continue;
                             batch.Draw(texture, location, quads[gid - 1], Color.White, 0, Vector2.Zero, SpriteEffects.None, render_layer);
                         }
                     }

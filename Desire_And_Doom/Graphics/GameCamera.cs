@@ -107,7 +107,7 @@ namespace Desire_And_Doom
             get
             {
                 return
-                    Matrix.CreateTranslation(new Vector3(-Position, 0.0f)) *
+                    Matrix.CreateTranslation(new Vector3(-new Vector2(Position.X, Position.Y), 0.0f)) *
                     Matrix.CreateTranslation(new Vector3(-Origin, 0.0f)) *
                     Matrix.CreateRotationZ(Rotation) *
                     Matrix.CreateScale(Zoom, Zoom, 1) *
