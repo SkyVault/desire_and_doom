@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.09.13" orientation="orthogonal" renderorder="right-down" width="68" height="112" tilewidth="8" tileheight="8" infinite="0" backgroundcolor="#55ffff" nextobjectid="155">
+<map version="1.0" tiledversion="2017.09.13" orientation="orthogonal" renderorder="right-down" width="68" height="112" tilewidth="8" tileheight="8" infinite="0" backgroundcolor="#55ffff" nextobjectid="162">
  <properties>
   <property name="Sky" value="true"/>
  </properties>
@@ -90,7 +90,15 @@
    eJztm9tu00AQhr27DlxwumrL6wAJXBS46+F1SBu4gEYCqYfXKQ3lAhIJpB4eh9nYk6w3Jnbs9WGT/5NWTqx44v098zsZ20EAAAAAAAAAAAAAAACommciGmX5qILgkyofp2lc6DGi7a9Ji580fjjQtgmK6pBnOx81qVIPjdbkmPJloKJa2hRsfXrx3AWtG+n6UVEtcc4c03LgYf7kJS1fQhkEHZlcp/V5oCKv8bGemCJ11SUtenL5Z3zVxNX52EbnS7/FvlLVvJchKIdkRh41RSN6xJ6ySXRzzNdXL6mKNtcNY9dPlfX0grR4CT1mbKKP5AE+sojWpA9dZlySFt+hxwx4ySLIkUXq9pAdysnnNL7Sef+bLL7cohjba5DfrMcfmtNfWXzpUo/dBnVlPcqybvlRFuiRpCo9uK9Yl68e0BwOHcxjj2Lsp8QZ/Ke3fqSSfXd+b6+/VPWed8/p+y4c6HFKMc6sONNja/XW+XhfqWTfnd/b67UedfYB7uj77h3ocUMxbo04j2j/H8vodyYP3RPS1yF0z72/ZH7mNmNZbx9gJyT/CMvH2aIY20acXdr/t4Ye5nWHrJ67Roj58kOGfi45oDkcOtBjj2LsG3FGxjE263/V61BTPWr003Oaw4UDPU4pxlkcR2vxhMbTlNxg/2BvmV3/ps9cp+SArWfV3NEc7h3ocUMxbsN5Xryj8d46tormfcLnDP2a5j+U0euOSv8/O80xD/qqafyiff8tkn7Ix5b9ZExznsR6aK+cyKTP2ugYPvRV00g7p4i4Pj7T+i9ynhsd3d8Q6RowvH2dfuoSzgFdE0NlzMeoGdajR+9fZ3gC11OdfuoSnQOhURNaixMawwLX8vm3h64n3/tCoVEzYxoTo27ykqg5T/3URGsSirlPPMzwCptpbsV156uf2nTF3CfeFKmXuO589VNXmL/1OyvmlWvyXo+s+r4Ivteq17CPtkWPPPdaAdBWmriPqs1ADwAAAEdi/Z+nWIUr4f/zFC5RMv3Zk03llcT/IQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBN5R9gwZx9
   </data>
  </layer>
- <objectgroup name="Entities" visible="0">
+ <layer name="Tree" width="68" height="112">
+  <properties>
+   <property name="layer" type="float" value="0.24"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt1NeRwgAMAFFCFz6CDVRFcoCqSCa4KnIq5LYK+268O/P+JX2o0TAzMzMzMzMz+zsF+EEHXfTQR4gIAwwxqmi+shtjgilmmCNGghQZFlhWNF/ZrbDGBlvskGOPA444oahovrI744IrbrjjgSdeeOODb0XzlV3Q5H+ggy566CNEhAGGGDWrnrScxuw5wRQzzBEjQYoMCyxrco8Ve66xwRY75NjjgCNOKGpyjzN7XnDFDXc88MQLb3zwrck9ghb/Ax100UMfISIMMMSoVfWk5TRmzwmmmGGOGAlSZFhgWZN7rNhzjQ222CHHHgcccUJRk3uc2fOCK26444EnXnjjg29N7hG0+R/ooIse+ggRYYAhRu2qJy2nMXtOMMUMc8RIkCLDAsua3GPFnmtssMUOOfY44IgTiprcw8zMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzP5vv/SLTqM=
+  </data>
+ </layer>
+ <objectgroup name="Entities">
   <object id="2" type="Bird" x="259" y="348" width="5.66667" height="6"/>
   <object id="62" type="Bird" x="249.167" y="362.667" width="5.66667" height="6"/>
   <object id="63" type="Bird" x="269.5" y="377.333" width="5.66667" height="6"/>
@@ -105,7 +113,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Doors" visible="0">
+ <objectgroup name="Doors">
   <object id="84" type="Door" x="208" y="640.5" width="128" height="23.5">
    <properties>
     <property name="Door" value="Demo 234 244"/>
@@ -114,7 +122,7 @@
   </object>
   <object id="90" type="Player" x="263" y="456.5" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="Billboards" visible="0">
+ <objectgroup name="Billboards">
   <object id="93" name="Column" type="Billboard" x="112" y="320" width="16" height="48">
    <properties>
     <property name="Region" value="152 0 16 48"/>
@@ -176,7 +184,7 @@
   <object id="112" x="81.1818" y="353.727" width="14" height="14"/>
   <object id="113" x="48.6364" y="354.091" width="14" height="14"/>
  </objectgroup>
- <objectgroup name="Solids" visible="0">
+ <objectgroup name="Solids">
   <object id="6" x="208" y="136" width="128" height="8"/>
   <object id="9" x="336" y="144" width="48" height="16"/>
   <object id="10" x="384" y="160" width="32" height="16"/>
@@ -240,7 +248,7 @@
   <object id="68" x="32" y="304" width="175.5" height="48"/>
   <object id="69" x="336" y="304" width="176.5" height="48"/>
  </objectgroup>
- <objectgroup name="Hulls" visible="0">
+ <objectgroup name="Hulls">
   <object id="78" type="hull" x="335.818" y="304">
    <polyline points="0,0 0.181818,96 0.363636,-0.181818 -0.727273,-0.181818"/>
   </object>
@@ -255,6 +263,21 @@
   </object>
   <object id="83" type="hull" x="512" y="304">
    <polyline points="0,0 0,-16 -16,-16 -16,-48 -32,-48 -32,-80 -48,-80 -48,-96 -64,-96 -64,-112 -96,-112 -96,-128 -128,-128 -128,-144 -176,-144 -176,-160 -304,-160 -304,-144 -352,-144 -352,-128 -384,-128 -384,-112 -416,-112 -416,-96 -432,-96 -432,-80 -448,-80 -448,-48 -464,-48 -464,-16 -480,-16 -480,32 -496,32 -484,-150.667 -180.667,-246 58,-51.3333 16,32 0,32 0,0"/>
+  </object>
+  <object id="157" x="423.25" y="185.75">
+   <polyline points="0,0 -33.25,19.25"/>
+  </object>
+  <object id="158" x="390" y="205">
+   <polyline points="0,0 20,26.25"/>
+  </object>
+  <object id="159" x="409.75" y="230.75">
+   <polyline points="0,0 32,1.25"/>
+  </object>
+  <object id="160" x="441.75" y="232">
+   <polyline points="0,0 11.75,-21.75"/>
+  </object>
+  <object id="161" x="453.25" y="210.75">
+   <polyline points="0,0 -12,-27.25"/>
   </object>
  </objectgroup>
 </map>
