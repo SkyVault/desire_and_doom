@@ -29,7 +29,7 @@ namespace Desire_And_Doom.Screens
         float MonoLogoY = DesireAndDoom.ScreenHeight;
 
         Color sky_color = Color.White;
-        Color mono_color = Color.Black;
+        Color mono_color = Color.White;
 
         Screen_Manager screen_manager;
 
@@ -71,26 +71,29 @@ namespace Desire_And_Doom.Screens
                     if (Vector4.Distance(sky_color.ToVector4(), Color.Transparent.ToVector4()) < 0.1f)
                     {
                         tasker.Next();
-                        sky_color = Color.Transparent;
                     }
                 },
                 (time) =>
                 {
                     MonoLogoY = Math2.Lerp(MonoLogoY, DesireAndDoom.ScreenHeight / 2 - Logo_Size / 2, 0.08f);
+                    sky_color = Math2.Lerp(sky_color, Color.Transparent, 0.02f);
                     if (MonoLogoY < DesireAndDoom.ScreenHeight / 2 - (Logo_Size / 2) + 1)
                         tasker.Next();
                 },
                 (time) =>
                 {
+                    sky_color = Math2.Lerp(sky_color, Color.Transparent, 0.02f);
                     mono_color = Math2.Lerp(mono_color, Color.Transparent, 0.02f);
                     if (Vector4.Distance(mono_color.ToVector4(), Color.Transparent.ToVector4()) < 0.1f)
                     {
                         tasker.Next();
-                        mono_color = Color.Transparent;
                     }
                 },
                 (time) =>
                 {
+                    sky_color = Math2.Lerp(sky_color, Color.Transparent, 0.02f);
+                    mono_color = Math2.Lerp(mono_color, Color.Transparent, 0.02f);
+
                     screen_manager.Goto_Screen("Menu", true);
                     tasker.Next();
                 }, (time) => { }
