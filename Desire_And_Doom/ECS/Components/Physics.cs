@@ -18,7 +18,7 @@ namespace Desire_And_Doom.ECS
         public List<string> Blacklisted_Collision_Tags { get; set; } = new List<string>();
 
         public Func<Entity, Entity, bool> Callback = null;
-        public PType Physics_Type { get; }
+        public PType Physics_Type { get; set; }
 
         public bool Handle_Collisions { get; set; } = true;
         public Entity Other { get; set; } = null;
@@ -33,6 +33,7 @@ namespace Desire_And_Doom.ECS
         
         public float Direction { get; set; } = 0f;
         public float Current_Speed { get; set; } = 0f;
+        public float Mass { get; set; } = 0.2f;
 
         public bool Flying { get; set; } = false;
 

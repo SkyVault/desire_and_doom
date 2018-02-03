@@ -191,6 +191,11 @@ namespace Desire_And_Doom.ECS
 
                         if (coll && !blacklisted)
                         {
+                            if (o_physics.Physics_Type == Physics.PType.DYNAMIC)
+                            {
+                                o_physics.Velocity = physics.Velocity * (o_physics.Mass);
+                            }
+
                             physics.Other = other;
                             physics.Callback?.Invoke(entity, other);
                         }

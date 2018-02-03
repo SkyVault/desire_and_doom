@@ -82,6 +82,17 @@ namespace Desire_And_Doom.ECS
                     case "Physics":
                         {
                             var physics = (Physics)entity.Add(new Physics(Vector2.Zero));
+                            if (component["type"] is string str)
+                            {
+                                switch (str)
+                                {
+                                    case "dynamic": physics.Physics_Type = Physics.PType.DYNAMIC; break;
+                                    case "static": physics.Physics_Type = Physics.PType.STATIC; break;
+                                    default:
+                                        Console.WriteLine($"[WARNING]::WORLD::CREATE::ENTITY::PHYSICS:: Unknown physics type: {str}");
+                                        break;
+                                }
+                            }
 
                             if ( component["btags"] is LuaTable btags )
                             {

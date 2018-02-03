@@ -12,6 +12,15 @@ return {
 		}
 	},
 
+	["Movable-Block"] = {
+		tags = {},
+		components = {
+			["Body"] = {48, 24},
+			["Sprite"] = {"entities", 512, 0, 48, 48},
+			["Physics"] = {type = "dynamic"},
+		}
+	},
+
 	["Wolf"] = {
 		tags = {"Enemy", "Wolf"},
 		components = {
