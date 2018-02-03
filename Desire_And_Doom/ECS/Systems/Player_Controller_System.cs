@@ -5,6 +5,7 @@ using static Desire_And_Doom.ECS.Component;
 using Desire_And_Doom.ECS.Components;
 using Desire_And_Doom.Graphics;
 using Desire_And_Doom.Gui;
+using Desire_And_Doom.Graphics.Particle_Systems;
 
 namespace Desire_And_Doom.ECS
 {
@@ -77,7 +78,7 @@ namespace Desire_And_Doom.ECS
                 equipment.Left_Hand = new Items.Equipable(Items.Equipable.Equipment_Type.WEAPON) {
                     Run_Animation_ID = "player-claymore-run",
                     Idle_Animation_ID = "player-claymore-idle",
-                    Use_Animation_ID = "player-claymore-attack",
+                    Use_Animation_ID = "player-claymore-attack-2",
                     ID = "Claymore"
                 };
             }
@@ -248,7 +249,7 @@ namespace Desire_And_Doom.ECS
                     equipment.Left_Hand = new Items.Equipable(Items.Equipable.Equipment_Type.WEAPON) {
                         Run_Animation_ID = "player-claymore-run",
                         Idle_Animation_ID = "player-claymore-idle",
-                        Use_Animation_ID = "player-claymore-attack",
+                        Use_Animation_ID = "player-claymore-attack-2",
                         ID = "Claymore"
                     };
                 }

@@ -23,14 +23,14 @@ namespace Desire_And_Doom.Graphics.Particle_Systems
 
             Rotation = rnd.Next() % 360;
 
-            Scale = (float)(0.2f + rnd.NextDouble() * 0.4f);
+            Scale = (float)(0.4f);
             Life = (float)(0.1f + rnd.NextDouble() * 0.5f);
 
             //Color = new Color(
             //    0.376f * 1.1f,
             //    0.356f * 1.1f,
             //    0.549f * 1.1f, 0.5f);
-            Transparency = 0.2f;
+            Transparency = 10f;
         }
 
         public override void Update(GameTime time)

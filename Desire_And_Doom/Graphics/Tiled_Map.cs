@@ -69,7 +69,8 @@ namespace Desire_And_Doom
                 Console.ReadKey();
             }
 
-            map         = new TmxMap(Directory.GetCurrentDirectory() + "/Content/Maps/" + name + ".tmx");
+            map = new TmxMap(Directory.GetCurrentDirectory() + "/Content/Maps/" + name + ".tmx");
+
             quads       = Assets.It.Get_Quads("quads");
 
             // load a texture
@@ -379,7 +380,12 @@ namespace Desire_And_Doom
                                 
                             }
 
-                            var location = new Rectangle(x * map.TileWidth, y * map.TileHeight, map.TileWidth, map.TileHeight);
+                            var location = new Rectangle(
+                                (int)(x * map.TileWidth), 
+                                (int)(y * map.TileHeight), 
+                                (int)(map.TileWidth), 
+                                (int)(map.TileHeight)
+                                );
                             if (gid - 1 > quads.Count) continue;
                             batch.Draw(texture, location, quads[gid - 1], Color.White, 0, Vector2.Zero, SpriteEffects.None, render_layer);
                         }

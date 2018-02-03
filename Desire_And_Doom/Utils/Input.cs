@@ -32,6 +32,13 @@ namespace Desire_And_Doom
         private Vector2 start_mpos = Vector2.Zero;
         private Vector2 last_mpos = Vector2.Zero;
 
+        //private Dictionary<string, Buttons> button_mappings = new Dictionary<string, Buttons>
+        //{
+        //    {"Action", Buttons.A},
+        //    {"Attack", Buttons.X},
+        //    {"Back", Buttons.B },
+        //};
+
         private Input() {
             states = new Dictionary<Keys, Key_State>();
             button_states = new Dictionary<Buttons, Button_State>();

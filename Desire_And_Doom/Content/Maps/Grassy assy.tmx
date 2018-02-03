@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2018.01.23" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" infinite="0" nextobjectid="5">
+<map version="1.0" tiledversion="2017.09.13" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" infinite="0" nextobjectid="12">
  <tileset firstgid="1" source="../../bin/DesktopGL/x86/Debug/Content/Maps/Tiles_1.tsx"/>
- <objectgroup name="Object">
-  <object id="3" type="Player" x="1020.5" y="91"/>
- </objectgroup>
  <layer name="Back Gradients" width="128" height="128">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -796,4 +793,17 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup name="Object">
+  <object id="3" type="Player" x="1020.5" y="91"/>
+  <object id="5" x="1024" y="0" width="8" height="1024"/>
+  <object id="6" x="0" y="1024" width="1032" height="8"/>
+  <object id="7" x="-8" y="0" width="8" height="1032"/>
+  <object id="10" x="-8" y="-8" width="1040" height="8"/>
+  <object id="11" type="Door" x="1016" y="0" width="8" height="1024">
+   <properties>
+    <property name="Door" value="Demo 18 348"/>
+    <property name="is_sensor" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>
