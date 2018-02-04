@@ -105,9 +105,11 @@ return {
 					local bbody = engine:Get_Component(bullet, "Body")
 
 					local angle = math.atan2(
-						p_body.Y - bbody.Y,		
+						p_body.Y - bbody.Y,
 						p_body.X - bbody.X
 					)
+
+					bphysics.DestroyOnCollision = true;
 
 					bphysics.Vel_X = math.cos(angle) * 100
 					bphysics.Vel_Y = math.sin(angle) * 100

@@ -41,6 +41,7 @@ namespace Desire_And_Doom.ECS
         public float Mass { get; set; } = 0.2f;
 
         public bool Flying { get; set; } = false;
+        public bool DestroyOnCollision { get; set; } = false;
 
         public PSide FacingSide = PSide.Right;
 

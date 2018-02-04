@@ -198,6 +198,12 @@ namespace Desire_And_Doom.ECS
 
                             physics.Other = other;
                             physics.Callback?.Invoke(entity, other);
+
+                            o_physics.Other = entity;
+                            o_physics.Callback?.Invoke(other, entity);
+
+                            if (physics.DestroyOnCollision)
+                                entity.Destroy();
                         }
 
                     }else if (o_physics.Physics_Type == Physics.PType.WORLD_INTERACTION)
@@ -225,16 +231,25 @@ namespace Desire_And_Doom.ECS
                     foreach (var solid in solids)
                     {
                         var o_body = new Body(solid.Location, solid.Size);
+                        var coll = false;
 
-                        if (o_body.Contains(x_body)) { x_body = body; }
-                        if (o_body.Contains(y_body)) { y_body = body; }
+                        if (o_body.Contains(x_body)) { x_body = body; coll = true; }
+                        if (o_body.Contains(y_body)) { y_body = body; coll = true; }
+
+                        if (coll && physics.DestroyOnCollision)
+                            entity.Destroy();
                     }
 
                     foreach (var poly in polygons)
                     {
+                        var coll = false;
+
                         // get the lines of the rectangle
-                        if (Body_In_Polygon(poly, x_body)) { x_body = body; }
-                        if (Body_In_Polygon(poly, y_body)) { y_body = body; }
+                        if (Body_In_Polygon(poly, x_body)) { x_body = body; coll = true; }
+                        if (Body_In_Polygon(poly, y_body)) { y_body = body; coll = true; }
+
+                        if (coll && physics.DestroyOnCollision)
+                            entity.Destroy();
                     }
                 }
             }
