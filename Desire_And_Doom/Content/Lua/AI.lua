@@ -30,6 +30,15 @@
 		end
 end
 
+local shulk_bullet = {
+	tags = {"Enemy-Hit", "Enemy"},
+	components = {
+		["Body"] = {8, 4},
+		["Animation"] = {"entities", {"shulk-bullet", 0.1}},
+		["Physics"] = {type = "dynamic", blacklist = {"Enemy"}},
+	}
+}
+
 return {
 
 	------------------------------------------------------- WOLF AI -------------------------------------------------------------
@@ -66,6 +75,13 @@ return {
 		local body = engine:Get_Component(entity, "Body")
 		local anim = engine:Get_Component(entity, "Animation")
 		local physics = engine:Get_Component(entity, "Physics")
+		local fn = engine:Get_Component(entity, "Lua_Function")
+
+		if fn.Table == nil then 
+			fn.Table = {
+				shoot_timer = 0	
+			}
+		end
 
 		if body and anim and physics then
 			local player = engine:Get_Player()
@@ -80,6 +96,26 @@ return {
 						anim.Current_Animation_ID = "shulk-idle";
 					end
 				end
+
+				if anim.Current_Frame == 9 - 1 and fn.Table.shoot_timer <= 0 then
+					fn.Table.shoot_timer = 1
+
+					local bullet = engine:Spawn(shulk_bullet, body.Center.X - 4, body.Center.Y - 4)	
+					local bphysics = engine:Get_Component(bullet, "Physics")
+					local bbody = engine:Get_Component(bullet, "Body")
+
+					local angle = math.atan2(
+						p_body.Y - bbody.Y,		
+						p_body.X - bbody.X
+					)
+
+					bphysics.Vel_X = math.cos(angle) * 100
+					bphysics.Vel_Y = math.sin(angle) * 100
+					bphysics.Friction = 1
+				end
+
+				local dt = engine:Get_DT()
+				fn.Table.shoot_timer = fn.Table.shoot_timer - dt
 
 				handle_player_hit(entity, engine, 1, 100)
 				

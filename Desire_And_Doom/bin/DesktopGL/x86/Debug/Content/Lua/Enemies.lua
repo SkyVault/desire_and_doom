@@ -43,14 +43,16 @@ return {
 	},
 
 	["Blue-Flame"] = {
-		tags = {"Meat"},
+		tags = {},
 		components = {
 			["Body"] = {8, 4},
+			["Light"] = {},
 			["Animation"] =
 				{"entities", {"blue-flame", 0.1}},
 			["Physics"] = {},
 		}
 	},
+
 
 	["Bird"] = {
 		tags = {"Meat"},
@@ -110,7 +112,7 @@ return {
 		components = {
 			["Body"] = {32, 24},
 			["Animation"] = {"entities", {"shulk-idle", 0.1}, {"shulk-attack", 0.1}},
-			["Physics"] = {},
+			["Physics"] = {blacklist = {"Enemy-Hit"}},
 			["Ai"] = {"Function", AI.Shulk},
 			["Light"] = {},
 			["Health"] = {3},
@@ -121,6 +123,16 @@ return {
 				},
 			}
 		}
-	}
+	},
+
+	["Shulk-Bullet"] = {
+		tags = {},
+		components = {
+			["Body"] = {8, 4},
+			["Light"] = {},
+			["Animation"] = {"entities", {"shulk-bullet", 0.1}},
+			["Physics"] = {},
+		}
+	},
 
 }

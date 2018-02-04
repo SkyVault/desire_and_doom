@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.09.13" orientation="orthogonal" renderorder="right-down" width="68" height="112" tilewidth="8" tileheight="8" infinite="0" backgroundcolor="#55ffff" nextobjectid="165">
+<map version="1.0" tiledversion="2017.09.13" orientation="orthogonal" renderorder="right-down" width="68" height="112" tilewidth="8" tileheight="8" infinite="0" backgroundcolor="#55ffff" nextobjectid="168">
  <properties>
   <property name="Sky" value="true"/>
  </properties>
@@ -98,7 +98,7 @@
    eJzt1NeRwgAMAFFCFz6CDVRFcoCqSCa4KnIq5LYK+268O/P+JX2o0TAzMzMzMzMz+zsF+EEHXfTQR4gIAwwxqmi+shtjgilmmCNGghQZFlhWNF/ZrbDGBlvskGOPA444oahovrI744IrbrjjgSdeeOODb0XzlV3Q5H+ggy566CNEhAGGGDWrnrScxuw5wRQzzBEjQYoMCyxrco8Ve66xwRY75NjjgCNOKGpyjzN7XnDFDXc88MQLb3zwrck9ghb/Ax100UMfISIMMMSoVfWk5TRmzwmmmGGOGAlSZFhgWZN7rNhzjQ222CHHHgcccUJRk3uc2fOCK26444EnXnjjg29N7hG0+R/ooIse+ggRYYAhRu2qJy2nMXtOMMUMc8RIkCLDAsua3GPFnmtssMUOOfY44IgTiprcw8zMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzP5vv/SLTqM=
   </data>
  </layer>
- <objectgroup name="Entities" visible="0">
+ <objectgroup name="Entities">
   <object id="2" type="Bird" x="259" y="348" width="5.66667" height="6"/>
   <object id="62" type="Bird" x="249.167" y="362.667" width="5.66667" height="6"/>
   <object id="63" type="Bird" x="269.5" y="377.333" width="5.66667" height="6"/>
@@ -112,6 +112,8 @@
     <property name="Boss_Number" value="1"/>
    </properties>
   </object>
+  <object id="166" name="Shulk-Bullet" type="Shulk-Bullet" x="144" y="480" width="16" height="16"/>
+  <object id="167" name="Blue-Flame" type="Blue-Flame" x="144.727" y="452.545" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Doors">
   <object id="84" type="Door" x="208" y="640.5" width="128" height="23.5">
@@ -122,7 +124,6 @@
   </object>
   <object id="90" type="Player" x="263" y="456.5" width="16" height="16"/>
   <object id="162" name="Shulk" type="Shulk" x="264" y="494.25" width="16" height="16"/>
-  <object id="164" name="Blue-Flame" type="Blue-Flame" x="200" y="456" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Billboards" visible="0">
   <object id="93" name="Column" type="Billboard" x="112" y="320" width="16" height="48">

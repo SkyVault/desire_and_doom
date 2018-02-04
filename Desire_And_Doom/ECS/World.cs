@@ -94,7 +94,7 @@ namespace Desire_And_Doom.ECS
                                 }
                             }
 
-                            if ( component["btags"] is LuaTable btags )
+                            if ( component["blacklist"] is LuaTable btags )
                             {
                                 for (int i = 1; i < btags.Values.Count + 1; i++ )
                                 {

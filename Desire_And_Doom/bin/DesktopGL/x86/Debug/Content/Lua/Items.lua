@@ -3,7 +3,7 @@
 		tags = {name, "Item"},
 		components = {
 			["Body"] = {4, 2},
-			["Physics"] = { btags = {"Item"} },
+			["Physics"] = { blacklist = {"Item"} },
 			["Sprite"] = {
 				"items",
 				quad[1], quad[2], quad[3], quad[4],
@@ -33,7 +33,7 @@ return {
 		tags = {"Coin", "Item"},
 		components = {
 			["Body"] = {4, 2},
-			["Physics"] = { btags = {"Item"} },
+			["Physics"] = { blacklist = {"Item"} },
 			["Animation"] = {
 				"items",
 				{"coin-flip", 0.08},

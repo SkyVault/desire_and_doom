@@ -51,9 +51,9 @@ namespace Desire_And_Doom.ECS
             
             var physics = (Physics)entity.Get(Types.Physics);
             physics.Blacklisted_Collision_Tags.Add("Player-Hit");
+
             physics.Callback = (self, o) =>
             {
-
                 if (o.Has_Tag("Enemy"))
                 {
                     var health = (Health)self.Get(Types.Health);
