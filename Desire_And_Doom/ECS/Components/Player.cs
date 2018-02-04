@@ -23,6 +23,8 @@ namespace Desire_And_Doom
 
         public int Combo_Counter = 0;
         public bool Performed_Combo = true;
+        public bool Dying = false;
+        public bool Going_To_Menu = false;
 
         public float Dash_Timer = 0;
         public float Max_Dash_Time { get => 1f; }

@@ -218,8 +218,9 @@ namespace Desire_And_Doom.ECS
             {
                 sprite.Force_Play_Animation("player-smoke");
             }
-        
+
             // Controll
+            if (player.Dying) player.Can_Move = false;
             if (player.Can_Move)
             {
                 if (Input.It.Is_Key_Pressed(Keys.LeftShift) == true || dash == true)
@@ -285,11 +286,24 @@ namespace Desire_And_Doom.ECS
             }
             player.Dash_Timer -= (float)time.ElapsedGameTime.TotalSeconds;
 
+
+            // Dealing with the killing of the player
             if (entity.Get(Component.Types.Health) is Health health){
-                if (health.Amount <= 0)
+                if (health.Amount <= 0 && !player.Dying)
                 {
-                    screen_manager.Goto_Screen("Menu", false);
+                    player.Dying = true;
+                    player.Going_To_Menu = false;
+                    sprite.Playing = true;
+                    sprite.Current_Animation_ID = "player-die";
+                    return;
                 }
+            }
+
+            if (player.Dying && sprite.Animation_End && !player.Going_To_Menu)
+            {
+                player.Going_To_Menu = true;
+                sprite.Playing = false;
+                screen_manager.Goto_Screen("Menu", true);
             }
 
             // (TEMP): toggle the equipment

@@ -11,6 +11,7 @@
 				{"player-run", 0.08}, 
 				{"player-idle", 0.1}, 
 				{"player-attack", 0.08}, 
+				{"player-die", 0.08}, 
 				{"player-claymore-run", 0.08}, 
 				{"player-claymore-idle", 0.1}, 
 				{"player-claymore-attack-1", 0.8},
