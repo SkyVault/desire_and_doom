@@ -293,8 +293,7 @@ namespace Desire_And_Doom.ECS
                 {
                     player.Dying = true;
                     player.Going_To_Menu = false;
-                    sprite.Playing = true;
-                    sprite.Current_Animation_ID = "player-die";
+                    sprite.Force_Play_Animation("player-die");
                     return;
                 }
             }
@@ -302,6 +301,8 @@ namespace Desire_And_Doom.ECS
             if (player.Dying && sprite.Animation_End && !player.Going_To_Menu)
             {
                 player.Going_To_Menu = true;
+                sprite.Force_Play_Animation("player-die");
+                sprite.Current_Frame = sprite.Animations[sprite.Current_Animation_ID].Frames.Count - 1;
                 sprite.Playing = false;
                 screen_manager.Goto_Screen("Menu", true);
             }
