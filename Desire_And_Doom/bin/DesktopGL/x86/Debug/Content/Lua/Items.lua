@@ -1,6 +1,6 @@
 ﻿function simple_item(name, quad)
 	return {
-		tags = {name, "Item"},
+		tags = {name, "Item", "Heal"},
 		components = {
 			["Body"] = {4, 2},
 			["Physics"] = { blacklist = {"Item"} },

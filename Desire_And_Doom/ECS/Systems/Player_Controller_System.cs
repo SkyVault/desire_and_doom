@@ -60,6 +60,13 @@ namespace Desire_And_Doom.ECS
                     health.Hurt(1, true);
                 }
 
+                if (o.Has_Tag("Heal"))
+                {
+                    var health = (Health)self.Get(Types.Health);
+
+                    if (health.Amount < 4) health.Heal(1);
+                }
+
                 if (o.Has(Types.Item))
                 {
                     var item = (Item)o.Get(Types.Item);

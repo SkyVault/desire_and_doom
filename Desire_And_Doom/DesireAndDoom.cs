@@ -225,15 +225,15 @@ namespace Desire_And_Doom
         {
             //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             //    Exit();
-
             if (SHOULD_QUIT) Quit();
-            
+            var time = gameTime;
+
             Timers.It.Update(gameTime);
             Input.It.Update(gameTime);
 
-            camera.Update(gameTime);
-            world.Update(gameTime);
-            screen_manager.Update(gameTime);
+            camera.Update(time);
+            world.Update(time);
+            screen_manager.Update(time);
             invatory_manager.Update(gameTime);
 
             Assets.It.Update(gameTime);
@@ -242,9 +242,9 @@ namespace Desire_And_Doom
             if (Input.It.Is_Key_Pressed(Keys.P)) DEBUG = !DEBUG;
 
             if (Game_State == State.PLAYING)
-                particle_world.Update(gameTime);
+                particle_world.Update(time);
 
-            base.Update(gameTime);
+            base.Update(time);
 
             Messanger.It.Clear();
         }
