@@ -29,7 +29,26 @@ return {
 				{"entities",  {"wolf-run", 0.08},{"wolf-idle", 0.1}},
 			["Physics"] = {},
 			["Ai"] = {"Function",AI.Wolf},
-			["Health"] = {3}
+			["Health"] = {3},
+
+			["Enemy"] = {
+				drops = {
+					{"Coin", 2, 5}, -- name, min, max
+					{"Carrot", 2, 5}, -- name, min, max
+					{"Tomato", 1, 3}, -- name, min, max
+					{"Baseball", 1, 1}, -- name, min, max
+				},
+			}
+		}
+	},
+
+	["Blue-Flame"] = {
+		tags = {"Meat"},
+		components = {
+			["Body"] = {8, 4},
+			["Animation"] =
+				{"entities", {"blue-flame", 0.1}},
+			["Physics"] = {},
 		}
 	},
 

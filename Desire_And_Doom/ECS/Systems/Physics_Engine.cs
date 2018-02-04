@@ -243,6 +243,8 @@ namespace Desire_And_Doom.ECS
             physics.Direction = (float)Math.Atan2(body.Y - (body.Y + physics.Vel_Y * dt),body.X - (body.X + physics.Vel_X * dt)) + Physics.Deg_To_Rad(180);
             physics.Current_Speed = Vector2.Distance(body.Position,body.Position + physics.Velocity * dt);
 
+            physics.FacingSide = physics.Velocity.X > 0 ? Physics.PSide.Right : Physics.PSide.Left;
+
             body.X = x_body.X;
             body.Y = y_body.Y;
             

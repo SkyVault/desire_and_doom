@@ -15,6 +15,11 @@ namespace Desire_And_Doom.ECS
             STATIC, DYNAMIC, WATER, SPACE, WORLD_INTERACTION
         };
 
+        public enum PSide
+        {
+            Left = -1, Right = 1
+        };
+
         public List<string> Blacklisted_Collision_Tags { get; set; } = new List<string>();
 
         public Func<Entity, Entity, bool> Callback = null;
@@ -36,6 +41,8 @@ namespace Desire_And_Doom.ECS
         public float Mass { get; set; } = 0.2f;
 
         public bool Flying { get; set; } = false;
+
+        public PSide FacingSide = PSide.Right;
 
         public static float Deg_To_Rad(float deg) {
             return (float)Math.PI * deg / 180;

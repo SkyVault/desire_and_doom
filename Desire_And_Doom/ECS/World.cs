@@ -270,6 +270,16 @@ namespace Desire_And_Doom.ECS
             systems.Remove(typeof(T));
         }
 
+        public List<Entity> Get_All_With_Tag(string tag)
+        {
+            List<Entity> list = new List<Entity>();
+
+            foreach(var e in entities)
+                if (e.Tags.Contains(tag)) list.Add(e);
+        
+            return list;
+        }
+
         public List<Entity> Get_All_With_Component(Component.Types T)
         {
             List<Entity> list = new List<Entity>();

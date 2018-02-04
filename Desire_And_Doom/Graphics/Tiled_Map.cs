@@ -312,6 +312,7 @@ namespace Desire_And_Doom
 
         public void Destroy()
         {
+            Console.WriteLine("ZHERE");
             billboards.Clear();
 
             foreach(var target in layer_render_targets) { target.Dispose(); }
