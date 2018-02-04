@@ -318,7 +318,9 @@ namespace Desire_And_Doom
             layer_render_targets.Clear();
 
             if (lighting != null)
+            {
                 lighting.Hulls.Clear();
+            }
         }
 
         public void Update(GameTime time)

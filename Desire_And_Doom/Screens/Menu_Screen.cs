@@ -57,6 +57,9 @@ namespace Desire_And_Doom.Screens
         {
             camera.Zoom = 3;
             camera.Position = Vector2.Zero;
+
+            var cont = camera.Get_Controller();
+
             penumbra.AmbientColor = new Color(1f, 1f, 1f, 1f);
             pre_origin = camera.Origin;
             camera.Origin = new Vector2(0, 0);
@@ -65,6 +68,7 @@ namespace Desire_And_Doom.Screens
         public override void Update(GameTime time)
         {
             sky.Update(time);
+            camera.Position = Vector2.Zero;
 
             var down = Input.It.Is_Key_Pressed(Keys.Down) || Input.It.Is_Gamepad_Button_Pressed(Buttons.DPadDown) || Input.It.Is_Gamepad_Button_Pressed(Buttons.LeftThumbstickDown);
             var up = Input.It.Is_Key_Pressed(Keys.Up) || Input.It.Is_Gamepad_Button_Pressed(Buttons.DPadUp) || Input.It.Is_Gamepad_Button_Pressed(Buttons.LeftThumbstickUp);

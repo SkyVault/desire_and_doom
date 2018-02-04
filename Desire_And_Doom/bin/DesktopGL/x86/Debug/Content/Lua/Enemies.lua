@@ -29,9 +29,30 @@ return {
 				{"entities",  {"wolf-run", 0.08},{"wolf-idle", 0.1}},
 			["Physics"] = {},
 			["Ai"] = {"Function",AI.Wolf},
-			["Health"] = {3}
+			["Health"] = {3},
+
+			["Enemy"] = {
+				drops = {
+					{"Coin", 2, 5}, -- name, min, max
+					{"Carrot", 2, 5}, -- name, min, max
+					{"Tomato", 1, 3}, -- name, min, max
+					{"Baseball", 1, 1}, -- name, min, max
+				},
+			}
 		}
 	},
+
+	["Blue-Flame"] = {
+		tags = {},
+		components = {
+			["Body"] = {8, 4},
+			["Light"] = {},
+			["Animation"] =
+				{"entities", {"blue-flame", 0.1}},
+			["Physics"] = {},
+		}
+	},
+
 
 	["Bird"] = {
 		tags = {"Meat"},
@@ -91,7 +112,7 @@ return {
 		components = {
 			["Body"] = {32, 24},
 			["Animation"] = {"entities", {"shulk-idle", 0.1}, {"shulk-attack", 0.1}},
-			["Physics"] = {},
+			["Physics"] = {blacklist = {"Enemy-Hit"}},
 			["Ai"] = {"Function", AI.Shulk},
 			["Light"] = {},
 			["Health"] = {3},
@@ -102,6 +123,16 @@ return {
 				},
 			}
 		}
-	}
+	},
+
+	["Shulk-Bullet"] = {
+		tags = {},
+		components = {
+			["Body"] = {8, 4},
+			["Light"] = {},
+			["Animation"] = {"entities", {"shulk-bullet", 0.1}},
+			["Physics"] = {},
+		}
+	},
 
 }

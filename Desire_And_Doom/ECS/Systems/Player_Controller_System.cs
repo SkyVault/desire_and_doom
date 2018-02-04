@@ -7,6 +7,7 @@ using Desire_And_Doom.Graphics;
 using Desire_And_Doom.Gui;
 using Desire_And_Doom.Screens;
 using Desire_And_Doom.Items;
+using System;
 
 namespace Desire_And_Doom.ECS
 {
@@ -39,13 +40,6 @@ namespace Desire_And_Doom.ECS
 
         public override void Load(Entity entity)
         {
-            // add dust emitter
-            //var body = (Body) entity.Get(Types.Body);
-            //entity.Add(new Entity_Particle_Emitter(
-            //    new Dust_Emitter(body.Position, true),
-            //    particle_world, 
-            //    true
-            //    ));
             invatory_container = new Invatory_Container();
 
             var invatory = (Invatory) entity.Get(Types.Invatory);
@@ -57,9 +51,9 @@ namespace Desire_And_Doom.ECS
             
             var physics = (Physics)entity.Get(Types.Physics);
             physics.Blacklisted_Collision_Tags.Add("Player-Hit");
+
             physics.Callback = (self, o) =>
             {
-
                 if (o.Has_Tag("Enemy"))
                 {
                     var health = (Health)self.Get(Types.Health);
@@ -72,7 +66,7 @@ namespace Desire_And_Doom.ECS
                     if (item.Can_Collect)
                     {
                         var inv = (Invatory)entity.Get(Types.Invatory);
-                        if (inv.Has_Space())
+                        if (inv.Has_Space() || o.Has_Tag("Coin"))
                         {
                             inv.Add_Item(o);
                             o.Destroy();
@@ -97,25 +91,39 @@ namespace Desire_And_Doom.ECS
             invatory_manager.Remove((Invatory) entity.Get(Types.Invatory));
         }
 
-        public void Create_Sword_Hitbox(Physics physics, Body body)
+        public void Create_Sword_Hitbox(World world, Physics physics, Body body)
         {
-            var side = physics.Velocity.X > 0 ? 1 : -1;
+            var side = (int)physics.FacingSide;
 
             var hit_size = 16;
             var hit = World_Ref.Create_Entity();
             hit.Tags.Add("Player-Hit");
-            hit.Add(new Body(new Vector2(body.Position.X + hit_size * side, body.Position.Y - body.Height / 2 - hit_size), new Vector2(hit_size * 1.8f, hit_size * 2)));
+
+            hit.Add(new Body(new Vector2(
+                body.Center.X + (side < 0 ? hit_size * side * 2 : 0), 
+                body.Position.Y - body.Height / 2 - hit_size), 
+
+                new Vector2(
+                    hit_size * 2.3f, 
+                    hit_size * 2
+                )));
+
             hit.Add(new Timed_Destroy(0.1f));
+
             var phy = (Physics) hit.Add(new Physics(Vector2.Zero, Physics.PType.DYNAMIC));
             phy.Blacklisted_Collision_Tags.Add("Player");
 
-            hit.Update = (self) => {
+            //hit.Update = (self) => {
 
-                var h_body = (Body) self.Get(Types.Body);
-                h_body.Position = body.Position + new Vector2(physics.Velocity.X > 0 ? hit_size : -hit_size, -h_body.Height + 16);
+            //    var h_body = (Body) self.Get(Types.Body);
+            //    var _side = (int)physics.FacingSide;
+            //    h_body.Position = body.Center + new Vector2(
+            //        (-hit_size) + (2 * hit_size * _side),
+            //        body.Position.Y - body.Height / 2 - hit_size
+            //        );
 
-                return true;
-            };
+            //    return true;
+            //};
         }
 
         public override void Update(GameTime time, Entity entity)
@@ -237,7 +245,7 @@ namespace Desire_And_Doom.ECS
                         player.State = Player.Action_State.ATTACKING;
 
                         // create the collideable
-                        Create_Sword_Hitbox(physics, body);
+                        Create_Sword_Hitbox(World_Ref, physics, body);
                     }
                 }
                 else
@@ -250,15 +258,18 @@ namespace Desire_And_Doom.ECS
                             {
                                 player.State = Player.Action_State.IDLE;
                                 player.Combo_Counter = 0;
+                                player.Performed_Combo = false;
                             }
                         }
 
-                        if (sprite.Current_Frame == 10 - 1)
+                        if (sprite.Current_Frame == 10 - 1 && player.Combo_Counter > 0 && player.Performed_Combo == false)
                         {
-                            Create_Sword_Hitbox(physics, body);
+                            Create_Sword_Hitbox(World_Ref, physics, body);
+                            player.Performed_Combo = true;
                         }
 
                         if (sprite.Animation_End) {
+                            player.Performed_Combo = false;
                             player.Combo_Counter = 0;
                             player.State = Player.Action_State.IDLE;
                         }

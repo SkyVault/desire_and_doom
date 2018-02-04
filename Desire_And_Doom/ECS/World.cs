@@ -94,7 +94,7 @@ namespace Desire_And_Doom.ECS
                                 }
                             }
 
-                            if ( component["btags"] is LuaTable btags )
+                            if ( component["blacklist"] is LuaTable btags )
                             {
                                 for (int i = 1; i < btags.Values.Count + 1; i++ )
                                 {
@@ -268,6 +268,16 @@ namespace Desire_And_Doom.ECS
         public void Remove_System<T>()
         {
             systems.Remove(typeof(T));
+        }
+
+        public List<Entity> Get_All_With_Tag(string tag)
+        {
+            List<Entity> list = new List<Entity>();
+
+            foreach(var e in entities)
+                if (e.Tags.Contains(tag)) list.Add(e);
+        
+            return list;
         }
 
         public List<Entity> Get_All_With_Component(Component.Types T)
