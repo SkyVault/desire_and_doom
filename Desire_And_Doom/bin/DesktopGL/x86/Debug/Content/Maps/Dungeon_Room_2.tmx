@@ -131,7 +131,6 @@
    </properties>
   </object>
   <object id="90" type="Player" x="263" y="456.5" width="16" height="16"/>
-  <object id="162" name="Shulk" type="Shulk" x="264" y="494.25" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Billboards">
   <object id="93" name="Column" type="Billboard" x="112" y="320" width="16" height="48">
