@@ -3,6 +3,7 @@
 -- Scale the whole game to prevent the OpenGL / DirectX oversampling :(
 
 IMPROVEMENTS
+-- Create a faster debug drawing algorithm using buffers, Debug_Drawing.cs
 -- Dont hardcode the combo frame
 -- Improve the particle system to suck less
 -- Create a button mapping system

@@ -93,8 +93,6 @@ namespace Desire_And_Doom.ECS
 
         public void Create_Sword_Hitbox(World world, Physics physics, Body body)
         {
-            if (world.Get_All_With_Tag("Player-Hit").Count > 1) return;
-
             var side = (int)physics.FacingSide;
 
             var hit_size = 16;

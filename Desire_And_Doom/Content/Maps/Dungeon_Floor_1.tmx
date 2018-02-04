@@ -325,6 +325,5 @@
     <property name="is_sensor" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="7" name="Movable-Block" type="Movable-Block" x="440" y="520" width="48" height="48"/>
  </objectgroup>
 </map>

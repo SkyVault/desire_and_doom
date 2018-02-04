@@ -312,14 +312,15 @@ namespace Desire_And_Doom
 
         public void Destroy()
         {
-            Console.WriteLine("ZHERE");
             billboards.Clear();
 
             foreach(var target in layer_render_targets) { target.Dispose(); }
             layer_render_targets.Clear();
 
             if (lighting != null)
+            {
                 lighting.Hulls.Clear();
+            }
         }
 
         public void Update(GameTime time)
