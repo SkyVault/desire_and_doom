@@ -106,7 +106,7 @@ namespace Desire_And_Doom.ECS
                 body.Position.Y - body.Height / 2 - hit_size), 
 
                 new Vector2(
-                    hit_size * 1.8f, 
+                    hit_size * 2.3f, 
                     hit_size * 2
                 )));
 
