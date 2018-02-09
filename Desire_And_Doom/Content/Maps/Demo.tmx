@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.09.13" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" infinite="0" nextobjectid="108">
+<map version="1.0" tiledversion="2017.09.13" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="8" tileheight="8" infinite="0" nextobjectid="113">
  <properties>
   <property name="Sky" type="bool" value="true"/>
  </properties>
@@ -1012,6 +1012,11 @@
   <object id="105" x="626.75" y="760" width="125.25" height="8"/>
   <object id="106" x="239" y="601" width="72" height="136"/>
   <object id="107" x="-8" y="840" width="258" height="195"/>
+  <object id="108" type="Bird" x="272.5" y="325" width="5.66667" height="6"/>
+  <object id="109" type="Bird" x="275.833" y="340" width="5.66667" height="6"/>
+  <object id="110" type="Bird" x="248.333" y="320.333" width="5.66667" height="6"/>
+  <object id="111" type="Bird" x="238.5" y="335" width="5.66667" height="6"/>
+  <object id="112" type="Bird" x="258.833" y="349.666" width="5.66667" height="6"/>
  </objectgroup>
  <objectgroup name="Billboards">
   <object id="50" name="Lamp Post" type="Billboard" x="368" y="303.818" width="16" height="32">

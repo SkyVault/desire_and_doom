@@ -20,7 +20,6 @@ namespace Desire_And_Doom.ECS
             ID = "Claymore"
         };
 
-
         GameCamera camera;
         Particle_World particle_world;
         Invatory_Container invatory_container;
@@ -60,10 +59,9 @@ namespace Desire_And_Doom.ECS
                     health.Hurt(1, true);
                 }
 
-                if (o.Has_Tag("Heal"))
+                if (o.Has_Tag("Heal") && invatory.Has_Space())
                 {
                     var health = (Health)self.Get(Types.Health);
-
                     if (health.Amount < 4) health.Heal(1);
                 }
 
@@ -115,22 +113,23 @@ namespace Desire_And_Doom.ECS
                     hit_size * 2
                 )));
 
-            hit.Add(new Timed_Destroy(0.1f));
+            hit.Add(new Timed_Destroy(0.2f));
 
             var phy = (Physics) hit.Add(new Physics(Vector2.Zero, Physics.PType.DYNAMIC));
             phy.Blacklisted_Collision_Tags.Add("Player");
 
-            //hit.Update = (self) => {
+            hit.Update = (self) => {
 
-            //    var h_body = (Body) self.Get(Types.Body);
-            //    var _side = (int)physics.FacingSide;
-            //    h_body.Position = body.Center + new Vector2(
-            //        (-hit_size) + (2 * hit_size * _side),
-            //        body.Position.Y - body.Height / 2 - hit_size
-            //        );
+                var h_body = (Body) self.Get(Types.Body);
+                var _side = (int)physics.FacingSide;
 
-            //    return true;
-            //};
+                h_body.Position = new Vector2(
+                    body.Center.X + (side < 0 ? hit_size * side * 2 : 0),
+                    body.Position.Y - body.Height / 2 - hit_size
+                );
+
+                return true;
+            };
         }
 
         public override void Update(GameTime time, Entity entity)

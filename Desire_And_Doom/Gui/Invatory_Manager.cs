@@ -90,7 +90,7 @@ namespace Desire_And_Doom.Gui
                 if (selector.Y < 0) selector.Y = invatories.First().H - 1;
                 if (selector.Y > invatories.First().H - 1) selector.Y = 0;
 
-                if (Input.It.Is_Key_Pressed(Keys.Z))
+                if (Input.It.Is_Key_Pressed(Keys.Z) || Input.It.Is_Gamepad_Button_Pressed(Buttons.A))
                 {
                     if (ShowMenu)
                     {
@@ -103,12 +103,12 @@ namespace Desire_And_Doom.Gui
 
                 if (ShowMenu)
                 {
-                    if (Input.It.Is_Key_Pressed(Keys.Up))
+                    if (up)
                     {
                         menu_selector--;
                     }
 
-                    if (Input.It.Is_Key_Pressed(Keys.Down))
+                    if (down)
                     {
                         menu_selector++;
                     }
