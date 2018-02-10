@@ -113,7 +113,7 @@ namespace Desire_And_Doom.ECS
                     hit_size * 2
                 )));
 
-            hit.Add(new Timed_Destroy(0.2f));
+            hit.Add(new Timed_Destroy(0.3f));
 
             var phy = (Physics) hit.Add(new Physics(Vector2.Zero, Physics.PType.DYNAMIC));
             phy.Blacklisted_Collision_Tags.Add("Player");

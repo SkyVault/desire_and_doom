@@ -76,7 +76,7 @@ namespace Desire_And_Doom
             var device_height   = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             
             graphics = new GraphicsDeviceManager(this) {
-                PreferredBackBufferWidth    = (int)(device_width * 0.8f),
+                PreferredBackBufferWidth    = (int)(device_width * 0.5f),
                 PreferredBackBufferHeight   = (int)(device_height * 0.8f),
                 SynchronizeWithVerticalRetrace = true
             };
@@ -110,14 +110,15 @@ namespace Desire_And_Doom
 
         void Window_CLientSizeChanged(object sender, EventArgs args)
         {
+            camera.WindowResized(GraphicsDevice);
             // Handle window resizing
-            var device_width    = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            var device_height   = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            //var device_width    = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            //var device_height   = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
-            graphics.PreferredBackBufferWidth = device_width;
-            graphics.PreferredBackBufferHeight = device_height;
+            //graphics.PreferredBackBufferWidth = device_width;
+            //graphics.PreferredBackBufferHeight = device_height;
 
-            graphics.ApplyChanges();
+            //graphics.ApplyChanges();
         }
 
         protected override void Initialize()
@@ -225,6 +226,7 @@ namespace Desire_And_Doom
         {
             //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             //    Exit();
+
             if (SHOULD_QUIT) Quit();
             var time = gameTime;
 

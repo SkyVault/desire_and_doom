@@ -1,8 +1,10 @@
 ﻿FIXES:
+-- The asset manager shouldn't crash when it cant find an object
+-- Fix the glitch with the hulls ghosting
 -- Move entities out from each other if they collide, see birds?
--- Scale the whole game to prevent the OpenGL / DirectX oversampling :(
 
 IMPROVEMENTS
+-- Improve how the game scales with the window size
 -- Create a faster debug drawing algorithm using buffers, Debug_Drawing.cs
 -- Dont hardcode the combo frame
 -- Improve the particle system to suck less
@@ -10,7 +12,6 @@ IMPROVEMENTS
 -- All of the menus in the game use different code to controll the interface
 -- Remove that shitty table based ai system, implemented in AI_System
 -- Fix the dialog system
--- Make the invatory system controller work
 -- Improve the Assets system, make it auto load everything at startup
 
 ADDITIONS
@@ -35,3 +36,7 @@ DONE
 -- Weapon should also have specific strings for idle and attack animations, the player should then -- DONE
 be using whichever animation that the current weapon suggests
 -- Weapons should also be attached to the equipment component									   -- DONE
+-- Make the invatory controllable with the gamepad	--DONE
+
+:: NOTE :: Fixed this by drawing each map layer to a render target first, then rendering that in order with the regular scene.
+-- Scale the whole game to prevent the OpenGL / DirectX oversampling :(

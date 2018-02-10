@@ -58,7 +58,7 @@ return {
 				anim.Current_Animation_ID = "wolf-run"
 			end
 
-			if (engine:Entity_Within("Player", body.X, body.Y,70)) then
+			if (engine:Entity_Within("Player", body.X, body.Y, 140)) then
 				engine:Track(entity, engine:Get_With_Tag "Player", 4)
 			end
 

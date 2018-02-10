@@ -34,9 +34,9 @@ return {
 			["Enemy"] = {
 				drops = {
 					{"Coin", 2, 5}, -- name, min, max
-					{"Carrot", 2, 5}, -- name, min, max
-					{"Tomato", 1, 3}, -- name, min, max
-					{"Baseball", 1, 1}, -- name, min, max
+					{"Carrot", 0, 1}, -- name, min, max
+					{"Tomato", 0, 1}, -- name, min, max
+					{"Baseball", 0, 1}, -- name, min, max
 				},
 			}
 		}
@@ -119,7 +119,7 @@ return {
 			["Enemy"] = {
 				drops = {
 					{"Coin", 2, 5}, -- name, min, max
-					{"Orange", 2, 5}, -- name, min, max
+					{"Orange", 0, 2}, -- name, min, max
 				},
 			}
 		}
