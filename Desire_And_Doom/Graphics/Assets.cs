@@ -45,6 +45,11 @@ namespace Desire_And_Doom
             lua_tables   = new Dictionary<string, LuaTableAsset>();
 
             lua = new Lua();
+
+            lua_tables.Add("None", 
+                new LuaTableAsset {
+                    Table = lua.DoString("return {}")[0] as LuaTable
+                });
         }
 
         public void Add(string id, object t, bool hotreload = false)
@@ -242,7 +247,7 @@ namespace Desire_And_Doom
             if (typeof(T) == typeof(Texture2D))
             {
                 if (textures.ContainsKey(id))
-                   return (T)(textures[id] as object);
+                    return (T)(textures[id] as object);
                 else
                 {
                     return (T)(this.Load_Texture(id, id) as object);
@@ -251,7 +256,13 @@ namespace Desire_And_Doom
             else if (typeof(T) == typeof(SpriteFont))
                 return (T)(fonts[id] as object);
             else if (typeof(T) == typeof(LuaTable))
-                return (T)(object)(lua_tables[id].Table);
+                if (lua_tables.ContainsKey(id) == false)
+                {
+                    Console.WriteLine($"[WARNING]:: Cannot find lua table: {id}");
+                    return (T)(object)(lua_tables["None"].Table);
+                }
+                else
+                    return (T)(object)(lua_tables[id].Table);
             else if (typeof(T) == typeof(Animation))
                 return (T)(object)(animations[id]);
             return default(T);

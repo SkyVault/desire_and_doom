@@ -43,7 +43,10 @@ namespace Desire_And_Doom.ECS
         {
             var entity = Create_Entity();
             var components = table["components"] as LuaTable;
-            Debug.Assert(components != null);
+            if (components == null) {
+                entity.Destroy();
+                return entity;
+            }
 
             if (table["tags"] is LuaTable tags)
                 foreach (var t in tags.Values)
