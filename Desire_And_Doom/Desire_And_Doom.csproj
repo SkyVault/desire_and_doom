@@ -90,6 +90,7 @@
     <Compile Include="Graphics\Animation_Frame.cs" />
     <Compile Include="Graphics\Assets.cs" />
     <Compile Include="Graphics\Camera.cs" />
+    <Compile Include="Graphics\Dialog.cs" />
     <Compile Include="Graphics\GameCamera.cs" />
     <Compile Include="Graphics\Debug_Drawing.cs" />
     <Compile Include="Graphics\Default_Viewport_Adapter.cs" />

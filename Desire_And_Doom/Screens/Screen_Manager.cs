@@ -111,7 +111,7 @@ namespace Desire_And_Doom.Screens
         }
 
         public void FilteredDraw(SpriteBatch batch)
-        {
+       {
             active?.FilteredDraw(batch);
             batch.Draw(
                 Assets.It.Get<Texture2D>("gui-rect"),

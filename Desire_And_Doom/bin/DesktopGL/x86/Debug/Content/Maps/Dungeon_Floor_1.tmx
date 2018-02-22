@@ -174,7 +174,7 @@
 </data>
  </layer>
  <objectgroup name="Entities">
-  <object id="8" name="Wolf" type="Wilf" x="624" y="587"/>
+  <object id="8" name="Wolf" type="Wolf" x="624" y="587"/>
   <object id="9" name="Wolf" type="Wolf" x="377" y="581"/>
  </objectgroup>
  <layer name="Shadow" width="128" height="128">
