@@ -30,9 +30,33 @@ namespace Desire_And_Doom.Graphics
 
         public Dialog() {}
         public Dialog(LuaTable table) {
-            foreach (var keyPair in table)
-            {
-                Console.WriteLine(keyPair);
+            foreach(var dialog_text_table in table.Keys) {
+                var dt = table[dialog_text_table] as LuaTable;
+                var text = dt[1] as string;
+
+                var dialog_text = new Dialog_Text{Value = text};
+
+                if (dt[2] is LuaTable) {
+                    var options = dt[2] as LuaTable;
+
+                    foreach(var _option in options.Values) {
+                        var op = _option as LuaTable;
+
+                        var value = op[1] as string;
+                        var next = (int)(op[2] as double?);
+
+                        dialog_text.options.Add(new Dialog_Option{
+                                Value = value,
+                                NextDialogText = next
+                                });
+                    }
+
+                } else if (dt[2] is double) {
+                    var next = (int)(dt[2] as double?);
+                    dialog_text.NextDialogText = next;
+                }
+
+                Dialog_Texts.Add((int)(dialog_text_table as double?), dialog_text);
             }
         }
     }

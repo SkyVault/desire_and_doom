@@ -171,9 +171,13 @@ namespace Desire_And_Doom.ECS
                     case "Npc":
                         {
                             // TODO(Dustin): Load the table
-                            Console.WriteLine((component[0] as string));
+                            var name = (component[1] as string);
+                            var dialog_table = Assets.It.Get<LuaTable>(name);
 
-                            //entity.Add(new Npc(null));
+                            if (dialog_table == null) break;
+
+                            entity.Add(new Npc(dialog_table));
+
                             break;
                         }
                     case "Timed_Destroy":
