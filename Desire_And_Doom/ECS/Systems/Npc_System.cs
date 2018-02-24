@@ -40,6 +40,8 @@ namespace Desire_And_Doom.ECS
             var physics = (Physics) entity.Get(Component.Types.Physics);
             var npc = (Npc) entity.Get(Types.Npc);
             var player = World_Ref.Find_With_Tag("Player");
+
+            dialog_box.TryOpen(npc.Dialog);
         }
 
         public override void Destroy(Entity entity)

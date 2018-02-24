@@ -60,6 +60,8 @@ namespace Desire_And_Doom
         Physics_Engine      physics_engine;
         Invatory_Manager    invatory_manager;
         Renderer3D          renderer_3d;
+        PrimitivesBatch     primitives;
+        Dialog_Box          dialog_box;
 
         public static int ScreenWidth { get => graphics.PreferredBackBufferWidth; }
         public static int ScreenHeight { get => graphics.PreferredBackBufferHeight; }
@@ -158,7 +160,6 @@ namespace Desire_And_Doom
 
             gui = new Monogui();
 
-            var npc_system = (Npc_System)world.Add_System<Npc_System>(new Npc_System(this, graphics, invatory_manager, new Dialog_Box()));
 
             penumbra.Initialize();
 
@@ -181,6 +182,10 @@ namespace Desire_And_Doom
         protected override void LoadContent()
         {
             batch = new SpriteBatch(GraphicsDevice);
+            primitives = new PrimitivesBatch(batch, GraphicsDevice);
+            dialog_box = new Dialog_Box(primitives);
+
+            var npc_system = (Npc_System)world.Add_System<Npc_System>(new Npc_System(this, graphics, invatory_manager, dialog_box));
 
             Assets.It.Add("entities",       Content.Load<Texture2D>("entities"));
             Assets.It.Add("items",          Content.Load<Texture2D>("items"));
@@ -235,6 +240,7 @@ namespace Desire_And_Doom
             world.Update(time);
             screen_manager.Update(time);
             invatory_manager.Update(gameTime);
+            dialog_box.Update(gameTime);
 
             Assets.It.Update(gameTime);
             //UserInterface.Update(gameTime);
@@ -294,6 +300,7 @@ namespace Desire_And_Doom
                 gui.Draw(batch);
                 invatory_manager.UIDraw(batch);
                 console.Draw(batch);
+                dialog_box.Draw(batch);
 
                 if ( DEBUG )
                 {

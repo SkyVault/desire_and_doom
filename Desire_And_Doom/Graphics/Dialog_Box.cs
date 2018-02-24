@@ -16,10 +16,15 @@ namespace Desire_And_Doom
     class Dialog_Box
     {
         public Dialog CurrentDialog {get; private set;} = null;
-        public bool IsOpen { get => CurrentDialog == null; }
+        public bool IsOpen { get => CurrentDialog != null; }
+
+        PrimitivesBatch primitives;
+        public Dialog_Box(PrimitivesBatch _primitives) {
+            primitives = _primitives;
+        }
 
         public bool TryOpen(Dialog dialog) {
-            if (IsOpen == false) {
+            if (!IsOpen) {
                 CurrentDialog = dialog;
                 return true;
             }
@@ -31,10 +36,14 @@ namespace Desire_And_Doom
 
         }
 
-        public void Render(SpriteBatch batch) {
+        public void Draw(SpriteBatch batch) {
             if (!IsOpen) return;
 
-            // Draw the dialog box
+            primitives.DrawFilledRect(
+                new Vector2(0, 0),
+                new Vector2(DesireAndDoom.ScreenWidth, DesireAndDoom.ScreenHeight / 3),
+                Color.Blue
+            );
         }
     }
 }

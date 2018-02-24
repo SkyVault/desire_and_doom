@@ -127,6 +127,7 @@
     <Compile Include="Graphics\Particle_Systems\Fire_Fly_Particle.cs" />
     <Compile Include="Graphics\Particle_Systems\Fire_Particle.cs" />
     <Compile Include="Graphics\Particle_World.cs" />
+    <Compile Include="Graphics\PrimitivesBatch.cs" />
     <Compile Include="Graphics\Renderer2D.cs" />
     <Compile Include="Graphics\Renderer3D.cs" />
     <Compile Include="Graphics\Sky_Renderer.cs" />
