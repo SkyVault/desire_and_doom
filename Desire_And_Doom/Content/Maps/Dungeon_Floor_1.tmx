@@ -458,10 +458,10 @@
   <object id="3" x="456" y="696" width="1.75" height="82.25"/>
   <object id="4" x="584" y="695.5" width="1.5" height="80.75"/>
   <object id="5" name="Player" type="Player" x="520" y="456" width="16" height="16"/>
-  <object id="6" name="Door To The Woods" type="Door" x="456" y="376" width="128" height="16">
+  <object id="6" name="Door To The Woods" type="Door" x="456" y="376" width="128" height="4.125">
    <properties>
     <property name="Door" value="Demo 234 252"/>
-    <property name="is_sensor" type="bool" value="true"/>
+    <property name="is_sensor" type="bool" value="false"/>
    </properties>
   </object>
  </objectgroup>

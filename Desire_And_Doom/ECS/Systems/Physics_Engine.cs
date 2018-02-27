@@ -209,7 +209,7 @@ namespace Desire_And_Doom.ECS
                                 entity.Destroy();
                         }
 
-                    }else if (o_physics.Physics_Type == Physics.PType.WORLD_INTERACTION)
+                    } else if (o_physics.Physics_Type == Physics.PType.WORLD_INTERACTION)
                     {
                         if (o_body.Contains(body))
                         {
