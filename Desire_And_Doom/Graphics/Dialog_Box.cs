@@ -20,6 +20,8 @@ namespace Desire_And_Doom
         public int CurrentDialogTextPointer {get; private set;} = 1;
         public bool IsOpen { get => CurrentDialog != null; }
 
+        private float timer = 0;
+
         public int GetNextDialogPointer() {
             if (IsOpen == false) return 0;
             return
@@ -32,7 +34,7 @@ namespace Desire_And_Doom
         }
 
         public bool TryOpen(Dialog dialog) {
-            if (!IsOpen) {
+            if (!IsOpen && this.timer <= 0) {
                 CurrentDialogTextPointer = 1;
                 CurrentDialog = dialog;
                 return true;
@@ -41,6 +43,7 @@ namespace Desire_And_Doom
         }
 
         public void Update(GameTime time) {
+            timer -= (float)time.ElapsedGameTime.TotalSeconds;
             if (!IsOpen) return;
 
             if (Input.It.Is_Key_Pressed(Keys.Enter)) {
@@ -48,6 +51,7 @@ namespace Desire_And_Doom
                     CurrentDialogTextPointer = GetNextDialogPointer();
                     if (CurrentDialogTextPointer == 0)
                     {
+                        timer = Constants.DIALOG_COOLDOWN;
                         CurrentDialog = null;
                     }
                 }

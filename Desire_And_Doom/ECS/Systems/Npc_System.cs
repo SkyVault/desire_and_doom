@@ -9,6 +9,7 @@ using MonoGame.Extended;
 using Desire_And_Doom.Gui;
 using static Desire_And_Doom.ECS.Component;
 using Microsoft.Xna.Framework.Input;
+using Desire_And_Doom.Utils;
 
 namespace Desire_And_Doom.ECS
 {
@@ -19,7 +20,9 @@ namespace Desire_And_Doom.ECS
         Invatory_Manager invatory_manager;
         Dialog_Box dialog_box;
 
+        //public static readonly
         float timer = 0;
+        private bool talking = false;
 
         public Npc_System(Game game, GraphicsDeviceManager graphics, Invatory_Manager invatory_manager, Dialog_Box dialog_box) : base(Component.Types.Npc, Component.Types.Body)
         {
@@ -41,7 +44,18 @@ namespace Desire_And_Doom.ECS
             var npc = (Npc) entity.Get(Types.Npc);
             var player = World_Ref.Find_With_Tag("Player");
 
-            dialog_box.TryOpen(npc.Dialog);
+            if (player == null) return;
+
+            var player_body = (Body)player.Get(Types.Body);
+
+            if (Vector2.Distance(player_body.Center, body.Center) < Constants.NPC_TALKING_DISTANCE)
+            {
+                if (Input.It.Is_Key_Pressed(Keys.Z))
+                {
+                    dialog_box.TryOpen(npc.Dialog);
+                }
+            }
+
         }
 
         public override void Destroy(Entity entity)
