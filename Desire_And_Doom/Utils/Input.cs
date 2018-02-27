@@ -114,6 +114,12 @@ namespace Desire_And_Doom
             }
         }
 
+        public void Reset_Key(Keys key)
+        {
+            states[key].last    = true;
+            states[key].current = false;
+        }
+
         public bool Is_Key_Down(Keys key) {
             return (Keyboard.GetState().IsKeyDown(key));
         }

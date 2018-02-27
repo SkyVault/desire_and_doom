@@ -46,7 +46,7 @@ namespace Desire_And_Doom
             timer -= (float)time.ElapsedGameTime.TotalSeconds;
             if (!IsOpen) return;
 
-            if (Input.It.Is_Key_Pressed(Keys.Enter)) {
+            if (Input.It.Is_Key_Pressed(Keys.Enter) || Input.It.Is_Key_Pressed(Keys.Z)) {
                 if (CurrentDialog.Dialog_Texts[CurrentDialogTextPointer].options.Count() == 0) {
                     CurrentDialogTextPointer = GetNextDialogPointer();
                     if (CurrentDialogTextPointer == 0)

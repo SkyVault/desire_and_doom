@@ -48,10 +48,11 @@ namespace Desire_And_Doom.ECS
 
             var player_body = (Body)player.Get(Types.Body);
 
-            if (Vector2.Distance(player_body.Center, body.Center) < Constants.NPC_TALKING_DISTANCE)
+            if (Vector2.Distance(player_body.Center, body.Center) < Constants.NPC_TALKING_DISTANCE && dialog_box.IsOpen == false)
             {
                 if (Input.It.Is_Key_Pressed(Keys.Z))
                 {
+                    Input.It.Reset_Key(Keys.Z);
                     dialog_box.TryOpen(npc.Dialog);
                 }
             }
