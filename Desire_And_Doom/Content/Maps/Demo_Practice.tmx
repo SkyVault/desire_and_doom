@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="8" tileheight="8" nextobjectid="102">
+<map version="1.0" tiledversion="2017.09.13" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="8" tileheight="8" infinite="0" nextobjectid="102">
  <properties>
   <property name="Ambiant" value="200 200 200"/>
   <property name="Sky" value="true"/>
  </properties>
  <tileset firstgid="1" name="Tiles_1" tilewidth="8" tileheight="8" tilecount="4096" columns="64">
-  <image source="../../../../../../Content/Tiles_1.png" width="512" height="512"/>
+  <image source="../Tiles_1.png" width="512" height="512"/>
  </tileset>
  <layer name="Ground" width="64" height="64">
   <properties>

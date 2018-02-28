@@ -3,15 +3,12 @@
 -- Move entities out from each other if they collide, see birds?
 
 IMPROVEMENTS
+-- Make a key repeat action in the input manager, this is going to be a fucking pain in the ass.
 -- Make it so that the player slides against the tangent of the line
 -- Improve how the game scales with the window size
--- Create a faster debug drawing algorithm using buffers, Debug_Drawing.cs
 -- Dont hardcode the combo frame
 -- Improve the particle system to suck less
 -- Create a button mapping system
--- All of the menus in the game use different code to controll the interface
--- Remove that shitty table based ai system, implemented in AI_System
--- Fix the dialog system
 -- Improve the Assets system, make it auto load everything at startup
 
 ADDITIONS
@@ -28,6 +25,10 @@ ADDITIONS
 -- Equipment
 	
 DONE
+-- Fix the dialog system
+-- Remove that shitty table based ai system, implemented in AI_System
+-- All of the menus in the game use different code to controll the interface
+-- Create a faster debug drawing algorithm using buffers, Debug_Drawing.cs
 -- Create a pausing system -- DONE
 -- Check out the whole Game1.Map_Height_Pixels thing, seems super fishy -- DONE
 -- flags hit box is off center -- DONE
