@@ -49,6 +49,7 @@ namespace Desire_And_Doom.Screens
         {
             camera.Zoom = 3;
             camera.Position = Vector2.Zero;
+            called = false;
 
             var cont = camera.Get_Controller();
 
@@ -172,7 +173,8 @@ namespace Desire_And_Doom.Screens
         public override void Destroy()
         {
             camera.Origin = pre_origin;
-            called = false; 
+            called = false;
+            actions = null;
             base.Destroy();
         }
     }

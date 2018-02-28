@@ -34,6 +34,10 @@ namespace Desire_And_Doom.Screens
             {
                 Load_Map(args[0]);
             }
+            else
+            {
+                Load_Map("Dungeon_Room_2");
+            }
             //Load_Map("Ship");
             //Load_Map("Demo");
             //Load_Map("Dungeon_Floor_1");
