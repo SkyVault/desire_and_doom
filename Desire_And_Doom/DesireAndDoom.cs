@@ -213,12 +213,13 @@ namespace Desire_And_Doom
             screen_manager.Register(new Level_1_Screen(screen_manager, world, camera, penumbra, particle_world, physics_engine, lua, GraphicsDevice));
             screen_manager.Register(new Boss_Room_1(world, camera, penumbra, particle_world, physics_engine, Content, lua, GraphicsDevice));
             screen_manager.Register(new Menu_Screen(screen_manager, penumbra, camera));
+            screen_manager.Register(new Level_Select_Screen(screen_manager, penumbra, camera));
             screen_manager.Register(new Intro_Logos_Screen(screen_manager, camera, penumbra, Content));
 
             if (skip_intro_animation == false)
                 screen_manager.Goto_Screen("Logo");
             else
-                screen_manager.Goto_Screen("Level 1");
+                screen_manager.Goto_Screen("Menu");
         }
 
         protected override void UnloadContent()

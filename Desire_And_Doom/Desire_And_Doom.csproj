@@ -142,6 +142,7 @@
     <Compile Include="Screens\Boss_Room_1.cs" />
     <Compile Include="Screens\Game_Screen.cs" />
     <Compile Include="Screens\Intro_Logos_Screen.cs" />
+    <Compile Include="Screens\Level_Select_Screen.cs" />
     <Compile Include="Screens\Settings_Screen.cs" />
     <Compile Include="Utils\Constants.cs" />
     <Compile Include="Utils\Kore_Parser.cs" />

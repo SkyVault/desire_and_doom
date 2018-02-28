@@ -30,8 +30,8 @@ namespace Desire_And_Doom.Screens
         {
             world.Destroy_All();
             lighting.AmbientColor = new Color(0.6f, 0.6f, 0.6f, 1.0f);
-            //Load_Map("Dungeon_Room_2");
-            Load_Map("Ship");
+            Load_Map("Dungeon_Room_2");
+            //Load_Map("Ship");
             //Load_Map("Demo");
             //Load_Map("Dungeon_Floor_1");
 
@@ -56,7 +56,7 @@ namespace Desire_And_Doom.Screens
         {
             sky.Update(time);
             base.Update(time);
-            
+
             pause_menu.Update(time);
         }
 

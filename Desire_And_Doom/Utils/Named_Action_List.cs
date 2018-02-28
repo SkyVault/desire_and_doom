@@ -18,6 +18,11 @@ namespace Desire_And_Doom.Utils
             get => actions.Keys.ToArray();
         }
 
+        public void Add(string id, Action action)
+        {
+            this.actions.Add(id, action);
+        }
+
         public void Call(int index)
         {
             if (index >= 0 && index < actions.Count)
