@@ -81,8 +81,9 @@ return {
 			["Body"] = {12, 6},
 			["Animation"] = {"entities", {"mech-idle", 0.1}, {"mech-attack", 0.1}},
 			["Physics"] = {},
-			["Ai"] = {"Table","Mech_Ai"},
-			["Light"] = {}
+			["Ai"] = {"Function", AI.Mech_AI},
+			["Light"] = {},
+			["Health"] = {5}
 		}
 	},
 
