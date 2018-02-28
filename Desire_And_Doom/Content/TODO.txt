@@ -5,7 +5,6 @@
 IMPROVEMENTS
 -- Make a key repeat action in the input manager, this is going to be a fucking pain in the ass.
 -- Make it so that the player slides against the tangent of the line
--- Improve how the game scales with the window size
 -- Dont hardcode the combo frame
 -- Improve the particle system to suck less
 -- Create a button mapping system
@@ -25,6 +24,7 @@ ADDITIONS
 -- Equipment
 	
 DONE
+-- Improve how the game scales with the window size
 -- Fix the dialog system
 -- Remove that shitty table based ai system, implemented in AI_System
 -- All of the menus in the game use different code to controll the interface

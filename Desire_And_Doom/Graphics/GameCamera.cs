@@ -38,6 +38,7 @@ namespace Desire_And_Doom
 
         public void Update(GameTime time)
         {
+
             var rnd = new Random();
             if (shake_timer > 0 && (int)time.TotalGameTime.TotalMilliseconds % 2 == 0)
             {
@@ -51,12 +52,12 @@ namespace Desire_And_Doom
 
         public void WindowResized(GraphicsDevice device)
         {
-            this.camera = new Camera(device);
+            var ad = camera.GetViewportAdapter();
+            camera.Origin = new Vector2(ad.VirtualWidth/2f, ad.VirtualHeight/2f);
         }
 
         public void Track(Body body, float smoothing)
         {
-            
             if (!can_move) {
                 can_move = true;
                 return;
