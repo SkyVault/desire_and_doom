@@ -33,7 +33,7 @@ namespace Desire_And_Doom.Screens
                 Goto_Screen(_screen.ID);
         }
 
-        public void Goto_Screen(string _id, bool fade_in_out = false)
+        public void Goto_Screen(string _id, bool fade_in_out = false, params string []args)
         {
             fade = fade_in_out;
 
@@ -60,7 +60,7 @@ namespace Desire_And_Doom.Screens
                         // change screen while in black
                         active?.Destroy();
                         active = screens[_id];
-                        active?.Load();
+                        active?.Load(args);
 
                         fade_timer = 0f;
                         fade_task.Next();
@@ -82,7 +82,7 @@ namespace Desire_And_Doom.Screens
             {
                 active?.Destroy();
                 active = screens[_id];
-                active?.Load();
+                active?.Load(args);
             }
         }
 

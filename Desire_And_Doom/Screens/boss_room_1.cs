@@ -32,7 +32,7 @@ namespace Desire_And_Doom.Screens
             this.content    = _content;
         }
 
-        public override void Load()
+        public override void Load(params string[] args)
         {
             base.Load();
 

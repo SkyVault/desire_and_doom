@@ -46,10 +46,10 @@ namespace Desire_And_Doom.Screens
                 } },
                 {"Level Select", () =>
                 {
-                    _manager.Goto_Screen("Level Select", true);
+                    _manager.Goto_Screen("Level Select", false);
                 } },
                 {"Settings", ()=>{
-
+                    
                 } },
                 {"Exit", ()=>{
                     DesireAndDoom.SHOULD_QUIT = true;
@@ -57,7 +57,7 @@ namespace Desire_And_Doom.Screens
             });
         }
 
-        public override void Load()
+        public override void Load(params string []args)
         {
             camera.Zoom = 3;
             camera.Position = Vector2.Zero;

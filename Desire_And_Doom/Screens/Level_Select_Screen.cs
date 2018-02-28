@@ -45,7 +45,7 @@ namespace Desire_And_Doom.Screens
             actions = new Named_Action_List(new Dictionary<string, Action> {});
         }
 
-        public override void Load()
+        public override void Load(params string []args)
         {
             camera.Zoom = 3;
             camera.Position = Vector2.Zero;
@@ -53,14 +53,16 @@ namespace Desire_And_Doom.Screens
             var cont = camera.Get_Controller();
 
             var list = new Named_Action_List(new Dictionary<string, Action>());
-            list.Add("Menu", () => screen_manager.Goto_Screen("Menu"));
+            list.Add("Menu", () => screen_manager.Goto_Screen("Menu", false));
 
             var current = Directory.GetCurrentDirectory();
             var files = Directory.GetFiles(current + "/Content/Maps/");
             foreach (var file in files)
             {
                 var toks = file.Split('\\', '/');
-                list.Add(toks.Last(), () => { });
+                list.Add(toks.Last(), () => {
+                    screen_manager.Goto_Screen("Level 1", false, toks.Last().Split('.').First());
+                    });
             }
 
             actions = list;

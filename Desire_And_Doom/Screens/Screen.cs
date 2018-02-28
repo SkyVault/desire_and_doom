@@ -16,7 +16,7 @@ namespace Desire_And_Doom.Screens
             ID = _id;
         }
 
-        public virtual void Load() { }
+        public virtual void Load(params string[] args) { }
         public virtual void Update(GameTime time) { }
         public virtual void PreDraw(SpriteBatch batch) { }
         public virtual void Draw(SpriteBatch batch) { }
