@@ -18,7 +18,7 @@ namespace Desire_And_Doom.Gui
         List<Invatory> invatories;
         public int Square_Size { get; set; } = 24;
 
-        Point selector = Point.Zero;
+        Point Cursor = Point.Zero;
 
         public bool Showing { get; set; } = false;
         private bool ShowMenu { get; set; } = false;
@@ -44,7 +44,7 @@ namespace Desire_And_Doom.Gui
             MenuActions = new Dictionary<string, Action>
             {
                 {"Drop", ()=>{
-                    invatories.First().Drop_Item(selector.X, selector.Y);
+                    invatories.First().Drop_Item(Cursor.X, Cursor.Y);
                 }},
                 {"Move", ()=>{ Console.WriteLine("Moving!"); }},
                 {"Info", ()=>{ Console.WriteLine("Info!"); }},
@@ -57,9 +57,20 @@ namespace Desire_And_Doom.Gui
             if (Player != null && Player.Remove) Player = null;
             if (Player == null) return;
 
-            if (Input.It.Is_Key_Pressed(Keys.Q))
+            if (Input.It.Is_Key_Pressed(Keys.Q)) { Showing = !Showing; } 
+
+            if (Input.It.Is_Key_Pressed(Keys.Left)) { Cursor.X--; } 
+            if (Input.It.Is_Key_Pressed(Keys.Right)) { Cursor.X++; } 
+            if (Input.It.Is_Key_Pressed(Keys.Up)) { Cursor.Y--; } 
+            if (Input.It.Is_Key_Pressed(Keys.Down)) { Cursor.Y++; }
+
+            var invatory = (Invatory)Player.Get(Types.Invatory);
+            if (invatory != null)
             {
-                Showing = !Showing;
+                if (Cursor.X < 0) { Cursor.X = invatory.W - 1; }
+                if (Cursor.Y < 0) { Cursor.X = invatory.H - 1; }
+                if (Cursor.X > invatory.W - 1) { Cursor.X = 0; }
+                if (Cursor.Y > invatory.H - 1) { Cursor.Y = 0; }
             }
         }
         
@@ -102,7 +113,7 @@ namespace Desire_And_Doom.Gui
                 for (int j = 0; j < invatory.W; j++)
                 {
                     // Draw the rectangle
-                    if (i == 0 && j == 0)
+                    if (i == Cursor.Y && j == Cursor.X)
                     {
                         primitives.DrawLineRect(
                             starting_pos + new Vector2((CELL_SIZE + CELL_MARGIN) * j, (CELL_SIZE + CELL_MARGIN) * i),
