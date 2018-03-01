@@ -102,6 +102,17 @@ namespace Desire_And_Doom.Gui
                 for (int j = 0; j < invatory.W; j++)
                 {
                     // Draw the rectangle
+                    if (i == 0 && j == 0)
+                    {
+                        primitives.DrawLineRect(
+                            starting_pos + new Vector2((CELL_SIZE + CELL_MARGIN) * j, (CELL_SIZE + CELL_MARGIN) * i),
+                            new Vector2(CELL_SIZE),
+                            Color.Orange,
+                            8,
+                            0.92f
+                            );
+                    }
+
                     primitives.DrawFilledRect(
                         starting_pos + new Vector2((CELL_SIZE + CELL_MARGIN) * j, (CELL_SIZE + CELL_MARGIN) * i),
                         new Vector2(CELL_SIZE),

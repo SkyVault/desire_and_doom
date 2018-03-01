@@ -34,5 +34,42 @@ namespace Desire_And_Doom.Graphics
                 layer
                 );
         }
+
+        public void DrawLineRect(Vector2 position, Vector2 size, Color color, int line_width = 2, float layer = 1.0f)
+        {
+            // NOTE: Rotation takes some trig, so we'll deal with that later .... 
+
+            //Left Line
+            DrawFilledRect(
+                position - new Vector2(line_width) / 2, 
+                new Vector2(line_width, size.Y), 
+                color, 
+                0.0f, 
+                layer);
+
+            //Top line
+            DrawFilledRect(
+                position - new Vector2(line_width) / 2, 
+                new Vector2(size.X, line_width), 
+                color, 
+                0.0f, 
+                layer);
+
+            //Left Line
+            DrawFilledRect(
+                position + new Vector2(size.X, 0) - new Vector2(line_width) / 2, 
+                new Vector2(line_width, size.Y + line_width), 
+                color, 
+                0.0f, 
+                layer);
+
+            //Top line
+            DrawFilledRect(
+                position + new Vector2(0, size.Y) - new Vector2(line_width) / 2, 
+                new Vector2(size.X + line_width, line_width), 
+                color, 
+                0.0f, 
+                layer);
+        }
     }
 }
