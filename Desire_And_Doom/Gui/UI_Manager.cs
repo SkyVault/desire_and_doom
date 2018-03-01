@@ -11,7 +11,7 @@ using static Desire_And_Doom.ECS.Component;
 
 namespace Desire_And_Doom.Gui
 {
-    class Invatory_Manager
+    class UI_Manager
     {
         List<Invatory> invatories;
         public int Square_Size { get; set; } = 24;
@@ -22,11 +22,16 @@ namespace Desire_And_Doom.Gui
         private bool ShowMenu { get; set; } = false;
         private int menu_selector = 0;
 
-        public Dictionary<string, Action> MenuActions;
+        public Vector2 Offset { get; private set; } = Vector2.Zero;
 
-        public Invatory_Manager()
+        public Dictionary<string, Action> MenuActions;
+        public Entity Player { get; set; } = null;
+        private World entity_world;
+
+        public UI_Manager(World _entity_world)
         {
             invatories = new List<Invatory>();
+            entity_world = _entity_world;
 
             MenuActions = new Dictionary<string, Action>
             {
@@ -38,6 +43,7 @@ namespace Desire_And_Doom.Gui
             };
         }
 
+        
 
         public void Add(Invatory inv)
         {
@@ -51,6 +57,10 @@ namespace Desire_And_Doom.Gui
 
         public void Update(GameTime time)
         {
+            var players = entity_world.Get_All_With_Component(Component.Types.Player);
+            if (players.Count > 0) Player = players.First();
+            if (Player.Remove) Player = null;
+
             var total_width = 0;
             invatories.ForEach(i => total_width += (i.W * Square_Size));
 
@@ -132,8 +142,8 @@ namespace Desire_And_Doom.Gui
             {
                 var gui     = (Texture2D) Assets.It.Get<Texture2D>("gui");
                 var font    = (SpriteFont)Assets.It.Get<SpriteFont>("font");
-                var offset  = new Vector2(256, 64);
-                var size    = 48;
+                var offset  = new Vector2(256, 64) + Offset;
+                var size    = 64;
 
                 for ( int y = 0; y < invatory.H; y++ )
                     for ( int x = 0; x < invatory.W; x++ )

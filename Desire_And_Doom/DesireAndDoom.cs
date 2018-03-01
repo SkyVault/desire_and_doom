@@ -58,7 +58,7 @@ namespace Desire_And_Doom
         Lua                 lua;
         RenderTarget2D      scene;
         Physics_Engine      physics_engine;
-        Invatory_Manager    invatory_manager;
+        UI_Manager    invatory_manager;
         Renderer3D          renderer_3d;
         PrimitivesBatch     primitives;
         Dialog_Box          dialog_box;
@@ -137,7 +137,7 @@ namespace Desire_And_Doom
 
             world           = new World(penumbra);
             particle_world  = new Particle_World();
-            invatory_manager= new Invatory_Manager();
+            invatory_manager= new UI_Manager();
 
             //UserInterface.Initialize(Content, BuiltinThemes.hd);
 

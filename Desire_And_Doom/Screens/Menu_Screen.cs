@@ -55,7 +55,7 @@ namespace Desire_And_Doom.Screens
 
             actions = new Named_Action_List(new Dictionary<string, Action> {
                 {"Start", ()=>{
-                    manager.Goto_Screen("Level 1", true);
+                    manager.Goto_Screen("Level 1", false);
                 } },
                 {"Level Select", () =>
                 {

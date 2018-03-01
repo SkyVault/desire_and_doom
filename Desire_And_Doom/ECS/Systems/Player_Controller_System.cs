@@ -23,13 +23,13 @@ namespace Desire_And_Doom.ECS
         GameCamera camera;
         Particle_World particle_world;
         Invatory_Container invatory_container;
-        Invatory_Manager invatory_manager;
+        UI_Manager invatory_manager;
         Screen_Manager screen_manager;
 
         bool show_overlay_gui = false;
         const float dash_speed = 500;
 
-        public Player_Controller_System(GameCamera _camera, Particle_World particle_world, Invatory_Manager invatory_manager, Screen_Manager screen) : base(Types.Body, Types.Player, Types.Physics)
+        public Player_Controller_System(GameCamera _camera, Particle_World particle_world, UI_Manager invatory_manager, Screen_Manager screen) : base(Types.Body, Types.Player, Types.Physics)
         {
             this.screen_manager = screen;
             this.invatory_manager = invatory_manager;

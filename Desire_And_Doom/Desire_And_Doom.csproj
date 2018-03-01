@@ -133,7 +133,7 @@
     <Compile Include="Graphics\Sky_Renderer.cs" />
     <Compile Include="Graphics\ViewportAdapter.cs" />
     <Compile Include="Gui\Invatory_Container.cs" />
-    <Compile Include="Gui\Invatory_Manager.cs" />
+    <Compile Include="Gui\UI_Manager.cs" />
     <Compile Include="Gui\Pause_Menu.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IRectangle.cs" />

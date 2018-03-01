@@ -17,14 +17,14 @@ namespace Desire_And_Doom.ECS
     {
         GraphicsDeviceManager graphics;
         Game game;
-        Invatory_Manager invatory_manager;
+        UI_Manager invatory_manager;
         Dialog_Box dialog_box;
 
         //public static readonly
         float timer = 0;
         private bool talking = false;
 
-        public Npc_System(Game game, GraphicsDeviceManager graphics, Invatory_Manager invatory_manager, Dialog_Box dialog_box) : base(Component.Types.Npc, Component.Types.Body)
+        public Npc_System(Game game, GraphicsDeviceManager graphics, UI_Manager invatory_manager, Dialog_Box dialog_box) : base(Component.Types.Npc, Component.Types.Body)
         {
             this.graphics = graphics;
             this.game = game;

@@ -22,7 +22,11 @@ return {
 
 	["orange_guy"] = {
 		[1]	= {"Can you find me some oranges?", {
-			{"yes", 0},
+
+			{"yes", 0, action = function(self, other, engine)
+			
+			end},
+
 			{"no", 2, action = function(self, other, engine)
 				self:Destroy()
 

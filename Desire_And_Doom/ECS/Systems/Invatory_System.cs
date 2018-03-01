@@ -13,9 +13,9 @@ namespace Desire_And_Doom.ECS
 {
     class Invatory_System : System
     {
-        Invatory_Manager invatory_manager;
+        UI_Manager invatory_manager;
 
-        public Invatory_System(Invatory_Manager _invatory_manager) : base(Types.Invatory, Types.Body)
+        public Invatory_System(UI_Manager _invatory_manager) : base(Types.Invatory, Types.Body)
         {
             invatory_manager = _invatory_manager;
         }
