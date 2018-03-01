@@ -10,6 +10,7 @@ namespace Desire_And_Doom.Graphics
     class Dialog_Option {
         public string Value { get; set; }
         public int NextDialogText { get; set; } = 0;
+        public LuaFunction action = null;
     }
 
     class Dialog_Text {
@@ -45,10 +46,19 @@ namespace Desire_And_Doom.Graphics
                         var value = op[1] as string;
                         var next = (int)(op[2] as double?);
 
-                        dialog_text.options.Add(new Dialog_Option{
-                                Value = value,
-                                NextDialogText = next
-                                });
+                        var dialog_option = new Dialog_Option
+                        {
+                            Value = value,
+                            NextDialogText = next
+                        };
+
+                        if (op["action"] is LuaFunction)
+                        {
+                            dialog_option.action = op["action"] as LuaFunction;
+                        }
+
+                        dialog_text.options.Add(dialog_option);
+
                     }
 
                 } else if (dt[2] is double) {

@@ -3,6 +3,7 @@ using Desire_And_Doom.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using NLua;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace Desire_And_Doom
         public int Selector { get; private set; } = 0;
 
         private float timer = 0;
+        private Lua lua;
 
         public int GetNextDialogPointer() {
             if (IsOpen == false) return 0;
@@ -30,8 +32,9 @@ namespace Desire_And_Doom
         }
 
         PrimitivesBatch primitives;
-        public Dialog_Box(PrimitivesBatch _primitives) {
-            primitives = _primitives;
+        public Dialog_Box(PrimitivesBatch _primitives, Lua _lua) {
+            primitives  = _primitives;
+            lua         = _lua;
         }
 
         public bool TryOpen(Dialog dialog) {
@@ -45,11 +48,9 @@ namespace Desire_And_Doom
 
         public void Update(GameTime time) {
             timer -= (float)time.ElapsedGameTime.TotalSeconds;
-            if (!IsOpen)
-            {
-                Selector = 0;
-                return;
-            }
+            if (!IsOpen) { Selector = 0; return; }
+
+            DesireAndDoom.Request_Pause();
 
             if (Input.It.Is_Key_Pressed(Keys.Enter) || Input.It.Is_Key_Pressed(Keys.Z)) {
                 if (CurrentDialog.Dialog_Texts[CurrentDialogTextPointer].options.Count() == 0) {
@@ -58,14 +59,10 @@ namespace Desire_And_Doom
                     {
                         timer = Constants.DIALOG_COOLDOWN;
                         CurrentDialog = null;
+                        DesireAndDoom.Request_Resume();
                         return;
                     }
-                } else
-                {
-
-
-
-                }
+                } 
             }
 
             var dialog_text = CurrentDialog.Dialog_Texts[CurrentDialogTextPointer];
@@ -82,7 +79,12 @@ namespace Desire_And_Doom
 
                 if (Input.It.Is_Key_Pressed(Keys.Enter) || Input.It.Is_Key_Pressed(Keys.Z))
                 {
-                    CurrentDialogTextPointer = dialog_text.options[Selector].NextDialogText;
+                    var the_option = dialog_text.options[Selector];
+                    CurrentDialogTextPointer = the_option.NextDialogText;
+                    if (the_option.action != null)
+                    {
+                        the_option.action.Call();
+                    }
                 }
 
                 Selector = Selector < 0 ? dialog_text.options.Count - 1 : (Selector > dialog_text.options.Count - 1 ? 0 : Selector);
@@ -94,6 +96,7 @@ namespace Desire_And_Doom
             if (CurrentDialogTextPointer == 0)
             {
                 CurrentDialog = null;
+                DesireAndDoom.Request_Resume();
                 return;
             }
 

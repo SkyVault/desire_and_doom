@@ -183,7 +183,7 @@ namespace Desire_And_Doom
         {
             batch = new SpriteBatch(GraphicsDevice);
             primitives = new PrimitivesBatch(batch, GraphicsDevice);
-            dialog_box = new Dialog_Box(primitives);
+            dialog_box = new Dialog_Box(primitives, lua);
 
             var npc_system = (Npc_System)world.Add_System<Npc_System>(new Npc_System(this, graphics, invatory_manager, dialog_box));
 
