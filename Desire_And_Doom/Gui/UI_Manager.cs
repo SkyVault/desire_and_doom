@@ -1,4 +1,6 @@
 ﻿using Desire_And_Doom.ECS;
+using Desire_And_Doom.ECS.Components;
+using Desire_And_Doom.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -20,18 +22,24 @@ namespace Desire_And_Doom.Gui
 
         public bool Showing { get; set; } = false;
         private bool ShowMenu { get; set; } = false;
-        private int menu_selector = 0;
 
         public Vector2 Offset { get; private set; } = Vector2.Zero;
 
         public Dictionary<string, Action> MenuActions;
         public Entity Player { get; set; } = null;
         private World entity_world;
+        private PrimitivesBatch primitives;
 
-        public UI_Manager(World _entity_world)
+        public static readonly float MARGIN = 32;
+        public static readonly float CELL_SIZE = 64;
+        public static readonly float CELL_MARGIN = 8;
+        public static readonly Color CELL_COLOR = new Color(0, 0, 0, 0.75f);
+
+        public UI_Manager(World _entity_world, PrimitivesBatch _primitives)
         {
             invatories = new List<Invatory>();
             entity_world = _entity_world;
+            primitives = _primitives;
 
             MenuActions = new Dictionary<string, Action>
             {
@@ -42,218 +50,84 @@ namespace Desire_And_Doom.Gui
                 {"Info", ()=>{ Console.WriteLine("Info!"); }},
             };
         }
-
-        
-
-        public void Add(Invatory inv)
-        {
-            invatories.Add(inv);
-        }
-
-        public void Remove(Invatory inv)
-        {
-            invatories.Remove(inv);
-        }
-
         public void Update(GameTime time)
         {
             var players = entity_world.Get_All_With_Component(Component.Types.Player);
             if (players.Count > 0) Player = players.First();
-            if (Player.Remove) Player = null;
+            if (Player != null && Player.Remove) Player = null;
+            if (Player == null) return;
 
-            var total_width = 0;
-            invatories.ForEach(i => total_width += (i.W * Square_Size));
-
-            if ( Showing )
+            if (Input.It.Is_Key_Pressed(Keys.Q))
             {
-                var left = Input.It.Is_Key_Pressed(Keys.Left) || Input.It.Is_Gamepad_Button_Pressed(Buttons.LeftThumbstickLeft);
-                var right = Input.It.Is_Key_Pressed(Keys.Right) || Input.It.Is_Gamepad_Button_Pressed(Buttons.LeftThumbstickRight);
-                var down = Input.It.Is_Key_Pressed(Keys.Down) || Input.It.Is_Gamepad_Button_Pressed(Buttons.LeftThumbstickDown);
-                var up = Input.It.Is_Key_Pressed(Keys.Up) || Input.It.Is_Gamepad_Button_Pressed(Buttons.LeftThumbstickUp);
-
-                if (left)
-                {
-                    selector += new Point(-1, 0);
-                    ShowMenu = false;
-                }
-
-                if (right)
-                {
-                    selector += new Point(1, 0);
-                    ShowMenu = false;
-                }
-
-                if ( !ShowMenu && up) selector += new Point(0, -1);
-                if ( !ShowMenu && down) selector += new Point(0, 1);
-
-                if (selector.X < 0)
-                {
-                    selector.X = invatories.First().W - 1;
-                    selector.Y--;
-                }
-                if (selector.X > invatories.First().W - 1)
-                {
-                    selector.Y++;
-                    selector.X = 0;
-                }
-
-                if (selector.Y < 0) selector.Y = invatories.First().H - 1;
-                if (selector.Y > invatories.First().H - 1) selector.Y = 0;
-
-                if (Input.It.Is_Key_Pressed(Keys.Z) || Input.It.Is_Gamepad_Button_Pressed(Buttons.A))
-                {
-                    if (ShowMenu)
-                    {
-                        MenuActions[MenuActions.ElementAt(menu_selector).Key]?.Invoke();
-                        menu_selector = 0;
-                    }
-
-                    ShowMenu = !ShowMenu;
-                }
-
-                if (ShowMenu)
-                {
-                    if (up)
-                    {
-                        menu_selector--;
-                    }
-
-                    if (down)
-                    {
-                        menu_selector++;
-                    }
-
-                    if (menu_selector < 0) menu_selector = MenuActions.Count - 1;
-                    if (menu_selector > MenuActions.Count - 1) menu_selector = 0;
-                }
+                Showing = !Showing;
             }
-            else
+        }
+        
+        public void DrawPlayerHealth(SpriteBatch batch)
+        {
+            var gui     = Assets.It.Get<Texture2D>("gui");
+            // Draw the players health
+            var health  = (Health)Player.Get(Types.Health);
+
+            var margin = CELL_MARGIN;
+            var health_pos = new Vector2(MARGIN) + Offset;
+            var scale = 4;
+
+            for (int i = 0; i < health.Amount; i++)
             {
-                ShowMenu = false;
+                if (i > 0) health_pos += (new Vector2(scale * 16 + margin, 0));
+                batch.Draw(
+                    gui,
+                    health_pos,
+                    new Rectangle(0, 24, 16, 16),
+                    Color.White,
+                    0f,
+                    Vector2.Zero,
+                    scale,
+                    SpriteEffects.None,
+                    1f
+                    );
             }
+        }
+        public void DrawPlayerInvatory(SpriteBatch batch)
+        {
+            var invatory = (Invatory)Player.Get(Types.Invatory);
+            var center = new Vector2(DesireAndDoom.ScreenWidth, DesireAndDoom.ScreenHeight) / 2.0f;
+            var starting_pos = new Vector2(
+                center.X - (invatory.W * (CELL_SIZE + CELL_MARGIN)) / 2.0f,
+                center.Y - (invatory.H * (CELL_SIZE + CELL_MARGIN)) / 2.0f
+                );
+            
+            for (int i = 0; i < invatory.H; i++)
+                for (int j = 0; j < invatory.W; j++)
+                {
+                    // Draw the rectangle
+                    primitives.DrawFilledRect(
+                        starting_pos + new Vector2((CELL_SIZE + CELL_MARGIN) * j, (CELL_SIZE + CELL_MARGIN) * i),
+                        new Vector2(CELL_SIZE),
+                        CELL_COLOR,
+                        0,
+                        0.91f
+                        );
+
+                    var cell = invatory.Get(i, j);
+                    if (cell != null)
+                    {
+                        // Draw the item over the rectangle
+                    }
+                }
         }
 
         public void UIDraw(SpriteBatch batch)
         {
-            if ( !Showing ) return;
+            if (Player != null && Player.Remove) Player = null;
+            if (Player == null) return;
 
-            int index = 0;
-            foreach (var invatory in invatories )
-            {
-                var gui     = (Texture2D) Assets.It.Get<Texture2D>("gui");
-                var font    = (SpriteFont)Assets.It.Get<SpriteFont>("font");
-                var offset  = new Vector2(256, 64) + Offset;
-                var size    = 64;
+            DrawPlayerHealth(batch);
 
-                for ( int y = 0; y < invatory.H; y++ )
-                    for ( int x = 0; x < invatory.W; x++ )
-                    {
-                        var pos = new Vector2(x * 16, y * 16) + offset;
-                        var region = new Rectangle(24, 0, 24, 24);
-                        
-                        //draw grid square
-                        batch.Draw(
-                            gui, 
-                            new Rectangle(
-                                (int) offset.X + size * x, 
-                                (int) offset.Y + size * y, 
-                                size, 
-                                size), 
-                            new Rectangle(24, 0, 24, 24), 
-                            new Color(0, 0, 0, 100), 
-                            0, 
-                            Vector2.Zero, 
-                            SpriteEffects.None, 
-                            0.3f);
+            if (!Showing) return;
 
-                        if (selector.X == x && selector.Y == y)
-                        {
-                            batch.Draw(
-                                gui, 
-                                new Rectangle(
-                                    (int)offset.X + size * x, 
-                                    (int)offset.Y + size * y, 
-                                    size, 
-                                    size), 
-                                new Rectangle(24, 0, 24, 24), 
-                                new Color(0, 0, 0, 100));
-
-                            if (this.ShowMenu)
-                            {
-                                var text_height = font.MeasureString("Hello").Y;
-
-                                batch.Draw(
-                                    gui, 
-                                    new Rectangle(
-                                        (int)offset.X + size * x + size, 
-                                        (int)offset.Y + size * y, 
-                                        size * 2, 
-                                        (int)text_height * (int)MenuActions.Count), 
-                                    new Rectangle(24, 0, 24, 24), 
-                                    new Color(0, 0.5f, 0.5f, 1f), 
-                                    0,
-                                    Vector2.Zero, 
-                                    SpriteEffects.None, 
-                                    0.98f);
-
-
-                                int text_y = 0;
-                                foreach (var action in MenuActions)
-                                {
-                                    if (text_y == menu_selector)
-                                    {
-                                        batch.Draw(
-                                        gui,
-                                        new Rectangle(
-                                            (int)offset.X + size * x + size,
-                                            (int)offset.Y + size * y + (int)(text_y * text_height),
-                                            size * 2,
-                                            (int)text_height),
-                                        new Rectangle(24, 0, 24, 24),
-                                        new Color(0, 0.0f, 0.0f, 0.5f),
-                                        0,
-                                        Vector2.Zero,
-                                        SpriteEffects.None,
-                                        0.99f);
-                                    }
-
-                                    batch.DrawString(
-                                        font,
-                                        action.Key, 
-                                        new Vector2(offset.X + size * x + size, offset.Y + size * y + (text_y++ * text_height)),
-                                        Color.White,
-                                        0,
-                                        Vector2.Zero,
-                                        1,
-                                        SpriteEffects.None,
-                                        1f);
-                                }
-                            }
-                        }
-
-                        var item = invatory.Get(y, x);
-
-                        if ( item != null )
-                        {
-                            var spr = (Sprite) item.Get(Types.Sprite);
-                            if ( spr != null )
-                            {
-                                batch.Draw(
-                                    spr.Texture,
-                                    new Vector2((float) offset.X + size * x, (float) offset.Y + size * y),
-                                    spr.Quad,
-                                    Color.White,
-                                    0f,
-                                    Vector2.Zero,
-                                    4,
-                                    SpriteEffects.None,
-                                    0.5f
-                                    );
-                            }
-                        }
-                    }
-                index++;
-            }
+            DrawPlayerInvatory(batch);
         }
     }
 }

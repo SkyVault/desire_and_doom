@@ -23,16 +23,14 @@ namespace Desire_And_Doom.ECS
         GameCamera camera;
         Particle_World particle_world;
         Invatory_Container invatory_container;
-        UI_Manager invatory_manager;
         Screen_Manager screen_manager;
 
         bool show_overlay_gui = false;
         const float dash_speed = 500;
 
-        public Player_Controller_System(GameCamera _camera, Particle_World particle_world, UI_Manager invatory_manager, Screen_Manager screen) : base(Types.Body, Types.Player, Types.Physics)
+        public Player_Controller_System(GameCamera _camera, Particle_World particle_world, Screen_Manager screen) : base(Types.Body, Types.Player, Types.Physics)
         {
             this.screen_manager = screen;
-            this.invatory_manager = invatory_manager;
             this.camera = _camera;
             this.particle_world = particle_world;
         }
@@ -40,13 +38,7 @@ namespace Desire_And_Doom.ECS
         public override void Load(Entity entity)
         {
             invatory_container = new Invatory_Container();
-
             var invatory = (Invatory) entity.Get(Types.Invatory);
-            if (invatory != null )
-            {
-                // add the invatory to the manager
-                invatory_manager.Add(invatory);
-            }
             
             var physics = (Physics)entity.Get(Types.Physics);
             physics.Blacklisted_Collision_Tags.Add("Player-Hit");
@@ -92,8 +84,6 @@ namespace Desire_And_Doom.ECS
         public override void Destroy(Entity entity)
         {
             base.Destroy(entity);
-
-            invatory_manager.Remove((Invatory) entity.Get(Types.Invatory));
         }
 
         public void Create_Sword_Hitbox(World world, Physics physics, Body body)
@@ -349,7 +339,6 @@ namespace Desire_And_Doom.ECS
             if ( Input.It.Is_Key_Pressed(Keys.Q) || Input.It.Is_Gamepad_Button_Pressed(Buttons.Y))
             {
                 show_overlay_gui = !show_overlay_gui;
-                invatory_manager.Showing = show_overlay_gui;
 
                 if (show_overlay_gui)
                     player.State = Player.Action_State.IN_INVATORY;
@@ -396,37 +385,37 @@ namespace Desire_And_Doom.ECS
             base.UIDraw(batch, camera, entity);
             if ( !show_overlay_gui ) return;
 
-            var gui = Assets.It.Get<Texture2D>("gui");
+            //var gui = Assets.It.Get<Texture2D>("gui");
 
-            int y_offset = 32;
+            //int y_offset = 32;
 
-            var region = new Rectangle(24, 0, 24, 24);
-            batch.Draw(gui, new Rectangle(96, 32+y_offset, 48, 48), region, new Color(0, 0, 0, 100));
-            batch.Draw(gui, new Rectangle(96, 32+ y_offset + 48 + 2, 48, 48), region, new Color(0, 0, 0, 100));
+            //var region = new Rectangle(24, 0, 24, 24);
+            //batch.Draw(gui, new Rectangle(96, 32+y_offset, 48, 48), region, new Color(0, 0, 0, 100));
+            //batch.Draw(gui, new Rectangle(96, 32+ y_offset + 48 + 2, 48, 48), region, new Color(0, 0, 0, 100));
 
-            // left hand box
-            batch.Draw(gui, new Rectangle(96 - 48 - 2, 32 + 48 + 2 + y_offset, 48, 48), region, new Color(0, 0, 0, 100));
-            // right hand box
-            batch.Draw(gui, new Rectangle(96 + 48 + 2, 32 + 48 + 2 + y_offset, 48, 48), region, new Color(0, 0, 0, 100));
+            //// left hand box
+            //batch.Draw(gui, new Rectangle(96 - 48 - 2, 32 + 48 + 2 + y_offset, 48, 48), region, new Color(0, 0, 0, 100));
+            //// right hand box
+            //batch.Draw(gui, new Rectangle(96 + 48 + 2, 32 + 48 + 2 + y_offset, 48, 48), region, new Color(0, 0, 0, 100));
 
-            batch.Draw(gui, new Rectangle(96, 32 + 48 * 2 + 4 + y_offset, 48, 48), region, new Color(0, 0, 0, 100));
+            //batch.Draw(gui, new Rectangle(96, 32 + 48 * 2 + 4 + y_offset, 48, 48), region, new Color(0, 0, 0, 100));
 
-            var equipment = (Equipment) entity.Get(Types.Equipment);
-            var font = (SpriteFont) Assets.It.Get<SpriteFont>("font");
-            var inv = (Invatory) entity.Get(Types.Invatory);
+            //var equipment = (Equipment) entity.Get(Types.Equipment);
+            //var font = (SpriteFont) Assets.It.Get<SpriteFont>("font");
+            //var inv = (Invatory) entity.Get(Types.Invatory);
 
-            // draw money
-            var items = Assets.It.Get<Texture2D>("items");
-            var coin_region = new Rectangle(0, 0, 8, 8);
-            var coin_pos = new Vector2(16, 16);
-            batch.Draw(items, coin_pos, coin_region, Color.White, 0, Vector2.Zero, 4, SpriteEffects.None, 1);
-            batch.DrawString(font, inv.Money.ToString(),coin_pos + new Vector2(48, 0), Color.White);
+            //// draw money
+            //var items = Assets.It.Get<Texture2D>("items");
+            //var coin_region = new Rectangle(0, 0, 8, 8);
+            //var coin_pos = new Vector2(16, 16);
+            //batch.Draw(items, coin_pos, coin_region, Color.White, 0, Vector2.Zero, 4, SpriteEffects.None, 1);
+            //batch.DrawString(font, inv.Money.ToString(),coin_pos + new Vector2(48, 0), Color.White);
 
-            // left hand (TODO): finish the rest of the boxes
-            if ( equipment.Left_Hand != null )
-                batch.DrawString(font, equipment.Left_Hand.ID, new Vector2(96 - 48 - 2, 32 + 48 + 2 + y_offset), Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 1);
+            //// left hand (TODO): finish the rest of the boxes
+            //if ( equipment.Left_Hand != null )
+            //    batch.DrawString(font, equipment.Left_Hand.ID, new Vector2(96 - 48 - 2, 32 + 48 + 2 + y_offset), Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 1);
 
-            // right hand
+            //// right hand
 
 
         }

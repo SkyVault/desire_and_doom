@@ -67,8 +67,6 @@ namespace Desire_And_Doom.ECS
         public override void Destroy(Entity entity)
         {
             base.Destroy(entity);
-
-            invatory_manager.Remove((Invatory) entity.Get(Types.Invatory));
         }
 
         public override void Draw(SpriteBatch batch, Entity entity)

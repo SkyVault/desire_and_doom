@@ -13,11 +13,9 @@ namespace Desire_And_Doom.ECS
 {
     class Invatory_System : System
     {
-        UI_Manager invatory_manager;
 
-        public Invatory_System(UI_Manager _invatory_manager) : base(Types.Invatory, Types.Body)
+        public Invatory_System() : base(Types.Invatory, Types.Body)
         {
-            invatory_manager = _invatory_manager;
         }
 
         public override void Load(Entity entity)
@@ -34,7 +32,6 @@ namespace Desire_And_Doom.ECS
             base.Destroy(entity);
 
             var inv = (Invatory) entity.Get(Types.Invatory);
-            invatory_manager.Remove(inv);
         }
 
         public override void UIDraw(SpriteBatch batch, GameCamera camera, Entity entity)

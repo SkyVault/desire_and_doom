@@ -137,16 +137,15 @@ namespace Desire_And_Doom
 
             world           = new World(penumbra);
             particle_world  = new Particle_World();
-            invatory_manager= new UI_Manager();
 
             //UserInterface.Initialize(Content, BuiltinThemes.hd);
 
             world.Add_System<Sprite_Renderer_System>(new Sprite_Renderer_System());
-            world.Add_System<Player_Controller_System>(new Player_Controller_System(camera, particle_world, invatory_manager, screen_manager));
+            world.Add_System<Player_Controller_System>(new Player_Controller_System(camera, particle_world, screen_manager));
             world.Add_System<Animation_Renderer_System>(new Animation_Renderer_System());
             physics_engine = (Physics_Engine)world.Add_System<Physics_Engine>(new Physics_Engine(world));
 
-            world.Add_System<Invatory_System>(new Invatory_System(invatory_manager));
+            world.Add_System<Invatory_System>(new Invatory_System());
             world.Add_System<AI_System>(new AI_System());
             world.Add_System<Light_Emitter_System>(new Light_Emitter_System());
             world.Add_System<World_Interaction_System>(new World_Interaction_System());
@@ -189,6 +188,7 @@ namespace Desire_And_Doom
             dialog_box = new Dialog_Box(primitives, lua, lua_function_system);
 
             var npc_system = (Npc_System)world.Add_System<Npc_System>(new Npc_System(this, graphics, invatory_manager, dialog_box));
+            invatory_manager= new UI_Manager(world, primitives);
 
             Assets.It.Add("entities",       Content.Load<Texture2D>("entities"));
             Assets.It.Add("items",          Content.Load<Texture2D>("items"));
@@ -302,9 +302,9 @@ namespace Desire_And_Doom
             batch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp);
                 world.UIDraw(batch, camera);
                 gui.Draw(batch);
-                invatory_manager.UIDraw(batch);
                 console.Draw(batch);
                 dialog_box.Draw(batch);
+                invatory_manager.UIDraw(batch);
 
                 if ( DEBUG )
                 {
