@@ -62,6 +62,7 @@ namespace Desire_And_Doom
         Renderer3D          renderer_3d;
         PrimitivesBatch     primitives;
         Dialog_Box          dialog_box;
+        Lua_Function_System lua_function_system;
 
         public static int ScreenWidth { get => graphics.PreferredBackBufferWidth; }
         public static int ScreenHeight { get => graphics.PreferredBackBufferHeight; }
@@ -149,7 +150,7 @@ namespace Desire_And_Doom
             world.Add_System<AI_System>(new AI_System());
             world.Add_System<Light_Emitter_System>(new Light_Emitter_System());
             world.Add_System<World_Interaction_System>(new World_Interaction_System());
-            world.Add_System<Lua_Function_System>(new Lua_Function_System(lua, camera));
+            lua_function_system = (Lua_Function_System)world.Add_System<Lua_Function_System>(new Lua_Function_System(lua, camera));
             world.Add_System<Timed_Destroy_System>(new Timed_Destroy_System());
             world.Add_System<Particle_Emitter_System>(new Particle_Emitter_System());
             world.Add_System<Enemy_System>(new Enemy_System());
@@ -157,6 +158,8 @@ namespace Desire_And_Doom
             world.Add_System<Item_System>(new Item_System());
             world.Add_System<Health_System>(new Health_System());
             world.Add_System<Advanced_Animation_Rendering_System>(new Advanced_Animation_Rendering_System());
+
+            lua["Engine"] = lua_function_system;
 
             gui = new Monogui();
 
@@ -183,7 +186,7 @@ namespace Desire_And_Doom
         {
             batch = new SpriteBatch(GraphicsDevice);
             primitives = new PrimitivesBatch(batch, GraphicsDevice);
-            dialog_box = new Dialog_Box(primitives, lua);
+            dialog_box = new Dialog_Box(primitives, lua, lua_function_system);
 
             var npc_system = (Npc_System)world.Add_System<Npc_System>(new Npc_System(this, graphics, invatory_manager, dialog_box));
 

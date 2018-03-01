@@ -1,4 +1,7 @@
-﻿FIXES:
+﻿-- CURRENT
+-- Making it so the dialog class has a reference to the player and the npc
+
+FIXES:
 -- Fix the glitch with the hulls ghosting
 -- Move entities out from each other if they collide, see birds?
 

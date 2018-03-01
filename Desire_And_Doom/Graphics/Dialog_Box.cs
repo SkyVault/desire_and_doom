@@ -1,4 +1,5 @@
-﻿using Desire_And_Doom.Graphics;
+﻿using Desire_And_Doom.ECS.Systems;
+using Desire_And_Doom.Graphics;
 using Desire_And_Doom.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -24,6 +25,7 @@ namespace Desire_And_Doom
 
         private float timer = 0;
         private Lua lua;
+        private Lua_Function_System engine;
 
         public int GetNextDialogPointer() {
             if (IsOpen == false) return 0;
@@ -32,9 +34,10 @@ namespace Desire_And_Doom
         }
 
         PrimitivesBatch primitives;
-        public Dialog_Box(PrimitivesBatch _primitives, Lua _lua) {
+        public Dialog_Box(PrimitivesBatch _primitives, Lua _lua, Lua_Function_System _engine) {
             primitives  = _primitives;
             lua         = _lua;
+            engine      = _engine;
         }
 
         public bool TryOpen(Dialog dialog) {
@@ -49,6 +52,14 @@ namespace Desire_And_Doom
         public void Update(GameTime time) {
             timer -= (float)time.ElapsedGameTime.TotalSeconds;
             if (!IsOpen) { Selector = 0; return; }
+
+            // Check and see if the npc was destroyed
+            if (CurrentDialog.Speaker == null || CurrentDialog.Speaker.Remove == true)
+            {
+                CurrentDialog = null;
+                DesireAndDoom.Request_Resume();
+                return;
+            }
 
             DesireAndDoom.Request_Pause();
 
@@ -83,7 +94,7 @@ namespace Desire_And_Doom
                     CurrentDialogTextPointer = the_option.NextDialogText;
                     if (the_option.action != null)
                     {
-                        the_option.action.Call();
+                        the_option.action.Call(CurrentDialog.Speaker, CurrentDialog.Target, engine);
                     }
                 }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Desire_And_Doom.ECS;
 
 namespace Desire_And_Doom.Graphics
 {
@@ -28,6 +29,9 @@ namespace Desire_And_Doom.Graphics
     {
         public Dictionary<int, Dialog_Text> Dialog_Texts = new Dictionary<int, Dialog_Text>();
         public int CurrentDialogText {get; set;} = 0;
+
+        public Entity Speaker { get; set; } = null;
+        public Entity Target { get; set; } = null;
 
         public Dialog() {}
         public Dialog(LuaTable table) {

@@ -53,6 +53,11 @@ namespace Desire_And_Doom.ECS
                 if (Input.It.Is_Key_Pressed(Keys.Z))
                 {
                     Input.It.Reset_Key(Keys.Z);
+                    
+                    // set the speaker and the target for interactions with lua functions
+                    npc.Dialog.Speaker  = entity;
+                    npc.Dialog.Target   = player;
+
                     dialog_box.TryOpen(npc.Dialog);
                 }
             }

@@ -1,12 +1,19 @@
-﻿return {
+﻿local enemies = require "Content/Lua/Enemies"
+
+return {
     ["dialog_npc_test"] = {
         [1] = {"#White Hello I am an #Cyan Npc! #White What can I #Yellow do #White for you?"}
     },
 
     ["wolf_gui"] = {
         [1] = { "Help me dude! can you fight a wolf?", {
-                {"yes", 2, action = function(self, other) 
-					print "Boogers!"	
+                {"yes", 2, action = function(self, other, engine) 
+					self:Destroy()
+
+					local body = engine:Get_Component(self, "Body")
+					if engine ~= nil and body ~= nil then
+						engine:Spawn(enemies["Wolf"], body.X, body.Y)
+					end
 				end},
                 {"no", 0}
 		}},
