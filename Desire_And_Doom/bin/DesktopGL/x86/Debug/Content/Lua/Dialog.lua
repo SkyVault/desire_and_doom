@@ -18,7 +18,22 @@ return {
                 {"no", 0}
 		}},
         [2] = { "Whaaa hahaha... this will be your doom", 0 }
-    }
+    },
+
+	["orange_guy"] = {
+		[1]	= {"Can you find me some oranges?", {
+			{"yes", 0},
+			{"no", 2, action = function(self, other, engine)
+				self:Destroy()
+
+				local body = engine:Get_Component(self, "Body")
+				if engine ~= nil and body ~= nil then
+					engine:Spawn(enemies["Wolf"], body.X, body.Y)
+				end
+			end},
+		}},
+		[2] = {"Well then DIE!!!"}
+	}
 }
 
 --[[

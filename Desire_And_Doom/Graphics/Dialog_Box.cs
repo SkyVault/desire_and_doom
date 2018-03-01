@@ -94,7 +94,11 @@ namespace Desire_And_Doom
                     CurrentDialogTextPointer = the_option.NextDialogText;
                     if (the_option.action != null)
                     {
-                        the_option.action.Call(CurrentDialog.Speaker, CurrentDialog.Target, engine);
+                        var result = the_option.action.Call(CurrentDialog.Speaker, CurrentDialog.Target, engine);
+                        if (result != null)
+                        {
+                            CurrentDialogTextPointer = (int)(result[0] as double?);
+                        }
                     }
                 }
 
