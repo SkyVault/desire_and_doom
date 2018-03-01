@@ -4,7 +4,10 @@
     },
 
     ["wolf_gui"] = {
-        [1] = {"hello my mellow fellow", 2},
+        [1] = { "Help me dude! can you fight a wolf?", {
+                {"yes", 2},
+                {"no", 0}
+		}},
         [2] = { "Whaaa hahaha... this will be your doom", 0 }
     }
 }
@@ -12,10 +15,6 @@
 --[[
 --
 --= {
-            "Help me dude! can you fight a wolf?", {
-                {"yes", 2},
-                {"no", 0}
-            }
         },
 
 --]]

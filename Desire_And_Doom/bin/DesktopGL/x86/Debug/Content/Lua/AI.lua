@@ -10,7 +10,6 @@ function handle_player_hit(entity, engine, damage, power)
 				local o_body = engine:Get_Component(other, "Body")
 				local health = engine:Get_Component(entity, "Health")
 				if health then
-					print "I have been hit!";
 					-- take damage according to the weapons damage
 					health:Hurt(damage)
 					physics.Other:Destroy()

@@ -19,6 +19,7 @@ namespace Desire_And_Doom
         public Dialog CurrentDialog {get; private set;} = null;
         public int CurrentDialogTextPointer {get; private set;} = 1;
         public bool IsOpen { get => CurrentDialog != null; }
+        public int Selector { get; private set; } = 0;
 
         private float timer = 0;
 
@@ -44,7 +45,11 @@ namespace Desire_And_Doom
 
         public void Update(GameTime time) {
             timer -= (float)time.ElapsedGameTime.TotalSeconds;
-            if (!IsOpen) return;
+            if (!IsOpen)
+            {
+                Selector = 0;
+                return;
+            }
 
             if (Input.It.Is_Key_Pressed(Keys.Enter) || Input.It.Is_Key_Pressed(Keys.Z)) {
                 if (CurrentDialog.Dialog_Texts[CurrentDialogTextPointer].options.Count() == 0) {
@@ -53,27 +58,59 @@ namespace Desire_And_Doom
                     {
                         timer = Constants.DIALOG_COOLDOWN;
                         CurrentDialog = null;
+                        return;
                     }
+                } else
+                {
+
+
+
                 }
+            }
+
+            var dialog_text = CurrentDialog.Dialog_Texts[CurrentDialogTextPointer];
+            if (dialog_text.options.Count > 0)
+            {
+                if (Input.It.Is_Key_Pressed(Keys.Left) || Input.It.Is_Key_Pressed(Keys.Up)) 
+                {
+                    Selector--;
+                } 
+                else if (Input.It.Is_Key_Pressed(Keys.Right) || Input.It.Is_Key_Pressed(Keys.Down))
+                {
+                    Selector++;
+                }
+
+                if (Input.It.Is_Key_Pressed(Keys.Enter) || Input.It.Is_Key_Pressed(Keys.Z))
+                {
+                    CurrentDialogTextPointer = dialog_text.options[Selector].NextDialogText;
+                }
+
+                Selector = Selector < 0 ? dialog_text.options.Count - 1 : (Selector > dialog_text.options.Count - 1 ? 0 : Selector);
             }
         }
 
         public void Draw(SpriteBatch batch) {
             if (!IsOpen) return;
+            if (CurrentDialogTextPointer == 0)
+            {
+                CurrentDialog = null;
+                return;
+            }
 
             var height = DesireAndDoom.ScreenHeight / 3;
             var color = new Color(0.2f, 0.2f, 0.2f, 0.9f);
 
             var font = Assets.It.Get<SpriteFont>("gfont");
 
-            var text = CurrentDialog.Dialog_Texts[CurrentDialogTextPointer].Value;
+            var dialog_text = CurrentDialog.Dialog_Texts[CurrentDialogTextPointer];
+            var text = dialog_text.Value;
 
             primitives.DrawFilledRect(
                 new Vector2(0, DesireAndDoom.ScreenHeight - height),
                 new Vector2(DesireAndDoom.ScreenWidth, height),
                 color,
                 0,
-                0.99f
+                0.98f
             );
 
             batch.DrawString(
@@ -87,6 +124,47 @@ namespace Desire_And_Doom
                     SpriteEffects.None,
                     1.0f
                     );
+
+            if (dialog_text.options.Count > 0)
+            {
+                var x = 0.0f;
+                var index = 0;
+                foreach(var option in dialog_text.options)
+                {
+                    var margin = 16;
+                    var tsize = font.MeasureString(option.Value) * 0.5f;
+                    var size_x = tsize.X + margin;
+                    batch.DrawString(
+                        font,
+                        option.Value,
+                        new Vector2(32 + x, DesireAndDoom.ScreenHeight - 32 - margin),
+                        Color.White,
+                        0.0f,
+                        Vector2.Zero,
+                        0.5f,
+                        SpriteEffects.None,
+                        1.0f
+                    );
+
+                    if (index == Selector)
+                    {
+                        var rect = Assets.It.Get<Texture2D>("gui-rect");
+                        batch.Draw(
+                        rect,
+                        new Rectangle((int)(32 + x), DesireAndDoom.ScreenHeight - 32 - margin, (int)tsize.X, (int)tsize.Y),
+                        new Rectangle(0, 0, 512, 512),
+                        Color.Orange,
+                        0f,
+                        Vector2.Zero,
+                        SpriteEffects.None,
+                        0.99f
+                        );
+                    }
+
+                    x += size_x;
+                    index++;
+                }
+            }
         }
     }
 }
