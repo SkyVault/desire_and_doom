@@ -64,10 +64,6 @@ function npc_ai(entity, engine)
 					lua.Table.walk_timer = time
 				end
 				lua.Table.walk_timer = lua.Table.walk_timer - engine:Get_DT()
-
---				var o_body = (Body) other.Get(Types.Body);
---                var dot = body.Angle_To_Other(o_body);
---                physics.Apply_Force(force, dot);
 			end
 		end
 	end
@@ -81,11 +77,13 @@ return {
 			["Animation"] =
 				{"Charactors", {"npc-1-walk", 0.8},{"npc-1-idle", 0.8}},
 			["Physics"]={},
-			["Npc"] = {},
+			["Npc"] = {"wolf_gui"},
 			["Ai"] = {"Function", npc_ai},
 			["Invatory"] = {3, 2},
 		}
 	},
+
+  -- [[ This npc transforms into a wolf when the player talks to them ]]
 	["npc-2"] = {
 		tags = {"Npc"},
 		components = {
@@ -93,10 +91,11 @@ return {
 			["Animation"] =
 				{"Charactors", {"npc-2-walk", 0.8},{"npc-2-idle", 0.8}},
 			["Physics"]={},
-			["Npc"] = {},
+			["Npc"] = {"wolf_gui"},
 			["Ai"] = {"Function", npc_ai},
 		}
 	},
+
 	["npc-3"] = {
 		tags = {"Npc"},
 		components = {
@@ -104,7 +103,7 @@ return {
 			["Animation"] =
 				{"Charactors", {"npc-3-walk", 0.8},{"npc-3-idle", 0.8}},
 			["Physics"]={},
-			["Npc"] = {},
+			["Npc"] = {"wolf_gui"},
 			["Ai"] = {"Function", npc_ai},
 		}
 	},
@@ -116,7 +115,7 @@ return {
 			["Animation"] =
 				{"Charactors", {"npc-4-walk", 0.8},{"npc-4-idle", 0.8}},
 			["Physics"]={},
-			["Npc"] = {},
+			["Npc"] = {"wolf_gui"},
 			["Ai"] = {"Function", npc_ai},
 		}
 	},
@@ -128,7 +127,7 @@ return {
 			["Animation"] =
 				{"Charactors", {"npc-5-walk", 0.8},{"npc-5-idle", 0.8}},
 			["Physics"]={},
-			["Npc"] = {},
+			["Npc"] = {"wolf_gui"},
 			["Ai"] = {"Function", npc_ai},
 		}
 	},

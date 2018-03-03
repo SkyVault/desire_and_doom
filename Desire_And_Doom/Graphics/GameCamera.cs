@@ -13,7 +13,7 @@ namespace Desire_And_Doom
 
     class GameCamera
     {
-        private readonly Camera camera;
+        private Camera camera;
 
         public float Zoom { get => camera.Zoom; set => camera.Zoom = value; }
         public float Rotation { get; set; }
@@ -38,6 +38,7 @@ namespace Desire_And_Doom
 
         public void Update(GameTime time)
         {
+
             var rnd = new Random();
             if (shake_timer > 0 && (int)time.TotalGameTime.TotalMilliseconds % 2 == 0)
             {
@@ -49,16 +50,21 @@ namespace Desire_And_Doom
             }
         }
 
+        public void WindowResized(GraphicsDevice device)
+        {
+            var ad = camera.GetViewportAdapter();
+            camera.Origin = new Vector2(ad.VirtualWidth/2f, ad.VirtualHeight/2f);
+        }
+
         public void Track(Body body, float smoothing)
         {
-            
             if (!can_move) {
                 can_move = true;
                 return;
             }
-            
-            var dx = (X - (body.X + body.Width / 2)     + (DesireAndDoom.ScreenWidth) / 2);
-            var dy = (Y - (body.Y + body.Height / 2)    + (DesireAndDoom.ScreenHeight) / 2);
+
+            var dx = (X - (body.Center.X) + (DesireAndDoom.ScreenWidth) / 2);
+            var dy = (Y - (body.Center.Y) + (DesireAndDoom.ScreenHeight) / 2);
 
             camera.Move(new Vector2(-dx * smoothing, -dy * smoothing));
         }

@@ -23,10 +23,10 @@ function npc_ai(entity, engine)
 
 	if body and physics then
 		engine:Face_Move_Dir(entity)
-		
+
 		local anim_string = animation.Current_Animation_ID
 		local tokens = anim_string:split "-"
-		
+
 		local anim_id = tokens[1] .. "-" .. tokens[2] .. "-"
 
 		if physics.Current_Speed < 0.2 then
@@ -46,7 +46,7 @@ function npc_ai(entity, engine)
 				local speed = 3
 				local buffer = 10
 				local time = 6
-				
+
 				local dot = body:Angle_To_Other(engine:Vec2(lua.Table.target_x, lua.Table.target_y))
 				physics:Apply_Force(speed, dot)
 
@@ -93,7 +93,7 @@ return {
 			["Animation"] =
 				{"Charactors", {"npc-2-walk", 0.8},{"npc-2-idle", 0.8}},
 			["Physics"]={},
-			["Npc"] = {},
+			["Npc"] = {"wolf_gui"},
 			["Ai"] = {"Function", npc_ai},
 		}
 	},

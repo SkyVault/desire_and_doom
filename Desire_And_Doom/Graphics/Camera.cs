@@ -18,6 +18,8 @@ namespace Desire_And_Doom.Graphics
         {
         }
 
+        public ViewportAdapter GetViewportAdapter() => _viewportAdapter;
+
         public Camera(ViewportAdapter viewportAdapter)
         {
             _viewportAdapter = viewportAdapter;

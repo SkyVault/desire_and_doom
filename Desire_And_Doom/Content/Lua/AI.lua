@@ -1,14 +1,17 @@
-﻿local function handle_player_hit(entity, engine, dammage, power)
+﻿local 
+function handle_player_hit(entity, engine, damage, power)
+
 	local physics = engine:Get_Component(entity, "Physics")
 	local body = engine:Get_Component(entity, "Body")
+
 	if physics and physics.Other then
 			local other = physics.Other
 			if other:Has_Tag("Player-Hit") then
 				local o_body = engine:Get_Component(other, "Body")
 				local health = engine:Get_Component(entity, "Health")
 				if health then
-					-- take dammage according to the weapons dammage
-					health:Hurt(dammage)
+					-- take damage according to the weapons damage
+					health:Hurt(damage)
 					physics.Other:Destroy()
 
 					local camera = engine:Get_Camera()
@@ -24,8 +27,9 @@
 					if health.Should_Die then
 						entity:Destroy()
 					end
+				else
+					print("[LUA]::Warning:: handle_player_hit function requires the entity to have a health component.")
 				end
-
 			end
 		end
 end
@@ -58,7 +62,7 @@ return {
 				anim.Current_Animation_ID = "wolf-run"
 			end
 
-			if (engine:Entity_Within("Player", body.X, body.Y,70)) then
+			if (engine:Entity_Within("Player", body.X, body.Y, 140)) then
 				engine:Track(entity, engine:Get_With_Tag "Player", 4)
 			end
 
@@ -193,5 +197,25 @@ return {
 			physics.Vel_X =  75 * 0.5
 			physics.Vel_Y = -60 * 0.5
 		end
+	end,
+
+	-- Mech AI
+	Mech_AI = function(entity, engine)
+		local mx_dist	= 75
+		local body		= engine:Get_Component(entity, "Body")
+		local anim		= engine:Get_Component(entity, "Animation")
+		local physics	= engine:Get_Component(entity, "Physics")
+		local fn		= engine:Get_Component(entity, "Lua_Function")
+
+		if fn.Table == nil then fn.Table = {}; end
+
+		if (engine:Entity_Within("Player", body.X, body.Y, mx_dist)) then
+			anim.Current_Animation_ID = "mech-attack"
+			engine:Track(entity, engine:Get_With_Tag "Player", 3)
+		else
+			anim.Current_Animation_ID = "mech-idle"
+		end
+
+		handle_player_hit(entity, engine, 1, 100)
 	end,
 }

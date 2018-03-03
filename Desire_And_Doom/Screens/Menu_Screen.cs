@@ -39,21 +39,9 @@ namespace Desire_And_Doom.Screens
             sky = new Sky_Renderer(Assets.It.Get<Texture2D>("sky_1"), true);
             rect = Assets.It.Get<Texture2D>("gui-rect");
             font = Assets.It.Get<SpriteFont>("gfont");
-
-            actions = new Named_Action_List(new Dictionary<string, Action> {
-                {"Start", ()=>{
-                    _manager.Goto_Screen("Level 1", true);
-                } },
-                {"Settings", ()=>{
-
-                } },
-                {"Exit", ()=>{
-                    DesireAndDoom.SHOULD_QUIT = true;
-                } }
-            });
         }
 
-        public override void Load()
+        public override void Load(params string []args)
         {
             camera.Zoom = 3;
             camera.Position = Vector2.Zero;
@@ -63,6 +51,23 @@ namespace Desire_And_Doom.Screens
             penumbra.AmbientColor = new Color(1f, 1f, 1f, 1f);
             pre_origin = camera.Origin;
             camera.Origin = new Vector2(0, 0);
+            called = false;           
+
+            actions = new Named_Action_List(new Dictionary<string, Action> {
+                {"Start", ()=>{
+                    manager.Goto_Screen("Level 1", false);
+                } },
+                {"Level Select", () =>
+                {
+                    manager.Goto_Screen("Level Select", false);
+                } },
+                {"Settings", ()=>{
+                    Console.WriteLine("YOYOYOYO");
+                } },
+                {"Exit", ()=>{
+                    DesireAndDoom.SHOULD_QUIT = true;
+                }}
+            });
         }
 
         public override void Update(GameTime time)
@@ -163,7 +168,8 @@ namespace Desire_And_Doom.Screens
         public override void Destroy()
         {
             camera.Origin = pre_origin;
-            called = false; 
+            called = false;
+            actions = null;
             base.Destroy();
         }
     }

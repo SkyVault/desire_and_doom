@@ -89,6 +89,7 @@ namespace Desire_And_Doom.ECS
 
         internal Entity Get(int y, int x)
         {
+            if (x < 0 || y < 0 || x >= W || y >= H) return null;
             return slots[y, x];
         }
     }

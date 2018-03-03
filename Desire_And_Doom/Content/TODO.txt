@@ -1,16 +1,16 @@
-﻿FIXES:
+﻿-- CURRENT
+-- Making it so the dialog class has a reference to the player and the npc
+
+FIXES:
+-- Fix the glitch with the hulls ghosting
 -- Move entities out from each other if they collide, see birds?
--- Scale the whole game to prevent the OpenGL / DirectX oversampling :(
 
 IMPROVEMENTS
--- Create a faster debug drawing algorithm using buffers, Debug_Drawing.cs
+-- Make a key repeat action in the input manager, this is going to be a fucking pain in the ass.
+-- Make it so that the player slides against the tangent of the line
 -- Dont hardcode the combo frame
 -- Improve the particle system to suck less
 -- Create a button mapping system
--- All of the menus in the game use different code to controll the interface
--- Remove that shitty table based ai system, implemented in AI_System
--- Fix the dialog system
--- Make the invatory system controller work
 -- Improve the Assets system, make it auto load everything at startup
 
 ADDITIONS
@@ -27,6 +27,11 @@ ADDITIONS
 -- Equipment
 	
 DONE
+-- Improve how the game scales with the window size
+-- Fix the dialog system
+-- Remove that shitty table based ai system, implemented in AI_System
+-- All of the menus in the game use different code to controll the interface
+-- Create a faster debug drawing algorithm using buffers, Debug_Drawing.cs
 -- Create a pausing system -- DONE
 -- Check out the whole Game1.Map_Height_Pixels thing, seems super fishy -- DONE
 -- flags hit box is off center -- DONE
@@ -35,3 +40,8 @@ DONE
 -- Weapon should also have specific strings for idle and attack animations, the player should then -- DONE
 be using whichever animation that the current weapon suggests
 -- Weapons should also be attached to the equipment component									   -- DONE
+-- Make the invatory controllable with the gamepad	--DONE
+-- The asset manager shouldn't crash when it cant find an object
+
+:: NOTE :: Fixed this by drawing each map layer to a render target first, then rendering that in order with the regular scene.
+-- Scale the whole game to prevent the OpenGL / DirectX oversampling :(

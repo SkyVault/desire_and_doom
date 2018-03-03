@@ -26,20 +26,27 @@ namespace Desire_And_Doom.Screens
             pause_menu = new Pause_Menu(screen_manager, camera);
         }
 
-        public override void Load()
+        public override void Load(params string []args)
         {
             world.Destroy_All();
             lighting.AmbientColor = new Color(0.6f, 0.6f, 0.6f, 1.0f);
-            Load_Map("Dungeon_Room_2");
+            if (args.Length > 0)
+            {
+                Load_Map(args[0]);
+            }
+            else
+            {
+                Load_Map("Dungeon_Room_2");
+            }
+            //Load_Map("Ship");
             //Load_Map("Demo");
             //Load_Map("Dungeon_Floor_1");
 
             var ai_system = (AI_System)world.Get_System<AI_System>();
             ai_system.Give_Map(Map);
 
-            var song = Song.FromUri("Bloom", new Uri("Content/Audio/Bloom.mp3", UriKind.Relative));
-
-            MediaPlayer.Play(song);
+            //var song = Song.FromUri("Bloom", new Uri("Content/Audio/Bloom.mp3", UriKind.Relative)); 
+            //MediaPlayer.Play(song);
             MediaPlayer.IsRepeating = true;
 
             camera.Zoom = DesireAndDoom.SCALE;
@@ -56,7 +63,7 @@ namespace Desire_And_Doom.Screens
         {
             sky.Update(time);
             base.Update(time);
-            
+
             pause_menu.Update(time);
         }
 

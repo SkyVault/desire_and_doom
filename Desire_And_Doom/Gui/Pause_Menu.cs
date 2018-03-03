@@ -38,6 +38,11 @@ namespace Desire_And_Doom.Gui
                 {"Settings", ()=>{
 
                 } },
+                {"Level Select", () =>
+                {
+                    showing = false;
+                    screen_manager.Goto_Screen("Level Select", false);
+                }},
                 {"Exit",()=>{
                     //DesireAndDoom.Request_Resume();
                     showing = false;

@@ -9,6 +9,7 @@ using MonoGame.Extended;
 using Desire_And_Doom.Gui;
 using static Desire_And_Doom.ECS.Component;
 using Microsoft.Xna.Framework.Input;
+using Desire_And_Doom.Utils;
 
 namespace Desire_And_Doom.ECS
 {
@@ -16,18 +17,21 @@ namespace Desire_And_Doom.ECS
     {
         GraphicsDeviceManager graphics;
         Game game;
-        Invatory_Manager invatory_manager;
+        UI_Manager invatory_manager;
+        Dialog_Box dialog_box;
 
+        //public static readonly
         float timer = 0;
+        private bool talking = false;
 
-        public Npc_System(Game game, GraphicsDeviceManager graphics, Invatory_Manager invatory_manager) : base(Component.Types.Npc, Component.Types.Body)
+        public Npc_System(Game game, GraphicsDeviceManager graphics, UI_Manager invatory_manager, Dialog_Box dialog_box) : base(Component.Types.Npc, Component.Types.Body)
         {
             this.graphics = graphics;
             this.game = game;
             this.invatory_manager = invatory_manager;
-
+            this.dialog_box = dialog_box;
         }
-        
+
         public override void Constant_Update(GameTime time, Entity entity)
         {
             base.Constant_Update(time, entity);
@@ -40,81 +44,29 @@ namespace Desire_And_Doom.ECS
             var npc = (Npc) entity.Get(Types.Npc);
             var player = World_Ref.Find_With_Tag("Player");
 
-            var dialog = npc.Dialog;
-            if ( player != null )
+            if (player == null) return;
+
+            var player_body = (Body)player.Get(Types.Body);
+
+            if (Vector2.Distance(player_body.Center, body.Center) < Constants.NPC_TALKING_DISTANCE && dialog_box.IsOpen == false)
             {
-                var pbody = (Body) (player.Get(Component.Types.Body));
-                var pphys = (Physics) (player.Get(Component.Types.Physics));
-    
-                //NOTE(Dustin): Distance @hardcoded
-                if ( Vector2.Distance(body.Position, pbody.Position) < 25 )
+                if (Input.It.Is_Key_Pressed(Keys.Z))
                 {
-                    physics.Velocity = Vector2.Zero;
+                    Input.It.Reset_Key(Keys.Z);
+                    
+                    // set the speaker and the target for interactions with lua functions
+                    npc.Dialog.Speaker  = entity;
+                    npc.Dialog.Target   = player;
 
-                    var action_button = Input.It.Is_Key_Pressed(Microsoft.Xna.Framework.Input.Keys.Z) || 
-                                        Input.It.Is_Gamepad_Button_Pressed(Buttons.A);
-
-                    if (action_button && timer <= 0 )
-                    {
-                        dialog.Show_Portait = true;
-                        dialog.Image = anim.Texture;
-
-                        foreach ( var id in anim.Animations.Keys )
-                        {
-                            if ( id.Contains("idle") )
-                            {
-                                dialog.Region = anim.Animations[id].Frames[0].Rectangle;
-                            }
-                        }
-
-                        dialog.Animate_Toggle("#White Hello I am an #Cyan Npc! #White What can I #Yellow do #White for you?");
-
-                        var invatory = (Invatory) entity.Get(Component.Types.Invatory);
-                        if (invatory != null )
-                        {
-
-                            // Draw the invatory
-                            invatory_manager.Showing = dialog.Showing();
-                            if ( dialog.Showing() )
-                            {
-                                invatory_manager.Add(invatory);
-                            }
-                            else invatory_manager.Remove(invatory);
-                        }
-
-                        timer = 2;
-                    }
-                }
-
-                var pphysics = (Physics) player.Get(Component.Types.Physics);
-                if ( pphysics != null )
-                {
-                    if ( pphysics.Current_Speed > 2 )
-                        dialog.Stop();
-                }
-
-                dialog.Update(time);
-            } else
-            {
-                if (dialog.Showing())
-                {
-                    dialog.Stop();
-                    var invatory = (Invatory) entity.Get(Component.Types.Invatory);
-                    if (invatory != null )
-                    {
-                        // Clean up the invatory
-                        invatory_manager.Showing = false;
-                        invatory_manager.Remove(invatory);
-                    }
+                    dialog_box.TryOpen(npc.Dialog);
                 }
             }
+
         }
 
         public override void Destroy(Entity entity)
         {
             base.Destroy(entity);
-
-            invatory_manager.Remove((Invatory) entity.Get(Types.Invatory));
         }
 
         public override void Draw(SpriteBatch batch, Entity entity)
@@ -139,8 +91,6 @@ namespace Desire_And_Doom.ECS
         {
             base.UIDraw(batch, camera,entity);
             var npc = (Npc) entity.Get(Types.Npc);
-
-            npc.Dialog.Draw(batch, camera);
         }
     }
 }

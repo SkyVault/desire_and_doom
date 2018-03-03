@@ -90,6 +90,7 @@
     <Compile Include="Graphics\Animation_Frame.cs" />
     <Compile Include="Graphics\Assets.cs" />
     <Compile Include="Graphics\Camera.cs" />
+    <Compile Include="Graphics\Dialog.cs" />
     <Compile Include="Graphics\GameCamera.cs" />
     <Compile Include="Graphics\Debug_Drawing.cs" />
     <Compile Include="Graphics\Default_Viewport_Adapter.cs" />
@@ -126,12 +127,13 @@
     <Compile Include="Graphics\Particle_Systems\Fire_Fly_Particle.cs" />
     <Compile Include="Graphics\Particle_Systems\Fire_Particle.cs" />
     <Compile Include="Graphics\Particle_World.cs" />
+    <Compile Include="Graphics\PrimitivesBatch.cs" />
     <Compile Include="Graphics\Renderer2D.cs" />
     <Compile Include="Graphics\Renderer3D.cs" />
     <Compile Include="Graphics\Sky_Renderer.cs" />
     <Compile Include="Graphics\ViewportAdapter.cs" />
     <Compile Include="Gui\Invatory_Container.cs" />
-    <Compile Include="Gui\Invatory_Manager.cs" />
+    <Compile Include="Gui\UI_Manager.cs" />
     <Compile Include="Gui\Pause_Menu.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IRectangle.cs" />
@@ -140,6 +142,7 @@
     <Compile Include="Screens\Boss_Room_1.cs" />
     <Compile Include="Screens\Game_Screen.cs" />
     <Compile Include="Screens\Intro_Logos_Screen.cs" />
+    <Compile Include="Screens\Level_Select_Screen.cs" />
     <Compile Include="Screens\Settings_Screen.cs" />
     <Compile Include="Utils\Constants.cs" />
     <Compile Include="Utils\Kore_Parser.cs" />
@@ -723,6 +726,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\Maps\Maze.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Maps\Ship.tmx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\Maps\sky_test.tmx">

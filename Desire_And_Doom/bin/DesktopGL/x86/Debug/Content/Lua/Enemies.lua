@@ -34,9 +34,9 @@ return {
 			["Enemy"] = {
 				drops = {
 					{"Coin", 2, 5}, -- name, min, max
-					{"Carrot", 2, 5}, -- name, min, max
-					{"Tomato", 1, 3}, -- name, min, max
-					{"Baseball", 1, 1}, -- name, min, max
+					{"Carrot", 0, 1}, -- name, min, max
+					{"Tomato", 0, 1}, -- name, min, max
+					{"Baseball", 0, 1}, -- name, min, max
 				},
 			}
 		}
@@ -81,8 +81,9 @@ return {
 			["Body"] = {12, 6},
 			["Animation"] = {"entities", {"mech-idle", 0.1}, {"mech-attack", 0.1}},
 			["Physics"] = {},
-			["Ai"] = {"Table","Mech_Ai"},
-			["Light"] = {}
+			["Ai"] = {"Function", AI.Mech_AI},
+			["Light"] = {},
+			["Health"] = {5}
 		}
 	},
 
@@ -119,7 +120,7 @@ return {
 			["Enemy"] = {
 				drops = {
 					{"Coin", 2, 5}, -- name, min, max
-					{"Orange", 2, 5}, -- name, min, max
+					{"Orange", 0, 2}, -- name, min, max
 				},
 			}
 		}

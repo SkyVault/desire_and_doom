@@ -305,3 +305,5 @@ C:\Users\Dustin\source\repos\desire_and_doom\Desire_And_Doom\obj\x86\Debug\Desir
 C:\Users\Dustin\source\repos\desire_and_doom\Desire_And_Doom\obj\x86\Debug\Desire_And_Doom.csprojResolveAssemblyReference.cache
 C:\Users\Dustin\source\repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\Maps\Dungeon_Floor_1.tmx
 C:\Users\Dustin\source\repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\Logo_background.xnb
+C:\Users\Dustin\source\repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\Images\Ship.xnb
+C:\Users\Dustin\source\repos\desire_and_doom\Desire_And_Doom\bin\DesktopGL\x86\Debug\Content\Maps\Ship.tmx

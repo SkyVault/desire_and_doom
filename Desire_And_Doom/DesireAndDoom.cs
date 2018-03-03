@@ -36,7 +36,7 @@ namespace Desire_And_Doom
 
         public static void Request_Pause()  => Game_State = State.PAUSED;
         public static void Request_Resume() => Game_State = State.PLAYING;
-        
+
         // TEMP
         private bool skip_intro_animation = true;
 
@@ -48,7 +48,6 @@ namespace Desire_And_Doom
 
         private static GraphicsDeviceManager graphics;
         SpriteBatch batch;
-        
         GameCamera          camera;
         World               world;
         Monogui             gui;
@@ -59,9 +58,12 @@ namespace Desire_And_Doom
         Lua                 lua;
         RenderTarget2D      scene;
         Physics_Engine      physics_engine;
-        Invatory_Manager    invatory_manager;
+        UI_Manager    invatory_manager;
         Renderer3D          renderer_3d;
-        
+        PrimitivesBatch     primitives;
+        Dialog_Box          dialog_box;
+        Lua_Function_System lua_function_system;
+
         public static int ScreenWidth { get => graphics.PreferredBackBufferWidth; }
         public static int ScreenHeight { get => graphics.PreferredBackBufferHeight; }
         public static (int, int) ScreenSize { get => (ScreenWidth, ScreenHeight); }
@@ -74,7 +76,7 @@ namespace Desire_And_Doom
         {
             var device_width    = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             var device_height   = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-            
+
             graphics = new GraphicsDeviceManager(this) {
                 PreferredBackBufferWidth    = (int)(device_width * 0.8f),
                 PreferredBackBufferHeight   = (int)(device_height * 0.8f),
@@ -110,14 +112,15 @@ namespace Desire_And_Doom
 
         void Window_CLientSizeChanged(object sender, EventArgs args)
         {
+            camera.WindowResized(GraphicsDevice);
             // Handle window resizing
-            var device_width    = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            var device_height   = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            //var device_width    = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            //var device_height   = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
-            graphics.PreferredBackBufferWidth = device_width;
-            graphics.PreferredBackBufferHeight = device_height;
+            //graphics.PreferredBackBufferWidth = device_width;
+            //graphics.PreferredBackBufferHeight = device_height;
 
-            graphics.ApplyChanges();
+            //graphics.ApplyChanges();
         }
 
         protected override void Initialize()
@@ -125,7 +128,7 @@ namespace Desire_And_Doom
             Assets.It.Generate_Quads("quads", 512, 8, 8);
 
             Assets.It.Load_Animations_From_Lua("Content/Lua/Animation.lua");
-            
+
             //var frames = Assets.It.Get_Quads("player-attack");
             camera = new GameCamera(GraphicsDevice, true);
             screen_manager = new Screen_Manager();
@@ -134,20 +137,19 @@ namespace Desire_And_Doom
 
             world           = new World(penumbra);
             particle_world  = new Particle_World();
-            invatory_manager= new Invatory_Manager();
 
             //UserInterface.Initialize(Content, BuiltinThemes.hd);
 
             world.Add_System<Sprite_Renderer_System>(new Sprite_Renderer_System());
-            world.Add_System<Player_Controller_System>(new Player_Controller_System(camera, particle_world, invatory_manager, screen_manager));
+            world.Add_System<Player_Controller_System>(new Player_Controller_System(camera, particle_world, screen_manager));
             world.Add_System<Animation_Renderer_System>(new Animation_Renderer_System());
             physics_engine = (Physics_Engine)world.Add_System<Physics_Engine>(new Physics_Engine(world));
-            
-            world.Add_System<Invatory_System>(new Invatory_System(invatory_manager));
+
+            world.Add_System<Invatory_System>(new Invatory_System());
             world.Add_System<AI_System>(new AI_System());
             world.Add_System<Light_Emitter_System>(new Light_Emitter_System());
             world.Add_System<World_Interaction_System>(new World_Interaction_System());
-            world.Add_System<Lua_Function_System>(new Lua_Function_System(lua, camera));
+            lua_function_system = (Lua_Function_System)world.Add_System<Lua_Function_System>(new Lua_Function_System(lua, camera));
             world.Add_System<Timed_Destroy_System>(new Timed_Destroy_System());
             world.Add_System<Particle_Emitter_System>(new Particle_Emitter_System());
             world.Add_System<Enemy_System>(new Enemy_System());
@@ -156,10 +158,10 @@ namespace Desire_And_Doom
             world.Add_System<Health_System>(new Health_System());
             world.Add_System<Advanced_Animation_Rendering_System>(new Advanced_Animation_Rendering_System());
 
+            lua["Engine"] = lua_function_system;
+
             gui = new Monogui();
 
-            var npc_system = (Npc_System)world.Add_System<Npc_System>(new Npc_System(this, graphics, invatory_manager));
-            //npc_system.Text_Console.Initialize();
 
             penumbra.Initialize();
 
@@ -168,7 +170,7 @@ namespace Desire_And_Doom
             Components.Add(new InputListenerComponent(this, keyboard_listener));
 
             keyboard_listener.KeyTyped += console.Key_Typed;
-            
+
             scene = new RenderTarget2D(graphics.GraphicsDevice, ScreenWidth, ScreenHeight, false, SurfaceFormat.Color, DepthFormat.None, 2, RenderTargetUsage.DiscardContents);
 
             base.Initialize();
@@ -182,6 +184,11 @@ namespace Desire_And_Doom
         protected override void LoadContent()
         {
             batch = new SpriteBatch(GraphicsDevice);
+            primitives = new PrimitivesBatch(batch, GraphicsDevice);
+            dialog_box = new Dialog_Box(primitives, lua, lua_function_system);
+
+            var npc_system = (Npc_System)world.Add_System<Npc_System>(new Npc_System(this, graphics, invatory_manager, dialog_box));
+            invatory_manager= new UI_Manager(world, primitives);
 
             Assets.It.Add("entities",       Content.Load<Texture2D>("entities"));
             Assets.It.Add("items",          Content.Load<Texture2D>("items"));
@@ -189,7 +196,7 @@ namespace Desire_And_Doom
             Assets.It.Add("gui",            Content.Load<Texture2D>("gui"));
             Assets.It.Add("sky_1",          Content.Load<Texture2D>("sky"));
             Assets.It.Add("Boss_Texture",   Content.Load<Texture2D>("boss_1"));
-            Assets.It.Add("Charactors",     Content.Load<Texture2D>("Charactors"));
+            Assets.It.Add("Ship",           Content.Load<Texture2D>("Images/Ship"));
             Assets.It.Add("Background",     Content.Load<Texture2D>("Logo_background"));
             Assets.It.Add("font",           Content.Load<SpriteFont>("font"));
             Assets.It.Add("gfont",          Content.Load<SpriteFont>("GFont"));
@@ -209,12 +216,13 @@ namespace Desire_And_Doom
             screen_manager.Register(new Level_1_Screen(screen_manager, world, camera, penumbra, particle_world, physics_engine, lua, GraphicsDevice));
             screen_manager.Register(new Boss_Room_1(world, camera, penumbra, particle_world, physics_engine, Content, lua, GraphicsDevice));
             screen_manager.Register(new Menu_Screen(screen_manager, penumbra, camera));
+            screen_manager.Register(new Level_Select_Screen(screen_manager, penumbra, camera));
             screen_manager.Register(new Intro_Logos_Screen(screen_manager, camera, penumbra, Content));
 
             if (skip_intro_animation == false)
                 screen_manager.Goto_Screen("Logo");
             else
-                screen_manager.Goto_Screen("Level 1");
+                screen_manager.Goto_Screen("Menu");
         }
 
         protected override void UnloadContent()
@@ -225,6 +233,7 @@ namespace Desire_And_Doom
         {
             //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             //    Exit();
+
             if (SHOULD_QUIT) Quit();
             var time = gameTime;
 
@@ -235,6 +244,7 @@ namespace Desire_And_Doom
             world.Update(time);
             screen_manager.Update(time);
             invatory_manager.Update(gameTime);
+            dialog_box.Update(gameTime);
 
             Assets.It.Update(gameTime);
             //UserInterface.Update(gameTime);
@@ -288,13 +298,14 @@ namespace Desire_And_Doom
                 var font = Assets.It.Get<SpriteFont>("font");
                 batch.End();
             }
-            
+
             batch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp);
                 world.UIDraw(batch, camera);
                 gui.Draw(batch);
-                invatory_manager.UIDraw(batch);
                 console.Draw(batch);
-            
+                dialog_box.Draw(batch);
+                invatory_manager.UIDraw(batch);
+
                 if ( DEBUG )
                 {
                     float frameRate = 1f / (float) gameTime.ElapsedGameTime.TotalSeconds;

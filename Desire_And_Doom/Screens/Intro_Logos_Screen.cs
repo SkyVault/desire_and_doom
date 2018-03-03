@@ -51,7 +51,7 @@ namespace Desire_And_Doom.Screens
             Background = Assets.It.Get<Texture2D>("Background");
         }
 
-        public override void Load()
+        public override void Load(params string []args)
         {
             SkyVaultLogo = Assets.It.Load_Texture("logo", "Logo");
             MonoGameLogo = Assets.It.Load_Texture("SquareLogo_1024px", "Mono");

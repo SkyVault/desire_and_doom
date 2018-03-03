@@ -1,4 +1,5 @@
-﻿using NLua;
+﻿using Desire_And_Doom.Graphics;
+using NLua;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,10 @@ namespace Desire_And_Doom.ECS
 {
     class Npc : Component
     {
-        public Dialog_Box Dialog { get; private set; }
-
+        public Dialog Dialog;
         public Npc(LuaTable dialog_table) : base(Types.Npc)
         {
-            Dialog = new Dialog_Box();
+            this.Dialog = new Dialog(dialog_table);
         }
     }
 }

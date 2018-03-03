@@ -18,7 +18,7 @@ namespace Desire_And_Doom.ECS
         private List<Entity> entities;
         private Dictionary<Type, System> systems;
         private PenumbraComponent lighting;
-        
+
         public World(PenumbraComponent lighting)
         {
             entities = new List<Entity>();
@@ -43,7 +43,10 @@ namespace Desire_And_Doom.ECS
         {
             var entity = Create_Entity();
             var components = table["components"] as LuaTable;
-            Debug.Assert(components != null);
+            if (components == null) {
+                entity.Destroy();
+                return entity;
+            }
 
             if (table["tags"] is LuaTable tags)
                 foreach (var t in tags.Values)
@@ -107,7 +110,7 @@ namespace Desire_And_Doom.ECS
                         }
                     case "Animation": {
                             string image = component[1] as string;
-                            
+
                             var anim = new List<string>();
                             for (int i = 2; i < component.Values.Count + 1; i++)
                             {
@@ -167,7 +170,14 @@ namespace Desire_And_Doom.ECS
                         break;
                     case "Npc":
                         {
-                            entity.Add(new Npc(null));
+                            // TODO(Dustin): Load the table
+                            var name = (component[1] as string);
+                            var dialog_table = Assets.It.Get<LuaTable>(name);
+
+                            if (dialog_table == null) break;
+
+                            entity.Add(new Npc(dialog_table));
+
                             break;
                         }
                     case "Timed_Destroy":
@@ -253,7 +263,7 @@ namespace Desire_And_Doom.ECS
             entities.Add(entity);
             return entity;
         }
-        
+
         public System Add_System<T>(System system) {
             systems.Add(typeof(T), system);
             system.World_Ref = this;
@@ -264,7 +274,7 @@ namespace Desire_And_Doom.ECS
         {
             return systems[typeof(T)];
         }
-        
+
         public void Remove_System<T>()
         {
             systems.Remove(typeof(T));
@@ -276,7 +286,7 @@ namespace Desire_And_Doom.ECS
 
             foreach(var e in entities)
                 if (e.Tags.Contains(tag)) list.Add(e);
-        
+
             return list;
         }
 
@@ -286,10 +296,10 @@ namespace Desire_And_Doom.ECS
 
             foreach(var e in entities)
                 if (e.Has(T)) list.Add(e);
-        
+
             return list;
         }
-        
+
         public int timing = 0;
         public void Update(GameTime time)
         {
@@ -302,11 +312,11 @@ namespace Desire_And_Doom.ECS
                 if (entity.Remove) {
                     foreach ( var system in systems.Values )
                         if ( system.Has_All_Types(entity) )
-                            system.Destroy(entity);    
+                            system.Destroy(entity);
                     entities.Remove(entity);
                     continue;
                 }
-                
+
                 // Update the entity if the game is not paused
                 if (DesireAndDoom.Game_State == DesireAndDoom.State.PLAYING)
                     entity.Update?.Invoke(entity);
@@ -363,6 +373,6 @@ namespace Desire_And_Doom.ECS
                 }
             }
         }
-        
+
     }
 }

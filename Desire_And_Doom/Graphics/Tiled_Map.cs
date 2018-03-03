@@ -50,6 +50,8 @@ namespace Desire_And_Doom
 
         private List<RenderTarget2D> layer_render_targets = new List<RenderTarget2D>();
 
+        public Vector2 Offset { get; set; } = Vector2.Zero;
+
         public Tiled_Map(string name, GameCamera _camera, World world, Screen level, Particle_World particle_world, Lua lua, GraphicsDevice device, PenumbraComponent lighting = null, bool create_astar_collision_map = false)
         {
             this.device = device;
@@ -430,93 +432,6 @@ namespace Desire_And_Doom
 
         public void Draw(SpriteBatch batch)
         {
-            //Vector2 camera_position = camera.Left; 
-            //foreach (var layer in map.Layers)
-            //{
-            //    var render_layer = 0.0f;
-            //    if (layer.Properties.ContainsKey("layer"))
-            //        render_layer = float.Parse(layer.Properties["layer"]);
-            //    var sort = false;
-            //    if (layer.Properties.ContainsKey("sort"))
-            //        sort = bool.Parse(layer.Properties["sort"]);
-
-            //    int cx = (int)(camera_position.X / 8);
-            //    int cy = (int)(camera_position.Y / 8);
-            //    int cw = (int)((DesireAndDoom.ScreenWidth  / camera.Zoom) / 8);
-            //    int ch = (int)((DesireAndDoom.ScreenHeight / camera.Zoom) / 8);
-
-            //    if (cx < 0) cx = 0;
-            //    if (cy < 0) cy = 0;
-
-            //    for (int y = cy; y < cy + ch + 2; y++)
-            //        for (int x = cx; x < cx + cw + 2; x++)
-            //        {
-            //            if (x > map.Width - 1)  continue;
-            //            if (y > map.Height - 1) continue;
-
-            //            var tileset = map.Tilesets[0];
-
-            //            var tile = layer.Tiles[x + y * map.Width];
-            //            if ( tile.Gid != 0 )
-            //            {
-            //                // TODO: this animation system is very slow, try to find a way
-            //                // to refactor this, one idea is to create your own data structure
-            //                // like a Dictionary, that contains all of the keys and animations
-            //                int gid = tile.Gid;
-            //                bool contains = false;
-            //                foreach(var t in tileset.Tiles )
-            //                    if (t.Id + 1 == gid )
-            //                    {
-            //                        contains = true; break;
-            //                    }
-
-            //                if (contains)
-            //                {
-            //                    var anim_tile = tileset.Tiles[0];
-            //                    if ( anim_tile.AnimationFrames.Count != 0 )
-            //                    {
-            //                        var aframe = anim_tile.AnimationFrames[
-            //                            (frame % anim_tile.AnimationFrames.Count)
-            //                            ];
-            //                        gid = aframe.Id + 1;
-            //                    }
-
-            //                }
-
-            //                var location = new Rectangle(
-            //                    (int)(x * map.TileWidth), 
-            //                    (int)(y * map.TileHeight), 
-            //                    (int)(map.TileWidth), 
-            //                    (int)(map.TileHeight)
-            //                    );
-
-            //                if (gid - 1 > quads.Count) continue;
-            //                batch.Draw(texture, location, quads[gid - 1], Color.White, 0, Vector2.Zero, SpriteEffects.None, render_layer);
-            //            }
-            //        }
-            //}
-
-            //if (astar_collision_map != null)
-            //{
-            //    for (int y = 0; y < map.Height; y++)
-            //    {
-            //        for (int x = 0; x < map.Width; x++)
-            //        {
-            //            if (!astar_collision_map[y, x]) continue;
-            //            batch.Draw(
-            //                texture,
-            //                new Rectangle(x * map.TileWidth, y * map.TileHeight, map.TileWidth, map.TileHeight),
-            //                new Rectangle(0, 0, 8, 8),
-            //                Color.Black,
-            //                0f,
-            //                Vector2.Zero,
-            //                SpriteEffects.None,
-            //                1f
-            //                );
-            //        }
-            //    }
-            //}
-
             int i = 0;
             foreach(var layer in map.Layers)
             {
@@ -525,15 +440,21 @@ namespace Desire_And_Doom
                 if (layer.Properties.ContainsKey("layer"))
                     render_layer = float.Parse(layer.Properties["layer"]);
 
-                //if (i != 2) continue;
-                batch.Draw(texture: target, destinationRectangle: new Rectangle(0, 0, map.Width * map.TileWidth, map.Height * map.TileHeight), color: Color.White, layerDepth: render_layer);
+                var dest_rect = new Rectangle(
+                    (int)Offset.X,
+                    (int)Offset.Y,
+                    map.Width * map.TileWidth,
+                    map.Height * map.TileHeight
+                    );
+
+                batch.Draw(texture: target, destinationRectangle: dest_rect, color: Color.White, layerDepth: render_layer);
             }
 
             foreach (var billboard in billboards)
             {
                 var y = billboard.Position.Y + (billboard.Region.Height * 0.8f);
                 var layer = 0.3f + (y / Map_Height_In_Pixels) * 0.1f;
-                batch.Draw(texture, billboard.Position, billboard.Region, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, layer);
+                batch.Draw(texture, billboard.Position + Offset, billboard.Region, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, layer);
             }
         }
     }

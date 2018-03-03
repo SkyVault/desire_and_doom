@@ -170,8 +170,11 @@ namespace Desire_And_Doom.ECS
                 foreach (var other in bodies)
                 {
                     if (other.UUID == entity.UUID) continue;
+
                     var o_physics = (Physics)other.Get(Types.Physics);
                     var o_body = (Body)other.Get(Types.Body);
+
+                    if (o_physics.Flying || physics.Flying) continue;
 
                     if (o_physics.Handle_Collisions == false) continue;
 
@@ -206,7 +209,7 @@ namespace Desire_And_Doom.ECS
                                 entity.Destroy();
                         }
 
-                    }else if (o_physics.Physics_Type == Physics.PType.WORLD_INTERACTION)
+                    } else if (o_physics.Physics_Type == Physics.PType.WORLD_INTERACTION)
                     {
                         if (o_body.Contains(body))
                         {

@@ -1,6 +1,10 @@
-﻿using Desire_And_Doom.Utils;
+﻿using Desire_And_Doom.ECS.Systems;
+using Desire_And_Doom.Graphics;
+using Desire_And_Doom.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using NLua;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,230 +16,171 @@ using CColor = System.Drawing.Color;
 
 namespace Desire_And_Doom
 {
-    class Dialog_Word
-    {
-        public string Text { get; set; } = "";
-        public Color Color { get; set; } = Color.White;
-    }
-
     class Dialog_Box
     {
-        public Vector2 Position { get; set; } = Vector2.Zero;
-        public string Text { get; set; } = "";
+        public Dialog CurrentDialog {get; private set;} = null;
+        public int CurrentDialogTextPointer {get; private set;} = 1;
+        public bool IsOpen { get => CurrentDialog != null; }
+        public int Selector { get; private set; } = 0;
 
-        private bool animating { get; set; } = false;
+        private float timer = 0;
+        private Lua lua;
+        private Lua_Function_System engine;
 
-        public int Width { get; set; } = 10;
-        public int Height { get; set; } = 6;
-        public float Scale { get; set; } = 4f;
-
-        public bool Show_Portait { get; set; } = false;
-        public Texture2D Image { get; set; }
-        public Rectangle Region { get; set; }
-
-        public float Speed { get; set; } = 0.9f;
-
-        private Color color = new Color(50, 50, 50, 100);
-        private List<Dialog_Word> words;
-
-        private Vector2 position_offset { get; set; }
-
-        private List<Rectangle> button_animation_frames = new List<Rectangle>
-        {
-            new Rectangle(51 + 17 * 0, 7, 17, 17),
-            new Rectangle(51 + 17 * 1, 7, 17, 17),
-            new Rectangle(51 + 17 * 2, 7, 17, 17),
-            new Rectangle(51 + 17 * 1, 7, 17, 17),
-        };
-        private int button_animation_frame = 0;
-        private float button_animation_speed = 0.125f;
-        private float button_animation_time = 0f;
-
-        private float button_size = 48;
-
-        public Dialog_Box()
-        {
-            position_offset = new Vector2(0, Height * 8 * Scale);
+        public int GetNextDialogPointer() {
+            if (IsOpen == false) return 0;
+            return
+                CurrentDialog.Dialog_Texts[CurrentDialogTextPointer].NextDialogText;
         }
 
-        public void Animate_Toggle(string text)
-        {
-            animating   = !animating;
+        PrimitivesBatch primitives;
+        public Dialog_Box(PrimitivesBatch _primitives, Lua _lua, Lua_Function_System _engine) {
+            primitives  = _primitives;
+            lua         = _lua;
+            engine      = _engine;
+        }
 
-            if (animating == false )
-            {
-                position_offset += new Vector2(0, Height * 8 * Scale);
+        public bool TryOpen(Dialog dialog) {
+            if (!IsOpen && this.timer <= 0) {
+                CurrentDialogTextPointer = 1;
+                CurrentDialog = dialog;
+                return true;
             }
-            
-            Text        = text;
-            words       = Compile_To_Words(text);
-
-            Width = (DesireAndDoom.ScreenWidth / (int)(8 * Scale));
-
-            Position = new Vector2(
-                0,
-                DesireAndDoom.ScreenHeight - (Height * 8) * Scale
-                ); 
-
-            if (animating)
-                Messanger.It.Push("Dialog_Open");
-            else
-                Messanger.It.Push("Dialog_Closed");
+            return false;
         }
 
-        private List<Dialog_Word> Compile_To_Words(string text)
-        {
-            var list = new List<Dialog_Word>();
+        public void Update(GameTime time) {
+            timer -= (float)time.ElapsedGameTime.TotalSeconds;
+            if (!IsOpen) { Selector = 0; return; }
 
-            var tokens = text.Split(' ', '!', '\n');
-            
-            return list;
-        }
-
-        public void Stop()
-        {
-            animating = false;
-        }
-
-        public bool Showing() => animating;
-
-        public void Update(GameTime time)
-        {
-            if ( animating )
+            // Check and see if the npc was destroyed
+            if (CurrentDialog.Speaker == null || CurrentDialog.Speaker.Remove == true)
             {
-                position_offset *= Speed;
-
-                button_animation_time += (float)time.ElapsedGameTime.TotalSeconds;
-                if (button_animation_time > button_animation_speed)
-                {
-                    button_animation_time = 0;
-
-                    button_animation_frame++;
-                    button_animation_frame %= button_animation_frames.Count;
-                }
+                CurrentDialog = null;
+                DesireAndDoom.Request_Resume();
+                return;
             }
-        }
-        
-        public void Draw(SpriteBatch batch, GameCamera camera)
-        {
-            if (animating)
-            {
-                var image = Assets.It.Get<Texture2D>("gui");
-                var font = Assets.It.Get<SpriteFont>("dialog_font");
 
-                var pos = new Vector2(10, 10);
+            DesireAndDoom.Request_Pause();
 
-                var pre_width = Width;
-                var text_scale = 1f;
-
-                //move and shrink the dialog box to fit the portait
-                if ( Show_Portait )
-                {
-                    Width -= Height;
-                    Position = new Vector2(8*Height*Scale, Position.Y);
-                }
-
-                void Draw_Box(float xoff, float yoff, int w, int h)
-                {
-                    var pre_pos = Position;
-                    Position = new Vector2(xoff, yoff) + position_offset;
-                    for(int y = 0; y < h; y++)
-                        for (int x = 0; x < w; x++)
-                        {
-                            // TODO: Change this, we probably wont use a border, just incase we do, keep it for now
-                            if (x == 0 && y == 0)
-                                batch.Draw(image, Position, new Rectangle(0, 0, 8, 8), Color.White, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 0.99f);
-                            if (x > 0 && x < Width - 1 && y == 0)
-                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(8, 0, 8, 8), color, 0, Vector2.Zero,new Vector2(Scale), SpriteEffects.None, 0.99f);
-                            if (x == Width - 1 && y == 0)
-                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(16, 0, 8, 8), color, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 0.99f);
-                            if (x == 0 && y > 0 && y < Height - 1)
-                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(0, 8, 8, 8), color, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 0.99f);
-                            if (x == Width - 1 && y > 0 && y < Height - 1)
-                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(16, 8, 8, 8), color, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 0.99f);
-                            if (x == 0 && y == Height - 1)
-                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(0, 16, 8, 8), color, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 0.99f);
-                            if (x == Width-1 && y == Height - 1)
-                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(16, 16, 8, 8), color, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 0.99f);
-                            if (x > 0 && x < Width - 1 && y == Height - 1)
-                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(8, 16, 8, 8), color, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 0.99f);
-                            if (x > 0 && x < Width - 1 && y > 0 && y < Height - 1)
-                                batch.Draw(image, Position + new Vector2(x * 8 * Scale, y * 8 * Scale), new Rectangle(8, 8, 8, 8), color, 0, Vector2.Zero, new Vector2(Scale), SpriteEffects.None, 0.99f);
-                        }
-                    Position = pre_pos;
-                }
-
-                Draw_Box(Position.X, Position.Y, Width, Height);
-
-                Width = pre_width;
-
-                var position = Position + new Vector2(20, 20);
-                var text = Text;
-                var tokens = text.Split(' ');
-
-                if (tokens.Length > 1)
-                {
-                    float x = position.X;
-                    float y = position.Y;
-                    foreach ( var token in tokens )
+            if (Input.It.Is_Key_Pressed(Keys.Enter) || Input.It.Is_Key_Pressed(Keys.Z)) {
+                if (CurrentDialog.Dialog_Texts[CurrentDialogTextPointer].options.Count() == 0) {
+                    CurrentDialogTextPointer = GetNextDialogPointer();
+                    if (CurrentDialogTextPointer == 0)
                     {
-                        if (token.Length > 0 && token.First() == '#' )
-                        {
-                            var _color = token.Split('#').Last();
-                            var tmp = CColor.FromName(_color);
-                            color = new Color(tmp.R, tmp.G, tmp.B, tmp.A);
-                        }
-                        else
-                        {
-                            batch.DrawString(font, token, new Vector2(x, y) + position_offset, color, 0f, Vector2.Zero, text_scale, SpriteEffects.None, 1f);
-                            x += (font.MeasureString(token).X + font.MeasureString(" ").X) * text_scale; 
-                        }
+                        timer = Constants.DIALOG_COOLDOWN;
+                        CurrentDialog = null;
+                        DesireAndDoom.Request_Resume();
+                        return;
+                    }
+                } 
+            }
 
-                        if ( token.Contains("\n")) {
-                            y += (font.MeasureString(" ").Y);
-                            x = position.X;
-                        }
+            var dialog_text = CurrentDialog.Dialog_Texts[CurrentDialogTextPointer];
+            if (dialog_text.options.Count > 0)
+            {
+                if (Input.It.Is_Key_Pressed(Keys.Left) || Input.It.Is_Key_Pressed(Keys.Up)) 
+                {
+                    Selector--;
+                } 
+                else if (Input.It.Is_Key_Pressed(Keys.Right) || Input.It.Is_Key_Pressed(Keys.Down))
+                {
+                    Selector++;
+                }
 
+                if (Input.It.Is_Key_Pressed(Keys.Enter) || Input.It.Is_Key_Pressed(Keys.Z))
+                {
+                    var the_option = dialog_text.options[Selector];
+                    CurrentDialogTextPointer = the_option.NextDialogText;
+                    if (the_option.action != null)
+                    {
+                        var result = the_option.action.Call(CurrentDialog.Speaker, CurrentDialog.Target, engine);
+                        if (result != null)
+                        {
+                            CurrentDialogTextPointer = (int)(result[0] as double?);
+                        }
                     }
                 }
 
-                // Draw the button
-                var frame = button_animation_frames[button_animation_frame];
-                var gui = Assets.It.Get<Texture2D>("gui");
-                batch.Draw(gui,
-                    new Rectangle(
-                        DesireAndDoom.ScreenWidth - 128,
-                        DesireAndDoom.ScreenHeight - 64 + (int)position_offset.Y,
-                        (int)button_size,
-                        (int)button_size
-                        ),
-                    frame,
+                Selector = Selector < 0 ? dialog_text.options.Count - 1 : (Selector > dialog_text.options.Count - 1 ? 0 : Selector);
+            }
+        }
+
+        public void Draw(SpriteBatch batch) {
+            if (!IsOpen) return;
+            if (CurrentDialogTextPointer == 0)
+            {
+                CurrentDialog = null;
+                DesireAndDoom.Request_Resume();
+                return;
+            }
+
+            var height = DesireAndDoom.ScreenHeight / 3;
+            var color = new Color(0.2f, 0.2f, 0.2f, 0.9f);
+
+            var font = Assets.It.Get<SpriteFont>("gfont");
+
+            var dialog_text = CurrentDialog.Dialog_Texts[CurrentDialogTextPointer];
+            var text = dialog_text.Value;
+
+            primitives.DrawFilledRect(
+                new Vector2(0, DesireAndDoom.ScreenHeight - height),
+                new Vector2(DesireAndDoom.ScreenWidth, height),
+                color,
+                0,
+                0.98f
+            );
+
+            batch.DrawString(
+                    font,
+                    text,
+                    new Vector2(32, DesireAndDoom.ScreenHeight - height + 32),
                     Color.White,
                     0.0f,
                     Vector2.Zero,
+                    0.5f,
                     SpriteEffects.None,
-                    1f
+                    1.0f
                     );
 
-                if ( Show_Portait )
+            if (dialog_text.options.Count > 0)
+            {
+                var x = 0.0f;
+                var index = 0;
+                foreach(var option in dialog_text.options)
                 {
-                    Draw_Box(0, Position.Y, 6, 6);
-                    if ( Region != null && Image != null )
+                    var margin = 16;
+                    var tsize = font.MeasureString(option.Value) * 0.5f;
+                    var size_x = tsize.X + margin;
+                    batch.DrawString(
+                        font,
+                        option.Value,
+                        new Vector2(32 + x, DesireAndDoom.ScreenHeight - 32 - margin),
+                        Color.White,
+                        0.0f,
+                        Vector2.Zero,
+                        0.5f,
+                        SpriteEffects.None,
+                        1.0f
+                    );
+
+                    if (index == Selector)
                     {
-                        float rw = Region.Width;
-                        float rh = Region.Height;
-                        float aspect = (rw / rh);
+                        var rect = Assets.It.Get<Texture2D>("gui-rect");
                         batch.Draw(
-                            Image, 
-                            new Rectangle(
-                                (int)(Scale * (rw / Width) + position_offset.X), 
-                                (int) (Position.Y + position_offset.Y), 
-                                (int)(8 * (Height * aspect) * Scale), 
-                                (int)(8 * Height * Scale)), 
-                            Region, 
-                            Color.White,
-                            0, Vector2.Zero, SpriteEffects.None, 1);
+                        rect,
+                        new Rectangle((int)(32 + x), DesireAndDoom.ScreenHeight - 32 - margin, (int)tsize.X, (int)tsize.Y),
+                        new Rectangle(0, 0, 512, 512),
+                        Color.Orange,
+                        0f,
+                        Vector2.Zero,
+                        SpriteEffects.None,
+                        0.99f
+                        );
                     }
+
+                    x += size_x;
+                    index++;
                 }
             }
         }
